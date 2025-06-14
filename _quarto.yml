@@ -14,7 +14,9 @@ website:
       - href: cartes.qmd
         icon: map
         text: Cartes
-      - about.qmd
+      - href: ref_biblio.qmd
+        text: Références biliographiques
+        icon: book
   page-footer:
     left: "Site créé avec [Quarto](https://quarto.org/)"
     center: "©CEREMA"

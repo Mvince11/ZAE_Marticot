@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "CAPB_web",
+    "title": "Zone d’activité économique de Marticot",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n Back to top"
+    "text": "Par effet de la loi NOTRe [1], les établissements publics de coopération intercommunale à fiscalité propre sont, depuis le 1ᵉʳ janvier 2017, pleinement compétents en ce qui concerne la création, l’extension, l’entretien et la gestion des zones d’activité économique. A défaut de définition formelle, la détermination de ces zones ne peut qu’être le fruit d’une approche factuelle, à partir d’un faisceau d’indices. En pratique, cette méthode fait apparaître qu’une zone d’activité économique désigne un site administrativement réservé à l’implantation d’entreprises, dans un périmètre aménagé sous maîtrise d’ouvrage publique. Inversement, ne sont pas concernées les zones initiées et gérées par des acteurs privés, tout comme celles qui n’ont pas, ou seulement de manière accessoire, une vocation économique cohérente et continue.\n\n\n\nA l’instar de toute « zone », celle qui donne lieu à la réalisation d’activités économiques doit présenter une continuité et une cohérence géographique certaines. Cette double exigence se trouve clairement avancée dans différentes réponses ministérielles se prononçant spécifiquement sur les modalités d’identification des zones d’activité touristique [19], ceci pour évoquer l’idée que l’homogénéité de tels espaces concourt directement à leur attractivité [20].\nCet indice dédoublé est implicitement admis par le juge lorsqu’il retient la conformité d’un permis de construire relatif à la réalisation d’un entrepôt logistique de stockage devant se situer « en continuité ou en extension » d’une ZAE existante, par rapport aux documents d’urbanisme d’un territoire donné et notamment au SCoT exposant, par le truchement de son document d’orientation générale, l’objectif d’affirmer l’excellence industrielle dudit territoire et identifiant à cette fin des espaces dédiées à son développement économique [21].\nCes éléments traduisent le fait qu’une ZAE s’étend sur un périmètre géographique constitué soit d’une seule grande parcelle à diviser, soit d’au moins deux parcelles contiguës, sur lequel plusieurs entreprises se sont regroupées afin d’y exercer concomitamment leurs activités économiques respectives [22]. Ceci implique, à l’inverse, que les implantations isolées d’opérateurs marchands, tout comme les espaces sur lesquels un seul acteur se trouve installé, ne sont pas constitutives de telles zones.\n\n\n\n Retour au sommet"
   },
   {
     "objectID": "about.html",
@@ -18,7 +18,7 @@
     "href": "cartes.html",
     "title": "Cartes",
     "section": "",
-    "text": "ZAE de Marticot par zone"
+    "text": "Localisation des entreprises par zone"
   },
   {
     "objectID": "cartes.html#zae-de-marticot",
@@ -60,6 +60,13 @@
     "href": "cartes.html#zone-dactivité-économique-de-marticot",
     "title": "Cartes",
     "section": "",
-    "text": "ZAE de Marticot par zone"
+    "text": "Localisation des entreprises par zone"
+  },
+  {
+    "objectID": "ref_biblio.html",
+    "href": "ref_biblio.html",
+    "title": "Références bibliographiques",
+    "section": "",
+    "text": "La loi n°2015-991 du 7 août 2015 portant nouvelle organisation territoriale de la République (NOTRe) a organisé le transfert aux établissements publics de coopération intercommunale à fiscalité propre (EPCI-FP) de la compétence relative à la création, l’aménagement, l’entretien et la gestion des zones d’activité industrielle, commerciale, tertiaire, artisanale, touristique, portuaire ou aéroportuaire, sans condition de reconnaissance d’un intérêt communautaire. Il s’ensuit que depuis le 1ᵉʳ janvier 2017, ces autorités locales ont vocation à créer de tels espaces et à prendre en charge ceux déjà existants sur leurs territoires. De surcroit, ils doivent en assurer l’inventaire [2].\n\n\n\n\n Back to top"
   }
 ]
