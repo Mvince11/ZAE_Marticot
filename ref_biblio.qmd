@@ -5,5 +5,6 @@ toc: true
 ---
 
 ::: {style="font-family: YACkoD1yZN0-0;letter-spacing: 0.089em;font-size:1.0em;" #loi-notre}
+## La Loi NOTRe 
 La loi n°2015-991 du 7 août 2015 portant nouvelle organisation territoriale de la République (NOTRe) a organisé le transfert aux établissements publics de coopération intercommunale à fiscalité propre (EPCI-FP) de la compétence relative à la création, l’aménagement, l’entretien et la gestion des zones d’activité industrielle, commerciale, tertiaire, artisanale, touristique, portuaire ou aéroportuaire, sans condition de reconnaissance d’un intérêt communautaire. Il s’ensuit que depuis le 1ᵉʳ janvier 2017, ces autorités locales ont vocation à créer de tels espaces et à prendre en charge ceux déjà existants sur leurs territoires. De surcroit, ils doivent en assurer l’inventaire [2].
 :::

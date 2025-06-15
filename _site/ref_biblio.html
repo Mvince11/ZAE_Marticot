@@ -38,7 +38,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-37474ee44406cc732439a25c6cad07f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7abbf4777aa0e3e0463e7bb4b5827ba4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,7 +113,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenu</h2>
+   
+  <ul class="collapse">
+  <li><a href="#la-loi-notre" id="toc-la-loi-notre" class="nav-link active" data-scroll-target="#la-loi-notre">La Loi NOTRe</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -142,7 +148,10 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div id="loi-notre" style="font-family: YACkoD1yZN0-0;letter-spacing: 0.089em;font-size:1.0em;">
+<section id="la-loi-notre" class="level2">
+<h2 class="anchored" data-anchor-id="la-loi-notre">La Loi NOTRe</h2>
 <p>La loi n°2015-991 du 7 août 2015 portant nouvelle organisation territoriale de la République (NOTRe) a organisé le transfert aux établissements publics de coopération intercommunale à fiscalité propre (EPCI-FP) de la compétence relative à la création, l’aménagement, l’entretien et la gestion des zones d’activité industrielle, commerciale, tertiaire, artisanale, touristique, portuaire ou aéroportuaire, sans condition de reconnaissance d’un intérêt communautaire. Il s’ensuit que depuis le 1ᵉʳ janvier 2017, ces autorités locales ont vocation à créer de tels espaces et à prendre en charge ceux déjà existants sur leurs territoires. De surcroit, ils doivent en assurer l’inventaire [2].</p>
+</section>
 </div>
 
 
@@ -238,7 +247,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/website\.quarto\.pub\/zae_marticot");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

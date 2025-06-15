@@ -25,4 +25,65 @@ toc: true
 :::
 
 
+```{r}
+#| echo: FALSE
+#| include: FALSE
 
+library(leaflet)
+library(leaflet.extras)
+library(htmlwidgets)
+library(leaflegend)
+library(shiny)
+library(shinyjs)
+library(htmltools)
+library(fontawesome)
+library(sf)
+library(dplyr)
+library(geojsonio)
+
+# Charger la couche de commune (par ex) et une zone d'intérêt
+zone <- st_read("layers/2025-06-05_C18_zone_act_eco_1.geojson") %>% st_transform(4326)
+entreprises <- st_read("layers/2025-06-06_C18_geoetablissement_custom_65.geojson") %>% st_transform(4326)
+
+# Créer un masque en soustrayant la zone cible du fond total
+masque <- st_difference(st_union(zone), st_union(entreprises))
+
+```
+
+```{r echo=FALSE}
+icons_entreprise <- awesomeIcons(
+  icon = "industry",         # Icône entreprise
+  library = "fa",            # Font Awesome
+  markerColor = "green"
+)
+
+leaflet() %>%
+  addTiles() %>%
+  
+  addAwesomeMarkers(
+    data = entreprises,
+    icon = icons_entreprise,
+    popup = ~paste0(
+      "<b>Entreprise :</b> ", denominationunitelegale, "<br>",
+      "<b>Activité principale :</b> ", libactiviteprincipaleetablissement, "<br>",
+      "<b>Catégorie :</b> ", categorieentreprise
+    )
+  ) %>%
+
+  # addMarkers(
+  #   data = entreprises,
+  #   popup = ~paste0(
+  #     "<b>Entreprise :</b> ", denominationunitelegale, "<br>",
+  #     "<b>Activité principale :</b> ", libactiviteprincipaleetablissement, "<br>",
+  #     "<b>Catégorie :</b> ", categorieentreprise
+  #   ),
+  #   clusterOptions = markerClusterOptions(showCoverageOnHover = FALSE,removeOutsideVisibleBounds = TRUE),
+  # ) %>%
+  # Bordure de la zone d'intérêt (effet focus)
+  addPolygons(
+    data = zone,
+    color = "red",         # Bordure rouge
+    weight = 2,
+    fillOpacity = 0        # Pas de remplissage
+  )
+```
