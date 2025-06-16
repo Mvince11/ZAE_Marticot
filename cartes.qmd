@@ -7,23 +7,27 @@ toc: true
 ---
 
 ## Zone d'activité économique de Marticot
+
 ![](images/zae_marticot.png){.lightbox}
 
-::: {.callout-tip collapse="true" icon="false"}
+:::: {.callout-tip collapse="true" icon="false"}
 ## Localisation des entreprises par zone
-<div style="margin-top: 10px;"></div>
+
+::: {style="margin-top: 10px;"}
+:::
 
 ### Zone Nord
+
 ![](images/zae_marticot_entreprise.png){.lightbox}
 
 ### Zone Centrale
+
 ![](images/zae_marticot_entreprise_2.png){.lightbox}
 
 ### Zone Sud
+
 ![](images/zae_marticot_entreprise_3.png){.lightbox}
-
-:::
-
+::::
 
 ```{r}
 #| echo: FALSE

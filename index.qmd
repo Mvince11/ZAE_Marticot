@@ -5,20 +5,18 @@ lang: fr
 about:
   template: trestles
   image: "images/logos/logo_cerema.PNG"
-  
 ---
+
 ::: {style="font-family: YACkoD1yZN0-0;letter-spacing: 0.089em;font-size:1.0em;"}
-Par effet de la loi NOTRe [[1]](ref_biblio.qmd#loi-notre), les établissements publics de coopération intercommunale à fiscalité propre sont, depuis le 1ᵉʳ janvier 2017, pleinement compétents en ce qui concerne la création, l’extension, l’entretien et la gestion des zones d’activité économique. A défaut de définition formelle, la détermination de ces zones ne peut qu’être le fruit d’une approche factuelle, à partir d’un faisceau d’indices. En pratique, cette méthode fait apparaître qu’une zone d’activité économique désigne un site administrativement réservé à l’implantation d’entreprises, dans un périmètre aménagé sous maîtrise d’ouvrage publique. Inversement, ne sont pas concernées les zones initiées et gérées par des acteurs privés, tout comme celles qui n’ont pas, ou seulement de manière accessoire, une vocation économique cohérente et continue.
+Par effet de la loi NOTRe [\[1\]](ref_biblio.qmd#loi-notre), les établissements publics de coopération intercommunale à fiscalité propre sont, depuis le 1ᵉʳ janvier 2017, pleinement compétents en ce qui concerne la création, l’extension, l’entretien et la gestion des zones d’activité économique. A défaut de définition formelle, la détermination de ces zones ne peut qu’être le fruit d’une approche factuelle, à partir d’un faisceau d’indices. En pratique, cette méthode fait apparaître qu’une zone d’activité économique désigne un site administrativement réservé à l’implantation d’entreprises, dans un périmètre aménagé sous maîtrise d’ouvrage publique. Inversement, ne sont pas concernées les zones initiées et gérées par des acteurs privés, tout comme celles qui n’ont pas, ou seulement de manière accessoire, une vocation économique cohérente et continue.
 :::
 
 <br>
 
 ::: {style="font-family: YACkoD1yZN0-0;letter-spacing: 0.089em;font-size:1.0em;"}
-A l’instar de toute « zone », celle qui donne lieu à la réalisation d’activités économiques doit présenter une continuité et une cohérence géographique certaines. Cette double exigence se trouve clairement avancée dans différentes réponses ministérielles se prononçant spécifiquement sur les modalités d’identification des zones d’activité touristique [19], ceci pour évoquer l’idée que l’homogénéité de tels espaces concourt directement à leur attractivité [20].
+A l’instar de toute « zone », celle qui donne lieu à la réalisation d’activités économiques doit présenter une continuité et une cohérence géographique certaines. Cette double exigence se trouve clairement avancée dans différentes réponses ministérielles se prononçant spécifiquement sur les modalités d’identification des zones d’activité touristique \[19\], ceci pour évoquer l’idée que l’homogénéité de tels espaces concourt directement à leur attractivité \[20\].
 
-Cet indice dédoublé est implicitement admis par le juge lorsqu’il retient la conformité d’un permis de construire relatif à la réalisation d’un entrepôt logistique de stockage devant se situer « en continuité ou en extension » d’une ZAE existante, par rapport aux documents d’urbanisme d’un territoire donné et notamment au SCoT exposant, par le truchement de son document d’orientation générale, l’objectif d’affirmer l’excellence industrielle dudit territoire et identifiant à cette fin des espaces dédiées à son développement économique [21].
+Cet indice dédoublé est implicitement admis par le juge lorsqu’il retient la conformité d’un permis de construire relatif à la réalisation d’un entrepôt logistique de stockage devant se situer « en continuité ou en extension » d’une ZAE existante, par rapport aux documents d’urbanisme d’un territoire donné et notamment au SCoT exposant, par le truchement de son document d’orientation générale, l’objectif d’affirmer l’excellence industrielle dudit territoire et identifiant à cette fin des espaces dédiées à son développement économique \[21\].
 
-Ces éléments traduisent le fait qu’une ZAE s’étend sur un périmètre géographique constitué soit d’une seule grande parcelle à diviser, soit d’au moins deux parcelles contiguës, sur lequel plusieurs entreprises se sont regroupées afin d’y exercer concomitamment leurs activités économiques respectives [22]. Ceci implique, à l’inverse, que les implantations isolées d’opérateurs marchands, tout comme les espaces sur lesquels un seul acteur se trouve installé, ne sont pas constitutives de telles zones.
+Ces éléments traduisent le fait qu’une ZAE s’étend sur un périmètre géographique constitué soit d’une seule grande parcelle à diviser, soit d’au moins deux parcelles contiguës, sur lequel plusieurs entreprises se sont regroupées afin d’y exercer concomitamment leurs activités économiques respectives \[22\]. Ceci implique, à l’inverse, que les implantations isolées d’opérateurs marchands, tout comme les espaces sur lesquels un seul acteur se trouve installé, ne sont pas constitutives de telles zones.
 :::
-
-
