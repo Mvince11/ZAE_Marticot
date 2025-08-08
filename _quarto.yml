@@ -14,6 +14,9 @@ website:
       - href: cartes.qmd
         icon: map
         text: Cartes
+      - href: exploitation_questionnaire.qmd
+        icon: pen
+        text: Exploitation questionnaire
       - href: ref_biblio.qmd
         text: Références biliographiques
         icon: book
@@ -35,6 +38,10 @@ format:
     toc-title: Contenu
     toc-location: left
     toc-depth: 2
+    include-in-header:
+      - text: |
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
 
 editor: visual
 
