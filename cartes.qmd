@@ -49,24 +49,50 @@ library(geojsonio)
 zone <- st_read("layers/2025-06-05_C18_zone_act_eco_1.geojson") %>% st_transform(4326)
 entreprises <- st_read("layers/2025-06-06_C18_geoetablissement_custom_65.geojson") %>% st_transform(4326)
 
-# Créer un masque en soustrayant la zone cible du fond total
-masque <- st_difference(st_union(zone), st_union(entreprises))
+# Créer un rectangle plus grand que la zone (ici emprise France métropolitaine)
+emprise_totale <- st_as_sfc(
+  st_bbox(c(xmin = -5, xmax = 10, ymin = 41, ymax = 52), crs = st_crs(zone))
+)
+
+# Unifie la géométrie de la zone si elle contient plusieurs polygones
+zone_union <- st_union(zone)
+
+# Calcule le masque inversé : tout sauf la zone
+masque <- st_difference(emprise_totale, zone_union)
 
 ```
 
-```{r echo=FALSE}
+<div>
+
+```{r echo=FALSE, fig.width=10, fig.height=8}
 icons_entreprise <- awesomeIcons(
   icon = "industry",         # Icône entreprise
   library = "fa",            # Font Awesome
   markerColor = "green"
 )
 
-leaflet() %>%
-  addTiles() %>%
+leaflet(options = list(minZoom = 5, maxZoom = 18)) %>%
+  # Zoom par défaut
+  fitBounds(-0.6973803,44.7459913,-0.6852743, 44.7547388) %>%
+  addTiles(group = "OpenStreetMap") %>%
+  addTiles("https://data.geopf.fr/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&FORMAT=image/jpeg&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}",
+                 options = c(WMSTileOptions(tileSize = 256), 
+                             providerTileOptions(minZoom = 1, maxZoom = 22)),
+                 attribution='<a target="_blank" href="https://www.geoportail.gouv.fr/">Geoportail France</a>',
+                 group = "Ortho IGN") %>%
+        
+        
+        # Barre d'échelle
+  addScaleBar(position = c("bottomleft"), options = scaleBarOptions(metric = TRUE, imperial = FALSE)) %>%
+  
+  addLayersControl(position = "topright", baseGroups = c("OpenStreetMap", "Ortho IGN"),
+                   #overlayGroups = overlayGroups,
+                   options = layersControlOptions(autoZIndex = TRUE,collapsed = TRUE)) %>%
+  showGroup("Ortho IGN") %>%
   
   addAwesomeMarkers(
     data = entreprises,
-    icon = icons_entreprise,
+    icon = icons_entreprise, clusterOptions =  markerClusterOptions(showCoverageOnHover = FALSE,removeOutsideVisibleBounds = TRUE),
     popup = ~paste0(
       "<b>Entreprise :</b> ", denominationunitelegale, "<br>",
       "<b>Activité principale :</b> ", libactiviteprincipaleetablissement, "<br>",
@@ -74,20 +100,21 @@ leaflet() %>%
     )
   ) %>%
 
-  # addMarkers(
-  #   data = entreprises,
-  #   popup = ~paste0(
-  #     "<b>Entreprise :</b> ", denominationunitelegale, "<br>",
-  #     "<b>Activité principale :</b> ", libactiviteprincipaleetablissement, "<br>",
-  #     "<b>Catégorie :</b> ", categorieentreprise
-  #   ),
-  #   clusterOptions = markerClusterOptions(showCoverageOnHover = FALSE,removeOutsideVisibleBounds = TRUE),
-  # ) %>%
-  # Bordure de la zone d'intérêt (effet focus)
+  addPolygons(
+    data = masque,
+    fillColor = "#dee2e6",
+    fillOpacity = 0.4,
+    color = NA
+  ) %>%
+
+  # Bordure nette de la zone d'intérêt
   addPolygons(
     data = zone,
-    color = "red",         # Bordure rouge
-    weight = 2,
-    fillOpacity = 0        # Pas de remplissage
-  )
+    color = "orange",
+    weight = 3,
+    fillOpacity = 0
+  ) 
+
 ```
+
+</div>
