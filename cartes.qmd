@@ -6,11 +6,12 @@ lightbox: true
 toc: true
 ---
 
-## Zone d'activité économique de Marticot
+## Plan d'ensemble de la Zone d'activité économique de Marticot
 
 ![](images/zae_marticot.png){.lightbox}
 
-:::: {.callout-tip collapse="true" icon="false"}
+## Plan par zone de la zone d'activité économique de Marticot
+:::: {.callout-tip collapse="false" icon="false"}
 ## Localisation des entreprises par zone
 
 ::: {style="margin-top: 10px;"}
@@ -62,6 +63,7 @@ masque <- st_difference(emprise_totale, zone_union)
 
 ```
 
+## Carte interactive
 <div>
 
 ```{r echo=FALSE, fig.width=10, fig.height=8}
