@@ -98,11 +98,19 @@ ul.task-list li input[type="checkbox"] {
 </i> 
 <span class="menu-text">Cartes</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./exploitation_questionnaire.html"> <i class="bi bi-pen" role="img">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-exploitation-questionnaire" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-pen" role="img">
 </i> 
-<span class="menu-text">Exploitation questionnaire</span></a>
+ <span class="menu-text">Exploitation questionnaire</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-exploitation-questionnaire">    
+        <li>
+    <a class="dropdown-item" href="./exploitation_questionnaire.html">
+ <span class="dropdown-text">Etat civil</span></a>
   </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link active" href="./ref_biblio.html" aria-current="page"> <i class="bi bi-book" role="img">
 </i> 
@@ -253,7 +261,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/website\.quarto\.pub\/zae_marticot");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

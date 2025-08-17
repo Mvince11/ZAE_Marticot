@@ -14,9 +14,13 @@ website:
       - href: cartes.qmd
         icon: map
         text: Cartes
-      - href: exploitation_questionnaire.qmd
+      - text: Exploitation questionnaire
         icon: pen
-        text: Exploitation questionnaire
+        menu:
+          - href: exploitation_questionnaire.qmd
+            text: Etat civil
+          - text: Bloc2
+          - text: Bloc3
       - href: ref_biblio.qmd
         text: Références biliographiques
         icon: book
