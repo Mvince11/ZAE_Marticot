@@ -17,10 +17,18 @@ website:
       - text: Exploitation questionnaire
         icon: pen
         menu:
-          - href: exploitation_questionnaire.qmd
-            text: Etat civil
-          - text: Bloc2
-          - text: Bloc3
+          - href: etat_civil.qmd
+            text: Volet Etat civil
+          - text: Volet Perception générale
+            href: perception_general.qmd
+          - text: Volet vie professionnelle
+            href: vie_professionnelle.qmd
+          - text: Volet Perception de l'environnement et des conditions de travail
+            href: percpetion_environnement.qmd
+          - text: Volet Modalités de transports
+            href: modalites_transports.qmd
+          - text: Volet Pause déjeuner
+            href: pause_dejeuner.qmd
       - href: ref_biblio.qmd
         text: Références biliographiques
         icon: book

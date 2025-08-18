@@ -1,0 +1,328 @@
+---
+title: ""
+format:
+  dashboard:
+    orientation: rows
+editor: visual
+expandable: true
+layout: "grid"
+scrolling: true
+---
+
+```{r setup, include=FALSE}
+# Chargement des packages
+library(tidyverse)
+library(readr)
+
+# Lecture du fichier CSV
+donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
+  drop_na(`Date de soumission`)
+```
+
+## Columns
+
+<h1 style="font-size:1.4em;">
+
+Volet état civil
+
+</h1>
+
+::: {style="text-align:center; font-size:1.2em; font-weight:bold; margin:10px 0;"}
+Voici quelques statistiques issues du questionnaire
+:::
+
+## Row {height="40%"}
+
+```{r}
+#| echo: false
+
+donnees %>%
+  count(`Quel est votre genre ?  Veuillez cocher une case`) %>%
+  ggplot(aes(x = reorder(`Quel est votre genre ?  Veuillez cocher une case`, n), y = n, fill = `Quel est votre genre ?  Veuillez cocher une case`)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(title = "Répartition des réponses par genre", x = "Genre", y = "Nombre de réponses") +
+  theme(plot.title = element_text(color = "red", size = 14, face = "bold", hjust = 0.5))
+```
+
+```{r}
+#| echo: false
+
+donnees %>%
+  count(`Quel est votre âge ?`) %>%
+  ggplot(aes(x = `Quel est votre âge ?`, y = n, fill = `Quel est votre âge ?`)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(
+    title = "Répartition des réponses par âge",
+    x = "Âge",
+    y = "Nombre de réponses"
+  ) +
+  theme(
+    plot.title = element_text(color = "red", size = 14, face = "bold", hjust = 0.5)
+  )
+```
+
+## Row {height="40%"}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig.width: 5
+#| fig.height: 2
+donnees_age_genre <- donnees %>%
+  rename(Genre = `Quel est votre genre ?  Veuillez cocher une case`) %>%
+  count(`Quel est votre âge ?`, Genre)
+
+# Étape 2 : faire le graphique
+ggplot(donnees_age_genre, aes(x = `Quel est votre âge ?`, y = n, fill = Genre)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Répartition des réponses par âge et par genre",
+    y = "Nombre de réponses",
+    x = "Âge"
+  ) +
+  theme(
+    plot.title = element_text(color = "red", size = 5, face = "bold", hjust = 0.5),
+    axis.title.x = element_text(size = 6),  # Titre axe X
+    axis.title.y = element_text(size = 6),  # Titre axe Y
+    axis.text.x = element_text(size = 5),    # Valeurs axe X
+    axis.text.y = element_text(size = 5),     # Valeurs axe Y
+    legend.text = element_text(size = 4),        # Taille du texte de la légende
+    legend.title = element_text(size = 5)        # Taille du titre de la légende
+  )
+```
+
+## Row {height="30%"}
+
+```{r}
+#| echo: false
+#| fig.width: 5
+#| fig.height: 3
+
+donnees %>%
+  count(`Quelle est votre catégorie socio-professionnelle ?`) %>%
+  ggplot(aes(x = reorder(`Quelle est votre catégorie socio-professionnelle ?`, n), y = n, fill = `Quelle est votre catégorie socio-professionnelle ?`)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(title = "Répartition des réponses par catégorie socio-professionnelle", x = "catégorie socio-professionnelle", y = "Nombre de réponses") +
+  theme(
+    plot.title = element_text(color = "red", size = 6, face = "bold", hjust = 0.5),
+    axis.title.x = element_text(size = 6),  # Titre axe X
+    axis.title.y = element_text(size = 6),  # Titre axe Y
+    axis.text.x = element_text(size = 5),    # Valeurs axe X
+    axis.text.y = element_text(size = 5),     # Valeurs axe Y
+    legend.text = element_text(size = 4),        # Taille du texte de la légende
+    legend.title = element_text(size = 5)        # Taille du titre de la légende
+  )
+```
+
+```{r}
+#| echo: false
+#| fig.width: 5
+#| fig.height: 3
+
+donnees %>%
+  drop_na(`Quelle est votre catégorie socio-professionnelle ? [Autre]`)%>%
+  count(`Quelle est votre catégorie socio-professionnelle ? [Autre]`) %>%
+  ggplot(aes(x = reorder(`Quelle est votre catégorie socio-professionnelle ? [Autre]`, n), y = n, fill = `Quelle est votre catégorie socio-professionnelle ? [Autre]`)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(title = "Répartition des réponses par catégorie socio-professionnelle", x = "catégorie socio-professionnelle", y = "Nombre de réponses") +
+  theme(
+    plot.title = element_text(color = "red", size = 6, face = "bold", hjust = 0.5),
+    axis.title.x = element_text(size = 6),  # Titre axe X
+    axis.title.y = element_text(size = 6),  # Titre axe Y
+    axis.text.x = element_text(size = 5),    # Valeurs axe X
+    axis.text.y = element_text(size = 5),     # Valeurs axe Y
+    legend.text = element_text(size = 4),        # Taille du texte de la légende
+    legend.title = element_text(size = 5)        # Taille du titre de la légende
+  )
+```
+
+## Row {.tabset height="30%" width="50%"}
+
+```{r}
+#| include: false
+
+library(sf)
+library(dplyr)
+
+##### Script utile pour joindre les géométries des communes #####
+# communes <- st_read("data/COMMUNE.shp")
+# communes_33_40 <- communes %>% filter(INSEE_DEP %in% c("33", "40")) %>% select(NOM_M,geometry)
+# st_write(communes_33_40, "data/commune_33_40.geojson")
+# communes_33_40 <- st_read("data/commune_33_40.geojson")%>%
+#    rename("Dans quelle commune vivez-vous ?" = NOM_M )
+# # 
+#  donnees <- donnees %>%
+#    mutate(`Dans quelle commune vivez-vous ?` = sub(" [0-9]{5}$", "", `Dans quelle commune vivez-vous ?`))%>%
+#    mutate(`Dans quelle commune vivez-vous ?` = case_when(
+#      `Dans quelle commune vivez-vous ?` == "ST MEDARD EN JALLES" ~ "SAINT-MEDARD-EN-JALLES",
+#      `Dans quelle commune vivez-vous ?` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
+#      `Dans quelle commune vivez-vous ?` == "BELIN BELIET" ~ "BELIN-BELIET",
+#      `Dans quelle commune vivez-vous ?` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
+#      `Dans quelle commune vivez-vous ?` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
+#      `Dans quelle commune vivez-vous ?` == "CARBON BLANC" ~ "CARBON-BLANC",
+#      `Dans quelle commune vivez-vous ?` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
+#      `Dans quelle commune vivez-vous ?` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
+#      `Dans quelle commune vivez-vous ?` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
+#      `Dans quelle commune vivez-vous ?` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
+#      `Dans quelle commune vivez-vous ?` == "LUDON MEDOC" ~ "LUDON-MEDOC",
+#      `Dans quelle commune vivez-vous ?` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
+#      `Dans quelle commune vivez-vous ?` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
+#      `Dans quelle commune vivez-vous ?` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
+#      `Dans quelle commune vivez-vous ?` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
+#      `Dans quelle commune vivez-vous ?` == "ST MAGNE" ~ "SAINT-MAGNE",
+#      `Dans quelle commune vivez-vous ?` == "ST MORILLON" ~ "SAINT-MORILLON",
+#      `Dans quelle commune vivez-vous ?` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
+#      `Dans quelle commune vivez-vous ?` == "ST SELVE" ~ "SAINT-SELVE",
+#      `Dans quelle commune vivez-vous ?` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
+#      TRUE ~ `Dans quelle commune vivez-vous ?`
+#    ))
+# # 
+#  question_commune <- donnees %>%
+#    left_join(communes_33_40, by = "Dans quelle commune vivez-vous ?")
+# # 
+#  st_write(question_commune, "data/question_commune.geojson", append = TRUE)
+
+question_commune <- st_read("data/question_commune.geojson") #%>%
+#   rename(`Dans quelle commune vivez vous ?` = `Dans.quelle.commune.vivez.vous..`)
+```
+
+```{r}
+#| echo: false
+#| title: "Carte des flux domiciles/travail"
+#| color: red
+#| fig.width: 5
+#| fig.height: 3
+  
+library(sf)
+library(dplyr)
+library(tidyverse)
+library(leaflet)
+
+# --- 1. Coordonnées de destination : Cestas Marticot
+dest_lon <- -0.69112
+dest_lat <- 44.75134
+destination <- st_sf(
+  nom = "Cestas - Zone économique de Marticot",
+  geometry = st_sfc(st_point(c(dest_lon, dest_lat)), crs = 4326)
+)
+
+# donnees <- donnees %>%
+#   mutate(`Dans quelle commune vivez-vous ?` = sub(" [0-9]{5}$", "", `Dans quelle commune vivez-vous ?`))
+# --- 2. Compter le nombre de réponses par commune
+nb_reponses <- question_commune %>%
+  count(`Dans quelle commune vivez-vous ?`, name = "nb_reponses")
+
+
+
+# --- 3. Extraire les centroïdes et joindre le comptage
+communes_centroides <- question_commune %>%
+  st_centroid() %>%
+  st_transform(4326) %>%
+  #rename(`Dans quelle commune vivez vous ?` = `Dans.quelle.commune.vivez.vous..`) %>%
+  mutate(
+    lon = st_coordinates(.)[, 1],
+    lat = st_coordinates(.)[, 2]
+  ) %>%
+  filter(!is.na(lon), !is.na(lat), lon >= -180, lon <= 180, lat >= -90, lat <= 90) %>%
+  left_join(nb_reponses, 
+            by = c("Dans quelle commune vivez vous ?" = "Dans quelle commune vivez-vous ?")) %>%
+  rename(commune = `Dans quelle commune vivez vous ?`)
+
+# --- 4. Création des lignes depuis chaque commune vers la destination
+flux <- purrr::map2(
+  communes_centroides$lon, communes_centroides$lat,
+  ~ st_linestring(matrix(c(.x, dest_lon, .y, dest_lat), ncol = 2, byrow = FALSE))
+) %>%
+  st_sfc(crs = 4326) %>%
+  st_sf(
+    commune = communes_centroides$commune,
+    nb_reponses = communes_centroides$nb_reponses,
+    geometry = .
+  )
+
+# --- 5. Carte Leaflet
+m <- leaflet() %>%
+  addTiles(group = "OpenStreetMap") %>%
+  addTiles(
+    "https://data.geopf.fr/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&FORMAT=image/jpeg&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}",
+    options = c(WMSTileOptions(tileSize = 256), providerTileOptions(minZoom = 1, maxZoom = 22)),
+    attribution = '<a target="_blank" href="https://www.geoportail.gouv.fr/">Geoportail France</a>',
+    group = "Ortho IGN"
+  ) %>%
+  addScaleBar(position = "bottomleft", options = scaleBarOptions(metric = TRUE, imperial = FALSE)) %>%
+  addLayersControl(position = "topright", baseGroups = c("OpenStreetMap", "Ortho IGN")) %>%
+  
+  # Flux : épaisseur proportionnelle au nombre de réponses
+  addPolylines(
+    data = flux,
+    color = "red",
+    weight = ~ifelse(is.na(nb_reponses), 1, nb_reponses / 2),
+    opacity = 0.7,
+    popup = ~paste0("<b>", commune, "</b><br>Réponses : ", nb_reponses)
+  ) %>%
+  
+  # Communes
+  addCircleMarkers(
+    data = communes_centroides,
+    lng = ~lon, lat = ~lat,
+    radius = 3, color = "black", fillColor = "orange", fillOpacity = 0.8,
+    popup = ~paste0(commune, "<br>Réponses : ", nb_reponses)
+  ) %>%
+  
+  # Destination
+  addCircleMarkers(
+    data = destination,
+    color = "blue", fillColor = "blue", radius = 6, fillOpacity = 1,
+    popup = ~nom
+  )
+
+m
+
+```
+
+```{r}
+#| title: "Tableau récapitulatif"
+#| fig.width: 5
+#| fig.height: 3
+
+
+library(dplyr)
+library(DT)
+
+# Renommer et trier
+table_trajets <- nb_reponses %>%
+  rename(
+    Commune = `Dans quelle commune vivez-vous ?`,
+    `Nombre de trajets` = nb_reponses
+  ) %>%
+  arrange(desc(`Nombre de trajets`))
+
+datatable(
+  table_trajets,
+  #extensions = 'Buttons',
+  options = list(
+    pageLength = 15,
+    autoWidth = TRUE,
+    order = list(list(1, 'desc')),
+    dom = 'Bfrtip',
+    #buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+    columnDefs = list(list(className = 'dt-center', targets = 1))
+  ),
+  rownames = FALSE
+) %>%
+  formatStyle(
+    "Nombre de trajets",
+    backgroundColor = styleInterval(
+      c(5, 10),
+      c('#fff7ec', '#fd8d3c', '#e31a1c')
+    ),
+    color = "black",
+    fontWeight = "bold"
+  )
+
+```

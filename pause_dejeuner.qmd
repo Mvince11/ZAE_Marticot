@@ -1,0 +1,10 @@
+---
+title: ""
+format:
+  dashboard:
+    orientation: rows
+editor: visual
+expandable: true
+layout: "grid"
+scrolling: true
+---

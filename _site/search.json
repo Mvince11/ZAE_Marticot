@@ -33,5 +33,89 @@
     "title": "Zone d’activité économique de Marticot",
     "section": "",
     "text": "Par effet de la loi NOTRe [1], les établissements publics de coopération intercommunale à fiscalité propre sont, depuis le 1ᵉʳ janvier 2017, pleinement compétents en ce qui concerne la création, l’extension, l’entretien et la gestion des zones d’activité économique. A défaut de définition formelle, la détermination de ces zones ne peut qu’être le fruit d’une approche factuelle, à partir d’un faisceau d’indices. En pratique, cette méthode fait apparaître qu’une zone d’activité économique désigne un site administrativement réservé à l’implantation d’entreprises, dans un périmètre aménagé sous maîtrise d’ouvrage publique. Inversement, ne sont pas concernées les zones initiées et gérées par des acteurs privés, tout comme celles qui n’ont pas, ou seulement de manière accessoire, une vocation économique cohérente et continue.\n\n\n\nA l’instar de toute « zone », celle qui donne lieu à la réalisation d’activités économiques doit présenter une continuité et une cohérence géographique certaines. Cette double exigence se trouve clairement avancée dans différentes réponses ministérielles se prononçant spécifiquement sur les modalités d’identification des zones d’activité touristique [19], ceci pour évoquer l’idée que l’homogénéité de tels espaces concourt directement à leur attractivité [20].\nCet indice dédoublé est implicitement admis par le juge lorsqu’il retient la conformité d’un permis de construire relatif à la réalisation d’un entrepôt logistique de stockage devant se situer « en continuité ou en extension » d’une ZAE existante, par rapport aux documents d’urbanisme d’un territoire donné et notamment au SCoT exposant, par le truchement de son document d’orientation générale, l’objectif d’affirmer l’excellence industrielle dudit territoire et identifiant à cette fin des espaces dédiées à son développement économique [21].\nCes éléments traduisent le fait qu’une ZAE s’étend sur un périmètre géographique constitué soit d’une seule grande parcelle à diviser, soit d’au moins deux parcelles contiguës, sur lequel plusieurs entreprises se sont regroupées afin d’y exercer concomitamment leurs activités économiques respectives [22]. Ceci implique, à l’inverse, que les implantations isolées d’opérateurs marchands, tout comme les espaces sur lesquels un seul acteur se trouve installé, ne sont pas constitutives de telles zones.\n\n\n\n Retour au sommet"
+  },
+  {
+    "objectID": "etat_civil.html",
+    "href": "etat_civil.html",
+    "title": "\nVolet état civil\n",
+    "section": "",
+    "text": "Voici quelques statistiques issues du questionnaire"
+  },
+  {
+    "objectID": "etat_civil.html#columns",
+    "href": "etat_civil.html#columns",
+    "title": "\nVolet état civil\n",
+    "section": "",
+    "text": "Voici quelques statistiques issues du questionnaire"
+  },
+  {
+    "objectID": "etat_civil.html#row",
+    "href": "etat_civil.html#row",
+    "title": "\nVolet état civil\n",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "etat_civil.html#row-1",
+    "href": "etat_civil.html#row-1",
+    "title": "\nVolet état civil\n",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "etat_civil.html#row-2",
+    "href": "etat_civil.html#row-2",
+    "title": "\nVolet état civil\n",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "etat_civil.html#column",
+    "href": "etat_civil.html#column",
+    "title": "\nVolet état civil\n",
+    "section": "Column",
+    "text": "Column\n\nVolet Déplacements"
+  },
+  {
+    "objectID": "etat_civil.html#row-3",
+    "href": "etat_civil.html#row-3",
+    "title": "\nVolet état civil\n",
+    "section": "Row",
+    "text": "Row\n\n\nWarning: le package 'leaflet' a été compilé avec la version R 4.3.3\n\n\nWarning: st_centroid assumes attributes are constant over geometries\n\n\n\n\n\n\n\nlibrary(dplyr)\nlibrary(DT)\n\nWarning: le package 'DT' a été compilé avec la version R 4.3.3\n\n# Renommer et trier\ntable_trajets &lt;- nb_reponses %&gt;%\n  rename(\n    Commune = `Dans quelle commune vivez-vous ?`,\n    `Nombre de trajets` = nb_reponses\n  ) %&gt;%\n  arrange(desc(`Nombre de trajets`))\n\ndatatable(\n  table_trajets,\n  extensions = 'Buttons',\n  options = list(\n    pageLength = 15,\n    autoWidth = TRUE,\n    order = list(list(1, 'desc')),\n    dom = 'Bfrtip',\n    buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),\n    columnDefs = list(list(className = 'dt-center', targets = 1))\n  ),\n  rownames = FALSE\n) %&gt;%\n  formatStyle(\n    \"Nombre de trajets\",\n    backgroundColor = styleInterval(\n      c(5, 10),\n      c('#fff7ec', '#fd8d3c', '#e31a1c')\n    ),\n    color = \"black\",\n    fontWeight = \"bold\"\n  )"
+  },
+  {
+    "objectID": "vie_professionnelle.html",
+    "href": "vie_professionnelle.html",
+    "title": "",
+    "section": "",
+    "text": "Back to top"
+  },
+  {
+    "objectID": "perception_general.html",
+    "href": "perception_general.html",
+    "title": "",
+    "section": "",
+    "text": "Back to top"
+  },
+  {
+    "objectID": "modalites_transports.html",
+    "href": "modalites_transports.html",
+    "title": "",
+    "section": "",
+    "text": "Back to top"
+  },
+  {
+    "objectID": "pause_dejeuner.html",
+    "href": "pause_dejeuner.html",
+    "title": "",
+    "section": "",
+    "text": "Back to top"
+  },
+  {
+    "objectID": "percpetion_environnement.html",
+    "href": "percpetion_environnement.html",
+    "title": "",
+    "section": "",
+    "text": "Back to top"
   }
 ]
