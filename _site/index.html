@@ -37,7 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fe47cb3a97a20e4faed889ad50606148.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7c7d33b0cafb44faef3a5ec24d9e3dc9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -97,11 +97,39 @@ ul.task-list li input[type="checkbox"] {
 </i> 
 <span class="menu-text">Cartes</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./exploitation_questionnaire.html"> <i class="bi bi-pen" role="img">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-exploitation-questionnaire" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-pen" role="img">
 </i> 
-<span class="menu-text">Exploitation questionnaire</span></a>
+ <span class="menu-text">Exploitation questionnaire</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-exploitation-questionnaire">    
+        <li>
+    <a class="dropdown-item" href="./etat_civil.html">
+ <span class="dropdown-text">Volet Etat civil</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./perception_general.html">
+ <span class="dropdown-text">Volet Perception générale</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./vie_professionnelle.html">
+ <span class="dropdown-text">Volet vie professionnelle</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./percpetion_environnement.html">
+ <span class="dropdown-text">Volet Perception de l’environnement et des conditions de travail</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./modalites_transports.html">
+ <span class="dropdown-text">Volet Modalités de transports</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pause_dejeuner.html">
+ <span class="dropdown-text">Volet Pause déjeuner</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./ref_biblio.html"> <i class="bi bi-book" role="img">
 </i> 
@@ -230,7 +258,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/website\.quarto\.pub\/zae_marticot");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

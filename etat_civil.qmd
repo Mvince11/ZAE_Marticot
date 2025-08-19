@@ -19,7 +19,6 @@ donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
   drop_na(`Date de soumission`)
 ```
 
-## Columns
 
 <h1 style="font-size:1.4em;">
 
@@ -31,7 +30,7 @@ Volet état civil
 Voici quelques statistiques issues du questionnaire
 :::
 
-## Row {height="40%"}
+## Row {height="30%"}
 
 ```{r}
 #| echo: false
@@ -187,8 +186,8 @@ library(dplyr)
 # # 
 #  st_write(question_commune, "data/question_commune.geojson", append = TRUE)
 
-question_commune <- st_read("data/question_commune.geojson") #%>%
-#   rename(`Dans quelle commune vivez vous ?` = `Dans.quelle.commune.vivez.vous..`)
+question_commune <- st_read("data/question_commune.geojson") %>%
+   rename(`Dans quelle commune vivez vous ?` = `Dans.quelle.commune.vivez.vous..`)
 ```
 
 ```{r}
@@ -211,11 +210,35 @@ destination <- st_sf(
   geometry = st_sfc(st_point(c(dest_lon, dest_lat)), crs = 4326)
 )
 
-# donnees <- donnees %>%
-#   mutate(`Dans quelle commune vivez-vous ?` = sub(" [0-9]{5}$", "", `Dans quelle commune vivez-vous ?`))
+ donnees <- donnees %>%
+   mutate(`Dans quelle commune vivez-vous ?` = sub(" [0-9]{5}$", "", `Dans quelle commune vivez-vous ?`))
 # --- 2. Compter le nombre de réponses par commune
-nb_reponses <- question_commune %>%
-  count(`Dans quelle commune vivez-vous ?`, name = "nb_reponses")
+nb_reponses <- donnees %>%
+  count(`Dans quelle commune vivez-vous ?`, name = "nb_reponses")%>%
+    mutate(`Dans quelle commune vivez-vous ?` = sub(" [0-9]{5}$", "", `Dans quelle commune vivez-vous ?`))%>%
+    mutate(`Dans quelle commune vivez-vous ?` = case_when(
+      `Dans quelle commune vivez-vous ?` == "ST MEDARD EN JALLES" ~ "SAINT-MEDARD-EN-JALLES",
+      `Dans quelle commune vivez-vous ?` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
+      `Dans quelle commune vivez-vous ?` == "BELIN BELIET" ~ "BELIN-BELIET",
+      `Dans quelle commune vivez-vous ?` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
+      `Dans quelle commune vivez-vous ?` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
+      `Dans quelle commune vivez-vous ?` == "CARBON BLANC" ~ "CARBON-BLANC",
+      `Dans quelle commune vivez-vous ?` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
+      `Dans quelle commune vivez-vous ?` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
+      `Dans quelle commune vivez-vous ?` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
+      `Dans quelle commune vivez-vous ?` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
+      `Dans quelle commune vivez-vous ?` == "LUDON MEDOC" ~ "LUDON-MEDOC",
+     `Dans quelle commune vivez-vous ?` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
+      `Dans quelle commune vivez-vous ?` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
+      `Dans quelle commune vivez-vous ?` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
+      `Dans quelle commune vivez-vous ?` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
+      `Dans quelle commune vivez-vous ?` == "ST MAGNE" ~ "SAINT-MAGNE",
+      `Dans quelle commune vivez-vous ?` == "ST MORILLON" ~ "SAINT-MORILLON",
+      `Dans quelle commune vivez-vous ?` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
+      `Dans quelle commune vivez-vous ?` == "ST SELVE" ~ "SAINT-SELVE",
+      `Dans quelle commune vivez-vous ?` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
+      TRUE ~ `Dans quelle commune vivez-vous ?`
+    ))
 
 
 
@@ -325,4 +348,9 @@ datatable(
     fontWeight = "bold"
   )
 
+```
+
+## Column { expandable="false" }
+```{=html}
+Flux domicile/travail
 ```

@@ -8,5 +8,70 @@ expandable: true
 layout: "grid"
 scrolling: true
 ---
-## Column {expandable: false}
-<h1 style="font-size:1.4em;"> Volet Perception générale </h1>
+
+```{r setup, include=FALSE}
+# Chargement des packages
+library(tidyverse)
+library(readr)
+
+# Lecture du fichier CSV
+donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
+  drop_na(`Date de soumission`)
+```
+
+<h1 style="font-size:1.4em;">Volet Perception générale</h1>
+
+
+## Column {height="20%" width="50%"}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# On sélectionne uniquement les colonnes qui t'intéressent
+df_notes <- donnees %>%
+  select(
+    Attractive = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Attractive]`,
+    Conviviale = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Conviviale]`,
+    "Accessible en transport" = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Accessible en transports]`,
+    Isolee = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Isolée]`,
+    Obsolete = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Obsolète]`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))   # supprimer les NA
+
+# Compter le nombre de réponses par critère et par note
+df_plot <- df_notes %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")
+
+# Graphique : barres empilées
+ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
+  geom_text(aes(label = N), 
+            position = position_stack(vjust = 0.5), 
+            color = "black", size = 1) +
+  labs(
+    title = "Perception de la zone d’activité de Marticot",
+    x = "",
+    y = "Nombre de réponses",
+    fill = "Note"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
+        axis.text.x = element_text( hjust = 0.5, size = 4),
+        axis.title.x = element_text(size = 2),  # Titre axe X
+        axis.title.y = element_text(size = 4),  # Titre axe Y
+        axis.text.y = element_text(size = 4),     # Valeurs axe Y
+        legend.text = element_text(size = 3),        # Taille du texte de la légende
+        legend.title = element_text(size = 4),        # Taille du titre de la légende
+        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
+        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
+        )
+```
