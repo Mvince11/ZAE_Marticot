@@ -152,7 +152,7 @@ h1::before {
     top: 0;
     left: 0;
     width: 30px; /* Largeur du rectangle */
-    height: 100%;
+    height: 30px;
     background-color: $orangeCerema;
 }
 
@@ -342,4 +342,8 @@ img{
 
 .bslib-card .bslib-navs-card-title .nav{
   margin-left: inherit;
+}
+
+.test {
+  margin-bottom: -220px;
 }
