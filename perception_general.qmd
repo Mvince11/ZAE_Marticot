@@ -153,3 +153,119 @@ ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
         legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
         )
 ```
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# On sélectionne uniquement les colonnes qui t'intéressent
+nuisances_notes <- donnees %>%
+  select(
+    Autres = `Si oui, lesquelles ?  Veuillez cocher une ou plusieurs réponse  [Autre]`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))   # supprimer les NA
+
+# Compter le nombre de réponses par critère et par note
+df_plot <- nuisances_notes %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")
+
+# Graphique : barres empilées
+ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
+  geom_text(aes(label = N), 
+            position = position_stack(vjust = 0.5), 
+            color = "black", size = 1) +
+  labs(
+    title = "Origines des nuisances - Autres",
+    x = "",
+    y = "Nombre de réponses",
+    fill = "Note"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
+        axis.text.x = element_text( hjust = 0.5, size = 4),
+        axis.title.x = element_text(size = 2),  # Titre axe X
+        axis.title.y = element_text(size = 4),  # Titre axe Y
+        axis.text.y = element_text(size = 4),     # Valeurs axe Y
+        legend.text = element_text(size = 3),        # Taille du texte de la légende
+        legend.title = element_text(size = 4),        # Taille du titre de la légende
+        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
+        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
+        )
+```
+
+## Column { expandable="false" }
+```{=html}
+Plus de 200 personnes n'ont pas répondu à cette question
+```
+
+## Row {height="20%}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# On sélectionne uniquement les colonnes qui t'intéressent
+caracterisation_notes <- donnees %>%
+  select(
+    "Ses espaces de convivialité" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses espaces de convivialité]`,
+    "Ses services"= `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses services (équipements sportifs, restauration, supermarchés…)]`,
+    "Sa propreté et son bon entretien" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Sa propreté et son bon entretien]`,
+    "La sécurité" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [La sécurité (de ses biens et des personnes)]`,
+    "Ses cheminements piétons" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses cheminements piétons]`,
+    "Son réseau internet" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Son réseau internet]`,
+    "Ses espaces verts" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses espaces verts]`
+    
+    
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))   # supprimer les NA
+
+# Compter le nombre de réponses par critère et par note
+df_plot <- caracterisation_notes %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")
+
+# Graphique : barres empilées
+ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
+  geom_text(aes(label = N), 
+            position = position_stack(vjust = 0.5), 
+            color = "black", size = 1) +
+  labs(
+    title = "Selon vous, la zone d’activité de Marticot est caractérisée par",
+    x = "",
+    y = "Nombre de réponses",
+    fill = "Note"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
+        axis.text.x = element_text( hjust = 0.5, size = 4, angle = 20),
+        axis.title.x = element_text(size = 2),  # Titre axe X
+        axis.title.y = element_text(size = 4),  # Titre axe Y
+        axis.text.y = element_text(size = 4),     # Valeurs axe Y
+        legend.text = element_text(size = 3),        # Taille du texte de la légende
+        legend.title = element_text(size = 4),        # Taille du titre de la légende
+        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
+        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
+        )
+```
+
+## Column { expandable="false" }
+```{=html}
+Nous pouvons voir ici au travers des réponses qu'il manque d'espace de convivialité et que les services proposés dans la ZAE tels que les équipements sportifs, les supermarchés ou une enseigne de restauration sont absents.
+```
