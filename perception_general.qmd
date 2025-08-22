@@ -269,3 +269,287 @@ ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
 ```{=html}
 Nous pouvons voir ici au travers des réponses qu'il manque d'espace de convivialité et que les services proposés dans la ZAE tels que les équipements sportifs, les supermarchés ou une enseigne de restauration sont absents.
 ```
+
+## Row {height="30%"}
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# On sélectionne uniquement les colonnes qui t'intéressent
+aspect_notes <- donnees %>%
+  select(
+    `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :  Donnez une note de 1 à 6, 1 correspondant à « moche » et 6 « esthétique »  [Votre choix]` 
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))   # supprimer les NA
+
+# Compter le nombre de réponses par critère et par note
+df_plot <- aspect_notes %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")%>%
+  mutate(Critere = " ")
+
+# Graphique : barres empilées
+ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "RdYlGn", direction = 1,
+                     labels = c(
+                      "1 = Moche",
+                      "2",
+                      "3",
+                      "4",
+                      "5",
+                      "6 = Esthétique"
+                      )
+                    ) +
+  geom_text(aes(label = N), 
+            position = position_stack(vjust = 0.5), 
+            color = "black", size = 1) +
+  labs(
+    title = "Aspect visuel",
+    x = NULL,
+    y = "Nombre de réponses",
+    fill = "Note"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
+        axis.text.x = element_text( hjust = 0.5, size = 4),
+        axis.title.x = element_blank(),  # Titre axe X
+        axis.title.y = element_text(size = 4),  # Titre axe Y
+        axis.text.y = element_text(size = 4),     # Valeurs axe Y
+        legend.text = element_text(size = 3),        # Taille du texte de la légende
+        legend.title = element_text(size = 4),        # Taille du titre de la légende
+        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
+        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
+        )
+```
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# On sélectionne uniquement les colonnes qui t'intéressent
+espaces_verts_notes <- donnees %>%
+  select(
+    `Dans quelle mesure êtes-vous attaché(e) aux espaces verts présents sur la zone d’activités de Marticot ?  Donnez une note de 1 à 6, 1 correspondant à « pas du tout attaché » et 6 « très attaché »  [Votre choix]` 
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))   # supprimer les NA
+
+# Compter le nombre de réponses par critère et par note
+df_plot <- espaces_verts_notes %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")%>%
+  mutate(Critere = " ")
+
+# Graphique : barres empilées
+ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "RdYlGn", direction = 1,
+                     labels = c(
+                      "1 = pas du tout",
+                      "2",
+                      "3",
+                      "4",
+                      "5",
+                      "6 = tout à fait"
+                      )
+                    ) +
+  geom_text(aes(label = N), 
+            position = position_stack(vjust = 0.5), 
+            color = "black", size = 1) +
+  labs(
+    title = "Etes-vous attaché(e) aux espaces verts présents sur la zone d’activités de Marticot ?",
+    x = NULL,
+    y = "Nombre de réponses",
+    fill = "Note"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
+        axis.text.x = element_text( hjust = 0.5, size = 4),
+        axis.title.x = element_blank(),  # Titre axe X
+        axis.title.y = element_text(size = 4),  # Titre axe Y
+        axis.text.y = element_text(size = 4),     # Valeurs axe Y
+        legend.text = element_text(size = 3),        # Taille du texte de la légende
+        legend.title = element_text(size = 4),        # Taille du titre de la légende
+        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
+        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
+        )
+```
+
+## Row {height="30%"}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# On sélectionne uniquement les colonnes qui t'intéressent
+batiments_notes <- donnees %>%
+  select(
+    `Comment jugez-vous l’état général des bâtiments de la zone d’activité de Marticot ?Donnez une note en cochant de 1 à 6, 1 correspondant à « très mauvais » et 6 « très bon » [Votre choix]`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))   # supprimer les NA
+
+# Compter le nombre de réponses par critère et par note
+df_plot <- batiments_notes %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")%>%
+  mutate(Critere = " ")
+
+# Graphique : barres empilées
+ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "Dark2", direction = 1,
+                     labels = c(
+                      "1 = très mauvais",
+                      "2",
+                      "3",
+                      "4",
+                      "5",
+                      "6 = très bon"
+                      )
+                    ) +
+  geom_text(aes(label = N), 
+            position = position_stack(vjust = 0.5), 
+            color = "black", size = 1) +
+  labs(
+    title = "Comment jugez-vous l’état général des bâtiments ?",
+    x = NULL,
+    y = "Nombre de réponses",
+    fill = "Note"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
+        axis.text.x = element_text( hjust = 0.5, size = 4),
+        axis.title.x = element_blank(),  # Titre axe X
+        axis.title.y = element_text(size = 4),  # Titre axe Y
+        axis.text.y = element_text(size = 4),     # Valeurs axe Y
+        legend.text = element_text(size = 3),        # Taille du texte de la légende
+        legend.title = element_text(size = 4),        # Taille du titre de la légende
+        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
+        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
+        )
+```
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# On sélectionne uniquement les colonnes qui t'intéressent
+friches_notes <- donnees %>%
+  select(
+    `Avez-vous remarqué la présence de friches (terrain ou local abandonnés de longue date) ou de locaux vacants sur la zone d’activité de Marticot?  Veuillez choisir une seule réponse`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))   # supprimer les NA
+
+# Compter le nombre de réponses par critère et par note
+df_plot <- friches_notes %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")%>%
+  mutate(Critere = " ")
+
+# Graphique : barres empilées
+ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "Set2", direction = 1) +
+  geom_text(aes(label = N), 
+            position = position_stack(vjust = 0.5), 
+            color = "black", size = 1) +
+  labs(
+    title = "Présence de friches ou de locaux vacants ?",
+    x = NULL,
+    y = "Nombre de réponses",
+    fill = "Note"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
+        axis.text.x = element_text( hjust = 0.5, size = 4),
+        axis.title.x = element_blank(),  # Titre axe X
+        axis.title.y = element_text(size = 4),  # Titre axe Y
+        axis.text.y = element_text(size = 4),     # Valeurs axe Y
+        legend.text = element_text(size = 3),        # Taille du texte de la légende
+        legend.title = element_text(size = 4),        # Taille du titre de la légende
+        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
+        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
+        )
+```
+
+## Row {height="30%"}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# On sélectionne uniquement les colonnes qui t'intéressent
+caracterisation_notes <- donnees %>%
+  select(
+    "Plus verte" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus verte]`,
+    "Plus accessible"= `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus accessible]`,
+    "Plus dense" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus dense]`,
+    "Plus accessible à pied" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus accessible à pied]`,
+    "Mieux desservie" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Mieux desservie]`,
+    "Accueillir des services qui  seraient utiles à tous" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Accueillir des services qui  seraient utiles à tous]`,
+    "Accueillir des services qui vous seraient utiles à vous" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Accueillir des services qui vous seraient utiles à vous]`
+    
+    
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))   # supprimer les NA
+
+# Compter le nombre de réponses par critère et par note
+df_plot <- caracterisation_notes %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")
+
+# Graphique : barres empilées
+ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
+  geom_text(aes(label = N), 
+            position = position_stack(vjust = 0.5), 
+            color = "black", size = 1) +
+  labs(
+    title = "Selon vous, la zone d’activité de Marticot est caractérisée par",
+    x = "",
+    y = "Nombre de réponses",
+    fill = "Note"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
+        axis.text.x = element_text( hjust = 0.5, size = 4, angle = 20),
+        axis.title.x = element_text(size = 2),  # Titre axe X
+        axis.title.y = element_text(size = 4),  # Titre axe Y
+        axis.text.y = element_text(size = 4),     # Valeurs axe Y
+        legend.text = element_text(size = 3),        # Taille du texte de la légende
+        legend.title = element_text(size = 4),        # Taille du titre de la légende
+        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
+        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
+        )
+```
