@@ -212,13 +212,14 @@ Plus de 200 personnes n'ont pas répondu à cette question
 ```{r}
 #| echo: false
 #| fig.width: 4
-#| fig.height: 2
+#| fig.height: 3
 
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(plotly)
 
-# On sélectionne uniquement les colonnes qui t'intéressent
+# Préparation des données
 caracterisation_notes <- donnees %>%
   select(
     "Ses espaces de convivialité" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses espaces de convivialité]`,
@@ -228,24 +229,40 @@ caracterisation_notes <- donnees %>%
     "Ses cheminements piétons" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses cheminements piétons]`,
     "Son réseau internet" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Son réseau internet]`,
     "Ses espaces verts" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses espaces verts]`
-    
-    
   ) %>%
   pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
-  filter(!is.na(Note))   # supprimer les NA
+  filter(!is.na(Note))%>%
+  mutate(Note = factor(
+    Note,
+    levels = 1:6,
+    labels = c("1 = Pas du tout", "2", "3", "4", "5", "6 = Tout à fait")
+  ))
 
-# Compter le nombre de réponses par critère et par note
+# Comptage des réponses par critère/note
 df_plot <- caracterisation_notes %>%
   group_by(Critere, Note) %>%
-  summarise(N = n(), .groups = "drop")
+  summarise(N = n(), .groups = "drop")%>%
+  group_by(Critere) %>%
+  mutate(
+    Total = sum(N),
+    Pourcent = round(100 * N / Total, 1)  # % arrondi à 1 décimale
+  )
 
-# Graphique : barres empilées
-ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+# Graphique ggplot
+p <- ggplot(df_plot, aes(
+    x = Critere, y = N, fill = factor(Note),
+    text = paste(
+      "Critère :", Critere,
+      "<br>Note :", Note,
+      "<br>Réponses :", N,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
   geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
-  geom_text(aes(label = N), 
-            position = position_stack(vjust = 0.5), 
-            color = "black", size = 1) +
+  scale_fill_brewer(
+    palette = "RdYlGn", direction = 1#,
+    #labels = c("1 = Pas du tout", "2", "3", "4", "5", "6 = Tout à fait")
+  ) +
   labs(
     title = "Selon vous, la zone d’activité de Marticot est caractérisée par",
     x = "",
@@ -253,16 +270,17 @@ ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
     fill = "Note"
   ) +
   theme_minimal() +
-  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
-        axis.text.x = element_text( hjust = 0.5, size = 4, angle = 20),
-        axis.title.x = element_text(size = 2),  # Titre axe X
-        axis.title.y = element_text(size = 4),  # Titre axe Y
-        axis.text.y = element_text(size = 4),     # Valeurs axe Y
-        legend.text = element_text(size = 3),        # Taille du texte de la légende
-        legend.title = element_text(size = 4),        # Taille du titre de la légende
-        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
-        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
-        )
+  theme(
+    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(hjust = 0.5, size = 8, angle = 20),
+    axis.title.y = element_text(size = 8),
+    axis.text.y = element_text(size = 8),
+    legend.text = element_text(size = 7),
+    legend.title = element_text(size = 8)
+  )
+
+# Transformation en graphique interactif
+ggplotly(p, tooltip = "text")
 ```
 
 ## Column { expandable="false" }
@@ -506,6 +524,7 @@ ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+#library(plotly)
 
 # On sélectionne uniquement les colonnes qui t'intéressent
 caracterisation_notes <- donnees %>%
@@ -515,7 +534,7 @@ caracterisation_notes <- donnees %>%
     "Plus dense" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus dense]`,
     "Plus accessible à pied" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus accessible à pied]`,
     "Mieux desservie" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Mieux desservie]`,
-    "Accueillir des services qui  seraient utiles à tous" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Accueillir des services qui  seraient utiles à tous]`,
+    "Accueillir des services qui seraient utiles à tous" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Accueillir des services qui  seraient utiles à tous]`,
     "Accueillir des services qui vous seraient utiles à vous" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Accueillir des services qui vous seraient utiles à vous]`
     
     
@@ -552,4 +571,56 @@ ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
         legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
         legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
         )
+
+```
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+
+# Colonnes des services
+services_avis <- donnees %>%
+  select(
+    "Restauration" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Restauration]`,
+    "Équipements sportifs" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Équipements sportifs]`,
+    "Pôle médical ou para-médical" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Pôle médical ou para-médical]`,
+    "Services à la personne" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Services à la personne (coiffeur, institut de beauté, pressing...)]`,
+    "Supermarchés" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Supermarchés]`,
+    "Système de garde d’enfants collectif" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Système de garde d’enfants collectif]`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse")
+
+# Comptage uniquement des "Oui"
+df_plot <- services_avis %>%
+  filter(Reponse == "Oui") %>%
+  group_by(Service) %>%
+  summarise(N = n(), .groups = "drop")
+
+# Graphique ggplot
+p <- ggplot(df_plot, aes(x = reorder(Service, N), y = N, fill = Service,
+                         text = paste("Service:", Service, "<br>Réponses:", N))) +
+  geom_col(show.legend = FALSE) +   # enlève la légende
+  labs(
+    title = "Quels services vous seraient utiles",
+    x = "",
+    y = "Nombre de personnes"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 9),
+    axis.text.y = element_text(size = 8),
+    legend.position = "none"   # supprime totalement la légende
+  )
+
+# Graphique interactif
+ggplotly(p, tooltip = "text")
 ```
