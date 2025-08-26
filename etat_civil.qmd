@@ -140,7 +140,7 @@ donnees %>%
   )
 ```
 
-## Row {.tabset height="30%" width="50%"}
+## Row {.tabset height="40%" width="50%"}
 
 ```{r}
 #| include: false

@@ -344,6 +344,11 @@ img{
   margin-left: inherit;
 }
 
+.js-plotly-plot .plotly .cursor-crosshair{
+  cursor: context-menu !important;
+}
+
+
 /*.test {
   margin-bottom: -220px;
 }*/

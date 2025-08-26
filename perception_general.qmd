@@ -110,6 +110,7 @@ donnees %>%
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(plotly)
 
 # On sélectionne uniquement les colonnes qui t'intéressent
 nuisances_notes <- donnees %>%
@@ -118,40 +119,49 @@ nuisances_notes <- donnees %>%
     "Circulation poids lourds"= `Si oui, lesquelles ?  Veuillez cocher une ou plusieurs réponse  [Circulation de poids lourds]`,
     "Trafic routier" = `Si oui, lesquelles ?  Veuillez cocher une ou plusieurs réponse  [Trafic routier]`,
     Odeurs = `Si oui, lesquelles ?  Veuillez cocher une ou plusieurs réponse  [Odeurs]`
-    #Autres = `Si oui, lesquelles ?  Veuillez cocher une ou plusieurs réponse  [Autre]`
   ) %>%
   pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
-  filter(!is.na(Note))   # supprimer les NA
+  mutate(
+    Note = case_when(
+      is.na(Note) | Note == "N/A" ~ "Sans réponse",
+      Note %in% c("Non", "FALSE") ~ "Non",
+      Note %in% c("Oui", "TRUE") ~ "Oui",
+      TRUE ~ as.character(Note)
+    )
+  )
 
-# Compter le nombre de réponses par critère et par note
-df_plot <- nuisances_notes %>%
+df_nuis <- nuisances_notes %>%
   group_by(Critere, Note) %>%
   summarise(N = n(), .groups = "drop")
 
-# Graphique : barres empilées
-ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
+p2 <- ggplot(df_nuis, aes(
+    x = Critere, y = N, fill = factor(Note),
+    text = paste(
+      "Critère :", Critere,
+      "<br>Réponse :", Note,
+      "<br>Nombre de réponses :", N
+    )
+  )) +
   geom_bar(stat = "identity", position = "stack") +
   scale_fill_brewer(palette = "RdYlGn", direction = 1) +
-  geom_text(aes(label = N), 
-            position = position_stack(vjust = 0.5), 
-            color = "black", size = 1) +
   labs(
     title = "Origines des nuisances",
-    x = "",
-    y = "Nombre de réponses",
-    fill = "Note"
+    x = "", y = "Nombre de réponses", fill = "Note"
   ) +
   theme_minimal() +
-  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
-        axis.text.x = element_text( hjust = 0.5, size = 4),
-        axis.title.x = element_text(size = 2),  # Titre axe X
-        axis.title.y = element_text(size = 4),  # Titre axe Y
-        axis.text.y = element_text(size = 4),     # Valeurs axe Y
-        legend.text = element_text(size = 3),        # Taille du texte de la légende
-        legend.title = element_text(size = 4),        # Taille du titre de la légende
-        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
-        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
-        )
+  theme(
+    plot.title = element_text(color = "red", size = 8, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(hjust = 0.5, size = 7),
+    axis.title.y = element_text(size = 8),
+    axis.text.y = element_text(size = 7),
+    legend.text = element_text(size = 7),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.8, "cm"),
+    legend.spacing.y = unit(0.1, "cm")
+  )
+
+ggplotly(p2, tooltip = "text")
+  
 ```
 
 ```{r}
@@ -248,39 +258,43 @@ df_plot <- caracterisation_notes %>%
     Pourcent = round(100 * N / Total, 1)  # % arrondi à 1 décimale
   )
 
-# Graphique ggplot
-p <- ggplot(df_plot, aes(
-    x = Critere, y = N, fill = factor(Note),
-    text = paste(
-      "Critère :", Critere,
-      "<br>Note :", Note,
-      "<br>Réponses :", N,
-      "<br>Pourcentage :", Pourcent, "%"
-    )
-  )) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(
-    palette = "RdYlGn", direction = 1#,
-    #labels = c("1 = Pas du tout", "2", "3", "4", "5", "6 = Tout à fait")
-  ) +
-  labs(
-    title = "Selon vous, la zone d’activité de Marticot est caractérisée par",
-    x = "",
-    y = "Nombre de réponses",
-    fill = "Note"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
-    axis.text.x = element_text(hjust = 0.5, size = 8, angle = 20),
-    axis.title.y = element_text(size = 8),
-    axis.text.y = element_text(size = 8),
-    legend.text = element_text(size = 7),
-    legend.title = element_text(size = 8)
-  )
+plot_ly(
+  data = df_plot,
+  x = ~Critere,
+  y = ~N,
+  color = ~Note,
+  colors = "RdYlGn",
+  type = "bar",
+  text = ~paste(
+    "Critère :", Critere,
+    "<br>Note :", Note,
+    "<br>Réponses :", N,
+    "<br>Pourcentage :", Pourcent, "%"
+  ),
+  hoverinfo = "text",
+  textposition = "none"
+) %>%
+  layout(
+    barmode = "stack",
+    title = list(
+      text = "Selon vous, la zone d’activité de Marticot est caractérisée par",
+      x = 0.5,
+      font = list(color = "red", size = 14)
+    ),
+    xaxis = list(title = "", tickangle = 20),
+    yaxis = list(title = "Nombre de réponses"),
+    legend = list(
+      title = list(text = "Note"),
+      orientation = "h",   # légende horizontale
+      x = 0.5,             # centrée
+      y = -0.35,            # sous le graphique
+      xanchor = "center"   # ancrage centré
+    ),
+    autosize = TRUE
+  ) %>%
+  config(responsive = TRUE)
 
-# Transformation en graphique interactif
-ggplotly(p, tooltip = "text")
+
 ```
 
 ## Column { expandable="false" }
