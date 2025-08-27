@@ -8,3 +8,262 @@ expandable: true
 layout: "grid"
 scrolling: true
 ---
+
+```{r setup, include=FALSE}
+# Chargement des packages
+library(tidyverse)
+library(readr)
+
+# Lecture du fichier CSV
+donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
+  drop_na(`Date de soumission`)
+```
+
+<h1 style="font-size:1.4em;">Volet vie professionnelle</h1>
+
+::: {style="text-align:center; font-size:1.2em; margin:10px 0;"}
+Voici quelques statistiques issues du questionnaire
+:::
+
+## Row {height="30%"}
+
+```{r}
+#| echo: false
+#| fig.width: 5
+#| fig.height: 3
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+
+df_plot <- donnees %>%
+  count(Secteur = `Dans quel secteur travaillez-vous ?  Veuillez choisir une seule réponse`) %>%
+  mutate(
+    Secteur = case_when(
+      is.na(Secteur) | Secteur == "N/A" ~ "Sans réponse",
+      TRUE ~ Secteur
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1)  # % arrondi à 1 décimale
+  )
+
+# Graphique ggplot
+p <- ggplot(df_plot, aes(
+    x = reorder(Secteur, n),
+    y = n,
+    fill = Secteur,
+    text = paste(
+      "Secteur :", Secteur,
+      "<br>Réponses :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
+  geom_col(show.legend = FALSE) +
+  labs(
+    title = "Dans quel secteur travaillez-vous ?",
+    x = "",
+    y = "Nombre de personnes",
+    fill = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
+    axis.title.y = element_text(size = 9),
+    axis.text.y = element_text(size = 8)
+  )
+
+# Graphique interactif
+ggplotly(p, tooltip = "text")%>%
+  layout(
+    legend = list(
+      orientation = "h",       # horizontale
+      x = 0.5, xanchor = "center",
+      y = -0.40, yanchor = "top"  # sous le graphique
+    ),
+    margin = list(b = 110)     # espace en bas pour la légende
+  ) %>%
+  config(responsive = TRUE)
+```
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 3
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+
+ds_plot <- donnees %>%
+  count(Salaries = `Combien y a-t-il de salariés dans votre entreprise ?  Veuillez choisir une seule réponse`) %>%
+  mutate(
+    Salaries = case_when(
+      is.na(Salaries) | Salaries == "N/A" ~ "Sans réponse",
+      TRUE ~ Salaries
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1)  # % arrondi à 1 décimale
+  )
+
+# Graphique ggplot
+p <- ggplot(ds_plot, aes(
+    x = reorder(Salaries, n),
+    y = n,
+    fill = Salaries,
+    text = paste(
+      "Secteur :", Salaries,
+      "<br>Réponses :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
+  geom_col(show.legend = FALSE) +
+  labs(
+    title = "Combien y a-t-il de salariés dans votre entreprise ?",
+    x = "",
+    y = "Nombre de personnes",
+    fill = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
+    axis.title.y = element_text(size = 9),
+    axis.text.y = element_text(size = 8)
+  )
+
+# Graphique interactif
+ggplotly(p, tooltip = "text")%>%
+  layout(
+    legend = list(
+      orientation = "h",       # horizontale
+      x = 0.5, xanchor = "center",
+      y = -0.40, yanchor = "top"  # sous le graphique
+    ),
+    margin = list(b = 110)     # espace en bas pour la légende
+  ) %>%
+  config(responsive = TRUE)
+```
+
+## Row {height="30%"}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 3
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+
+temps_plot <- donnees %>%
+  count(Travail = `Depuis combien de temps travaillez-vous dans la zone d’activité de Marticot ?  Veuillez choisir une seule réponse`) %>%
+  mutate(
+    Travail  = ifelse(is.na(Travail) | Travail == "N/A", "Sans réponse", Travail),
+    Total    = sum(n),
+    Pourcent = round(100 * n / Total, 1)
+  )
+
+p <- ggplot(temps_plot, aes(
+    x = reorder(Travail, n),
+    y = n,
+    fill = Travail,
+    text = paste(
+      "Ancienneté :", Travail,
+      "<br>Réponses :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+)) +
+  geom_col() +                           # <-- garder la légende (ne pas mettre show.legend = FALSE)
+  labs(
+    title = "Ancienneté professionnelle dans la zone d’activité de Marticot",
+    x = "", y = "Nombre de personnes", fill = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
+    axis.title.y = element_text(size = 9),
+    axis.text.y = element_text(size = 8)
+  )
+
+ggplotly(p, tooltip = "text") %>%
+  layout(
+    legend = list(
+      orientation = "h",       # horizontale
+      x = 0.5, xanchor = "center",
+      y = -0.40, yanchor = "top"  # sous le graphique
+    ),
+     title = list(
+      text = "<b>Ancienneté professionnelle dans la zone d’activité de Marticot</b>",
+      font = list(size = 14),
+      x = 0.5,  # centré
+      xanchor = "center"
+    ),
+    margin = list(b = 110)     # espace en bas pour la légende
+  ) %>%
+  config(responsive = TRUE)
+
+```
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 3
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+
+entreprise_plot <- donnees %>%
+  count(Travail = `Depuis combien de temps travaillez-vous dans votre entreprise actuelle ?  Veuillez choisir une seule réponse`) %>%
+  mutate(
+    Travail = case_when(
+      is.na(Travail) | Travail == "N/A" ~ "Sans réponse",
+      TRUE ~ Travail
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1)  # % arrondi à 1 décimale
+  )
+
+# Graphique ggplot
+p <- ggplot(entreprise_plot, aes(
+    x = reorder(Travail, n),
+    y = n,
+    fill = Travail,
+    text = paste(
+      "Secteur :", Travail,
+      "<br>Réponses :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
+  geom_col() +
+  labs(
+    title = "Ancienneté professionnelle dans votre entreprise actuelle ?",
+    , fill = NULL,
+    x = "",
+    y = "Nombre de personnes"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(color = "red", size = 8, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
+    axis.title.y = element_text(size = 9),
+    axis.text.y = element_text(size = 8)
+  )
+
+# Graphique interactif
+ggplotly(p, tooltip = "text")%>%
+  layout(
+    legend = list(
+      orientation = "h",       # horizontale
+      x = 0.5, xanchor = "center",
+      y = -0.40, yanchor = "top"  # sous le graphique
+    ),
+    margin = list(b = 110)     # espace en bas pour la légende
+  ) %>%
+  config(responsive = TRUE)
+```

@@ -160,7 +160,7 @@ p2 <- ggplot(df_nuis, aes(
     legend.spacing.y = unit(0.1, "cm")
   )
 
-ggplotly(p2, tooltip = "text")
+ggplotly(p2, tooltip = "text") 
   
 ```
 
