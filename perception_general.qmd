@@ -19,7 +19,11 @@ donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
   drop_na(`Date de soumission`)
 ```
 
-<h1 class="test" style="font-size:1.4em;">Volet Perception générale</h1>
+<h1 class="test" style="font-size:1.4em;">
+
+Volet Perception générale
+
+</h1>
 
 ## Row {height="20%"}
 
@@ -75,8 +79,6 @@ ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
         )
 ```
 
-
-
 ```{r}
 #| echo: false
 #| fig.width: 4
@@ -100,7 +102,7 @@ donnees %>%
         )
 ```
 
-## Row {height="20%}
+## Row {height="\"20%"}
 
 ```{r}
 #| echo: false
@@ -212,12 +214,13 @@ ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
         )
 ```
 
-## Column { expandable="false" }
+## Column {expandable="false"}
+
 ```{=html}
 Plus de 200 personnes n'ont pas répondu à cette question
 ```
 
-## Row {height="20%}
+## Row {height="\"20%"}
 
 ```{r}
 #| echo: false
@@ -297,12 +300,14 @@ plot_ly(
 
 ```
 
-## Column { expandable="false" }
+## Column {expandable="false"}
+
 ```{=html}
 Nous pouvons voir ici au travers des réponses qu'il manque d'espace de convivialité et que les services proposés dans la ZAE tels que les équipements sportifs, les supermarchés ou une enseigne de restauration sont absents.
 ```
 
 ## Row {height="30%"}
+
 ```{r}
 #| echo: false
 #| fig.width: 4

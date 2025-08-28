@@ -29,12 +29,11 @@ Volet vie professionnelle
 Voici quelques statistiques issues du questionnaire
 :::
 
-## Row {height="30%"}
+## Row {height="20%"}
 
 ```{r}
 #| echo: false
-#| fig.width: 5
-#| fig.height: 3
+
 
 library(dplyr)
 library(tidyr)
@@ -49,12 +48,10 @@ df_plot <- donnees %>%
       TRUE ~ Secteur
     ),
     Total = sum(n),
-    Pourcent = round(100 * n / Total, 1)  # % arrondi à 1 décimale
+    Pourcent = round(100 * n / Total, 1)
   )
 
-titre_html <- "<span style='font-size:1.2em;'>Dans quel secteur travaillez-vous ?</span>"
-
-# Graphique ggplot
+# Graphique ggplot (sans titre)
 p <- ggplot(df_plot, aes(
     x = reorder(Secteur, n),
     y = n,
@@ -67,36 +64,43 @@ p <- ggplot(df_plot, aes(
   )) +
   geom_col(show.legend = FALSE) +
   labs(
-    title = titre_html,
     x = "",
     y = "Nombre de personnes",
     fill = NULL
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 8, face = "bold"),
     axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
     axis.title.y = element_text(size = 9),
     axis.text.y = element_text(size = 8)
   )
 
-# Graphique interactif
-ggplotly(p, tooltip = "text")%>%
+# Graphique interactif avec titre responsive
+ggplotly(p, tooltip = "text") %>%
   layout(
-    legend = list(
-      orientation = "h",       # horizontale
-      x = 0.5, xanchor = "center",
-      y = -0.40, yanchor = "top"  # sous le graphique
+    title = list(
+      text = "Dans quel secteur travaillez-vous ?",
+      x = 0.5,             # centré horizontalement
+      xanchor = "center",
+      yanchor = "top",
+      font = list(size = 12, color = "red")  # adaptatif et lisible
     ),
-    margin = list(b = 110)     # espace en bas pour la légende
+    legend = list(
+      orientation = "h",
+      x = 0.5, xanchor = "center",
+      y = -0.40, yanchor = "top"
+    ),
+    margin = list(t = 60, b = 110)  # marge haut/bas pour laisser la place au titre/légende
   ) %>%
   config(responsive = TRUE)
+
 ```
+
+## Row {height="20%"}
 
 ```{r}
 #| echo: false
-#| fig.width: 4
-#| fig.height: 3
+
 
 library(dplyr)
 library(tidyr)
@@ -154,7 +158,7 @@ ggplotly(p, tooltip = "text")%>%
   config(responsive = TRUE)
 ```
 
-## Row {height="30%"}
+## Row {height="20%"}
 
 ```{r}
 #| echo: false
@@ -214,6 +218,8 @@ ggplotly(p, tooltip = "text") %>%
   config(responsive = TRUE)
 
 ```
+
+## Row {height="20%"}
 
 ```{r}
 #| echo: false

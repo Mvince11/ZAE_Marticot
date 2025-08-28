@@ -19,7 +19,6 @@ donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
   drop_na(`Date de soumission`)
 ```
 
-
 <h1 style="font-size:1.4em;">
 
 Volet état civil
@@ -350,7 +349,8 @@ datatable(
 
 ```
 
-## Column { expandable="false" }
+## Column {expandable="false"}
+
 ```{=html}
 Flux domicile/travail
 ```
