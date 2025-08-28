@@ -25,9 +25,9 @@ Volet vie professionnelle
 
 </h1>
 
-::: {style="text-align:center; font-size:1.2em; margin:10px 0;"}
-Voici quelques statistiques issues du questionnaire
-:::
+```{=html}
+4 questions composent ce volet.
+```
 
 ## Row {height="20%"}
 
@@ -94,6 +94,12 @@ ggplotly(p, tooltip = "text") %>%
   ) %>%
   config(responsive = TRUE)
 
+```
+
+## Column {expandable="false"}
+
+```{=html}
+77.4% des personnes interrogées sont issus du monde industriel.
 ```
 
 ## Row {height="20%"}

@@ -25,121 +25,419 @@ Volet état civil
 
 </h1>
 
-::: {style="text-align:center; font-size:1.2em; font-weight:bold; margin:10px 0;"}
+```{=html}
 Voici quelques statistiques issues du questionnaire
-:::
-
-## Row {height="30%"}
-
-```{r}
-#| echo: false
-
-donnees %>%
-  count(`Quel est votre genre ?  Veuillez cocher une case`) %>%
-  ggplot(aes(x = reorder(`Quel est votre genre ?  Veuillez cocher une case`, n), y = n, fill = `Quel est votre genre ?  Veuillez cocher une case`)) +
-  geom_col(show.legend = FALSE) +
-  coord_flip() +
-  labs(title = "Répartition des réponses par genre", x = "Genre", y = "Nombre de réponses") +
-  theme(plot.title = element_text(color = "red", size = 14, face = "bold", hjust = 0.5))
 ```
 
+## Row {height="13%"}
+
 ```{r}
 #| echo: false
 
-donnees %>%
-  count(`Quel est votre âge ?`) %>%
-  ggplot(aes(x = `Quel est votre âge ?`, y = n, fill = `Quel est votre âge ?`)) +
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Préparation des données
+df_genre <- donnees %>%
+  count(Genre = `Quel est votre genre ?  Veuillez cocher une case`) %>%
+  mutate(
+    Genre = case_when(
+      is.na(Genre) | Genre == "N/A" ~ "Sans réponse",
+      TRUE ~ Genre
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1)
+  )
+
+# Graphique ggplot (sans titre, style épuré)
+p_genre <- ggplot(df_genre, aes(
+    x = reorder(Genre, n),
+    y = n,
+    fill = Genre,
+    text = paste(
+      "Genre :", Genre,
+      "<br>Réponses :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +  # diagramme horizontal
+  labs(
+    x = "Genre",
+    y = "Nombre de réponses",
+    fill = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_text(size = 9),
+    axis.title.y = element_text(size = 9),
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8)
+  )
+
+# Graphique interactif avec titre responsif
+p_genre_plotly <- ggplotly(p_genre, tooltip = "text") %>%
+  layout(
+    title = list(
+      text = "Répartition des réponses par genre",
+      x = 0.5,             # centré horizontalement
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red") # couleur rouge comme demandé
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(20, w/40)); // taille adaptative
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_genre_plotly
+
+```
+
+## Row {height="17%"}
+
+```{r}
+#| echo: false
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Préparation des données âge
+df_age <- donnees %>%
+  count(Age = `Quel est votre âge ?`) %>%
+  mutate(
+    Age_num = suppressWarnings(as.numeric(as.character(Age))), # conversion en numérique si possible
+    Age = case_when(
+      is.na(Age_num) & (is.na(Age) | Age == "N/A") ~ "Sans réponse",
+      TRUE ~ as.character(Age)
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1)
+  ) %>%
+  arrange(Age_num, Age)   # trier par âge croissant
+
+# Forcer l'ordre des modalités pour l'affichage
+df_age$Age <- factor(df_age$Age, levels = unique(df_age$Age))
+
+# Graphique ggplot
+p_age <- ggplot(df_age, aes(
+    x = Age,   # ordre respecté
+    y = n,
+    fill = Age,
+    text = paste(
+      "Âge :", Age,
+      "<br>Réponses :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
   geom_col(show.legend = FALSE) +
   coord_flip() +
   labs(
-    title = "Répartition des réponses par âge",
     x = "Âge",
     y = "Nombre de réponses"
   ) +
+  theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 14, face = "bold", hjust = 0.5)
+    axis.title.x = element_text(size = 9),
+    axis.title.y = element_text(size = 9),
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8)
   )
+
+# Graphique interactif sans légende + titre responsif
+p_age_plotly <- ggplotly(p_age, tooltip = "text") %>%
+  layout(
+    showlegend = FALSE,
+    title = list(
+      text = "Répartition des réponses par âge",
+      x = 0.5,
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red")
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(20, w/40));
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_age_plotly
+
+
 ```
 
-## Row {height="40%"}
+## Row {height="20%"}
 
 ```{r}
 #| echo: false
-#| message: false
-#| warning: false
-#| fig.width: 5
-#| fig.height: 2
-donnees_age_genre <- donnees %>%
-  rename(Genre = `Quel est votre genre ?  Veuillez cocher une case`) %>%
-  count(`Quel est votre âge ?`, Genre)
 
-# Étape 2 : faire le graphique
-ggplot(donnees_age_genre, aes(x = `Quel est votre âge ?`, y = n, fill = Genre)) +
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Préparation des données âge + genre
+df_age_genre <- donnees %>%
+  rename(Genre = `Quel est votre genre ?  Veuillez cocher une case`) %>%
+  count(Age = `Quel est votre âge ?`, Genre) %>%
+  mutate(
+    Age_num = suppressWarnings(as.numeric(as.character(Age))), # conversion en numérique si possible
+    Age = case_when(
+      is.na(Age_num) & (is.na(Age) | Age == "N/A") ~ "Sans réponse",
+      TRUE ~ as.character(Age)
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    Genre = case_when(
+      is.na(Genre) | Genre == "N/A" ~ "Sans réponse",
+      TRUE ~ Genre
+    )
+  ) %>%
+  arrange(Age_num, Age)
+
+# Forcer l'ordre croissant des âges
+df_age_genre$Age <- factor(df_age_genre$Age, levels = unique(df_age_genre$Age))
+
+# Graphique ggplot
+p_age_genre <- ggplot(df_age_genre, aes(
+    x = Age,
+    y = n,
+    fill = Genre,
+    text = paste(
+      "Âge :", Age,
+      "<br>Genre :", Genre,
+      "<br>Réponses :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
   geom_col(position = "dodge") +
   labs(
-    title = "Répartition des réponses par âge et par genre",
+    x = "Âge",
     y = "Nombre de réponses",
-    x = "Âge"
+    fill = NULL
   ) +
+  theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 5, face = "bold", hjust = 0.5),
-    axis.title.x = element_text(size = 6),  # Titre axe X
-    axis.title.y = element_text(size = 6),  # Titre axe Y
-    axis.text.x = element_text(size = 5),    # Valeurs axe X
-    axis.text.y = element_text(size = 5),     # Valeurs axe Y
-    legend.text = element_text(size = 4),        # Taille du texte de la légende
-    legend.title = element_text(size = 5)        # Taille du titre de la légende
+    axis.title.x = element_text(size = 9),
+    axis.title.y = element_text(size = 9),
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8),
+    legend.title = element_text(size = 8),
+    legend.text = element_text(size = 7)
   )
+
+# Graphique interactif avec titre rouge responsif
+p_age_genre_plotly <- ggplotly(p_age_genre, tooltip = "text") %>%
+  layout(
+    title = list(
+      text = "Répartition des réponses par âge et par genre",
+      x = 0.5,
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red")
+    ),
+    legend = list(
+      orientation = "h",    # légende horizontale
+      x = 0.5, xanchor = "center",
+      y = -0.3, yanchor = "top"
+    ),
+    margin = list(t = 60, b = 80)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(20, w/40));
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_age_genre_plotly
+
 ```
 
-## Row {height="30%"}
+## Row {height="15%"}
 
 ```{r}
 #| echo: false
-#| fig.width: 5
-#| fig.height: 3
 
-donnees %>%
-  count(`Quelle est votre catégorie socio-professionnelle ?`) %>%
-  ggplot(aes(x = reorder(`Quelle est votre catégorie socio-professionnelle ?`, n), y = n, fill = `Quelle est votre catégorie socio-professionnelle ?`)) +
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Préparation des données
+df_csp <- donnees %>%
+  count(CSP = `Quelle est votre catégorie socio-professionnelle ?`) %>%
+  mutate(
+    CSP = case_when(
+      is.na(CSP) | CSP == "N/A" ~ "Sans réponse",
+      TRUE ~ as.character(CSP)
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1)
+  ) %>%
+  arrange(desc(n))   # tri par effectif décroissant (modifiable)
+
+# Graphique ggplot
+p_csp <- ggplot(df_csp, aes(
+    x = reorder(CSP, n),
+    y = n,
+    fill = CSP,
+    text = paste(
+      "Catégorie :", CSP,
+      "<br>Réponses :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
   geom_col(show.legend = FALSE) +
   coord_flip() +
-  labs(title = "Répartition des réponses par catégorie socio-professionnelle", x = "catégorie socio-professionnelle", y = "Nombre de réponses") +
+  labs(
+    x = "Catégorie socio-professionnelle",
+    y = "Nombre de réponses"
+  ) +
+  theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 6, face = "bold", hjust = 0.5),
-    axis.title.x = element_text(size = 6),  # Titre axe X
-    axis.title.y = element_text(size = 6),  # Titre axe Y
-    axis.text.x = element_text(size = 5),    # Valeurs axe X
-    axis.text.y = element_text(size = 5),     # Valeurs axe Y
-    legend.text = element_text(size = 4),        # Taille du texte de la légende
-    legend.title = element_text(size = 5)        # Taille du titre de la légende
+    axis.title.x = element_text(size = 9),
+    axis.title.y = element_text(size = 9),
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8)
   )
+
+# Graphique interactif sans légende + titre rouge responsif
+p_csp_plotly <- ggplotly(p_csp, tooltip = "text") %>%
+  layout(
+    showlegend = FALSE,
+    title = list(
+      text = "Répartition des réponses par catégorie socio-professionnelle",
+      x = 0.5,
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red")
+    ),
+    margin = list(t = 80, b = 60)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(18, w/40));
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_csp_plotly
+
 ```
+
+## Row {height="15%"}
 
 ```{r}
 #| echo: false
-#| fig.width: 5
-#| fig.height: 3
 
-donnees %>%
-  drop_na(`Quelle est votre catégorie socio-professionnelle ? [Autre]`)%>%
-  count(`Quelle est votre catégorie socio-professionnelle ? [Autre]`) %>%
-  ggplot(aes(x = reorder(`Quelle est votre catégorie socio-professionnelle ? [Autre]`, n), y = n, fill = `Quelle est votre catégorie socio-professionnelle ? [Autre]`)) +
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Préparation des données
+df_csp_autre <- donnees %>%
+  drop_na(`Quelle est votre catégorie socio-professionnelle ? [Autre]`) %>%
+  count(CSP_Autre = `Quelle est votre catégorie socio-professionnelle ? [Autre]`) %>%
+  mutate(
+    CSP_Autre = as.character(CSP_Autre),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1)
+  ) %>%
+  arrange(desc(n))
+
+# Graphique ggplot
+p_csp_autre <- ggplot(df_csp_autre, aes(
+    x = reorder(CSP_Autre, n),
+    y = n,
+    fill = CSP_Autre,
+    text = paste(
+      "Réponse :", CSP_Autre,
+      "<br>Nombre :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
   geom_col(show.legend = FALSE) +
   coord_flip() +
-  labs(title = "Répartition des réponses par catégorie socio-professionnelle", x = "catégorie socio-professionnelle", y = "Nombre de réponses") +
+  labs(
+    x = "Catégorie socio-professionnelle (Autre)",
+    y = "Nombre de réponses"
+  ) +
+  theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 6, face = "bold", hjust = 0.5),
-    axis.title.x = element_text(size = 6),  # Titre axe X
-    axis.title.y = element_text(size = 6),  # Titre axe Y
-    axis.text.x = element_text(size = 5),    # Valeurs axe X
-    axis.text.y = element_text(size = 5),     # Valeurs axe Y
-    legend.text = element_text(size = 4),        # Taille du texte de la légende
-    legend.title = element_text(size = 5)        # Taille du titre de la légende
+    axis.title.x = element_text(size = 9),
+    axis.title.y = element_text(size = 9),
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8)
   )
+
+# Graphique interactif sans légende + titre rouge responsif
+p_csp_autre_plotly <- ggplotly(p_csp_autre, tooltip = "text") %>%
+  layout(
+    showlegend = FALSE,
+    title = list(
+      text = "Répartition des réponses par catégorie socio-professionnelle (Autre)",
+      x = 0.5,
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red")
+    ),
+    margin = list(t = 80, b = 60)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(18, w/40));
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_csp_autre_plotly
+
 ```
 
-## Row {.tabset height="40%" width="50%"}
+## Row {height="20%" .tabset }
 
 ```{r}
 #| include: false
@@ -193,8 +491,9 @@ question_commune <- st_read("data/question_commune.geojson") %>%
 #| echo: false
 #| title: "Carte des flux domiciles/travail"
 #| color: red
-#| fig.width: 5
-#| fig.height: 3
+#| fig.height: 6   # hauteur en pouces (~450px)
+#| fig.width: 8    # largeur en pouces
+
   
 library(sf)
 library(dplyr)
@@ -309,8 +608,7 @@ m
 
 ```{r}
 #| title: "Tableau récapitulatif"
-#| fig.width: 5
-#| fig.height: 3
+
 
 
 library(dplyr)
@@ -354,3 +652,4 @@ datatable(
 ```{=html}
 Flux domicile/travail
 ```
+
