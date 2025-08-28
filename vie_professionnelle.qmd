@@ -19,7 +19,11 @@ donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
   drop_na(`Date de soumission`)
 ```
 
-<h1 style="font-size:1.4em;">Volet vie professionnelle</h1>
+<h1 style="font-size:1.4em;">
+
+Volet vie professionnelle
+
+</h1>
 
 ::: {style="text-align:center; font-size:1.2em; margin:10px 0;"}
 Voici quelques statistiques issues du questionnaire
@@ -48,6 +52,8 @@ df_plot <- donnees %>%
     Pourcent = round(100 * n / Total, 1)  # % arrondi à 1 décimale
   )
 
+titre_html <- "<span style='font-size:1.2em;'>Dans quel secteur travaillez-vous ?</span>"
+
 # Graphique ggplot
 p <- ggplot(df_plot, aes(
     x = reorder(Secteur, n),
@@ -61,14 +67,14 @@ p <- ggplot(df_plot, aes(
   )) +
   geom_col(show.legend = FALSE) +
   labs(
-    title = "Dans quel secteur travaillez-vous ?",
+    title = titre_html,
     x = "",
     y = "Nombre de personnes",
     fill = NULL
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    plot.title = element_text(color = "red", size = 8, face = "bold"),
     axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
     axis.title.y = element_text(size = 9),
     axis.text.y = element_text(size = 8)
@@ -96,6 +102,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(plotly)
+library(htmlwidgets)
 
 ds_plot <- donnees %>%
   count(Salaries = `Combien y a-t-il de salariés dans votre entreprise ?  Veuillez choisir une seule réponse`) %>%
@@ -121,14 +128,14 @@ p <- ggplot(ds_plot, aes(
   )) +
   geom_col(show.legend = FALSE) +
   labs(
-    title = "Combien y a-t-il de salariés dans votre entreprise ?",
+    title = "Nombre de salariés dans votre entreprise ?",
     x = "",
     y = "Nombre de personnes",
     fill = NULL
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    plot.title = element_text(color = "red", size = 8, face = "bold"),
     axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
     axis.title.y = element_text(size = 9),
     axis.text.y = element_text(size = 8)
@@ -140,7 +147,7 @@ ggplotly(p, tooltip = "text")%>%
     legend = list(
       orientation = "h",       # horizontale
       x = 0.5, xanchor = "center",
-      y = -0.40, yanchor = "top"  # sous le graphique
+      y = -0.5, yanchor = "top"  # sous le graphique
     ),
     margin = list(b = 110)     # espace en bas pour la légende
   ) %>%
