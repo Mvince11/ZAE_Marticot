@@ -536,7 +536,8 @@ nb_reponses <- donnees %>%
       `Dans quelle commune vivez-vous ?` == "ST SELVE" ~ "SAINT-SELVE",
       `Dans quelle commune vivez-vous ?` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
       TRUE ~ `Dans quelle commune vivez-vous ?`
-    ))
+    )) %>%
+  mutate(pct = round(100 * nb_reponses / sum(nb_reponses), 1))   # <-- pourcentage
 
 
 
@@ -563,6 +564,7 @@ flux <- purrr::map2(
   st_sf(
     commune = communes_centroides$commune,
     nb_reponses = communes_centroides$nb_reponses,
+    pct = communes_centroides$pct,
     geometry = .
   )
 
@@ -584,7 +586,9 @@ m <- leaflet() %>%
     color = "red",
     weight = ~ifelse(is.na(nb_reponses), 1, nb_reponses / 2),
     opacity = 0.7,
-    popup = ~paste0("<b>", commune, "</b><br>Réponses : ", nb_reponses)
+    popup = ~paste0("<b>", commune, "</b><br>",
+                  "Réponses : ", nb_reponses, "<br>",
+                  "Part : ", pct, "%")
   ) %>%
   
   # Communes
@@ -592,7 +596,9 @@ m <- leaflet() %>%
     data = communes_centroides,
     lng = ~lon, lat = ~lat,
     radius = 3, color = "black", fillColor = "orange", fillOpacity = 0.8,
-    popup = ~paste0(commune, "<br>Réponses : ", nb_reponses)
+    popup = ~paste0("<b>", commune, "</b><br>",
+                  "Réponses : ", nb_reponses, "<br>",
+                  "Part : ", pct, "%")
   ) %>%
   
   # Destination
@@ -618,7 +624,8 @@ library(DT)
 table_trajets <- nb_reponses %>%
   rename(
     Commune = `Dans quelle commune vivez-vous ?`,
-    `Nombre de trajets` = nb_reponses
+    `Nombre de trajets` = nb_reponses,
+    `Pourcentages` = pct
   ) %>%
   arrange(desc(`Nombre de trajets`))
 
@@ -631,7 +638,12 @@ datatable(
     order = list(list(1, 'desc')),
     dom = 'Bfrtip',
     #buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
-    columnDefs = list(list(className = 'dt-center', targets = 1))
+    columnDefs = list(
+      list(width = '200px', targets = 0),   # largeur colonne "Commune"
+      list(width = '120px', targets = 1),   # largeur colonne "Nombre de trajets"
+      list(width = '120px', targets = 2),   # largeur colonne "Pourcentages"
+      list(className = 'dt-center', targets = c(1,2))
+  )
   ),
   rownames = FALSE
 ) %>%

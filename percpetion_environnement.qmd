@@ -8,3 +8,523 @@ expandable: true
 layout: "grid"
 scrolling: true
 ---
+
+```{r setup, include=FALSE}
+# Chargement des packages
+library(tidyverse)
+library(readr)
+
+# Lecture du fichier CSV
+donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
+  drop_na(`Date de soumission`)
+```
+
+<h1 style="font-size:1.4em;">
+
+Volet Perception de l'environnement et des conditions de travail
+
+</h1>
+
+## Row {height="15%"}
+
+```{r}
+#| echo: false
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+total_repondants <- nrow(donnees)
+
+
+espace_travail <- donnees %>%
+  select("Bureau personnel" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Bureau personnel]`,
+         "Bureau partagé" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Bureau partagé]`,
+         "Open space" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Open space]`,
+         "Atelier" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Atelier]`,
+         "Entrepôt logistique" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Entrepôt logistique]`,
+         "Garage" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Garage]`,
+         "Borne d'accueil" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Borne d’accueil]`,
+         "Hall d'exposition" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [ Hall d’exposition]`,
+         "Pépinière" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Pépinière]`
+         )%>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse")
+
+# Comptage uniquement des "Oui"
+df_plot <- espace_travail %>%
+  filter(Reponse == "Oui") %>%
+  group_by(Service) %>%
+  summarise(
+    N = n(),
+    pct = round(100 * n() / total_repondants, 1),  # pourcentage sur total
+    .groups = "drop"
+  )
+
+# Graphique ggplot
+p <- ggplot(df_plot, aes(x = reorder(Service, N), y = N, fill = Service,
+                         text = paste("Espace de travail:", Service, "<br>Réponses:", N, "<br>% des répondants: ", pct, "%"))) +
+  geom_col(show.legend = FALSE) +   # enlève la légende
+  labs(
+    #title = "Quels services vous seraient utiles",
+    x = "",
+    y = "Nombre de personnes"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 9),
+    axis.text.y = element_text(size = 8),
+    legend.position = "none"   # supprime totalement la légende
+  )
+
+# Graphique interactif
+p_espace <- ggplotly(p, tooltip = "text")%>%
+  layout(
+    showlegend = FALSE,
+    title = list(
+      text = "Espace de travail",
+      x = 0.5,
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red")
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(20, w/40));
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_espace
+
+```
+
+## Column
+```{=html}
+<p> Plus de la moitié des réponses 56.2% montre que les gens travaillent en open space.</p>
+```
+
+## Row {height="15%"}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+total_repondants <- nrow(donnees)
+
+evol_espace_travail <- donnees %>%
+  select("Espaces désormais réduits" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Oui, certains espaces de travail sont désormais réduits]`,
+         "Espaces désormais partagés" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Oui, certains espaces de travail sont désormais partagés]`,
+         "Espaces partagés avec autre entreprise" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Oui, une autre entreprise partage une partie des locaux]`,
+         "Pas de changement" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Non, cela n’a pas changé]`,
+         "Autre" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Autre]`
+         )%>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse")
+
+# Comptage uniquement des "Oui"
+df_plot <- evol_espace_travail %>%
+  filter(Reponse == "Oui") %>%
+  group_by(Service) %>%
+  summarise(
+    N = n(),
+    pct = round(100 * n() / total_repondants, 1),  # pourcentage sur total
+    .groups = "drop"
+  )
+
+# Graphique ggplot
+p <- ggplot(df_plot, aes(x = reorder(Service, N), y = N, fill = Service,
+                         text = paste("Evolution espace de travail:", Service, "<br>Réponses:", N, "<br>% des répondants: ", pct, "%"))) +
+  geom_col(show.legend = FALSE) +   # enlève la légende
+  labs(
+    #title = "Quels services vous seraient utiles",
+    x = "",
+    y = "Nombre de personnes"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 9),
+    axis.text.y = element_text(size = 8),
+    legend.position = "none"   # supprime totalement la légende
+  )
+
+# Graphique interactif
+p_espace <- ggplotly(p, tooltip = "text")%>%
+  layout(
+    showlegend = FALSE,
+    title = list(
+      text = "Evolution espace de travail",
+      x = 0.5,
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red")
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(20, w/40));
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_espace
+```
+
+## Row {height="15%"}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Extraire uniquement les réponses "Autre"
+autres_reponses <- donnees %>%
+  select(Autre = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Autre]`) %>%
+  filter(!is.na(Autre), Autre != "")
+
+# Compter les occurrences
+df_autre <- autres_reponses %>%
+  group_by(Autre) %>%
+  summarise(N = n(), .groups = "drop") %>%
+  arrange(desc(N))
+
+# Graphique ggplot
+p_autre <- ggplot(df_autre, aes(x = reorder(Autre, N), y = N,
+                                text = paste("Réponse:", Autre, "<br>Nombre:", N))) +
+  geom_col(fill = "#1f77b4") +
+  coord_flip() +  # réponses en lisibilité verticale
+  labs(
+    x = "",
+    y = "Nombre de personnes",
+    title = "Réponses formulées en 'Autre'"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(color = "red", size = 7, face = "bold", hjust = 0.5),
+    axis.text.y = element_text(size = 8)
+  )
+
+# Version interactive
+p_autre_interactif <- ggplotly(p_autre, tooltip = "text") %>%
+  layout(
+    title = list(
+      text = "Evolution espace de travail - Réponses 'Autre'",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red")
+    )
+  ) %>%
+  config(responsive = TRUE)%>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(7, Math.min(20, w/40));
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_autre_interactif
+```
+
+## Row {height="15%"}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+liens_autres_entreprises <- donnees %>%
+  count(lien = `Avez-vous des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité de Marticot ?Veuillez choisir une seule réponse`) %>%
+  mutate(
+    lien = case_when(
+      is.na(lien) | lien == "N/A" ~ "Sans réponse",
+      TRUE ~ lien
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1)
+  )
+
+# Graphique ggplot (sans titre, style épuré)
+p_lien <- ggplot(liens_autres_entreprises, aes(
+    x = reorder(lien, n),
+    y = n,
+    fill = lien,
+    text = paste(
+      "lien avec autres entreprises:", lien,
+      "<br>Réponses :", n,
+      "<br>Pourcentage :", Pourcent, "%"
+    )
+  )) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +  # diagramme horizontal
+  labs(
+    x = "",
+    y = "Nombre de réponses",
+    fill = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_text(size = 9),
+    axis.title.y = element_text(size = 9),
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8)
+  )
+
+# Graphique interactif avec titre responsif
+p_lien_plotly <- ggplotly(p_lien, tooltip = "text") %>%
+  layout(
+    title = list(
+      text = "Lien avec autres entrerpises",
+      x = 0.5,             # centré horizontalement
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red") # couleur rouge comme demandé
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(20, w/40)); // taille adaptative
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_lien_plotly
+
+```
+
+## Column
+```{=html}
+<p> Si oui, dans quel cadre ?</p>
+```
+
+## Row {height="15%"}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+
+
+oui_lien <- donnees %>%
+  select("Pause déjeuner" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Cadre informel (pause, déjeuner)]`,
+         "Evénements sportifs ou conviviaux" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Evénements sportifs ou conviviaux]`,
+         "Partage de services ou de matériel" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Partage de services ou de matériel]`,
+         "Echanges professionnels (partenariat, projets)" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Echanges professionnels (partenariat, projets)]`,
+         "Autre" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Autre]`
+         )%>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse")
+
+total_oui <- sum(oui_lien$Reponse == "Oui", na.rm = TRUE)
+
+# Comptage uniquement des "Oui"
+df_plot <- oui_lien %>%
+  filter(Reponse == "Oui") %>%
+  group_by(Service) %>%
+  summarise(
+    N = n(),
+    pct = round(100 * n() / total_oui, 1),  # pourcentage sur total
+    .groups = "drop"
+  )
+
+# Graphique ggplot
+p <- ggplot(df_plot, aes(x = reorder(Service, N), y = N, fill = Service,
+                         text = paste("Dans quel cadre ?:", Service, "<br>Réponses:", N, "<br>% des répondants: ", pct, "%"))) +
+  geom_col(show.legend = FALSE) +   # enlève la légende
+  labs(
+    #title = "Quels services vous seraient utiles",
+    x = "",
+    y = "Nombre de personnes"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 9),
+    axis.text.y = element_text(size = 8),
+    legend.position = "none"   # supprime totalement la légende
+  )
+
+# Graphique interactif
+p_espace <- ggplotly(p, tooltip = "text")%>%
+  layout(
+    showlegend = FALSE,
+    title = list(
+      text = "Dans quel cadre ?",
+      x = 0.5,
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red")
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(20, w/40));
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_espace
+```
+
+## Column
+```{=html}
+<p> Si non, souhaiteriez-vous avoir la possibilité d’avoir des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité de Marticot ?</p>
+```
+
+## Row {height="15%"}
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)   # <-- indispensable pour ggplotly
+library(htmlwidgets)
+
+# On sélectionne uniquement les colonnes qui t'intéressent
+possibilite_lien <- donnees %>%
+  select(
+    "Note" = `Si non, souhaiteriez-vous avoir la possibilité d’avoir des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité de Marticot ?  Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 à « tout à fait »  [Votre choix]`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))   # supprimer les NA
+
+total_reponses <- nrow(possibilite_lien)
+
+# Comptage
+df_plot <- possibilite_lien %>%
+  mutate(Note = factor(Note,
+                       levels = 1:6,
+                       labels = c(
+                         "1 = pas du tout",
+                         "2",
+                         "3",
+                         "4",
+                         "5",
+                         "6 = tout à fait"
+                       ))) %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop") %>%
+  mutate(pct = round(100 * N / total_reponses, 1))  # pourcentage
+
+# Graphique statique ggplot
+p <- ggplot(df_plot, aes(x = Critere, y = N, fill = Note,
+                         text = paste0("Note: ", Note,
+                                           "<br>Réponses: ", N,
+                                           "<br>% du total: ", pct, "%"))) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
+  labs(
+    title = "Possibilité d'avoir des liens avec d'autres entreprises ?",
+    x = "",
+    y = "Nombre de réponses",
+    fill = "Note"
+  ) +
+  theme_minimal()
+
+# Version interactive
+p_possibilite_lien <- ggplotly(p, tooltip = "text") %>%
+  layout(
+    showlegend = TRUE,
+    legend = list(
+      orientation = "h",
+      x = 0.5,
+      xanchor = "center",
+      y = -0.35,
+      font = list(size = 12)
+    ),
+    title = list(
+      text = "Possibilité d'avoir des liens avec d'autres entreprises ?",
+      x = 0.5,
+      xanchor = "center",
+      yanchor = "top",
+      font = list(color = "red", size = 16)
+    ),
+    xaxis = list(
+      title = list(text = "", font = list(size = 14))
+    ),
+    yaxis = list(
+      title = list(text = "Nombre de réponses", font = list(size = 14))
+    ),
+    margin = list(t = 80, b = 120)
+  ) %>%
+  config(responsive = TRUE) %>%
+  onRender("
+    function(el, x) {
+      function resize() {
+        var w = el.offsetWidth;
+        var newSize = Math.max(10, Math.min(20, w/40));
+        Plotly.relayout(el, {'title.font.size': newSize});
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    }
+  ")
+
+p_possibilite_lien
+
+```
