@@ -11,6 +11,9 @@ website:
       - href: index.qmd
         icon: house
         text: Accueil
+      - href: methodologie.qmd
+        text: Méthodologie
+        icon: flask
       - href: cartes.qmd
         icon: map
         text: Cartes

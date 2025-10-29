@@ -1,22 +1,33 @@
 ---
-title: "Zone d'activité économique de Marticot"
+title: "Rapport d'étude : améliorer la connaissance des besoins des salariés d'une zone d'activité économique"
+subtitle: "Cas d'étude de la zone d'activité de Marticot (33)"
 image: "images/logos/logo_cerema_br.jpg"
 lang: fr
 about:
   template: trestles
   image: "images/logos/logo_cerema.PNG"
+toc: true
 ---
 
-::: {style="font-family: YACkoD1yZN0-0;letter-spacing: 0.089em;font-size:1.0em;"}
-Par effet de la loi NOTRe [\[1\]](ref_biblio.qmd#loi-notre), les établissements publics de coopération intercommunale à fiscalité propre sont, depuis le 1ᵉʳ janvier 2017, pleinement compétents en ce qui concerne la création, l’extension, l’entretien et la gestion des zones d’activité économique. A défaut de définition formelle, la détermination de ces zones ne peut qu’être le fruit d’une approche factuelle, à partir d’un faisceau d’indices. En pratique, cette méthode fait apparaître qu’une zone d’activité économique désigne un site administrativement réservé à l’implantation d’entreprises, dans un périmètre aménagé sous maîtrise d’ouvrage publique. Inversement, ne sont pas concernées les zones initiées et gérées par des acteurs privés, tout comme celles qui n’ont pas, ou seulement de manière accessoire, une vocation économique cohérente et continue.
-:::
+::: {style="font-family: YACkoD1yZN0-0;font-size:1.1em;"}
+L’objectif de cette recherche s’inscrit dans une approche intégrée du développement territorial, qui articule durabilité, résilience et sobriété foncière. Depuis l’adoption de la loi Climat et Résilience en 2021, les communes françaises sont confrontées à réaliser des efforts quant au principe du zéro artificialisation nette (ZAN)[\[1\]](ref_biblio.qmd#ZAN), qui implique une réduction progressive de la consommation d’espaces naturels, agricoles et forestiers. Cette contrainte oblige les territoires à repenser leurs modes de développement, à limiter l’étalement urbain et à optimiser l’usage du foncier déjà disponible.
 
-<br>
+Dans le champ de l’habitat, des leviers ont déjà été activés : densification maîtrisée, valorisation des friches, intégration renforcée de la nature en ville et recherche d’un meilleur équilibre entre cadre de vie et performance environnementale. En revanche, le secteur économique demeure un angle mort des politiques d’aménagement. Or, les zones d’activités constituent un gisement foncier majeur pour les collectivités et sont aujourd’hui au cœur des débats, tant en raison de leur important gisement foncier que de leur rôle stratégique dans l’attractivité territorial.
 
-::: {style="font-family: YACkoD1yZN0-0;letter-spacing: 0.089em;font-size:1.0em;"}
-A l’instar de toute « zone », celle qui donne lieu à la réalisation d’activités économiques doit présenter une continuité et une cohérence géographique certaines. Cette double exigence se trouve clairement avancée dans différentes réponses ministérielles se prononçant spécifiquement sur les modalités d’identification des zones d’activité touristique \[19\], ceci pour évoquer l’idée que l’homogénéité de tels espaces concourt directement à leur attractivité \[20\].
+Dans ce contexte, l’étude entend contribuer à une réflexion renouvelée sur la place des zones d’activités dans la transition écologique. Elle interroge à la fois les projets d’extension, qui doivent désormais être mieux pensés, et les potentiels de requalification des sites existants. L’un des apports majeurs de cette démarche réside dans l’exploration d’une approche plus qualitative de la transformation des ZAE. Il s’agit non seulement d’évaluer leur performance foncière et environnementale, mais aussi de prendre en compte les perceptions, usages et formes d’appropriation des usagers qui les pratiquent au quotidien.
 
-Cet indice dédoublé est implicitement admis par le juge lorsqu’il retient la conformité d’un permis de construire relatif à la réalisation d’un entrepôt logistique de stockage devant se situer « en continuité ou en extension » d’une ZAE existante, par rapport aux documents d’urbanisme d’un territoire donné et notamment au SCoT exposant, par le truchement de son document d’orientation générale, l’objectif d’affirmer l’excellence industrielle dudit territoire et identifiant à cette fin des espaces dédiées à son développement économique \[21\].
+Pour cela cette étude propose ainsi d’amorcer une réflexion innovante, plaçant les usagers au cœur du processus de transformation, afin de concevoir des zones d’activités plus fonctionnelles, attractives et compatibles avec les impératifs de la transition écologique de nos territoires.
 
-Ces éléments traduisent le fait qu’une ZAE s’étend sur un périmètre géographique constitué soit d’une seule grande parcelle à diviser, soit d’au moins deux parcelles contiguës, sur lequel plusieurs entreprises se sont regroupées afin d’y exercer concomitamment leurs activités économiques respectives \[22\]. Ceci implique, à l’inverse, que les implantations isolées d’opérateurs marchands, tout comme les espaces sur lesquels un seul acteur se trouve installé, ne sont pas constitutives de telles zones.
+Pour cette étude, il s’agit de la zone d’activités économiques de Marticot qui a été choisie. Celle-ci, constitue l’un des pôles économiques dans le sud de l’aire urbaine bordelaise, à Cestas (33610), dans la communauté de commune Jalles Eau Bourdes. Elle regroupe un tissu d’entreprises diversifié, allant des activités artisanales et industrielles aux services et à la logistique, et concentre un nombre significatif d’emplois, soit de 1000 à 1500 salariés. Cette concentration en fait un lieu stratégique, tant du point de vue de l’économie locale que des enjeux d’aménagement et de mobilité. La zone d’activité a été choisie pour plusieurs critères bien distincts : sa taille représentative des ZAE, la diversité des entreprises présentes (notamment des PME et des ETI comme Lectra), sa proximité avec le siège du Cerema Sud Ouest et la présence d’enjeux que l’on retrouve classiquement dans des zones d’activités économiques : mobilité, services et espaces publics.
+
+## Plan d'ensemble de la Zone d'activité économique de Marticot
+![](images/zae_marticot.png){.lightbox}
+
+Dans un contexte où les zones d’activités économiques (ZAE) sont au cœur des réflexions sur la transition écologique et l’attractivité territoriale, il est intéressant de comprendre le quo-tidien des salariés pour mieux appréhender d’éventuels projets de requalification. L’objectif est double :
+
+  - Dresser un état des lieux des usages et des pratiques (notamment en matière de dé-placements, de restauration et de services disponibles),
+  -	Identifier les points faibles par les usagers de la zone afin d’orienter les projets d’aménagement futurs et d’améliorer la qualité de vie dans ces zones d’activités. 
+                  
+Cette enquête s’inscrit donc dans une logique de requalification durable des zones d’activités, où la prise en compte des usagers constitue un levier essentiel pour renforcer l’attractivité économique et permettre de répondre aux enjeux de sobriétés foncière du ZAN, tout en favorisant le bien-être des individus. 
+Notons que la collectivité n’a pas de projet de requalification de cette ZAE. Celle-ci a uni-quement offert au Cerema un terrain pour expérimenter une méthodologie de travail.
 :::

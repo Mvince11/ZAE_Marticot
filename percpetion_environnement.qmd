@@ -436,7 +436,7 @@ p_espace
 
 ```{r}
 #| echo: false
-#| fig.width: 4
+#| fig.width: 3
 #| fig.height: 2
 
 library(dplyr)

@@ -38,7 +38,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-b663525e4b92bb903b2199e2d401bf36.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ab06ffd3e41e6c8f7b349d80ba0e5ac7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b7e1f2767d6a33e309420a3313b95639.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -151,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contenu</h2>
    
   <ul class="collapse">
-  <li><a href="#la-loi-notre" id="toc-la-loi-notre" class="nav-link active" data-scroll-target="#la-loi-notre">La Loi NOTRe</a></li>
+  <li><a href="#zan-zéro-artificialisation-nette" id="toc-zan-zéro-artificialisation-nette" class="nav-link active" data-scroll-target="#zan-zéro-artificialisation-nette">ZAN (Zéro Artificialisation Nette)</a></li>
   </ul>
 </nav>
 </nav>
@@ -181,10 +181,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div id="loi-notre" style="font-family: YACkoD1yZN0-0;letter-spacing: 0.089em;font-size:1.0em;">
-<section id="la-loi-notre" class="level2">
-<h2 class="anchored" data-anchor-id="la-loi-notre">La Loi NOTRe</h2>
-<p>La loi n°2015-991 du 7 août 2015 portant nouvelle organisation territoriale de la République (NOTRe) a organisé le transfert aux établissements publics de coopération intercommunale à fiscalité propre (EPCI-FP) de la compétence relative à la création, l’aménagement, l’entretien et la gestion des zones d’activité industrielle, commerciale, tertiaire, artisanale, touristique, portuaire ou aéroportuaire, sans condition de reconnaissance d’un intérêt communautaire. Il s’ensuit que depuis le 1ᵉʳ janvier 2017, ces autorités locales ont vocation à créer de tels espaces et à prendre en charge ceux déjà existants sur leurs territoires. De surcroit, ils doivent en assurer l’inventaire [2].</p>
+<div id="ZAN" style="font-family: YACkoD1yZN0-0;letter-spacing: 0.089em;font-size:1.0em;">
+<section id="zan-zéro-artificialisation-nette" class="level2">
+<h2 class="anchored" data-anchor-id="zan-zéro-artificialisation-nette">ZAN (Zéro Artificialisation Nette)</h2>
+<p>L’objectif ZAN consiste à limiter toute extension de l’artificialisation d’ici 2050. Cela implique que des aménagements des espaces agricoles, naturels ou forestiers seront encore possibles mais conditionnés à une renaturation à proportion égale d’espaces artificialisés sur le territoire concerné. Tout ce qui sera consommé devra être compensé pour équilibrer la balance au terme du délai imposé en 2050. La loi visant à renforcer l’accompagnement des élus locaux dans la mise en oeuvre des ZAN dite “loi ZAN” du 20 juillet 2023 renforce ce principe tout en apportant quelques souplesses: - une garantie communale de 1ha est accordée aux communes disposant d’un document d’urbanisme, sous réserve de justifier du besoin, - une identification des projets d’envergure nationale pour les comptabiliser hors de l’enveloppe territoriale, - un report du délai d’évolution pour la prise en compte du ZAN par les documents d’urbanisme. ”</p>
 </section>
 </div>
 
@@ -281,7 +281,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/website\.quarto\.pub\/zae_marticot");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

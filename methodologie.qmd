@@ -1,0 +1,32 @@
+---
+title: ""
+lang: fr
+toc: true
+toc-depth: 4
+---
+
+## 1. METHODOLOGIE 
+
+### 1.1 Étapes d’élaboration et de traitement du questionnaire
+
+#### 1.1.1 Construction  
+Pour comprendre les usages et les besoins des salariés, nous avons élaboré une méthodologie d’enquête par questionnaire, déployée à l’échelle de la ZAE. Cette méthodologie nous permet de recueillir un large panel de répondants usagers de la zone d’activité pour comprendre le fonctionnement de la zone d’activité
+Afin de pouvoir le constituer, nous avons réalisé de multiples entretiens en amont pour réunir des éléments d’analyse comme base questionnaire. 5 thématiques sont ressortis de ces entretiens
+
+ -	la perception générale de la zone d’activité
+ -	la vie professionnelle
+ -	la perception de l’environnement et des conditions de travail
+ -	les modalités de transports 
+ -	la pause déjeuner
+
+La construction du questionnaire a nécessité un temps conséquent, notamment en raison de notre approche centrée sur la psychologie appliquée. En partenariat avec le laboration PSyCap du Cerema, avec Stéphanie Bordel, chercheuse, il a été choisie d’avoir cette approche pour mieux comprendre les interactions des individus avec leur environnement et comment ce dernier influence la perception de ceux-ci. cette approche permet Il s’agissait de formuler des questions précises et accessibles, tout en veillant à la pertinence des réponses recueillies pour l’étude, tout cela dans un cadre temporel restreint :
+
+→ le questionnaire ne devait pas dépasser 10 minutes pour ne pas décourager les répondants.
+Nous avons écarté également les questions ouvertes pour ne pas alourdir la phase de traitement des réponses en privilégiant des systèmes de graduation ou des cases à cocher.  Nous visons 20% du total des salariés de la zone pour que l'échantillon soit représentatif, ce qui équivaut à environ 300 personnes. 
+Depuis début juillet, le questionnaire est finalisé et en cours de diffusion.
+Nous avons privilégié une approche multi-canal :
+
+ -	Mise en ligne du questionnaire avec un lien et un QR code,
+ -	Relais interne via les chefs d’entreprise et la présidente de l’association locale des entreprises,
+ -	Présence sur le terrain, avec des questionnaires papier et des actions de démarchage direct auprès des salariés sur leur lieu de travail ou dans les espaces communs.
+
