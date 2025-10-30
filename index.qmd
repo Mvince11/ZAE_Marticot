@@ -21,13 +21,13 @@ Pour cela cette étude propose ainsi d’amorcer une réflexion innovante, plaç
 Pour cette étude, il s’agit de la zone d’activités économiques de Marticot qui a été choisie. Celle-ci, constitue l’un des pôles économiques dans le sud de l’aire urbaine bordelaise, à Cestas (33610), dans la communauté de commune Jalles Eau Bourdes. Elle regroupe un tissu d’entreprises diversifié, allant des activités artisanales et industrielles aux services et à la logistique, et concentre un nombre significatif d’emplois, soit de 1000 à 1500 salariés. Cette concentration en fait un lieu stratégique, tant du point de vue de l’économie locale que des enjeux d’aménagement et de mobilité. La zone d’activité a été choisie pour plusieurs critères bien distincts : sa taille représentative des ZAE, la diversité des entreprises présentes (notamment des PME et des ETI comme Lectra), sa proximité avec le siège du Cerema Sud Ouest et la présence d’enjeux que l’on retrouve classiquement dans des zones d’activités économiques : mobilité, services et espaces publics.
 
 ## Plan d'ensemble de la Zone d'activité économique de Marticot
+
 ![](images/zae_marticot.png){.lightbox}
 
 Dans un contexte où les zones d’activités économiques (ZAE) sont au cœur des réflexions sur la transition écologique et l’attractivité territoriale, il est intéressant de comprendre le quo-tidien des salariés pour mieux appréhender d’éventuels projets de requalification. L’objectif est double :
 
-  - Dresser un état des lieux des usages et des pratiques (notamment en matière de dé-placements, de restauration et de services disponibles),
-  -	Identifier les points faibles par les usagers de la zone afin d’orienter les projets d’aménagement futurs et d’améliorer la qualité de vie dans ces zones d’activités. 
-                  
-Cette enquête s’inscrit donc dans une logique de requalification durable des zones d’activités, où la prise en compte des usagers constitue un levier essentiel pour renforcer l’attractivité économique et permettre de répondre aux enjeux de sobriétés foncière du ZAN, tout en favorisant le bien-être des individus. 
-Notons que la collectivité n’a pas de projet de requalification de cette ZAE. Celle-ci a uni-quement offert au Cerema un terrain pour expérimenter une méthodologie de travail.
+-   Dresser un état des lieux des usages et des pratiques (notamment en matière de dé-placements, de restauration et de services disponibles),
+-   Identifier les points faibles par les usagers de la zone afin d’orienter les projets d’aménagement futurs et d’améliorer la qualité de vie dans ces zones d’activités.
+
+Cette enquête s’inscrit donc dans une logique de requalification durable des zones d’activités, où la prise en compte des usagers constitue un levier essentiel pour renforcer l’attractivité économique et permettre de répondre aux enjeux de sobriétés foncière du ZAN, tout en favorisant le bien-être des individus. Notons que la collectivité n’a pas de projet de requalification de cette ZAE. Celle-ci a uni-quement offert au Cerema un terrain pour expérimenter une méthodologie de travail.
 :::

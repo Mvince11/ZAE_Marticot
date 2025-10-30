@@ -1,15 +1,19 @@
 ---
 title: ""
-format:
-  dashboard:
-    orientation: rows
-editor: visual
-expandable: true
-layout: "grid"
-scrolling: true
+# format:
+#   dashboard:
+#     orientation: rows
+# editor: visual
+# expandable: true
+# layout: "grid"
+# scrolling: true
+lang: fr
+toc: true
+toc-depth: 4
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| include: FALSE
 # Chargement des packages
 library(tidyverse)
 library(readr)
@@ -19,27 +23,28 @@ donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
   drop_na(`Date de soumission`)
 ```
 
-<h1 style="font-size:1.4em;">
+## 2. PROFIL DE l’ÉCHANTILLON
 
-Volet état civil
+Comme évoqué notre échantillon finale de notre questionnaire est de 325 réponses, représentant environ [20%] de l’ensemble des salariés de la zone (estimée entre 1000 et 1500 salariés).
 
-</h1>
+### 2.1 Le genre
 
-```{=html}
-Voici quelques statistiques issues du questionnaire
-```
+La population salariée de la zone de Marticot apparaît majoritairement masculine, ce qui reflète probablement la nature des activités implantées (industrie, logistique, artisanat) traditionnellement plus masculinisées. Cette part supérieur est aussi importante à corréler avec la forte présence de CSP de cadres et professions intellectuelles supérieures qui représentent 66% environ des répondant au questionnaire. D’après les chiffres CSP en emploi de l’INSEE en 2024, 25,4%  sont des hommes et 20,4% sont des femmes. Les hommes sont proportionnellement plus nombreux parmi les cadres et les ouvriers qualifiés (INSEE, 2024).  
+Le profil de la zone de Marticot, caractérisé par une forte proportion de cadres et une majorité d’hommes, traduit donc une composition socioprofessionnelle spécifique à cette ZAE, qui ne reflète pas la structure nationale mais plutôt les caractéristiques économiques locales (présence d’ETI, activités industrielles, logistiques et de services spécialisés).Ce déséquilibre peut influencer les perceptions entre genre mais aussi en CSP au vu de ces 2 surreprésentations dans l’échantillon. Celui-ci reste représentatif de la réalité puisqu’il s’agit d’une réalité factuelle de la zone mais il ne pas négliger les sous représentations. Notamment en terme de CSP.
 
-## Row {height="13%"}
 
 ```{r}
-#| echo: false
+#| include: FALSE
 
 library(dplyr)
 library(ggplot2)
 library(plotly)
 library(htmlwidgets)
+```
 
-# Préparation des données
+```{r}
+#| echo: false
+
 df_genre <- donnees %>%
   count(Genre = `Quel est votre genre ?  Veuillez cocher une case`) %>%
   mutate(
@@ -48,65 +53,47 @@ df_genre <- donnees %>%
       TRUE ~ Genre
     ),
     Total = sum(n),
-    Pourcent = round(100 * n / Total, 1)
+    Pourcent = round(100 * n / Total, 1),
+    label = paste0(Genre, " (", Pourcent, "%)")
   )
 
-# Graphique ggplot (sans titre, style épuré)
-p_genre <- ggplot(df_genre, aes(
-    x = reorder(Genre, n),
-    y = n,
-    fill = Genre,
-    text = paste(
-      "Genre :", Genre,
-      "<br>Réponses :", n,
-      "<br>Pourcentage :", Pourcent, "%"
-    )
-  )) +
-  geom_col(show.legend = FALSE) +
-  coord_flip() +  # diagramme horizontal
-  labs(
-    x = "Genre",
-    y = "Nombre de réponses",
-    fill = NULL
-  ) +
-  theme_minimal() +
-  theme(
-    axis.title.x = element_text(size = 9),
-    axis.title.y = element_text(size = 9),
-    axis.text.x = element_text(size = 8),
-    axis.text.y = element_text(size = 8)
-  )
-
-# Graphique interactif avec titre responsif
-p_genre_plotly <- ggplotly(p_genre, tooltip = "text") %>%
+# Graphique interactif avec total par catégorie
+plot_ly(
+  data = df_genre,
+  labels = ~Genre,
+  values = ~n,  # Utiliser le nombre brut de réponses
+  type = "pie",
+  textinfo = "label",  # Affiche label, %, et total
+  hoverinfo = "label+value+percent",
+  hole= 0.4,
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
   layout(
     title = list(
       text = "Répartition des réponses par genre",
-      x = 0.5,             # centré horizontalement
+      x = 0.5,
       xanchor = "center",
-      yanchor = "top",
-      font = list(color = "red") # couleur rouge comme demandé
+      font = list(color = "red")
     ),
     margin = list(t = 60, b = 60)
   ) %>%
-  config(responsive = TRUE) %>%
-  onRender("
-    function(el, x) {
-      function resize() {
-        var w = el.offsetWidth;
-        var newSize = Math.max(10, Math.min(20, w/40)); // taille adaptative
-        Plotly.relayout(el, {'title.font.size': newSize});
-      }
-      window.addEventListener('resize', resize);
-      resize();
-    }
-  ")
+  config(responsive = TRUE)
 
-p_genre_plotly
+
 
 ```
 
-## Row {height="17%"}
+### 2.2 L’âge
+
+Dans notre échantillon de 325 répondants, L’âge moyen s’établit à 43,3 ans, tandis que la médiane, très proche (44 ans), confirme une distribution centrée autour de la quarantaine. L’écart-type de 11 ans indique toutefois une certaine diversité d’âges, avec des salariés allant de 21 à 63 ans. Le mode (valeur la plus fréquente) se situe à 53 ans, ce qui suggère la présence notable de salariés plus âgés, souvent expérimentés. Le graphique confirme visuellement cette tendance :  
+
+La tranche des 40-49 ans concentre le plus grand nombre d’effectifs, ce qui en fait le cœur de la population active de la ZAE. Cette surreprésentation traduit une main-d’œuvre en pleine maturité professionnelle, occupant souvent des postes qualifiés ou de responsabilité.
+
+Les 30-39 ans et 50-59 ans forment des groupes secondaires importants, témoignant d’une bonne continuité générationnelle et d’un renouvellement progressif.
+
+À l’inverse, les moins de 30 ans et les plus de 60 ans sont minoritaires, traduisant une faible proportion de jeunes entrants et de salariés proches de la retraite encore en activité.
+
+La ZAE de Marticot présente une structure d’âge équilibrée mais vieillissante, dominée par les salariés de 40 à 50 ans, avec une représentation limitée des jeunes actifs. Cette configuration reflète le profil typique d’une zone industrielle établie, où la stabilité des emplois et la technicité des postes favorisent la fidélisation et la longévité professionnelle.
 
 ```{r}
 #| echo: false
@@ -116,38 +103,42 @@ library(ggplot2)
 library(plotly)
 library(htmlwidgets)
 
-# Préparation des données âge
+#summary(as.numeric(donnees$`Quel est votre âge ?`))
+
 df_age <- donnees %>%
-  count(Age = `Quel est votre âge ?`) %>%
   mutate(
-    Age_num = suppressWarnings(as.numeric(as.character(Age))), # conversion en numérique si possible
-    Age = case_when(
-      is.na(Age_num) & (is.na(Age) | Age == "N/A") ~ "Sans réponse",
-      TRUE ~ as.character(Age)
-    ),
-    Total = sum(n),
-    Pourcent = round(100 * n / Total, 1)
+    Age_num = suppressWarnings(as.numeric(as.character(`Quel est votre âge ?`))),
+    Tranche = case_when(
+      is.na(Age_num) ~ "Sans réponse",
+      Age_num >= 20 & Age_num <= 29 ~ "20-29",
+      Age_num >= 30 & Age_num <= 39 ~ "30-39",
+      Age_num >= 40 & Age_num <= 49 ~ "40-49",
+      Age_num >= 50 & Age_num <= 59 ~ "50-59",
+      Age_num >= 60 & Age_num <= 69 ~ "60-69",
+      TRUE ~ "Autres"
+    )
   ) %>%
-  arrange(Age_num, Age)   # trier par âge croissant
+  count(Tranche) %>%
+  mutate(
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    Tranche = factor(Tranche, levels = c("20-29", "30-39", "40-49", "50-59", "60-69", "Autres", "Sans réponse"))
+  )
 
-# Forcer l'ordre des modalités pour l'affichage
-df_age$Age <- factor(df_age$Age, levels = unique(df_age$Age))
-
-# Graphique ggplot
+# Graphique ggplot vertical
 p_age <- ggplot(df_age, aes(
-    x = Age,   # ordre respecté
+    x = Tranche,
     y = n,
-    fill = Age,
+    fill = Tranche,
     text = paste(
-      "Âge :", Age,
+      "Tranche :", Tranche,
       "<br>Réponses :", n,
       "<br>Pourcentage :", Pourcent, "%"
     )
   )) +
   geom_col(show.legend = FALSE) +
-  coord_flip() +
   labs(
-    x = "Âge",
+    x = "Tranche d'âge",
     y = "Nombre de réponses"
   ) +
   theme_minimal() +
@@ -158,12 +149,12 @@ p_age <- ggplot(df_age, aes(
     axis.text.y = element_text(size = 8)
   )
 
-# Graphique interactif sans légende + titre responsif
+# Graphique interactif avec titre responsif
 p_age_plotly <- ggplotly(p_age, tooltip = "text") %>%
   layout(
     showlegend = FALSE,
     title = list(
-      text = "Répartition des réponses par âge",
+      text = "Répartition des réponses par tranche d'âge",
       x = 0.5,
       xanchor = "center",
       yanchor = "top",
@@ -189,7 +180,8 @@ p_age_plotly
 
 ```
 
-## Row {height="20%"}
+### 2.3 La catégorie socio-professionelle (CSP)
+
 
 ```{r}
 #| echo: false
@@ -199,100 +191,7 @@ library(ggplot2)
 library(plotly)
 library(htmlwidgets)
 
-# Préparation des données âge + genre
-df_age_genre <- donnees %>%
-  rename(Genre = `Quel est votre genre ?  Veuillez cocher une case`) %>%
-  count(Age = `Quel est votre âge ?`, Genre) %>%
-  mutate(
-    Age_num = suppressWarnings(as.numeric(as.character(Age))), # conversion en numérique si possible
-    Age = case_when(
-      is.na(Age_num) & (is.na(Age) | Age == "N/A") ~ "Sans réponse",
-      TRUE ~ as.character(Age)
-    ),
-    Total = sum(n),
-    Pourcent = round(100 * n / Total, 1),
-    Genre = case_when(
-      is.na(Genre) | Genre == "N/A" ~ "Sans réponse",
-      TRUE ~ Genre
-    )
-  ) %>%
-  arrange(Age_num, Age)
-
-# Forcer l'ordre croissant des âges
-df_age_genre$Age <- factor(df_age_genre$Age, levels = unique(df_age_genre$Age))
-
-# Graphique ggplot
-p_age_genre <- ggplot(df_age_genre, aes(
-    x = Age,
-    y = n,
-    fill = Genre,
-    text = paste(
-      "Âge :", Age,
-      "<br>Genre :", Genre,
-      "<br>Réponses :", n,
-      "<br>Pourcentage :", Pourcent, "%"
-    )
-  )) +
-  geom_col(position = "dodge") +
-  labs(
-    x = "Âge",
-    y = "Nombre de réponses",
-    fill = NULL
-  ) +
-  theme_minimal() +
-  theme(
-    axis.title.x = element_text(size = 9),
-    axis.title.y = element_text(size = 9),
-    axis.text.x = element_text(size = 8),
-    axis.text.y = element_text(size = 8),
-    legend.title = element_text(size = 8),
-    legend.text = element_text(size = 7)
-  )
-
-# Graphique interactif avec titre rouge responsif
-p_age_genre_plotly <- ggplotly(p_age_genre, tooltip = "text") %>%
-  layout(
-    title = list(
-      text = "Répartition des réponses par âge et par genre",
-      x = 0.5,
-      xanchor = "center",
-      yanchor = "top",
-      font = list(color = "red")
-    ),
-    legend = list(
-      orientation = "h",    # légende horizontale
-      x = 0.5, xanchor = "center",
-      y = -0.3, yanchor = "top"
-    ),
-    margin = list(t = 60, b = 80)
-  ) %>%
-  config(responsive = TRUE) %>%
-  onRender("
-    function(el, x) {
-      function resize() {
-        var w = el.offsetWidth;
-        var newSize = Math.max(10, Math.min(20, w/40));
-        Plotly.relayout(el, {'title.font.size': newSize});
-      }
-      window.addEventListener('resize', resize);
-      resize();
-    }
-  ")
-
-p_age_genre_plotly
-
-```
-
-## Row {height="15%"}
-
-```{r}
-#| echo: false
-
-library(dplyr)
-library(ggplot2)
-library(plotly)
-library(htmlwidgets)
-
+# Préparation des données
 # Préparation des données
 df_csp <- donnees %>%
   count(CSP = `Quelle est votre catégorie socio-professionnelle ?`) %>%
@@ -304,11 +203,14 @@ df_csp <- donnees %>%
     Total = sum(n),
     Pourcent = round(100 * n / Total, 1)
   ) %>%
-  arrange(desc(n))   # tri par effectif décroissant (modifiable)
+  arrange(desc(n))  # tri par effectif décroissant
 
-# Graphique ggplot
+# Forcer l’ordre des catégories dans le bon sens
+df_csp$CSP <- factor(df_csp$CSP, levels = df_csp$CSP)
+
+# Graphique ggplot vertical
 p_csp <- ggplot(df_csp, aes(
-    x = reorder(CSP, n),
+    x = CSP,
     y = n,
     fill = CSP,
     text = paste(
@@ -318,7 +220,6 @@ p_csp <- ggplot(df_csp, aes(
     )
   )) +
   geom_col(show.legend = FALSE) +
-  coord_flip() +
   labs(
     x = "Catégorie socio-professionnelle",
     y = "Nombre de réponses"
@@ -327,11 +228,11 @@ p_csp <- ggplot(df_csp, aes(
   theme(
     axis.title.x = element_text(size = 9),
     axis.title.y = element_text(size = 9),
-    axis.text.x = element_text(size = 8),
+    axis.text.x = element_text(size = 8, angle = 45, hjust = 1),
     axis.text.y = element_text(size = 8)
   )
 
-# Graphique interactif sans légende + titre rouge responsif
+# Graphique interactif avec titre rouge responsif
 p_csp_plotly <- ggplotly(p_csp, tooltip = "text") %>%
   layout(
     showlegend = FALSE,
@@ -342,7 +243,7 @@ p_csp_plotly <- ggplotly(p_csp, tooltip = "text") %>%
       yanchor = "top",
       font = list(color = "red")
     ),
-    margin = list(t = 80, b = 60)
+    margin = list(t = 80, b = 80)
   ) %>%
   config(responsive = TRUE) %>%
   onRender("
@@ -361,83 +262,10 @@ p_csp_plotly
 
 ```
 
-## Row {height="15%"}
+Les cadres et professions intellectuelles supérieures représentent 66 % des répondants, suivis par les employés (24 %) et les ouvriers (6 %). Les professions intermédiaires sont très minoritaires (2 %). Quelques cas isolés apparaissent (artisans, CEO, agents d’exploitation, surveillants de travaux)
+La forte présence de cadres témoigne de l’importance d’entreprises de taille intermédiaire (ETI) et de secteurs à forte valeur ajoutée (comme Lectra). Cela traduit un profil socio-économique élevé, susceptible de générer des attentes fortes en matière de services, de mobilité et de qualité de vie au travail. La présence non négligeable d’employés et d’ouvriers rappelle toutefois que les besoins sont variés et qu’une politique de requalification devra concilier des profils sociaux différents. De plus, il faut prendre en compte le fait que de part notre méthodologie, nous avons diffuser le questionnaire de manière numérique (par mail, QR code). Les salariés ayant le plus de chance d’avoir un accès bureautique sont les cadres et les employés puisqu’il s’agit de leur matériel de travail. Les ouvriers, artisans et certaines professions intermédiaires sont donc moins susceptibles d’avoir eu accès au questionnaire. C’est pour cela que nous avons réalisé un travail de terrain pour permettre une « démocratisation » de l’accès au questionnaire, en sensibilisant toutes les CSP présentent sur site.
 
-```{r}
-#| echo: false
-
-library(dplyr)
-library(ggplot2)
-library(plotly)
-library(htmlwidgets)
-
-# Préparation des données
-df_csp_autre <- donnees %>%
-  drop_na(`Quelle est votre catégorie socio-professionnelle ? [Autre]`) %>%
-  count(CSP_Autre = `Quelle est votre catégorie socio-professionnelle ? [Autre]`) %>%
-  mutate(
-    CSP_Autre = as.character(CSP_Autre),
-    Total = sum(n),
-    Pourcent = round(100 * n / Total, 1)
-  ) %>%
-  arrange(desc(n))
-
-# Graphique ggplot
-p_csp_autre <- ggplot(df_csp_autre, aes(
-    x = reorder(CSP_Autre, n),
-    y = n,
-    fill = CSP_Autre,
-    text = paste(
-      "Réponse :", CSP_Autre,
-      "<br>Nombre :", n,
-      "<br>Pourcentage :", Pourcent, "%"
-    )
-  )) +
-  geom_col(show.legend = FALSE) +
-  coord_flip() +
-  labs(
-    x = "Catégorie socio-professionnelle (Autre)",
-    y = "Nombre de réponses"
-  ) +
-  theme_minimal() +
-  theme(
-    axis.title.x = element_text(size = 9),
-    axis.title.y = element_text(size = 9),
-    axis.text.x = element_text(size = 8),
-    axis.text.y = element_text(size = 8)
-  )
-
-# Graphique interactif sans légende + titre rouge responsif
-p_csp_autre_plotly <- ggplotly(p_csp_autre, tooltip = "text") %>%
-  layout(
-    showlegend = FALSE,
-    title = list(
-      text = "Répartition des réponses par catégorie socio-professionnelle (Autre)",
-      x = 0.5,
-      xanchor = "center",
-      yanchor = "top",
-      font = list(color = "red")
-    ),
-    margin = list(t = 80, b = 60)
-  ) %>%
-  config(responsive = TRUE) %>%
-  onRender("
-    function(el, x) {
-      function resize() {
-        var w = el.offsetWidth;
-        var newSize = Math.max(10, Math.min(18, w/40));
-        Plotly.relayout(el, {'title.font.size': newSize});
-      }
-      window.addEventListener('resize', resize);
-      resize();
-    }
-  ")
-
-p_csp_autre_plotly
-
-```
-
-## Row {height="20%" .tabset }
+### 2.4 la commune de résidence des salariés
 
 ```{r}
 #| include: false
@@ -487,18 +315,18 @@ question_commune <- st_read("data/question_commune.geojson") %>%
    rename(`Dans quelle commune vivez vous ?` = `Dans.quelle.commune.vivez.vous..`)
 ```
 
-```{r}
-#| echo: false
-#| title: "Carte des flux domiciles/travail"
-#| color: red
-#| fig.height: 6   # hauteur en pouces (~450px)
-#| fig.width: 8    # largeur en pouces
+Les répondants résident majoritairement dans des communes proches : Cestas (12 %), Pessac (10,5 %), Léognan (5,2 %), Villeneuve-d’Ornon (5,9 %), Mérignac (4,6 %), Bègles (4,3 %) et Talence (4,9 %). Bordeaux intra-muros regroupe environ 6 % des salariés (tous quartiers confondus). L’aire de résidence est donc assez étendue, couvrant aussi bien la métropole bordelaise que des communes périphériques plus éloignées.  
+La zone de Marticot attire des salariés de proximité mais aussi d’un bassin d’emploi plus large, à l’échelle de l’agglomération bordelaise et au-delà. Cette dispersion géographique explique l’importance accordée aux enjeux de mobilité et d’accessibilité. Le fait que plus d’un salarié sur dix habite Cestas traduit aussi une dimension locale forte, où la zone d’activité joue un rôle structurant pour l’emploi de la commune.
 
-  
+###### carte des Flux Domicile/travail
+
+```{r}
+#| include: false
 library(sf)
 library(dplyr)
 library(tidyverse)
 library(leaflet)
+library(htmltools)
 
 # --- 1. Coordonnées de destination : Cestas Marticot
 dest_lon <- -0.69112
@@ -508,7 +336,7 @@ destination <- st_sf(
   geometry = st_sfc(st_point(c(dest_lon, dest_lat)), crs = 4326)
 )
 
- donnees <- donnees %>%
+donnees <- donnees %>%
    mutate(`Dans quelle commune vivez-vous ?` = sub(" [0-9]{5}$", "", `Dans quelle commune vivez-vous ?`))
 # --- 2. Compter le nombre de réponses par commune
 nb_reponses <- donnees %>%
@@ -568,6 +396,16 @@ flux <- purrr::map2(
     geometry = .
   )
 
+```
+
+
+```{r}
+#| echo: false
+#| title: "Carte des flux domiciles/travail"
+#| color: red
+#| fig.height: 6   # hauteur en pouces (~450px)
+#| fig.width: 8    # largeur en pouces
+
 # --- 5. Carte Leaflet
 m <- leaflet() %>%
   addTiles(group = "OpenStreetMap") %>%
@@ -606,15 +444,91 @@ m <- leaflet() %>%
     data = destination,
     color = "blue", fillColor = "blue", radius = 6, fillOpacity = 1,
     popup = ~nom
+  ) %>%
+  
+  addControl(
+    html = HTML('
+      <div style="background: white; padding: 8px; border-radius: 6px; box-shadow: 0 0 4px rgba(0,0,0,0.3); font-size: 0.9em;">
+        <b>Légende</b><br>
+        <div style="margin-top: 4px;">
+          <span style="display: inline-block; width: 12px; height: 12px; background: blue; border-radius: 50%; margin-right: 6px;"></span>
+          ZAE de Marticot
+        </div>
+        <div style="margin-top: 4px;">
+          <span style="display: inline-block; width: 12px; height: 12px; background: black; border-radius: 50%; margin-right: 6px;"></span>
+          Communes
+        </div>
+      </div>
+    '),
+    position = "bottomright"
   )
+
+
 
 m
 
 ```
 
+::: {style="margin-top:30px;"} :::
+
+```{r}
+#| echo: false
+
+library(dplyr)
+library(dplyr)
+library(plotly)
+
+table_trajets <- nb_reponses %>%
+  rename(
+    Commune = `Dans quelle commune vivez-vous ?`,
+    `Nombre de trajets` = nb_reponses,
+    `Pourcentages` = pct
+  ) %>%
+  arrange(desc(`Nombre de trajets`))
+
+# Regroupement des petites communes
+table_trajets_grouped <- table_trajets %>%
+  mutate(Commune = ifelse(`Nombre de trajets` < 10, "Autre", Commune)) %>%
+  group_by(Commune) %>%
+  summarise(
+    `Nombre de trajets` = sum(`Nombre de trajets`),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    Total = sum(`Nombre de trajets`),
+    Pourcentages = round(100 * `Nombre de trajets` / Total, 1)
+  )
+
+# Graphique circulaire
+plot_ly(
+  data = table_trajets_grouped,
+  labels = ~Commune,
+  values = ~`Nombre de trajets`,
+  type = "pie",
+  hole = 0.6,
+  textinfo = "label+percent+value",
+  hoverinfo = "label+value+percent",
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "Répartition des trajets par commune de résidence",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red")
+    ),
+    margin = list(t = 90, b = 90)
+  ) %>%
+  config(responsive = TRUE)
+
+
+```
+
+::: {style="margin-top:30px;"} :::
+
 ```{r}
 #| title: "Tableau récapitulatif"
-
+#| echo: false
 
 
 library(dplyr)
@@ -658,10 +572,7 @@ datatable(
   )
 
 ```
+::: {style="margin-top:30px;"} :::
 
-## Column {expandable="false"}
 
-```{=html}
-Flux domicile/travail
-```
 

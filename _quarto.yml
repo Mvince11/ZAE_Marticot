@@ -11,15 +11,17 @@ website:
       - href: index.qmd
         icon: house
         text: Accueil
-      - href: methodologie.qmd
-        text: Méthodologie
-        icon: flask
+      # - href: methodologie.qmd
+      #   text: Méthodologie
+      #   icon: flask
       - href: cartes.qmd
         icon: map
         text: Cartes
-      - text: Exploitation questionnaire
+      - text: Méthodologie/Exploitation questionnaire
         icon: pen
         menu:
+          - href: methodologie.qmd
+            text: Méthodologie
           - href: etat_civil.qmd
             text: Volet Etat civil
           - text: Volet Perception générale

@@ -5,28 +5,42 @@ toc: true
 toc-depth: 4
 ---
 
-## 1. METHODOLOGIE 
+## 1. METHODOLOGIE
 
 ### 1.1 Étapes d’élaboration et de traitement du questionnaire
 
-#### 1.1.1 Construction  
-Pour comprendre les usages et les besoins des salariés, nous avons élaboré une méthodologie d’enquête par questionnaire, déployée à l’échelle de la ZAE. Cette méthodologie nous permet de recueillir un large panel de répondants usagers de la zone d’activité pour comprendre le fonctionnement de la zone d’activité
-Afin de pouvoir le constituer, nous avons réalisé de multiples entretiens en amont pour réunir des éléments d’analyse comme base questionnaire. 5 thématiques sont ressortis de ces entretiens
+#### 1.1.1 Construction
 
- -	la perception générale de la zone d’activité
- -	la vie professionnelle
- -	la perception de l’environnement et des conditions de travail
- -	les modalités de transports 
- -	la pause déjeuner
+Pour comprendre les usages et les besoins des salariés, nous avons élaboré une méthodologie d’enquête par questionnaire, déployée à l’échelle de la ZAE. Cette méthodologie nous permet de recueillir un large panel de répondants usagers de la zone d’activité pour comprendre le fonctionnement de la zone d’activité Afin de pouvoir le constituer, nous avons réalisé de multiples entretiens en amont pour réunir des éléments d’analyse comme base questionnaire. 5 thématiques sont ressortis de ces entretiens
+
+-   la perception générale de la zone d’activité
+-   la vie professionnelle
+-   la perception de l’environnement et des conditions de travail
+-   les modalités de transports
+-   la pause déjeuner
 
 La construction du questionnaire a nécessité un temps conséquent, notamment en raison de notre approche centrée sur la psychologie appliquée. En partenariat avec le laboration PSyCap du Cerema, avec Stéphanie Bordel, chercheuse, il a été choisie d’avoir cette approche pour mieux comprendre les interactions des individus avec leur environnement et comment ce dernier influence la perception de ceux-ci. cette approche permet Il s’agissait de formuler des questions précises et accessibles, tout en veillant à la pertinence des réponses recueillies pour l’étude, tout cela dans un cadre temporel restreint :
 
-→ le questionnaire ne devait pas dépasser 10 minutes pour ne pas décourager les répondants.
-Nous avons écarté également les questions ouvertes pour ne pas alourdir la phase de traitement des réponses en privilégiant des systèmes de graduation ou des cases à cocher.  Nous visons 20% du total des salariés de la zone pour que l'échantillon soit représentatif, ce qui équivaut à environ 300 personnes. 
-Depuis début juillet, le questionnaire est finalisé et en cours de diffusion.
-Nous avons privilégié une approche multi-canal :
+→ le questionnaire ne devait pas dépasser 10 minutes pour ne pas décourager les répondants. Nous avons écarté également les questions ouvertes pour ne pas alourdir la phase de traitement des réponses en privilégiant des systèmes de graduation ou des cases à cocher. Nous visons 20% du total des salariés de la zone pour que l'échantillon soit représentatif, ce qui équivaut à environ 300 personnes. Depuis début juillet, le questionnaire est finalisé et en cours de diffusion. Nous avons privilégié une approche multi-canal :
 
- -	Mise en ligne du questionnaire avec un lien et un QR code,
- -	Relais interne via les chefs d’entreprise et la présidente de l’association locale des entreprises,
- -	Présence sur le terrain, avec des questionnaires papier et des actions de démarchage direct auprès des salariés sur leur lieu de travail ou dans les espaces communs.
+-   Mise en ligne du questionnaire avec un lien et un QR code,
+-   Relais interne via les chefs d’entreprise et la présidente de l’association locale des entreprises,
+-   Présence sur le terrain, avec des questionnaires papier et des actions de démarchage direct auprès des salariés sur leur lieu de travail ou dans les espaces communs.
 
+#### 1.1.2 Diffusion
+
+Le questionnaire a été diffusé à partir du 27/06/2025 Jusqu’au 08/09/2025 (2 mois et demi environ) auprès des salariés de la ZAE de Marticot. Pour permettre sa diffusion, une version en ligne a été éditer sur le logiciel LimeSurvey qui permet une anonymisation des répondants. Un lien a donc été créé ainsi qu’un QR code pour faciliter l’accès sur plateforme numérique. Celui-ci a été diffusé auprès des chefs d’entreprises afin qu’ils le transmettent en interne à leurs salariés, à la présidente du club des entreprises, la pépinière d’entreprises…  
+Une partie terrain à été complété pour réaliser le questionnaire sur place auprès de salariés et a permis de diffuser celui-ci auprès d’entreprises n’ayant pas eu l’information. Collecte des données.
+
+#### 1.1.3 Echantillon
+
+Le questionnaire a été ouvert par 420 personnes. 310 étaient complets et 110 incomplets. Il a donc été décidé de réaliser un nettoyage dans ceux incomplets pour avoir un échantillon représentatif; 31 ont étés ouverts sans aucunes réponses, 62 ont répondus jusqu’à l’état civil. Ce qui équivaut à 93 questionnaires supprimés. Sur les 327 restants, 2 ont étés volontairement supprimés en raison de réponses jugées « absurdes » sur l’âge. L’échantillon finale de notre questionnaire est donc de 325 réponses, représentant environ [20%] de l’ensemble des salariés de la zone (estimée entre 1000 et 1500 salariés). Ce volume de réponses permet d’obtenir un échantillon représentatif des pratiques et attentes, bien qu’il ne prétende pas à l’exhaustivité.
+
+#### 1.1.4 Analyse
+
+Les données ont été traitées en deux volets :
+
+  - Analyse quantitative : exploitation statistique des réponses fermées (répartition, moyennes, pourcentages, croisements simples entre profil et pratiques) ;
+  - Analyse qualitative : traitement des réponses ouvertes et des commentaires libres, permettant de compléter les résultats chiffrés par une lecture plus fine des ressentis et attentes.
+  
+Cette méthodologie garantit une vision à la fois globale et nuancée de la perception des salariés, en croisant données objectives (mobilités, services) et subjectives (qualité de vie, attentes, contraintes).
