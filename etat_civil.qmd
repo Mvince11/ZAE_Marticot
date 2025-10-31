@@ -17,10 +17,11 @@ toc-depth: 4
 # Chargement des packages
 library(tidyverse)
 library(readr)
+library(readxl)
 
 # Lecture du fichier CSV
-donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
-  drop_na(`Date de soumission`)
+donnees <- read_excel("data/Classeur1.xlsx")
+  #drop_na(`Date de soumission`)
 ```
 
 ## 2. PROFIL DE l’ÉCHANTILLON
@@ -46,7 +47,7 @@ library(htmlwidgets)
 #| echo: false
 
 df_genre <- donnees %>%
-  count(Genre = `Quel est votre genre ?  Veuillez cocher une case`) %>%
+  count(Genre) %>%
   mutate(
     Genre = case_when(
       is.na(Genre) | Genre == "N/A" ~ "Sans réponse",
@@ -107,7 +108,7 @@ library(htmlwidgets)
 
 df_age <- donnees %>%
   mutate(
-    Age_num = suppressWarnings(as.numeric(as.character(`Quel est votre âge ?`))),
+    Age_num = suppressWarnings(as.numeric(as.character(`X2 age...3`))),
     Tranche = case_when(
       is.na(Age_num) ~ "Sans réponse",
       Age_num >= 20 & Age_num <= 29 ~ "20-29",
@@ -194,7 +195,7 @@ library(htmlwidgets)
 # Préparation des données
 # Préparation des données
 df_csp <- donnees %>%
-  count(CSP = `Quelle est votre catégorie socio-professionnelle ?`) %>%
+  count(CSP = `X3 csp autre`) %>%
   mutate(
     CSP = case_when(
       is.na(CSP) | CSP == "N/A" ~ "Sans réponse",
@@ -272,53 +273,59 @@ La forte présence de cadres témoigne de l’importance d’entreprises de tail
 
 library(sf)
 library(dplyr)
+library(stringi) #permet de supprimer les accents
 
 ##### Script utile pour joindre les géométries des communes #####
-# communes <- st_read("data/COMMUNE.shp")
-# communes_33_40 <- communes %>% filter(INSEE_DEP %in% c("33", "40")) %>% select(NOM_M,geometry)
-# st_write(communes_33_40, "data/commune_33_40.geojson")
-# communes_33_40 <- st_read("data/commune_33_40.geojson")%>%
-#    rename("Dans quelle commune vivez-vous ?" = NOM_M )
-# # 
-#  donnees <- donnees %>%
-#    mutate(`Dans quelle commune vivez-vous ?` = sub(" [0-9]{5}$", "", `Dans quelle commune vivez-vous ?`))%>%
-#    mutate(`Dans quelle commune vivez-vous ?` = case_when(
-#      `Dans quelle commune vivez-vous ?` == "ST MEDARD EN JALLES" ~ "SAINT-MEDARD-EN-JALLES",
-#      `Dans quelle commune vivez-vous ?` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
-#      `Dans quelle commune vivez-vous ?` == "BELIN BELIET" ~ "BELIN-BELIET",
-#      `Dans quelle commune vivez-vous ?` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
-#      `Dans quelle commune vivez-vous ?` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
-#      `Dans quelle commune vivez-vous ?` == "CARBON BLANC" ~ "CARBON-BLANC",
-#      `Dans quelle commune vivez-vous ?` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
-#      `Dans quelle commune vivez-vous ?` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
-#      `Dans quelle commune vivez-vous ?` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
-#      `Dans quelle commune vivez-vous ?` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
-#      `Dans quelle commune vivez-vous ?` == "LUDON MEDOC" ~ "LUDON-MEDOC",
-#      `Dans quelle commune vivez-vous ?` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
-#      `Dans quelle commune vivez-vous ?` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
-#      `Dans quelle commune vivez-vous ?` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
-#      `Dans quelle commune vivez-vous ?` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
-#      `Dans quelle commune vivez-vous ?` == "ST MAGNE" ~ "SAINT-MAGNE",
-#      `Dans quelle commune vivez-vous ?` == "ST MORILLON" ~ "SAINT-MORILLON",
-#      `Dans quelle commune vivez-vous ?` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
-#      `Dans quelle commune vivez-vous ?` == "ST SELVE" ~ "SAINT-SELVE",
-#      `Dans quelle commune vivez-vous ?` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
-#      TRUE ~ `Dans quelle commune vivez-vous ?`
-#    ))
-# # 
-#  question_commune <- donnees %>%
-#    left_join(communes_33_40, by = "Dans quelle commune vivez-vous ?")
-# # 
-#  st_write(question_commune, "data/question_commune.geojson", append = TRUE)
+#  communes <- st_read("data/COMMUNE.shp")
+#  communes_33_40 <- communes %>% filter(INSEE_DEP %in% c("33", "40")) %>% select(NOM,geometry)
+#  communes_33_40$NOM <- toupper(stri_trans_general(communes_33_40$NOM, "Latin-ASCII")) #Permet de mettre en Majuscule
+#  st_write(communes_33_40, "data/commune_33_40.geojson")
+#  communes_33_40 <- st_read("data/commune_33_40.geojson")%>%
+#     rename("X4 commune" = NOM )
+# # # 
+   donnees <- donnees %>%
+     mutate(`X4 commune` = sub(" [0-9]{5}$", "", `X4 commune`))%>%
+     mutate(`X4 commune` = case_when(
+       `X4 commune` == "ST MEDARD EN JALLES" ~ "SAINT-MEDARD-EN-JALLES",
+       `X4 commune` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
+       `X4 commune` == "BELIN BELIET" ~ "BELIN-BELIET",
+       `X4 commune` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
+       `X4 commune` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
+       `X4 commune` == "CARBON BLANC" ~ "CARBON-BLANC",
+       `X4 commune` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
+       `X4 commune` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
+       `X4 commune` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
+       `X4 commune` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
+       `X4 commune` == "LUDON MEDOC" ~ "LUDON-MEDOC",
+       `X4 commune` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
+       `X4 commune` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
+       `X4 commune` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
+       `X4 commune` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
+       `X4 commune` == "ST MAGNE" ~ "SAINT-MAGNE",
+       `X4 commune` == "ST MORILLON" ~ "SAINT-MORILLON",
+       `X4 commune` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
+       `X4 commune` == "ST SELVE" ~ "SAINT-SELVE",
+       `X4 commune` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
+       `X4 commune` == "ANDERNOS LES BAINS" ~ "ANDERNOS-LES-BAINS",
+       `X4 commune` == "CANTENAC" ~ "MARGAUX-CANTENAC",
+       `X4 commune` == "GUJAN MESTRAS" ~ "GUJAN-MESTRAS",
+       `X4 commune` == "MARGAUX" ~ "MARGAUX-CANTENAC",
+       `X4 commune` == "ST ANDRE DE CUBZAC" ~ "SAINT-ANDRE-DE-CUBZAC",
+       TRUE ~ `X4 commune`
+     ))
+# # # 
+   question_commune <- donnees %>%
+     left_join(communes_33_40, by = "X4 commune")
+# # # 
+#   st_write(question_commune, "data/question_commune.geojson", append = TRUE)
 
-question_commune <- st_read("data/question_commune.geojson") %>%
-   rename(`Dans quelle commune vivez vous ?` = `Dans.quelle.commune.vivez.vous..`)
+question_commune <- st_read("data/question_commune.geojson") 
 ```
 
 Les répondants résident majoritairement dans des communes proches : Cestas (12 %), Pessac (10,5 %), Léognan (5,2 %), Villeneuve-d’Ornon (5,9 %), Mérignac (4,6 %), Bègles (4,3 %) et Talence (4,9 %). Bordeaux intra-muros regroupe environ 6 % des salariés (tous quartiers confondus). L’aire de résidence est donc assez étendue, couvrant aussi bien la métropole bordelaise que des communes périphériques plus éloignées.  
 La zone de Marticot attire des salariés de proximité mais aussi d’un bassin d’emploi plus large, à l’échelle de l’agglomération bordelaise et au-delà. Cette dispersion géographique explique l’importance accordée aux enjeux de mobilité et d’accessibilité. Le fait que plus d’un salarié sur dix habite Cestas traduit aussi une dimension locale forte, où la zone d’activité joue un rôle structurant pour l’emploi de la commune.
 
-###### carte des Flux Domicile/travail
+###### **carte des Flux Domicile/travail**
 
 ```{r}
 #| include: false
@@ -336,35 +343,35 @@ destination <- st_sf(
   geometry = st_sfc(st_point(c(dest_lon, dest_lat)), crs = 4326)
 )
 
-donnees <- donnees %>%
-   mutate(`Dans quelle commune vivez-vous ?` = sub(" [0-9]{5}$", "", `Dans quelle commune vivez-vous ?`))
+# donnees <- donnees %>%
+#    mutate(`X4 commune` = sub(" [0-9]{5}$", "", `X4 commune`))
 # --- 2. Compter le nombre de réponses par commune
-nb_reponses <- donnees %>%
-  count(`Dans quelle commune vivez-vous ?`, name = "nb_reponses")%>%
-    mutate(`Dans quelle commune vivez-vous ?` = sub(" [0-9]{5}$", "", `Dans quelle commune vivez-vous ?`))%>%
-    mutate(`Dans quelle commune vivez-vous ?` = case_when(
-      `Dans quelle commune vivez-vous ?` == "ST MEDARD EN JALLES" ~ "SAINT-MEDARD-EN-JALLES",
-      `Dans quelle commune vivez-vous ?` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
-      `Dans quelle commune vivez-vous ?` == "BELIN BELIET" ~ "BELIN-BELIET",
-      `Dans quelle commune vivez-vous ?` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
-      `Dans quelle commune vivez-vous ?` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
-      `Dans quelle commune vivez-vous ?` == "CARBON BLANC" ~ "CARBON-BLANC",
-      `Dans quelle commune vivez-vous ?` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
-      `Dans quelle commune vivez-vous ?` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
-      `Dans quelle commune vivez-vous ?` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
-      `Dans quelle commune vivez-vous ?` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
-      `Dans quelle commune vivez-vous ?` == "LUDON MEDOC" ~ "LUDON-MEDOC",
-     `Dans quelle commune vivez-vous ?` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
-      `Dans quelle commune vivez-vous ?` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
-      `Dans quelle commune vivez-vous ?` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
-      `Dans quelle commune vivez-vous ?` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
-      `Dans quelle commune vivez-vous ?` == "ST MAGNE" ~ "SAINT-MAGNE",
-      `Dans quelle commune vivez-vous ?` == "ST MORILLON" ~ "SAINT-MORILLON",
-      `Dans quelle commune vivez-vous ?` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
-      `Dans quelle commune vivez-vous ?` == "ST SELVE" ~ "SAINT-SELVE",
-      `Dans quelle commune vivez-vous ?` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
-      TRUE ~ `Dans quelle commune vivez-vous ?`
-    )) %>%
+nb_reponses <- question_commune %>%
+  count(`X4.commune`, name = "nb_reponses")%>%
+    # mutate(`X4 commune` = sub(" [0-9]{5}$", "", `X4 commune`))%>%
+    # mutate(`X4 commune` = case_when(
+    #   `X4 commune` == "ST MEDARD EN JALLES" ~ "SAINT-MEDARD-EN-JALLES",
+    #   `X4 commune` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
+    #   `X4 commune` == "BELIN BELIET" ~ "BELIN-BELIET",
+    #   `X4 commune` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
+    #   `X4 commune` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
+    #   `X4 commune` == "CARBON BLANC" ~ "CARBON-BLANC",
+    #   `X4 commune` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
+    #   `X4 commune` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
+    #   `X4 commune` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
+    #   `X4 commune` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
+    #   `X4 commune` == "LUDON MEDOC" ~ "LUDON-MEDOC",
+    #   `X4 commune` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
+    #   `X4 commune` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
+    #   `X4 commune` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
+    #   `X4 commune` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
+    #   `X4 commune` == "ST MAGNE" ~ "SAINT-MAGNE",
+    #   `X4 commune` == "ST MORILLON" ~ "SAINT-MORILLON",
+    #   `X4 commune` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
+    #   `X4 commune` == "ST SELVE" ~ "SAINT-SELVE",
+    #   `X4 commune` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
+    #   TRUE ~ `X4 commune`
+    # )) %>%
   mutate(pct = round(100 * nb_reponses / sum(nb_reponses), 1))   # <-- pourcentage
 
 
@@ -373,15 +380,15 @@ nb_reponses <- donnees %>%
 communes_centroides <- question_commune %>%
   st_centroid() %>%
   st_transform(4326) %>%
-  #rename(`Dans quelle commune vivez vous ?` = `Dans.quelle.commune.vivez.vous..`) %>%
+  rename(`X4 commune` = `X4.commune`) %>%
   mutate(
     lon = st_coordinates(.)[, 1],
     lat = st_coordinates(.)[, 2]
   ) %>%
   filter(!is.na(lon), !is.na(lat), lon >= -180, lon <= 180, lat >= -90, lat <= 90) %>%
   left_join(nb_reponses, 
-            by = c("Dans quelle commune vivez vous ?" = "Dans quelle commune vivez-vous ?")) %>%
-  rename(commune = `Dans quelle commune vivez vous ?`)
+            by = "X4 commune") #%>%
+  #rename(commune = `Dans quelle commune vivez vous ?`)
 
 # --- 4. Création des lignes depuis chaque commune vers la destination
 flux <- purrr::map2(
@@ -390,7 +397,7 @@ flux <- purrr::map2(
 ) %>%
   st_sfc(crs = 4326) %>%
   st_sf(
-    commune = communes_centroides$commune,
+    commune = communes_centroides$`X4 commune`
     nb_reponses = communes_centroides$nb_reponses,
     pct = communes_centroides$pct,
     geometry = .
@@ -480,7 +487,7 @@ library(plotly)
 
 table_trajets <- nb_reponses %>%
   rename(
-    Commune = `Dans quelle commune vivez-vous ?`,
+    Commune = `X4 commune`,
     `Nombre de trajets` = nb_reponses,
     `Pourcentages` = pct
   ) %>%
@@ -537,7 +544,7 @@ library(DT)
 # Renommer et trier
 table_trajets <- nb_reponses %>%
   rename(
-    Commune = `Dans quelle commune vivez-vous ?`,
+    Commune = `X4 commune`,
     `Nombre de trajets` = nb_reponses,
     `Pourcentages` = pct
   ) %>%

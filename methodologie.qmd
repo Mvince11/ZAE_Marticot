@@ -40,7 +40,7 @@ Le questionnaire a été ouvert par 420 personnes. 310 étaient complets et 110 
 
 Les données ont été traitées en deux volets :
 
-  - Analyse quantitative : exploitation statistique des réponses fermées (répartition, moyennes, pourcentages, croisements simples entre profil et pratiques) ;
-  - Analyse qualitative : traitement des réponses ouvertes et des commentaires libres, permettant de compléter les résultats chiffrés par une lecture plus fine des ressentis et attentes.
+**- Analyse quantitative** : exploitation statistique des réponses fermées (répartition, moyennes, pourcentages, croisements simples entre profil et pratiques) ;  
+**- Analyse qualitative** : traitement des réponses ouvertes et des commentaires libres, permettant de compléter les résultats chiffrés par une lecture plus fine des ressentis et attentes.
   
 Cette méthodologie garantit une vision à la fois globale et nuancée de la perception des salariés, en croisant données objectives (mobilités, services) et subjectives (qualité de vie, attentes, contraintes).
