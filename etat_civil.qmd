@@ -375,6 +375,8 @@ nb_reponses <- donnees %>%
         `X4 commune` == "ST ANDRE DE CUBZAC" ~ "SAINT-ANDRE-DE-CUBZAC",
        TRUE ~ `X4 commune`
      )) %>%
+  group_by(`X4 commune`) %>%
+  summarise(nb_reponses = sum(nb_reponses), .groups = "drop") %>%
   mutate(pct = round(100 * nb_reponses / sum(nb_reponses), 1))   # <-- pourcentage
 
 
@@ -486,6 +488,8 @@ m
 ::::: {style="margin-top:30px;"}
 ```{r}
 #| echo: false
+#| fig.height: 7   # hauteur en pouces (~450px)
+#| fig.width: 8    # largeur en pouces
 
 library(dplyr)
 library(dplyr)
