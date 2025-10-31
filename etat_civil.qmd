@@ -26,13 +26,12 @@ donnees <- read_excel("data/Classeur1.xlsx")
 
 ## 2. PROFIL DE l’ÉCHANTILLON
 
-Comme évoqué notre échantillon finale de notre questionnaire est de 325 réponses, représentant environ [20%] de l’ensemble des salariés de la zone (estimée entre 1000 et 1500 salariés).
+Comme évoqué notre échantillon finale de notre questionnaire est de 325 réponses, représentant environ \[20%\] de l’ensemble des salariés de la zone (estimée entre 1000 et 1500 salariés).
 
 ### 2.1 Le genre
 
-La population salariée de la zone de Marticot apparaît majoritairement masculine, ce qui reflète probablement la nature des activités implantées (industrie, logistique, artisanat) traditionnellement plus masculinisées. Cette part supérieur est aussi importante à corréler avec la forte présence de CSP de cadres et professions intellectuelles supérieures qui représentent 66% environ des répondant au questionnaire. D’après les chiffres CSP en emploi de l’INSEE en 2024, 25,4%  sont des hommes et 20,4% sont des femmes. Les hommes sont proportionnellement plus nombreux parmi les cadres et les ouvriers qualifiés (INSEE, 2024).  
+La population salariée de la zone de Marticot apparaît majoritairement masculine, ce qui reflète probablement la nature des activités implantées (industrie, logistique, artisanat) traditionnellement plus masculinisées. Cette part supérieur est aussi importante à corréler avec la forte présence de CSP de cadres et professions intellectuelles supérieures qui représentent 66% environ des répondant au questionnaire. D’après les chiffres CSP en emploi de l’INSEE en 2024, 25,4% sont des hommes et 20,4% sont des femmes. Les hommes sont proportionnellement plus nombreux parmi les cadres et les ouvriers qualifiés (INSEE, 2024).\
 Le profil de la zone de Marticot, caractérisé par une forte proportion de cadres et une majorité d’hommes, traduit donc une composition socioprofessionnelle spécifique à cette ZAE, qui ne reflète pas la structure nationale mais plutôt les caractéristiques économiques locales (présence d’ETI, activités industrielles, logistiques et de services spécialisés).Ce déséquilibre peut influencer les perceptions entre genre mais aussi en CSP au vu de ces 2 surreprésentations dans l’échantillon. Celui-ci reste représentatif de la réalité puisqu’il s’agit d’une réalité factuelle de la zone mais il ne pas négliger les sous représentations. Notamment en terme de CSP.
-
 
 ```{r}
 #| include: FALSE
@@ -86,7 +85,7 @@ plot_ly(
 
 ### 2.2 L’âge
 
-Dans notre échantillon de 325 répondants, L’âge moyen s’établit à 43,3 ans, tandis que la médiane, très proche (44 ans), confirme une distribution centrée autour de la quarantaine. L’écart-type de 11 ans indique toutefois une certaine diversité d’âges, avec des salariés allant de 21 à 63 ans. Le mode (valeur la plus fréquente) se situe à 53 ans, ce qui suggère la présence notable de salariés plus âgés, souvent expérimentés. Le graphique confirme visuellement cette tendance :  
+Dans notre échantillon de 325 répondants, L’âge moyen s’établit à 43,3 ans, tandis que la médiane, très proche (44 ans), confirme une distribution centrée autour de la quarantaine. L’écart-type de 11 ans indique toutefois une certaine diversité d’âges, avec des salariés allant de 21 à 63 ans. Le mode (valeur la plus fréquente) se situe à 53 ans, ce qui suggère la présence notable de salariés plus âgés, souvent expérimentés. Le graphique confirme visuellement cette tendance :
 
 La tranche des 40-49 ans concentre le plus grand nombre d’effectifs, ce qui en fait le cœur de la population active de la ZAE. Cette surreprésentation traduit une main-d’œuvre en pleine maturité professionnelle, occupant souvent des postes qualifiés ou de responsabilité.
 
@@ -183,7 +182,6 @@ p_age_plotly
 
 ### 2.3 La catégorie socio-professionelle (CSP)
 
-
 ```{r}
 #| echo: false
 
@@ -263,8 +261,7 @@ p_csp_plotly
 
 ```
 
-Les cadres et professions intellectuelles supérieures représentent 66 % des répondants, suivis par les employés (24 %) et les ouvriers (6 %). Les professions intermédiaires sont très minoritaires (2 %). Quelques cas isolés apparaissent (artisans, CEO, agents d’exploitation, surveillants de travaux)
-La forte présence de cadres témoigne de l’importance d’entreprises de taille intermédiaire (ETI) et de secteurs à forte valeur ajoutée (comme Lectra). Cela traduit un profil socio-économique élevé, susceptible de générer des attentes fortes en matière de services, de mobilité et de qualité de vie au travail. La présence non négligeable d’employés et d’ouvriers rappelle toutefois que les besoins sont variés et qu’une politique de requalification devra concilier des profils sociaux différents. De plus, il faut prendre en compte le fait que de part notre méthodologie, nous avons diffuser le questionnaire de manière numérique (par mail, QR code). Les salariés ayant le plus de chance d’avoir un accès bureautique sont les cadres et les employés puisqu’il s’agit de leur matériel de travail. Les ouvriers, artisans et certaines professions intermédiaires sont donc moins susceptibles d’avoir eu accès au questionnaire. C’est pour cela que nous avons réalisé un travail de terrain pour permettre une « démocratisation » de l’accès au questionnaire, en sensibilisant toutes les CSP présentent sur site.
+Les cadres et professions intellectuelles supérieures représentent 66 % des répondants, suivis par les employés (24 %) et les ouvriers (6 %). Les professions intermédiaires sont très minoritaires (2 %). Quelques cas isolés apparaissent (artisans, CEO, agents d’exploitation, surveillants de travaux) La forte présence de cadres témoigne de l’importance d’entreprises de taille intermédiaire (ETI) et de secteurs à forte valeur ajoutée (comme Lectra). Cela traduit un profil socio-économique élevé, susceptible de générer des attentes fortes en matière de services, de mobilité et de qualité de vie au travail. La présence non négligeable d’employés et d’ouvriers rappelle toutefois que les besoins sont variés et qu’une politique de requalification devra concilier des profils sociaux différents. De plus, il faut prendre en compte le fait que de part notre méthodologie, nous avons diffuser le questionnaire de manière numérique (par mail, QR code). Les salariés ayant le plus de chance d’avoir un accès bureautique sont les cadres et les employés puisqu’il s’agit de leur matériel de travail. Les ouvriers, artisans et certaines professions intermédiaires sont donc moins susceptibles d’avoir eu accès au questionnaire. C’est pour cela que nous avons réalisé un travail de terrain pour permettre une « démocratisation » de l’accès au questionnaire, en sensibilisant toutes les CSP présentent sur site.
 
 ### 2.4 la commune de résidence des salariés
 
@@ -276,53 +273,53 @@ library(dplyr)
 library(stringi) #permet de supprimer les accents
 
 ##### Script utile pour joindre les géométries des communes #####
-#  communes <- st_read("data/COMMUNE.shp")
-#  communes_33_40 <- communes %>% filter(INSEE_DEP %in% c("33", "40")) %>% select(NOM,geometry)
-#  communes_33_40$NOM <- toupper(stri_trans_general(communes_33_40$NOM, "Latin-ASCII")) #Permet de mettre en Majuscule
-#  st_write(communes_33_40, "data/commune_33_40.geojson")
-#  communes_33_40 <- st_read("data/commune_33_40.geojson")%>%
-#     rename("X4 commune" = NOM )
-# # # 
-   donnees <- donnees %>%
-     mutate(`X4 commune` = sub(" [0-9]{5}$", "", `X4 commune`))%>%
-     mutate(`X4 commune` = case_when(
-       `X4 commune` == "ST MEDARD EN JALLES" ~ "SAINT-MEDARD-EN-JALLES",
-       `X4 commune` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
-       `X4 commune` == "BELIN BELIET" ~ "BELIN-BELIET",
-       `X4 commune` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
-       `X4 commune` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
-       `X4 commune` == "CARBON BLANC" ~ "CARBON-BLANC",
-       `X4 commune` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
-       `X4 commune` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
-       `X4 commune` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
-       `X4 commune` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
-       `X4 commune` == "LUDON MEDOC" ~ "LUDON-MEDOC",
-       `X4 commune` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
-       `X4 commune` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
-       `X4 commune` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
-       `X4 commune` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
-       `X4 commune` == "ST MAGNE" ~ "SAINT-MAGNE",
-       `X4 commune` == "ST MORILLON" ~ "SAINT-MORILLON",
-       `X4 commune` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
-       `X4 commune` == "ST SELVE" ~ "SAINT-SELVE",
-       `X4 commune` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
-       `X4 commune` == "ANDERNOS LES BAINS" ~ "ANDERNOS-LES-BAINS",
-       `X4 commune` == "CANTENAC" ~ "MARGAUX-CANTENAC",
-       `X4 commune` == "GUJAN MESTRAS" ~ "GUJAN-MESTRAS",
-       `X4 commune` == "MARGAUX" ~ "MARGAUX-CANTENAC",
-       `X4 commune` == "ST ANDRE DE CUBZAC" ~ "SAINT-ANDRE-DE-CUBZAC",
-       TRUE ~ `X4 commune`
-     ))
-# # # 
-   question_commune <- donnees %>%
-     left_join(communes_33_40, by = "X4 commune")
-# # # 
-#   st_write(question_commune, "data/question_commune.geojson", append = TRUE)
+#   communes <- st_read("data/COMMUNE.shp")
+#   communes_33_40 <- communes %>% filter(INSEE_DEP %in% c("33", "40")) %>% select(NOM_M,geometry)
+#   #communes_33_40$NOM <- toupper(stri_trans_general(communes_33_40$NOM, "Latin-ASCII")) #Permet de mettre en Majuscule
+#   st_write(communes_33_40, "data/commune_33_40.geojson")
+#   communes_33_40 <- st_read("data/commune_33_40.geojson")%>%
+#      rename("X4 commune" = NOM_M )
+# # # # 
+    #donnees <- donnees %>%
+#      mutate(`X4 commune` = sub(" [0-9]{5}$", "", `X4 commune`))%>%
+      #mutate(`X4 commune` = case_when(
+        #`X4 commune` =="ST GENES DE LOMBAUD" ~ "SAINT-GENES-DE-LOMBAUD",
+#        `X4 commune` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
+#        `X4 commune` == "BELIN BELIET" ~ "BELIN-BELIET",
+#        `X4 commune` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
+#        `X4 commune` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
+#        `X4 commune` == "CARBON BLANC" ~ "CARBON-BLANC",
+#        `X4 commune` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
+#        `X4 commune` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
+#        `X4 commune` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
+#        `X4 commune` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
+#        `X4 commune` == "LUDON MEDOC" ~ "LUDON-MEDOC",
+#        `X4 commune` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
+#        `X4 commune` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
+#        `X4 commune` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
+#        `X4 commune` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
+#        `X4 commune` == "ST MAGNE" ~ "SAINT-MAGNE",
+#        `X4 commune` == "ST MORILLON" ~ "SAINT-MORILLON",
+#        `X4 commune` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
+#        `X4 commune` == "ST SELVE" ~ "SAINT-SELVE",
+#        `X4 commune` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
+#        `X4 commune` == "ANDERNOS LES BAINS" ~ "ANDERNOS-LES-BAINS",
+#        `X4 commune` == "CANTENAC" ~ "MARGAUX-CANTENAC",
+#        `X4 commune` == "GUJAN MESTRAS" ~ "GUJAN-MESTRAS",
+#        `X4 commune` == "MARGAUX" ~ "MARGAUX-CANTENAC",
+#        `X4 commune` == "ST ANDRE DE CUBZAC" ~ "SAINT-ANDRE-DE-CUBZAC",
+        #TRUE ~ `X4 commune`
+      #))
+# # # # 
+#     question_commune <- donnees %>%
+#       left_join(communes_33_40, by = "X4 commune")
+# # # # # 
+#     st_write(question_commune, "data/question_commune.geojson", append = TRUE)
 
 question_commune <- st_read("data/question_commune.geojson") 
 ```
 
-Les répondants résident majoritairement dans des communes proches : Cestas (12 %), Pessac (10,5 %), Léognan (5,2 %), Villeneuve-d’Ornon (5,9 %), Mérignac (4,6 %), Bègles (4,3 %) et Talence (4,9 %). Bordeaux intra-muros regroupe environ 6 % des salariés (tous quartiers confondus). L’aire de résidence est donc assez étendue, couvrant aussi bien la métropole bordelaise que des communes périphériques plus éloignées.  
+Les répondants résident majoritairement dans des communes proches : Cestas (12 %), Pessac (10,5 %), Léognan (5,2 %), Villeneuve-d’Ornon (5,9 %), Mérignac (4,6 %), Bègles (4,3 %) et Talence (4,9 %). Bordeaux intra-muros regroupe environ 6 % des salariés (tous quartiers confondus). L’aire de résidence est donc assez étendue, couvrant aussi bien la métropole bordelaise que des communes périphériques plus éloignées.\
 La zone de Marticot attire des salariés de proximité mais aussi d’un bassin d’emploi plus large, à l’échelle de l’agglomération bordelaise et au-delà. Cette dispersion géographique explique l’importance accordée aux enjeux de mobilité et d’accessibilité. Le fait que plus d’un salarié sur dix habite Cestas traduit aussi une dimension locale forte, où la zone d’activité joue un rôle structurant pour l’emploi de la commune.
 
 ###### **carte des Flux Domicile/travail**
@@ -343,35 +340,41 @@ destination <- st_sf(
   geometry = st_sfc(st_point(c(dest_lon, dest_lat)), crs = 4326)
 )
 
-# donnees <- donnees %>%
-#    mutate(`X4 commune` = sub(" [0-9]{5}$", "", `X4 commune`))
+ # donnees <- question_commune %>%
+ #    mutate(`X4 commune` = sub(" [0-9]{5}$", "", `X4 commune`))
 # --- 2. Compter le nombre de réponses par commune
-nb_reponses <- question_commune %>%
-  count(`X4.commune`, name = "nb_reponses")%>%
-    # mutate(`X4 commune` = sub(" [0-9]{5}$", "", `X4 commune`))%>%
-    # mutate(`X4 commune` = case_when(
-    #   `X4 commune` == "ST MEDARD EN JALLES" ~ "SAINT-MEDARD-EN-JALLES",
-    #   `X4 commune` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
-    #   `X4 commune` == "BELIN BELIET" ~ "BELIN-BELIET",
-    #   `X4 commune` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
-    #   `X4 commune` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
-    #   `X4 commune` == "CARBON BLANC" ~ "CARBON-BLANC",
-    #   `X4 commune` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
-    #   `X4 commune` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
-    #   `X4 commune` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
-    #   `X4 commune` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
-    #   `X4 commune` == "LUDON MEDOC" ~ "LUDON-MEDOC",
-    #   `X4 commune` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
-    #   `X4 commune` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
-    #   `X4 commune` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
-    #   `X4 commune` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
-    #   `X4 commune` == "ST MAGNE" ~ "SAINT-MAGNE",
-    #   `X4 commune` == "ST MORILLON" ~ "SAINT-MORILLON",
-    #   `X4 commune` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
-    #   `X4 commune` == "ST SELVE" ~ "SAINT-SELVE",
-    #   `X4 commune` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
-    #   TRUE ~ `X4 commune`
-    # )) %>%
+nb_reponses <- donnees %>%
+  count(`X4 commune`, name = "nb_reponses")%>%
+     mutate(`X4 commune` = sub(" [0-9]{5}$", "", `X4 commune`))%>%
+     mutate(`X4 commune` = case_when(
+        `X4 commune` == "ST MEDARD EN JALLES" ~ "SAINT-MEDARD-EN-JALLES",
+        `X4 commune` =="ST GENES DE LOMBAUD" ~ "SAINT-GENES-DE-LOMBAUD",
+        `X4 commune` == "BAYON SUR GIRONDE" ~ "BAYON-SUR-GIRONDE",
+        `X4 commune` == "BELIN BELIET" ~ "BELIN-BELIET",
+        `X4 commune` == "CAMBLANES ET MEYNAC" ~ "CAMBLANES-ET-MEYNAC",
+        `X4 commune` == "CARIGNAN DE BORDEAUX" ~ "CARIGNAN-DE-BORDEAUX",
+        `X4 commune` == "CARBON BLANC" ~ "CARBON-BLANC",
+        `X4 commune` == "GIRONDE SUR DROPT" ~ "GIRONDE-SUR-DROPT",
+        `X4 commune` == "LA TESTE DE BUCH" ~ "LA TESTE-DE-BUCH",
+        `X4 commune` == "LE PIAN SUR GARONNE" ~ "LE PIAN-SUR-GARONNE",
+        `X4 commune` == "LEGE CAP FERRET" ~ "LEGE-CAP-FERRET",
+        `X4 commune` == "LUDON MEDOC" ~ "LUDON-MEDOC",
+        `X4 commune` == "MARTIGNAS SUR JALLE" ~ "MARTIGNAS-SUR-JALLE",
+        `X4 commune` == "ST CAPRAIS DE BORDEAUX" ~ "SAINT-CAPRAIS-DE-BORDEAUX",
+        `X4 commune` == "ST JEAN D ILLAC" ~ "SAINT-JEAN-D'ILLAC",
+        `X4 commune` == "ST LEGER DE BALSON" ~ "SAINT-LEGER-DE-BALSON",
+        `X4 commune` == "ST MAGNE" ~ "SAINT-MAGNE",
+        `X4 commune` == "ST MORILLON" ~ "SAINT-MORILLON",
+        `X4 commune` == "ST QUENTIN DE BARON" ~ "SAINT-QUENTIN-DE-BARON",
+        `X4 commune` == "ST SELVE" ~ "SAINT-SELVE",
+        `X4 commune` == "VILLENAVE D ORNON" ~ "VILLENAVE-D'ORNON",
+        `X4 commune` == "ANDERNOS LES BAINS" ~ "ANDERNOS-LES-BAINS",
+        `X4 commune` == "CANTENAC" ~ "MARGAUX-CANTENAC",
+        `X4 commune` == "GUJAN MESTRAS" ~ "GUJAN-MESTRAS",
+        `X4 commune` == "MARGAUX" ~ "MARGAUX-CANTENAC",
+        `X4 commune` == "ST ANDRE DE CUBZAC" ~ "SAINT-ANDRE-DE-CUBZAC",
+       TRUE ~ `X4 commune`
+     )) %>%
   mutate(pct = round(100 * nb_reponses / sum(nb_reponses), 1))   # <-- pourcentage
 
 
@@ -387,7 +390,10 @@ communes_centroides <- question_commune %>%
   ) %>%
   filter(!is.na(lon), !is.na(lat), lon >= -180, lon <= 180, lat >= -90, lat <= 90) %>%
   left_join(nb_reponses, 
-            by = "X4 commune") #%>%
+            by = c("X4 commune" = "X4 commune")) %>%
+  rename(commune = `X4 commune`)
+
+ #%>%
   #rename(commune = `Dans quelle commune vivez vous ?`)
 
 # --- 4. Création des lignes depuis chaque commune vers la destination
@@ -397,7 +403,7 @@ flux <- purrr::map2(
 ) %>%
   st_sfc(crs = 4326) %>%
   st_sf(
-    commune = communes_centroides$`X4 commune`
+    commune = communes_centroides$commune,
     nb_reponses = communes_centroides$nb_reponses,
     pct = communes_centroides$pct,
     geometry = .
@@ -405,13 +411,14 @@ flux <- purrr::map2(
 
 ```
 
-
 ```{r}
 #| echo: false
 #| title: "Carte des flux domiciles/travail"
 #| color: red
 #| fig.height: 6   # hauteur en pouces (~450px)
 #| fig.width: 8    # largeur en pouces
+
+
 
 # --- 5. Carte Leaflet
 m <- leaflet() %>%
@@ -476,8 +483,7 @@ m
 
 ```
 
-::: {style="margin-top:30px;"} :::
-
+::::: {style="margin-top:30px;"}
 ```{r}
 #| echo: false
 
@@ -531,8 +537,7 @@ plot_ly(
 
 ```
 
-::: {style="margin-top:30px;"} :::
-
+:::: {style="margin-top:30px;"}
 ```{r}
 #| title: "Tableau récapitulatif"
 #| echo: false
@@ -579,7 +584,8 @@ datatable(
   )
 
 ```
-::: {style="margin-top:30px;"} :::
 
-
-
+::: {style="margin-top:30px;"}
+:::
+::::
+:::::
