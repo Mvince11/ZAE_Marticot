@@ -12,17 +12,19 @@ toc: true
 toc-depth: 4
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| include: FALSE
 # Chargement des packages
 library(tidyverse)
 library(readr)
+library(readxl)
 
 # Lecture du fichier CSV
-donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
-  drop_na(`Date de soumission`)
+donnees <- read_excel("data/Classeur1.xlsx")
+  #drop_na(`Date de soumission`)
 ```
 
-## 3. PERCEPTION GÉNÉRALE DE LA ZONE D’ACTIVITÉ DE MARTICOT 
+## 3. PERCEPTION GÉNÉRALE DE LA ZONE D’ACTIVITÉ DE MARTICOT
 
 ```{=html}
 <div style="display: flex; align-items: flex-start; gap: 20px;">
@@ -37,7 +39,7 @@ La perception qu’ont les salariés de cette zone d’activité offre un éclai
 </div>
 ```
 
-### 3.1 Dans quelle mesure les salariés trouvent la zone d’activité de Marticot ?  
+### 3.1 Dans quelle mesure les salariés trouvent la zone d’activité de Marticot ?
 
 ```{r}
 #| include: false
@@ -50,11 +52,11 @@ library(plotly)
 # On sélectionne uniquement les colonnes qui t'intéressent
 df_notes <- donnees %>%
   select(
-    Attractive = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Attractive]`,
-    Conviviale = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Conviviale]`,
-    "Accessible en transport" = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Accessible en transports]`,
-    Isolee = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Isolée]`,
-    Obsolete = `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :Donnez une note de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Obsolète]`
+    Attractive = `A1 1 attractive`,
+    Conviviale = `A1 2 conviviale`,
+    "Accessible en transport" = `A1 3 accessible`,
+    Isolee = `A1 4 isolée`,
+    Obsolete = `A1 5 obsolète`
   ) %>%
   pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
   filter(!is.na(Note))   # supprimer les NA
@@ -72,7 +74,6 @@ couleurs <- RColorBrewer::brewer.pal(6, "RdYlGn")
 ```
 
 ::: {style="margin-top:30px;"}
-
 ```{r}
 #| echo: false
 
@@ -104,11 +105,9 @@ config(responsive = TRUE)
 ```
 :::
 
-Sous forme de tableau, les répondants devaient donner une note d’appréciation de 1 à 6 sur différent adjectif qualificatif de la zone. L’objectif est de faire ressortir les caractéristiques globales pour mieux identifier les points faibles. 
+Sous forme de tableau, les répondants devaient donner une note d’appréciation de 1 à 6 sur différent adjectif qualificatif de la zone. L’objectif est de faire ressortir les caractéristiques globales pour mieux identifier les points faibles.
 
-Les résultats montrent que la zone est perçue de manière nuancée. Elle est jugée moyennement attractive (moyenne 3,15/6) avec un écart-type de 1,24, ce qui traduit une dispersion modérée des réponses. Pour la convivialité on retrouve une moyenne plus basse de (2,92/6) avec 69,4% des répondants ayant donné une note entre 1 et 3. L’accessibilité est la modalité la moins bien évaluée avec une tendance négative (2,37/6) en moyenne, confirmant un ressenti de difficulté d’accès. À l’inverse, l’isolement est plutôt marqué (3,61/6), ce qui traduit une impression de coupure vis-à-vis de son environnement urbain. Cependant l’écart type de 1,64 (le plus élévé des 5) indique tout de même une importante dispersion. Avec 20,9% pour une note de 3 et 21,8% pour une note de 5. Cela peut traduire un isolement à relativiser. Enfin, la zone n’est pas jugée particulièrement obsolète (2,93/6), avec 71,9% des répondants ayant donné une note entre 1 et 3. 
-Ces résultats traduisent une image mitigée de la zone de Marticot : si elle conserve une certaine attractivité économique, son manque de convivialité et surtout ses problèmes d’accessibilité apparaissent comme des points faibles majeurs. Le ressenti d’isolement dispersé renforce l’idée d’une zone fonctionnelle mais avec peut-être des problématiques d’intégration à son territoire.
-
+Les résultats montrent que la zone est perçue de manière nuancée. Elle est jugée moyennement attractive (moyenne 3,15/6) avec un écart-type de 1,24, ce qui traduit une dispersion modérée des réponses. Pour la convivialité on retrouve une moyenne plus basse de (2,92/6) avec 69,4% des répondants ayant donné une note entre 1 et 3. L’accessibilité est la modalité la moins bien évaluée avec une tendance négative (2,37/6) en moyenne, confirmant un ressenti de difficulté d’accès. À l’inverse, l’isolement est plutôt marqué (3,61/6), ce qui traduit une impression de coupure vis-à-vis de son environnement urbain. Cependant l’écart type de 1,64 (le plus élévé des 5) indique tout de même une importante dispersion. Avec 20,9% pour une note de 3 et 21,8% pour une note de 5. Cela peut traduire un isolement à relativiser. Enfin, la zone n’est pas jugée particulièrement obsolète (2,93/6), avec 71,9% des répondants ayant donné une note entre 1 et 3. Ces résultats traduisent une image mitigée de la zone de Marticot : si elle conserve une certaine attractivité économique, son manque de convivialité et surtout ses problèmes d’accessibilité apparaissent comme des points faibles majeurs. Le ressenti d’isolement dispersé renforce l’idée d’une zone fonctionnelle mais avec peut-être des problématiques d’intégration à son territoire.
 
 ### 3.2 Ressentez-vous des nuisances dans la ZAE de Marticot ?
 
@@ -120,7 +119,7 @@ library(plotly)
 
 # Préparation des données
 df_nuisances <- donnees %>%
-  count(Reponse = `Ressentez-vous des nuisances dans la zone d’activité de Marticot ?`) %>%
+  count(Reponse = `A2 oui/non nuisance`) %>%
   mutate(
     Reponse = case_when(
       is.na(Reponse) | Reponse == "N/A" ~ "Sans réponse",
@@ -153,17 +152,16 @@ plot_ly(
   config(responsive = TRUE)
 ```
 
-Dans l’élaboration de notre questionnaire, nous avons prédéfinis des catégories qui nous semblaient pertinentes et englobantes ; Les nuisances liées : 
+Dans l’élaboration de notre questionnaire, nous avons prédéfinis des catégories qui nous semblaient pertinentes et englobantes ; Les nuisances liées :
 
-- À l’environnement bruyant 
-- À la circulation de poids lourd
-- Au trafic routier et à la sécurité 
-- Aux odeurs
-- À l’accessibilité 
-- Les nuisances 
+-   À l’environnement bruyant
+-   À la circulation de poids lourd
+-   Au trafic routier et à la sécurité
+-   Aux odeurs
+-   À l’accessibilité
+-   Les nuisances
 
-A savoir que les 3 dernières catégories ont étés rajoutés après avoir analyser les réponses libres des personnes ayant choisis de préciser dans « autre ». 
-
+A savoir que les 3 dernières catégories ont étés rajoutés après avoir analyser les réponses libres des personnes ayant choisis de préciser dans « autre ».
 
 ```{r}
 #| echo: false
@@ -173,71 +171,74 @@ library(tidyr)
 library(ggplot2)
 library(plotly)
 
-# On sélectionne uniquement les colonnes qui t'intéressent
+# Étape 1 : transformation des données
 nuisances_notes <- donnees %>%
   select(
-    Bruit = `Si oui, lesquelles ?  Veuillez cocher une ou plusieurs réponse  [Bruit]`,
-    "Circulation poids lourds"= `Si oui, lesquelles ?  Veuillez cocher une ou plusieurs réponse  [Circulation de poids lourds]`,
-    "Trafic routier" = `Si oui, lesquelles ?  Veuillez cocher une ou plusieurs réponse  [Trafic routier]`,
-    Odeurs = `Si oui, lesquelles ?  Veuillez cocher une ou plusieurs réponse  [Odeurs]`
+    Bruit = `A2 1 bruit`,
+    "Circulation poids lourds" = `A2 2 circulation poids lourds`,
+    "Trafic/sécurité" = `A2 3 traffic/ sécurité`,
+    Odeurs = `A2 4 odeurs`,
+    Accessibilité = `A2 5 accessibilité`,
+    Pollution = `A2 6 pollution`
   ) %>%
   pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
   mutate(
     Note = case_when(
-      is.na(Note) | Note == "N/A" ~ "Sans réponse",
-      Note %in% c("Non", "FALSE") ~ "Non",
       Note %in% c("Oui", "TRUE") ~ "Oui",
-      TRUE ~ as.character(Note)
+      Note %in% c("Non", "FALSE") ~ "Non",
+      TRUE ~ NA_character_
     )
+  ) %>%
+  filter(!is.na(Note))  # On garde uniquement Oui/Non
+
+# Étape 2 à 4 : calcul des % Oui par critère
+df_pct_oui <- nuisances_notes %>%
+  group_by(Critere) %>%
+  summarise(
+    total = n(),
+    nb_oui = sum(Note == "Oui"),
+    pct_oui = round(100 * nb_oui / total, 1),
+    .groups = "drop"
   )
 
-df_nuis <- nuisances_notes %>%
-  group_by(Critere, Note) %>%
-  summarise(N = n(), .groups = "drop")
-
-p2 <- ggplot(df_nuis, aes(
-    x = Critere, y = N, fill = factor(Note),
+# Étape 5 : graphique
+p <- ggplot(df_pct_oui, aes(
+    x = Critere, y = pct_oui,
     text = paste(
       "Critère :", Critere,
-      "<br>Réponse :", Note,
-      "<br>Nombre de réponses :", N
+      "<br>% Oui :", pct_oui,
+      "<br>Oui :", nb_oui,
+      "<br>Total Oui/Non :", total
     )
   )) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
+  geom_col(fill = "blue") +
   labs(
-    title = "Origines des nuisances",
-    x = "", y = "Nombre de réponses", fill = "Note"
+    title = "Pourcentage de réponses Oui par critère (Oui/Non uniquement)",
+    x = "", y = "% de Oui"
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    plot.title = element_text(color = "#ff4444", size = 10, face = "bold", hjust = 0.5),
     axis.text.x = element_text(hjust = 0.5, size = 7),
     axis.title.y = element_text(size = 8),
     axis.text.y = element_text(size = 7),
-    legend.text = element_text(size = 7),
-    legend.title = element_text(size = 7),
-    legend.key.size = unit(0.8, "cm"),
-    legend.spacing.y = unit(0.1, "cm")
+    legend.title = element_text(size = 8),
+    legend.text = element_text(size = 7)
   )
 
-ggplotly(p2, tooltip = "text") 
-  
-```
+ggplotly(p, tooltip = "text")
 
+```
 
 Les résultats mettent en évidence une perception différenciée des nuisances parmi les salariés interrogés. Trois types de nuisances ressortent nettement :
 
-- le trafic et la sécurité, cités par plus des trois quarts des répondants (77,8 %) ;
-- le bruit, mentionné par 60,0 % ;
-- et la circulation des poids lourds, évoquée par 53,3 %.
+-   le trafic et la sécurité, cités par plus des trois quarts des répondants (77,8 %) ;
+-   le bruit, mentionné par 60,0 % ;
+-   et la circulation des poids lourds, évoquée par 53,3 %.
 
-Ces résultats traduisent une sensibilité forte des usagers à la circulation routière et à ses conséquences directes, qu’il s’agisse du bruit, du trafic dense ou des poids lourds.
-À l’inverse, l’odeur, l’accessibilité et la pollution apparaissent comme beaucoup plus marginales comme nuisances. Mais celles-ci ont étés rajoutés à partir de la case autre qui permettaient de préciser d’autres nuisances non cités. 
-Ainsi, les nuisances perçues dans la zone d’activité sont avant tout liées aux conditions de circulation et de sécurité, tandis que les nuisances environnementales plus classiques (pollution de l’air, odeurs) sont relativement peu mentionnées.
+Ces résultats traduisent une sensibilité forte des usagers à la circulation routière et à ses conséquences directes, qu’il s’agisse du bruit, du trafic dense ou des poids lourds. À l’inverse, l’odeur, l’accessibilité et la pollution apparaissent comme beaucoup plus marginales comme nuisances. Mais celles-ci ont étés rajoutés à partir de la case autre qui permettaient de préciser d’autres nuisances non cités. Ainsi, les nuisances perçues dans la zone d’activité sont avant tout liées aux conditions de circulation et de sécurité, tandis que les nuisances environnementales plus classiques (pollution de l’air, odeurs) sont relativement peu mentionnées.
 
-
-### 3.3 Selon vous la zone d’activité de Marticot est caractérisée par : 
+### 3.3 Selon vous la zone d’activité de Marticot est caractérisée par :
 
 ::: {style="margin-top:30px;"}
 ```{r}
@@ -253,13 +254,13 @@ library(plotly)
 # Préparation des données
 caracterisation_notes <- donnees %>%
   select(
-    "Ses espaces de convivialité" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses espaces de convivialité]`,
-    "Ses services"= `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses services (équipements sportifs, restauration, supermarchés…)]`,
-    "Sa propreté et son bon entretien" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Sa propreté et son bon entretien]`,
-    "La sécurité" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [La sécurité (de ses biens et des personnes)]`,
-    "Ses cheminements piétons" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses cheminements piétons]`,
-    "Son réseau internet" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Son réseau internet]`,
-    "Ses espaces verts" = `Selon vous, la zone d’activité de Marticot est caractérisée par :Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 « tout à fait » [Ses espaces verts]`
+    "Ses espaces de convivialité" = `A3 1 convivialité`,
+    "Ses services"= `A3 2 services`,
+    "Sa propreté et son bon entretien" = `A3 3 propreté`,
+    "La sécurité" = `A3 4 sécurité`,
+    "Ses cheminements piétons" = `A3 5 cheminement`,
+    "Son réseau internet" = `A3 6 réseau`,
+    "Ses espaces verts" = `A3 7 espaces`
   ) %>%
   pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
   filter(!is.na(Note))%>%
@@ -319,348 +320,373 @@ plot_ly(
 ```
 :::
 
-L’analyse des réponses montre une perception contrastée des différentes dimensions de la zone d’activité. Les salariés jugent positivement la qualité du réseau et la présence d’espaces verts, qui recueillent les meilleures moyennes (respectivement 4,23 et 4,17 sur 6). La majorité des répondants s’accorde à reconnaître ces atouts, même si l’écart-type un peu plus élevé pour les espaces verts laisse apparaître des avis plus dispersés selon les secteurs ou les usages.  
+L’analyse des réponses montre une perception contrastée des différentes dimensions de la zone d’activité. Les salariés jugent positivement la qualité du réseau et la présence d’espaces verts, qui recueillent les meilleures moyennes (respectivement 4,23 et 4,17 sur 6). La majorité des répondants s’accorde à reconnaître ces atouts, même si l’écart-type un peu plus élevé pour les espaces verts laisse apparaître des avis plus dispersés selon les secteurs ou les usages.
 
-La sécurité et la propreté sont évaluées de manière correcte, autour de 3,8 en moyenne. Ces résultats traduisent une appréciation globalement satisfaisante, (61,4% des notes allant de 4 à 6 pour la sécurité et 61,2%  pour la propreté) mais il faut tout de même nuancer : certains salariés estiment ces dimensions convenables, quand d’autres expriment des réserves, ce que confirme la dispersion modérée des réponses.  
+La sécurité et la propreté sont évaluées de manière correcte, autour de 3,8 en moyenne. Ces résultats traduisent une appréciation globalement satisfaisante, (61,4% des notes allant de 4 à 6 pour la sécurité et 61,2% pour la propreté) mais il faut tout de même nuancer : certains salariés estiment ces dimensions convenables, quand d’autres expriment des réserves, ce que confirme la dispersion modérée des réponses.
 
-En revanche, d’autres critères apparaissent beaucoup plus faibles. Les cheminements obtiennent une moyenne de 3,08, ce qui traduit une appréciation mitigée et assez hétérogène : les salariés sont partagés entre une relative fonctionnalité et des insuffisances perçues. Plus marquant encore, la convivialité (2,31) et la présence de services (2,38) ressortent comme les points les plus déficitaires. Les réponses sont ici fortement concentrées dans les modalités basses, ce qui montre un consensus autour d’un manque d’espaces favorisant d’une certaine manière la sociabilité et l’interaction grâce à des équipements de proximité dans la zone.  
+En revanche, d’autres critères apparaissent beaucoup plus faibles. Les cheminements obtiennent une moyenne de 3,08, ce qui traduit une appréciation mitigée et assez hétérogène : les salariés sont partagés entre une relative fonctionnalité et des insuffisances perçues. Plus marquant encore, la convivialité (2,31) et la présence de services (2,38) ressortent comme les points les plus déficitaires. Les réponses sont ici fortement concentrées dans les modalités basses, ce qui montre un consensus autour d’un manque d’espaces favorisant d’une certaine manière la sociabilité et l’interaction grâce à des équipements de proximité dans la zone.
 
 En résumé, si la ZA de Marticot est reconnue pour ses atouts en termes d’infrastructures et de cadre paysager, elle souffre d’un déficit marqué en services et en convivialité. La sécurité et la propreté sont jugées acceptables mais non pleinement satisfaisantes, et les cheminements apparaissent comme un élément à appronfondir/ valoriser. Cette lecture croisée des moyennes, des fréquences et de la dispersion des réponses met donc en lumière une zone perçue comme fonctionnelle et structurée, mais insuffisamment pensée pour le quotidien et la sociabilité des salariés.
 
-![](images/bus_marticot.png){fig-align="center" width=60%}
+![](images/bus_marticot.png){fig-align="center" width="60%"}
 
-### 3.4 Dans quelle mesure trouvez-vous la zone d’activité de Marticot ? 
+### 3.4 Dans quelle mesure trouvez-vous la zone d’activité de Marticot ?
 
 ```{r}
 #| echo: false
 
 library(dplyr)
 library(tidyr)
-library(ggplot2)
-
-# On sélectionne uniquement les colonnes qui t'intéressent
-aspect_notes <- donnees %>%
-  select(
-    `Dans quelle mesure trouvez-vous la zone d’activité de Marticot :  Donnez une note de 1 à 6, 1 correspondant à « moche » et 6 « esthétique »  [Votre choix]` 
-  ) %>%
-  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
-  filter(!is.na(Note))   # supprimer les NA
-
-# Compter le nombre de réponses par critère et par note
-df_plot <- aspect_notes %>%
-  group_by(Critere, Note) %>%
-  summarise(N = n(), .groups = "drop")%>%
-  mutate(Critere = " ")
-
-# Graphique : barres empilées
-ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(palette = "RdYlGn", direction = 1,
-                     labels = c(
-                      "1 = Moche",
-                      "2",
-                      "3",
-                      "4",
-                      "5",
-                      "6 = Esthétique"
-                      )
-                    ) +
-  geom_text(aes(label = N), 
-            position = position_stack(vjust = 0.5), 
-            color = "black", size = 1) +
-  labs(
-    title = "Aspect visuel",
-    x = NULL,
-    y = "Nombre de réponses",
-    fill = "Note"
-  ) +
-  theme_minimal() +
-  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
-        axis.text.x = element_text( hjust = 0.5, size = 4),
-        axis.title.x = element_blank(),  # Titre axe X
-        axis.title.y = element_text(size = 4),  # Titre axe Y
-        axis.text.y = element_text(size = 4),     # Valeurs axe Y
-        legend.text = element_text(size = 3),        # Taille du texte de la légende
-        legend.title = element_text(size = 4),        # Taille du titre de la légende
-        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
-        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
-        )
-```
-
-```{r}
-#| echo: false
-#| fig.width: 4
-#| fig.height: 2
-
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-
-# On sélectionne uniquement les colonnes qui t'intéressent
-espaces_verts_notes <- donnees %>%
-  select(
-    `Dans quelle mesure êtes-vous attaché(e) aux espaces verts présents sur la zone d’activités de Marticot ?  Donnez une note de 1 à 6, 1 correspondant à « pas du tout attaché » et 6 « très attaché »  [Votre choix]` 
-  ) %>%
-  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
-  filter(!is.na(Note))   # supprimer les NA
-
-# Compter le nombre de réponses par critère et par note
-df_plot <- espaces_verts_notes %>%
-  group_by(Critere, Note) %>%
-  summarise(N = n(), .groups = "drop")%>%
-  mutate(Critere = " ")
-
-# Graphique : barres empilées
-ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(palette = "RdYlGn", direction = 1,
-                     labels = c(
-                      "1 = pas du tout",
-                      "2",
-                      "3",
-                      "4",
-                      "5",
-                      "6 = tout à fait"
-                      )
-                    ) +
-  geom_text(aes(label = N), 
-            position = position_stack(vjust = 0.5), 
-            color = "black", size = 1) +
-  labs(
-    title = "Etes-vous attaché(e) aux espaces verts présents sur la zone d’activités de Marticot ?",
-    x = NULL,
-    y = "Nombre de réponses",
-    fill = "Note"
-  ) +
-  theme_minimal() +
-  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
-        axis.text.x = element_text( hjust = 0.5, size = 4),
-        axis.title.x = element_blank(),  # Titre axe X
-        axis.title.y = element_text(size = 4),  # Titre axe Y
-        axis.text.y = element_text(size = 4),     # Valeurs axe Y
-        legend.text = element_text(size = 3),        # Taille du texte de la légende
-        legend.title = element_text(size = 4),        # Taille du titre de la légende
-        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
-        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
-        )
-```
-
-## Row {height="30%"}
-
-```{r}
-#| echo: false
-#| fig.width: 4
-#| fig.height: 2
-
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-
-# On sélectionne uniquement les colonnes qui t'intéressent
-batiments_notes <- donnees %>%
-  select(
-    `Comment jugez-vous l’état général des bâtiments de la zone d’activité de Marticot ?Donnez une note en cochant de 1 à 6, 1 correspondant à « très mauvais » et 6 « très bon » [Votre choix]`
-  ) %>%
-  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
-  filter(!is.na(Note))   # supprimer les NA
-
-# Compter le nombre de réponses par critère et par note
-df_plot <- batiments_notes %>%
-  group_by(Critere, Note) %>%
-  summarise(N = n(), .groups = "drop")%>%
-  mutate(Critere = " ")
-
-# Graphique : barres empilées
-ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(palette = "Dark2", direction = 1,
-                     labels = c(
-                      "1 = très mauvais",
-                      "2",
-                      "3",
-                      "4",
-                      "5",
-                      "6 = très bon"
-                      )
-                    ) +
-  geom_text(aes(label = N), 
-            position = position_stack(vjust = 0.5), 
-            color = "black", size = 1) +
-  labs(
-    title = "Comment jugez-vous l’état général des bâtiments ?",
-    x = NULL,
-    y = "Nombre de réponses",
-    fill = "Note"
-  ) +
-  theme_minimal() +
-  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
-        axis.text.x = element_text( hjust = 0.5, size = 4),
-        axis.title.x = element_blank(),  # Titre axe X
-        axis.title.y = element_text(size = 4),  # Titre axe Y
-        axis.text.y = element_text(size = 4),     # Valeurs axe Y
-        legend.text = element_text(size = 3),        # Taille du texte de la légende
-        legend.title = element_text(size = 4),        # Taille du titre de la légende
-        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
-        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
-        )
-```
-
-```{r}
-#| echo: false
-#| fig.width: 4
-#| fig.height: 2
-
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-
-# On sélectionne uniquement les colonnes qui t'intéressent
-friches_notes <- donnees %>%
-  select(
-    `Avez-vous remarqué la présence de friches (terrain ou local abandonnés de longue date) ou de locaux vacants sur la zone d’activité de Marticot?  Veuillez choisir une seule réponse`
-  ) %>%
-  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
-  filter(!is.na(Note))   # supprimer les NA
-
-# Compter le nombre de réponses par critère et par note
-df_plot <- friches_notes %>%
-  group_by(Critere, Note) %>%
-  summarise(N = n(), .groups = "drop")%>%
-  mutate(Critere = " ")
-
-# Graphique : barres empilées
-ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(palette = "Set2", direction = 1) +
-  geom_text(aes(label = N), 
-            position = position_stack(vjust = 0.5), 
-            color = "black", size = 1) +
-  labs(
-    title = "Présence de friches ou de locaux vacants ?",
-    x = NULL,
-    y = "Nombre de réponses",
-    fill = "Note"
-  ) +
-  theme_minimal() +
-  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
-        axis.text.x = element_text( hjust = 0.5, size = 4),
-        axis.title.x = element_blank(),  # Titre axe X
-        axis.title.y = element_text(size = 4),  # Titre axe Y
-        axis.text.y = element_text(size = 4),     # Valeurs axe Y
-        legend.text = element_text(size = 3),        # Taille du texte de la légende
-        legend.title = element_text(size = 4),        # Taille du titre de la légende
-        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
-        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
-        )
-```
-
-## Row {height="30%"}
-
-```{r}
-#| echo: false
-#| fig.width: 4
-#| fig.height: 2
-
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-#library(plotly)
-
-# On sélectionne uniquement les colonnes qui t'intéressent
-caracterisation_notes <- donnees %>%
-  select(
-    "Plus verte" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus verte]`,
-    "Plus accessible"= `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus accessible]`,
-    "Plus dense" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus dense]`,
-    "Plus accessible à pied" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Plus accessible à pied]`,
-    "Mieux desservie" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Mieux desservie]`,
-    "Accueillir des services qui seraient utiles à tous" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Accueillir des services qui  seraient utiles à tous]`,
-    "Accueillir des services qui vous seraient utiles à vous" = `Si la zone d’activité de Marticot devait évoluer (attention il n’y a aucun projet prévu, cette question vise uniquement à comprendre comment des salariés se projetteraient vers une éventuelle évolution), pour vous elle devrait être :1 correspondant à « pas du tout » et 6 « tout à fait » [Accueillir des services qui vous seraient utiles à vous]`
-    
-    
-  ) %>%
-  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
-  filter(!is.na(Note))   # supprimer les NA
-
-# Compter le nombre de réponses par critère et par note
-df_plot <- caracterisation_notes %>%
-  group_by(Critere, Note) %>%
-  summarise(N = n(), .groups = "drop")
-
-# Graphique : barres empilées
-ggplot(df_plot, aes(x = Critere, y = N, fill = factor(Note))) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
-  geom_text(aes(label = N), 
-            position = position_stack(vjust = 0.5), 
-            color = "black", size = 1) +
-  labs(
-    title = "Selon vous, la zone d’activité de Marticot est caractérisée par",
-    x = "",
-    y = "Nombre de réponses",
-    fill = "Note"
-  ) +
-  theme_minimal() +
-  theme(plot.title = element_text(color = "red", size = 4, face = "bold", hjust = 0.5),
-        axis.text.x = element_text( hjust = 0.5, size = 4, angle = 20),
-        axis.title.x = element_text(size = 2),  # Titre axe X
-        axis.title.y = element_text(size = 4),  # Titre axe Y
-        axis.text.y = element_text(size = 4),     # Valeurs axe Y
-        legend.text = element_text(size = 3),        # Taille du texte de la légende
-        legend.title = element_text(size = 4),        # Taille du titre de la légende
-        legend.key.size = unit(0.3, "cm"),        # Taille des cases de la légende
-        legend.spacing.y = unit(0.1, "cm")        # Espacement vertical réduit
-        )
-
-```
-
-```{r}
-#| echo: false
-#| fig.width: 4
-#| fig.height: 2
-
-library(dplyr)
-library(tidyr)
-library(ggplot2)
 library(plotly)
 
-# Colonnes des services
-services_avis <- donnees %>%
-  select(
-    "Restauration" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Restauration]`,
-    "Équipements sportifs" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Équipements sportifs]`,
-    "Pôle médical ou para-médical" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Pôle médical ou para-médical]`,
-    "Services à la personne" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Services à la personne (coiffeur, institut de beauté, pressing...)]`,
-    "Supermarchés" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Supermarchés]`,
-    "Système de garde d’enfants collectif" = `Quels services vous seraient utiles :Veuillez cocher une ou plusieurs réponses [Système de garde d’enfants collectif]`
-  ) %>%
-  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse")
+# Préparation des données
+aspect_notes <- donnees %>%
+  select(`A4 esthétisme ZAE`) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))
 
-# Comptage uniquement des "Oui"
-df_plot <- services_avis %>%
-  filter(Reponse == "Oui") %>%
-  group_by(Service) %>%
-  summarise(N = n(), .groups = "drop")
-
-# Graphique ggplot
-p <- ggplot(df_plot, aes(x = reorder(Service, N), y = N, fill = Service,
-                         text = paste("Service:", Service, "<br>Réponses:", N))) +
-  geom_col(show.legend = FALSE) +   # enlève la légende
-  labs(
-    title = "Quels services vous seraient utiles",
-    x = "",
-    y = "Nombre de personnes"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
-    axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
-    axis.title.x = element_blank(),
-    axis.title.y = element_text(size = 9),
-    axis.text.y = element_text(size = 8),
-    legend.position = "none"   # supprime totalement la légende
+df_plot <- aspect_notes %>%
+  group_by(Note) %>%
+  summarise(N = n(), .groups = "drop") %>%
+  mutate(
+    Note = factor(Note, levels = c("1", "2", "3", "4", "5", "6"),
+                  labels = c("1 = Moche", "2", "3", "4", "5", "6 = Esthétique"))
   )
 
-# Graphique interactif
-ggplotly(p, tooltip = "text")
+# Couleurs personnalisées
+couleurs <- c("#d73027", "#fc8d59", "#fee08b", "#d9ef8b", "#91cf60", "#1a9850")
+
+# Graphique Plotly
+plot_ly(
+  data = df_plot,
+  x = ~Note,
+  y = ~N,
+  type = "bar",
+  marker = list(color = couleurs),
+  text = ~paste("Note :", Note, "<br>Réponses :", N),
+  hoverinfo = "text",
+  textposition = "none",
+  name = "Note"
+) %>%
+  layout(
+    title = list(text = "Aspect visuel de la ZAE", x = 0.5, font = list(size = 18, color = "red")),
+    xaxis = list(title = "Note", tickfont = list(size = 12)),
+    yaxis = list(title = "Nombre de réponses", titlefont = list(size = 14)),
+    legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.2),
+    bargap = 0.2,
+    showlegend = FALSE
+  )
+
 ```
+
+La qualité esthétique de la zone est jugée de manière mitigée par les salariés. La moyenne s’établit à 3,26/6, avec une médiane de 3, ce qui traduit une appréciation plutôt moyenne. La majorité des répondants se situe dans les notes intermédiaires (3 ou 4), tandis qu’environ un quart exprime une perception négative (notes 1 ou 2). À l’inverse, seuls 14 % évaluent positivement l’esthétisme (notes 5 ou 6). Ces résultats soulignent que l’environnement bâti de la ZAE n’est pas perçu comme un atout particulier et qu’il suscite au mieux une neutralité, au pire une certaine réserve.
+
+
+### 3.5 Attachement aux espaces verts de la zone
+
+Les salariés se déclarent majoritairement attachés aux espaces verts. La moyenne obtenue est de 4,7/6, avec une médiane à 5, et près des deux tiers des répondants attribuent une note de 5 ou 6 (soit 66 %). À l’inverse, seuls 10 % expriment un attachement faible (notes 1 ou 2). Cette distribution met en évidence un consensus positif : la présence des espaces verts est perçue comme un atout valorisé dans le quotidien des usagers.
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+
+# Préparation des données
+espaces_verts_note_notes <- donnees %>%
+  select(`A5 attachement espaces verts ZAE`) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))
+
+# Calcul des effectifs et pourcentages
+df_plot <- espaces_verts_note_notes %>%
+  group_by(Note) %>%
+  summarise(N = n(), .groups = "drop") %>%
+  mutate(
+    total = sum(N),
+    pct = round(100 * N / total, 1),
+    Note = factor(Note, levels = c("1", "2", "3", "4", "5", "6"),
+                  labels = c("1 = Pas du tout attaché", "2", "3", "4", "5", "6 = Tout à fait attaché"))
+  )
+
+# Couleurs personnalisées
+couleurs <- c("#d73027", "#fc8d59", "#fee08b", "#d9ef8b", "#91cf60", "#1a9850")
+
+# Graphique Plotly avec % dans le tooltip
+plot_ly(
+  data = df_plot,
+  x = ~Note,
+  y = ~pct,
+  type = "bar",
+  marker = list(color = couleurs),
+  text = ~paste("Nombre de réponses :", N, "<br>Note :", Note, "<br>% de réponses :", pct, "%"),
+  hoverinfo = "text",
+  textposition = "none",
+  name = "Note"
+) %>%
+  layout(
+    title = list(text = "Attachement aux espaces verts de la zone", x = 0.5, font = list(size = 18, color = "red")),
+    xaxis = list(title = "Note", tickfont = list(size = 12)),
+    yaxis = list(title = "% de réponses", titlefont = list(size = 14)),
+    legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.2),
+    bargap = 0.2,
+    showlegend = FALSE
+  )
+
+```
+
+### 3.6 État général des bâtiments
+
+L’évaluation de l’état général des bâtiments est globalement correcte, avec une moyenne de 3,82/6 et une médiane de 4. Plus de la moitié des répondants se situent entre 4 et 5, traduisant une appréciation plutôt positive, tandis qu’une minorité (11 % environ) juge l’état dégradé (notes 1 ou 2). La dispersion limitée (écart-type de 1,11) montre que les salariés partagent une vision relativement homogène : les bâtiments ne sont pas considérés comme obsolètes, mais leur qualité n’est pas un facteur de satisfaction marqué.
+
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 2
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+
+# Préparation des données
+batiments_notes <- donnees %>%
+  select(`A6 état batî`) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))
+
+# Calcul des effectifs et pourcentages
+df_plot <- batiments_notes %>%
+  group_by(Note) %>%
+  summarise(N = n(), .groups = "drop") %>%
+  mutate(
+    total = sum(N),
+    pct = round(100 * N / total, 1),
+    Note = factor(Note, levels = c("1", "2", "3", "4", "5", "6"),
+                  labels = c("1 = très mauvais", "2", "3", "4", "5", "6 = très bon"))
+  )
+
+# Couleurs personnalisées
+couleurs <- c("#d73027", "#fc8d59", "#fee08b", "#d9ef8b", "#91cf60", "#1a9850")
+
+# Graphique Plotly avec % dans le tooltip
+plot_ly(
+  data = df_plot,
+  x = ~Note,
+  y = ~pct,
+  type = "bar",
+  marker = list(color = couleurs),
+  text = ~paste("Nombre de réponses :", N, "<br>Note :", Note, "<br>% de réponses :", pct, "%"),
+  hoverinfo = "text",
+  textposition = "none",
+  name = "Note"
+) %>%
+  layout(
+    title = list(text = "État général des bâtiments", x = 0.5, font = list(size = 18, color = "red")),
+    xaxis = list(title = "Note", tickfont = list(size = 12)),
+    yaxis = list(title = "% de réponses", titlefont = list(size = 14)),
+    legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.2),
+    bargap = 0.2,
+    showlegend = FALSE
+  )
+```
+
+
+### 3.7 Présence de friches ou locaux vacants
+
+Une majorité de salariés (66,2 %) déclarent ne pas avoir remarqué de friches ou de locaux vacants sur la zone. Toutefois, près d’un tiers (30,3 %) indiquent en avoir observé “quelques-uns”, et 3,5 % mentionnent même “plusieurs” friches. Ces perceptions contrastées traduisent une situation intermédiaire : la présence de bâtiments inoccupés est visible mais reste limitée, suggérant une vigilance nécessaire pour éviter que ces espaces ne deviennent des points de fragilité ou n’altèrent l’image générale de la zone.
+
+```{r}
+#| echo: false
+
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+
+# Préparation des données
+friches_notes <- donnees %>%
+  select(`A7 friches`) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))
+
+# Comptage des réponses
+df_plot <- friches_notes %>%
+  count(Note, name = "N") %>%
+  mutate(
+    pct = round(100 * N / sum(N), 1),
+    label = paste0(Note)
+  )
+
+# Diagramme circulaire Plotly
+plot_ly(
+  data = df_plot,
+  labels = ~label,
+  values = ~N,
+  type = "pie",
+  textinfo = "label",
+  hoverinfo = "label+value+percent",
+  textposition = "none",
+  hole = 0.4,
+   marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(text = "Présence de friches ou de locaux vacants ?", x = 0.5, font = list(size = 16, color = "red")#,
+    #legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.2)
+  ),
+margin = list(t = 60, b = 60))%>%
+  config(responsive=TRUE)
+
+```
+
+### 3.8 Si la zone d’activité de Marticot devait évoluer; pour vous elle devrait être :
+
+::: {style= "margin-top:30px;"}
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+
+# Préparation des données
+caracterisation_notes <- donnees %>%
+  select(
+    "Plus verte" = `A8 1 plus verte`,
+    "Plus accessible" = `A8 2 plus accessible`,
+    "Plus dense" = `A8 3 plus dense`,
+    "Plus accessible à pied" = `A8 4 plus accessible à pied`,
+    "Mieux desservie" = `A8 5 mieux desservie`,
+    "Accueillir des services qui seraient utiles à tous" = `A8 6 plus de service utile à tous`,
+    "Accueillir des services qui vous seraient utiles à vous" = `A8 7 plus der services utile à moi`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))
+
+# Comptage des réponses + % par critère
+df_plot <- caracterisation_notes %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop") %>%
+  group_by(Critere) %>%
+  mutate(
+    total = sum(N),
+    pct = round(100 * N / total, 1),
+    hover = paste0("Critère : ", Critere,
+                   "<br>Note : ", Note,
+                   "<br>Réponses : ", N,
+                   "<br>% : ", pct, "%")
+  )
+
+# Couleurs dégradées
+couleurs <- RColorBrewer::brewer.pal(n = length(unique(df_plot$Note)), name = "RdYlGn")
+
+# Graphique Plotly
+plot_ly(
+  data = df_plot,
+  x = ~Critere,
+  y = ~N,
+  color = ~Note,
+  colors = couleurs,
+  type = "bar",
+  text = ~hover,           # info-bulle personnalisée
+  hoverinfo = "text",
+  textposition = "none" # affichage uniquement au survol
+) %>%
+  layout(
+    barmode = "stack",
+    title = list(text = "Selon vous, la zone d’activité de Marticot est caractérisée par", x = 0.5, font = list(size = 16, color = "red")),
+    xaxis = list(title = "", tickangle = 20, tickfont = list(size = 10)),
+    yaxis = list(title = "Nombre de réponses", titlefont = list(size = 12)),
+    legend = list(title = list(text = "Note"), font = list(size = 10))
+  )
+
+```
+:::
+
+Les résultats de la question A8 mettent clairement en évidence que les attentes prioritaires des salariés concernent avant tout la mobilité et l’accessibilité. Avec une moyenne de 4,95 sur 6 et un écart-type limité (1,15), cet item recueille un consensus très fort : plus de 70 % des répondants lui attribuent une note de 5 ou 6. Cette concentration des réponses illustre la centralité de la question des déplacements dans le quotidien des usagers de la zone.   
+
+Viennent ensuite les services disponibles, qui apparaissent eux aussi comme un enjeu majeur d’évolution. La moyenne atteint 4,85, avec une médiane de 5 et un écart-type faible (1,14), traduisant une convergence d’opinions. Une large majorité de salariés exprime le besoin de voir se développer l’offre de restauration, de commerces et de services de proximité, confirmant l’importance de ce levier dans l’amélioration de la qualité de vie au travail. La signalétique arrive en troisième position avec une moyenne de 4,40. Bien que moins prioritaire que la mobilité ou les services, elle est tout de même jugée nécessaire par une majorité de répondants. L’écart-type légèrement plus élevé (1,31) témoigne cependant d’une certaine dispersion : certains salariés considèrent la signalétique comme un point faible de la zone, tandis que d’autres ne l’identifient pas comme un enjeu majeur. La qualité architecturale est également évoquée, avec une moyenne de 4,07 et une médiane de 4. L’écart-type de 1,27 suggère une diversité de perceptions : une partie des salariés souhaite une amélioration du bâti et de l’image architecturale, tandis qu’une autre estime que ce n’est pas une priorité. Enfin, les espaces verts arrivent en dernière position, avec une moyenne de 3,77. Cet item, qui avait pourtant suscité un fort attachement en A5, apparaît ici comme moins urgent dans les évolutions attendues. L’écart-type de 1,33 traduit des avis assez hétérogènes : certains salariés semblent satisfaits de l’existant, tandis que d’autres souhaitent davantage de valorisation paysagère.  
+Dans l’ensemble, ces résultats traduisent une hiérarchisation nette des attentes : l’amélioration des conditions de déplacement et de l’offre de services constitue la priorité des salariés, suivie par des besoins intermédiaires en matière de signalétique et d’architecture, tandis que la dimension paysagère, bien qu’appréciée, est reléguée au second plan dans les demandes de transformation.
+
+### 3.9 Quels services vous seraient utiles ? 
+
+:::{style="margin-top:30px;"}
+```{r}
+#| echo: false
+
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+library(RColorBrewer)
+
+# Étape 1 : transformation des données
+services_avis <- donnees %>%
+  select(
+    "Restauration" = `A9 1 utile resto`,
+    "Équipements sportifs" = `A9 2 utile sport`,
+    "Pôle médical ou para-médical" = `A9 3 utile médical`,
+    "Services à la personne" = `A9 4 utile services à la personne`,
+    "Supermarchés" = `A9 5 utile supermarché`,
+    "Système de garde d’enfants collectif" = `A9 6 utile garde enfant`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse") %>%
+  filter(Reponse %in% c("Oui", "Non"))
+
+# Étape 2 : calcul du % de Oui par service
+df_plot <- services_avis %>%
+  group_by(Service) %>%
+  summarise(
+    total = n(),
+    nb_oui = sum(Reponse == "Oui"),
+    pct = round(100 * nb_oui / total, 1),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    hover = paste0("Service : ", Service,
+                   "<br>Réponses Oui : ", nb_oui,
+                   "<br>Total réponses : ", total,
+                   "<br>% Oui : ", pct, "%")
+  )
+
+# Palette de couleurs par service (6 couleurs)
+couleurs <- RColorBrewer::brewer.pal(n = 6, name = "Set2")
+
+# Graphique Plotly : barres colorées par service
+plot_ly(
+  data = df_plot,
+  x = ~reorder(Service, nb_oui),
+  y = ~nb_oui,
+  type = "bar",
+  marker = list(color = couleurs),
+  text = ~hover,
+  textposition = "none",
+  hoverinfo = "text"
+) %>%
+  layout(
+    title = list(text = "Quels services vous seraient utiles (réponses Oui)", x = 0.5, font = list(size = 16, color = "red")),
+    xaxis = list(title = "", tickangle = 25, tickfont = list(size = 10)),
+    yaxis = list(title = "Nombre de réponses Oui", titlefont = list(size = 12)),
+    showlegend = FALSE
+  )
+```
+:::
+
+La question A9 visait à identifier les services jugés utiles par les salariés de la zone d’activité de Marticot. La difficulté était de cibler des axes de services sans pour autant demander explicitement les besoins. Cette approche peut-être biaiser puisque les personnes peuvent en effet vouloir des équipements dont ils ne se serviront pas forcément ou jugeant que c’est nécessaire pour la qualité de vie dans la ZAE mais sans que ce le soit necessairement. C’est pour cela que nous avons cibler des services « utiles » afin cadrer les attentes et avoir des réponses crédibles. Les résultats montrent des attentes différenciées selon les types de services proposés.  
+
+Tout d’abord, le service le plus plébiscité est la restauration : 72,3 % des répondants déclarent qu’un restaurant ou une offre alimentaire leur serait utile. Cette forte demande traduit un besoin central de lieux de convivialité et de solutions pratiques pour la pause déjeuner, dans une zone où l’offre semble insuffisante au regard du nombre de salariés. Cela rejoint également les résultats de la partie E du questionnaire sur la pause déjeuner, où beaucoup de salariés expriment des contraintes liées au temps et à l’accessibilité de la restauration.  
+
+Ensuite, près de la moitié des répondants (44 %) estiment qu’une offre sportive serait un service utile. Cette donnée témoigne d’une attente significative en matière de qualité de vie au travail et de possibilités de pratiquer une activité physique à proximité immédiate du lieu d’emploi, ce qui rejoint les tendances actuelles d’entreprises cherchant à promouvoir la santé et le bien-être des salariés.  
+
+Les services **médicaux** (36,9 %) arrivent en troisième position. Plus d’un tiers des salariés jugent utile de pouvoir accéder à des soins directement sur site ou à proximité, ce qui reflète une volonté de simplifier la gestion du temps et de limiter les déplacements pour ce type de besoins essentiels.  
+
+En revanche, les autres services apparaissent comme secondaires dans les réponses :
+
+- Services à la personne : **29,2 %**
+- Supermarché : **30,5 %**
+- Garde d’enfant : **27,4 %**
+    
+Ces résultats montrent que, bien que ces services intéressent une partie non négligeable des salariés, ils restent moins prioritaires que la restauration, le sport ou la santé. Leur utilité est sans doute perçue comme plus contextuelle ou dépendante de la situation personnelle des salariés (présence d’enfants à charge, organisation familiale, habitudes de consommation).
