@@ -1,53 +1,94 @@
 ---
 title: ""
-format:
-  dashboard:
-    orientation: rows
-editor: visual
-expandable: true
-layout: "grid"
-scrolling: true
+# format:
+#   dashboard:
+#     orientation: rows
+# editor: visual
+# expandable: true
+# layout: "grid"
+# scrolling: true
+lang: fr
+toc: true
+toc-depth: 4
 ---
 
 ```{r setup, include=FALSE}
-# Chargement des packages
-library(tidyverse)
-library(readr)
+library(readxl)
 
 # Lecture du fichier CSV
-donnees <- read_csv("data/results-survey337264.csv", show_col_types = FALSE)%>%
-  drop_na(`Date de soumission`)
+donnees <- read_excel("data/Classeur1.xlsx")
+  #drop_na(`Date de soumission`)
 ```
 
-<h1 style="font-size:1.4em;">
+## 4. PERCEPTION DE L'ENVIRONNEMENT ET DES CONDITIONS DE TRAVAIL 
 
-Volet Perception de l'environnement et des conditions de travail
 
-</h1>
+```{=html}
+<div style="display: flex; align-items: flex-start; gap: 20px;">
+  <div style="flex: 1;">
+    <p style="text-align: justify;">
+Cette partie du questionnaire vise à comprendre la manière dont les salariés perçoivent leur environnement professionnel au sein de la zone d’activités économiques (ZAE) de Marticot. Au-delà des données objectives sur les secteurs d’activité ou les effectifs, l’objectif est ici d’explorer le ressenti des travailleurs et les modalités concrètes de leurs conditions de travail, afin de comprendre dans quel cadre professionnel ils évoluent et les interactions sociales qui peut y avoir.
+    </p>
+  </div>
+    <div style="flex: 0 0 370px;">
+      <img src="images/environnement.jpg" style="width: 100%; border-radius: 6px;">
+    </div>
+</div>
+<p>
+Plus précisément, cette section cherche à recueillir des informations sur plusieurs dimensions : <br><br>
 
-## Row {height="15%"}
+    <a style="display:block; margin-left:15px">1.	L’organisation et les espaces de travail<br>
+        Les questions portent sur le type d’espace occupé (bureau individuel, open space, atelier, entrepôt, etc.) et sur l’évolution récente de ces espaces (partage, réduction, mutualisation). Cela permet d’appréhender les transformations structurelles du travail et d’identifier si la zone suit les tendances actuelles (flex office, mutualisation des lo-caux, optimisation des surfaces).</a> <br>
+    <a style="display:block; margin-left:15px">
+    2.	Les relations interentreprises et le sentiment d’appartenance <br>
+        Les items relatifs aux liens entre salariés de différentes entreprises visent à mesurer le niveau d’ouverture et de coopération au sein de la ZAE. Cette dimension est es-sentielle pour évaluer la dynamique collective du territoire économique, entre isole-ment professionnel et potentiel de réseau local (échanges informels, partenariats, événements communs).</a> <br>
+    <a style="display:block; margin-left:15px">    
+    3.	L’attachement au lieu de travail et la perception subjective de l’environnement immédiat <br>
+        En questionnant le degré d’attachement au lieu de travail, le questionnaire cherche à cerner le rapport affectif au cadre professionnel : fierté, bien-être, qualité perçue des espaces. Ces éléments permettent d’évaluer la valeur symbolique et sociale du travail dans la zone, au-delà de la seule dimension fonctionnelle. </a> <br>
+    <a style="display:block; margin-left:15px">   
+    4.	Les pratiques de travail et les conditions quotidiennes<br>
+        Des questions complémentaires sur les horaires, le télétravail, les déplacements pro-fessionnels ou les habitudes autour du déjeuner visent à décrire les rythmes et modes de travail des salariés. Elles renseignent sur la souplesse organisationnelle des entreprises, la compatibilité entre vie professionnelle et personnelle, et la capacité du site à s’adapter aux nouvelles pratiques.</a><br><br>
+        
+L’ensemble de ces items a pour finalité de dresser un portrait qualitatif du vécu salarié à Mar-ticot, en reliant la perception des conditions de travail à l’organisation spatiale et sociale de la zone.<br><br>
+
+Elle doit permettre de :
+<ul>
+    <li>	Identifier les atouts et fragilités du cadre de travail ;</li>
+    <li>	Comprendre comment les salariés s’approprient leur environnement professionnel ;</li>
+    <li>	Mesurer le potentiel d’évolution des espaces et des pratiques dans une perspective d’amélioration du bien-être au travail et de cohésion interentreprises.</li>
+</ul>
+    
+En somme, cette partie du questionnaire constitue un levier d’analyse du climat de travail et de la qualité de vie professionnelle dans la ZAE. Elle éclaire les dynamiques humaines der-rière les structures économiques, et contribue à mieux cerner les enjeux d’aménagement, de coopération et d’attractivité du territoire.
+</p>
+```
+
+### 4.1 Organisation et évolution des espaces de travail 
+
+#### 4.1.1 Dans quel(s) types d’espace(s) travaillez-vous ? 
 
 ```{r}
 #| echo: false
+#| warning: false
 
 library(dplyr)
 library(ggplot2)
 library(plotly)
 library(htmlwidgets)
+library(tidyr)
 
 total_repondants <- nrow(donnees)
 
 
 espace_travail <- donnees %>%
-  select("Bureau personnel" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Bureau personnel]`,
-         "Bureau partagé" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Bureau partagé]`,
-         "Open space" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Open space]`,
-         "Atelier" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Atelier]`,
-         "Entrepôt logistique" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Entrepôt logistique]`,
-         "Garage" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Garage]`,
-         "Borne d'accueil" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Borne d’accueil]`,
-         "Hall d'exposition" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [ Hall d’exposition]`,
-         "Pépinière" = `Dans quel(s) type(s) d’espace(s) travaillez-vous ?  Veuillez cocher une ou plusieurs réponses  [Pépinière]`
+  select("Bureau personnel" = `C14 1 bureau`,
+         "Bureau partagé" = `C14 2 bureau partagé`,
+         "Open space" = `C14 3 open space`,
+         "Atelier" = `C14 4 atelier`,
+         "Entrepôt logistique" = `C14 5 entrepôt`,
+         "Garage" = `C14 6 garage`,
+         "Borne d'accueil" = `C14 7 borne accueil`,
+         "Hall d'exposition" = `C14 8 halle`,
+         "Pépinière" = `C14 9 pépinière`
          )%>%
   pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse")
 
@@ -110,17 +151,22 @@ p_espace
 
 ```
 
-## Column
-```{=html}
-<p> Plus de la moitié des réponses 56.2% montre que les gens travaillent en open space.</p>
-```
+L’analyse des types d’espaces de travail occupés par les salariés de la ZAE de Marticot met en évidence une nette dominance des espaces à vocation bureautique, en particulier les open spaces. Ceux-ci concentrent à eux seuls une large majorité des répondants, avec près de 180 salariés concernés. Ce constat confirme la forte représentation des emplois liés aux fonctions administratives, techniques ou de conception au sein des entreprises présentes dans la zone, notamment dans les grandes structures industrielles et technologiques comme Lectra ou Stryker.  
 
-## Row {height="15%"}
+Les ateliers, qui relèvent d’activités plus manuelles, occupent une place secondaire mais néanmoins significative. Ils témoignent de la présence d’un tissu d’entreprises industrielles où la production et l’assemblage demeurent des composantes importantes de l’activité. En revanche, les entrepôts, pépinières d’entreprises ou garages sont très faiblement représen-tés, ce qui suggère une relative spécialisation des locaux à des usages de bureaux et de production plutôt qu’à la logistique ou à l’artisanat.  
+
+On observe également une certaine diversification des espaces de travail dans le tertiaire : la part non négligeable de bureaux partagés traduit une tendance à la mutualisation des es-paces et à l’évolution vers des modes de travail plus collaboratifs, souvent liés à la présence d’activités d’ingénierie, de recherche ou de conception.  
+
+Ainsi, la structure des espaces de travail reflète bien la spécificité de la ZAE de Marticot : un environnement où cohabitent des fonctions de bureau majoritaires et des activités de pro-duction manuelle complémentaires. Cette configuration illustre le profil d’une zone indus-trielle et technologique, davantage tournée vers la conception, la gestion et le suivi tech-nique que vers la production lourde, tout en conservant un ancrage manufacturier identi-fiable.
+
+
+#### 4.1.2 Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail de votre entreprise ?
+
 
 ```{r}
 #| echo: false
-#| fig.width: 4
-#| fig.height: 2
+#| warning: false
+
 
 library(dplyr)
 library(ggplot2)
@@ -130,11 +176,13 @@ library(htmlwidgets)
 total_repondants <- nrow(donnees)
 
 evol_espace_travail <- donnees %>%
-  select("Espaces désormais réduits" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Oui, certains espaces de travail sont désormais réduits]`,
-         "Espaces désormais partagés" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Oui, certains espaces de travail sont désormais partagés]`,
-         "Espaces partagés avec autre entreprise" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Oui, une autre entreprise partage une partie des locaux]`,
-         "Pas de changement" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Non, cela n’a pas changé]`,
-         "Autre" = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Autre]`
+  select("Espaces désormais réduits" = `C15 1 réduits`,
+         "Espaces désormais partagés" = `C15 2 partagé`,
+         "Espaces partagés avec autre entreprise" = `C15 3 locaux partagés`,
+         "Pas de changement" = `C15 4 pas changer`,
+         "Agrandissement" = `C15 5 agrandissement`,
+         "Amélioration" = `C15 6 amélioration`,
+         "Réorganisation" = `C15 7 réorganisation`
          )%>%
   pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse")
 
@@ -196,112 +244,48 @@ p_espace <- ggplotly(p, tooltip = "text")%>%
 p_espace
 ```
 
-## Row {height="15%"}
+L’analyse des évolutions perçues dans les espaces de travail montre qu’une très large majo-rité des répondants déclarent ne pas avoir constaté de changement significatif dans l’aménagement ou l’organisation de leurs lieux de travail. Cette tendance traduit une relative permanence des modes d’occupation et peut s’expliquer par la nature des activités majoritai-rement industrielles et technologiques de la zone, où les espaces sont souvent conçus pour des usages spécifiques (bureaux techniques, ateliers, laboratoires, etc.) difficilement modi-fiables à court terme.  
+
+Toutefois, une part non négligeable de salariés mentionne certaines évolutions récentes, notamment la mise en place d’espaces partagés et la réduction des surfaces de travail. Ces transformations, bien que minoritaires, traduisent une évolution des pratiques dans cer-taines entreprises, probablement liées à la recherche d’une meilleure optimisation foncière ou à l’adaptation aux nouvelles formes d’organisation du travail (télétravail, mutualisation des locaux). Elles concernent davantage les salariés des fonctions tertiaires et administra-tives que ceux exerçant des métiers manuels ou techniques. La  ZAE Marticot apparaît comme un espace professionnel relativement stable dans sa configuration spatiale, où les aménagements évoluent lentement. Cette stabilité peut être perçue positivement par les sa-lariés en termes de repères et de confort, mais elle témoigne également d’une faible dyna-mique de transformation des lieux de travail, limitant parfois l’adaptation aux nouvelles at-tentes en matière de convivialité, de flexibilité ou de bien-être au travail.
+
+
+### 4.2 liens et échanges entre salariés de la zone d’activité  
+
+#### 4.2.1 Avez-vous des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité de Marticot ?
+
 
 ```{r}
 #| echo: false
-#| fig.width: 4
-#| fig.height: 2
+
 
 library(dplyr)
 library(ggplot2)
 library(plotly)
 library(htmlwidgets)
 
-# Extraire uniquement les réponses "Autre"
-autres_reponses <- donnees %>%
-  select(Autre = `Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail dans votre entreprise ?  Veuillez cocher une ou plusieurs réponses  [Autre]`) %>%
-  filter(!is.na(Autre), Autre != "")
-
-# Compter les occurrences
-df_autre <- autres_reponses %>%
-  group_by(Autre) %>%
-  summarise(N = n(), .groups = "drop") %>%
-  arrange(desc(N))
-
-# Graphique ggplot
-p_autre <- ggplot(df_autre, aes(x = reorder(Autre, N), y = N,
-                                text = paste("Réponse:", Autre, "<br>Nombre:", N))) +
-  geom_col(fill = "#1f77b4") +
-  coord_flip() +  # réponses en lisibilité verticale
-  labs(
-    x = "",
-    y = "Nombre de personnes",
-    title = "Réponses formulées en 'Autre'"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(color = "red", size = 7, face = "bold", hjust = 0.5),
-    axis.text.y = element_text(size = 8)
-  )
-
-# Version interactive
-p_autre_interactif <- ggplotly(p_autre, tooltip = "text") %>%
-  layout(
-    title = list(
-      text = "Evolution espace de travail - Réponses 'Autre'",
-      x = 0.5,
-      xanchor = "center",
-      font = list(color = "red")
-    )
-  ) %>%
-  config(responsive = TRUE)%>%
-  onRender("
-    function(el, x) {
-      function resize() {
-        var w = el.offsetWidth;
-        var newSize = Math.max(7, Math.min(20, w/40));
-        Plotly.relayout(el, {'title.font.size': newSize});
-      }
-      window.addEventListener('resize', resize);
-      resize();
-    }
-  ")
-
-p_autre_interactif
-```
-
-## Row {height="15%"}
-
-```{r}
-#| echo: false
-#| fig.width: 4
-#| fig.height: 2
-
-library(dplyr)
-library(ggplot2)
-library(plotly)
-library(htmlwidgets)
-
+# Filtrer les réponses valides
 liens_autres_entreprises <- donnees %>%
-  count(lien = `Avez-vous des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité de Marticot ?Veuillez choisir une seule réponse`) %>%
+  filter(!is.na(`C16 liens autre salariés ZAE...65`), `C16 liens autre salariés ZAE...65` != "N/A") %>%
+  count(lien = `C16 liens autre salariés ZAE...65`) %>%
   mutate(
-    lien = case_when(
-      is.na(lien) | lien == "N/A" ~ "Sans réponse",
-      TRUE ~ lien
-    ),
     Total = sum(n),
     Pourcent = round(100 * n / Total, 1)
   )
 
-# Graphique ggplot (sans titre, style épuré)
+# Graphique ggplot (épuré, horizontal)
 p_lien <- ggplot(liens_autres_entreprises, aes(
     x = reorder(lien, n),
     y = n,
     fill = lien,
     text = paste(
-      "lien avec autres entreprises:", lien,
+      "Lien avec autres entreprises :", lien,
       "<br>Réponses :", n,
       "<br>Pourcentage :", Pourcent, "%"
     )
   )) +
   geom_col(show.legend = FALSE) +
-  coord_flip() +  # diagramme horizontal
-  labs(
-    x = "",
-    y = "Nombre de réponses",
-    fill = NULL
-  ) +
+  coord_flip() +
+  labs(x = "", y = "Nombre de réponses") +
   theme_minimal() +
   theme(
     axis.title.x = element_text(size = 9),
@@ -310,16 +294,17 @@ p_lien <- ggplot(liens_autres_entreprises, aes(
     axis.text.y = element_text(size = 8)
   )
 
-# Graphique interactif avec titre responsif
+# Graphique interactif Plotly avec titre responsive
 p_lien_plotly <- ggplotly(p_lien, tooltip = "text") %>%
   layout(
     title = list(
-      text = "Lien avec autres entrerpises",
-      x = 0.5,             # centré horizontalement
+      text = "Lien avec autres entreprises",
+      x = 0.5,
       xanchor = "center",
       yanchor = "top",
-      font = list(color = "red") # couleur rouge comme demandé
+      font = list(color = "red")
     ),
+    showlegend = FALSE,
     margin = list(t = 60, b = 60)
   ) %>%
   config(responsive = TRUE) %>%
@@ -327,7 +312,7 @@ p_lien_plotly <- ggplotly(p_lien, tooltip = "text") %>%
     function(el, x) {
       function resize() {
         var w = el.offsetWidth;
-        var newSize = Math.max(10, Math.min(20, w/40)); // taille adaptative
+        var newSize = Math.max(10, Math.min(20, w/40));
         Plotly.relayout(el, {'title.font.size': newSize});
       }
       window.addEventListener('resize', resize);
@@ -337,33 +322,28 @@ p_lien_plotly <- ggplotly(p_lien, tooltip = "text") %>%
 
 p_lien_plotly
 
+
 ```
 
-## Column
-```{=html}
-<p> Si oui, dans quel cadre ?</p>
-```
+#### 4.2.2 Si oui dans quel cadre ?
 
-## Row {height="15%"}
 
 ```{r}
 #| echo: false
-#| fig.width: 4
-#| fig.height: 2
 
 library(dplyr)
 library(ggplot2)
 library(plotly)
 library(htmlwidgets)
+library(tidyr)
 
 
 
 oui_lien <- donnees %>%
-  select("Pause déjeuner" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Cadre informel (pause, déjeuner)]`,
-         "Evénements sportifs ou conviviaux" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Evénements sportifs ou conviviaux]`,
-         "Partage de services ou de matériel" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Partage de services ou de matériel]`,
-         "Echanges professionnels (partenariat, projets)" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Echanges professionnels (partenariat, projets)]`,
-         "Autre" = `Dans quel cadre ?  Veuillez cocher une ou plusieurs réponses  [Autre]`
+  select("Pause déjeuner" = `C17 1 cadre informel`,
+         "Evénements sportifs ou conviviaux" = `C17 2 cadre convivial`,
+         "Partage de services ou de matériel" = `C17 3 partage service`,
+         "Echanges professionnels (partenariat, projets)" = `C17 4 échanges pro`
          )%>%
   pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse")
 
@@ -427,104 +407,227 @@ p_espace <- ggplotly(p, tooltip = "text")%>%
 p_espace
 ```
 
-## Column
-```{=html}
-<p> Si non, souhaiteriez-vous avoir la possibilité d’avoir des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité de Marticot ?</p>
-```
+Il nous a semblé pertinent dans la partie de la perception de l’environnement de travail d’aborder la question des liens entre salariés.). Ce graphique illustre la fréquence des échanges entre les salariés et il est observé une forte prévalence de l’absence de liens entre salariés ; 87,5% des répondants déclarent n’avoir jamais de contact avec d’autres salariés de la ZAE, 19,3% indiquent en avoir rarement, 7,4% de temps en temps et seulement 5 ?8% régulièrement. D’autant que quand on demande aux personnes ayant des liens plus ou moins de manière fréquente, il s’agit du cadre informel qui prédomine avec 35,5%, dans certaines configurations sur la ZAE, des entreprises partagent des locaux et sont donc amenés à se côtoyer. De très proche, des échanges se réalisent dans un cadre convivial 31,4% dont on peut supposer que ce soit dans le cadre d’échanges via le club des entreprises en activité sur la commune avec des événements organisés. Les échanges professionnels (21,5%) et le partage des services (11,6%) ont des parts moins importantes, et doivent plutôt se réaliser sûrement dans les petites entreprises présentent dans la pépinière, dans laquelle on retrouve plus d’interactions et d’espaces mutualisés (espace de pause, espace de courriel, salle de réunion).
 
-## Row {height="15%"}
+![Site web du Club des Entreprises de Cestas et Canéjan (33), www.club-entreprises-cestas-canejan.fr](images/club_entreprises.png){fig-align="center" width="60%"}
+
+Cette répartition met en évidence une importante rupture entre les entreprises de la ZAE ce qui reflète la faible présence d’espaces mutualisés propice à ce que la convivialité et la rencontre se développe. Ce faussé est en partie créer par la présente de grandes entreprises qui ont leur propre emprise foncière et donc aucun lien avec d’autres entreprises. Cette frontière symbolique se matérialise notamment avec la présence de barrières, des entrées surveillées ou des clôtures qui délimitent. Cela pose des problématiques importantes notamment sur la gouvernance des ZAE. En effet les interactions sont essentielles pour développer des projets communs tel que de la mutualisation de services et faciliter les questions de gouvernance dans les ZAE. (CF fiche gouvernance)
+
+
+#### 4.2.3 Si non, souhaiteriez-vous avoir la possibilité d’avoir des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité Marticot ?
+
 
 ```{r}
 #| echo: false
+#| warning: false
 #| fig.width: 3
 #| fig.height: 2
 
 library(dplyr)
-library(tidyr)
 library(ggplot2)
-library(plotly)   # <-- indispensable pour ggplotly
+library(plotly)
 library(htmlwidgets)
 
-# On sélectionne uniquement les colonnes qui t'intéressent
+# Préparation des données
 possibilite_lien <- donnees %>%
-  select(
-    "Note" = `Si non, souhaiteriez-vous avoir la possibilité d’avoir des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité de Marticot ?  Donnez une note en cochant de 1 à 6, 1 correspondant à « pas du tout » et 6 à « tout à fait »  [Votre choix]`
-  ) %>%
-  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
-  filter(!is.na(Note))   # supprimer les NA
+  select(Note = `C18 volonté lien`) %>%
+  filter(!is.na(Note)) %>%
+  mutate(Note = as.numeric(Note))
 
-total_reponses <- nrow(possibilite_lien)
+# Calcul de la moyenne
+mediane_note <- median(possibilite_lien$Note)
 
-# Comptage
-df_plot <- possibilite_lien %>%
-  mutate(Note = factor(Note,
-                       levels = 1:6,
-                       labels = c(
-                         "1 = pas du tout",
-                         "2",
-                         "3",
-                         "4",
-                         "5",
-                         "6 = tout à fait"
-                       ))) %>%
-  group_by(Critere, Note) %>%
-  summarise(N = n(), .groups = "drop") %>%
-  mutate(pct = round(100 * N / total_reponses, 1))  # pourcentage
+# Densité calculée manuellement
+densite <- density(possibilite_lien$Note, from = 1, to = 6)
+densite_df <- data.frame(
+  Note = densite$x,
+  Densite = densite$y
+) %>%
+  filter(Densite > 0.05) %>%
+  mutate(text = paste0("Note : ", round(Note, 2),
+                       "<br>Densité : ", round(Densite, 3)))
 
-# Graphique statique ggplot
-p <- ggplot(df_plot, aes(x = Critere, y = N, fill = Note,
-                         text = paste0("Note: ", Note,
-                                           "<br>Réponses: ", N,
-                                           "<br>% du total: ", pct, "%"))) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
+# Graphique ggplot
+p <- ggplot(possibilite_lien, aes(x = Note)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1,
+                 fill = "#91cf60", color = "white", alpha = 0.7) +
+  geom_line(data = densite_df,
+            aes(x = Note, y = Densite, text = text, group = 1),
+            color = "#d73027", size = 1.2) +
+  geom_vline(aes(xintercept = mediane_note),
+             color = "blue", linetype = "dashed", size = 1) +
+  annotate("text", x = mediane_note + 0.1, y = max(densite_df$Densite),
+           label = paste0("Mediane : ", round(mediane_note, 2)),
+           color = "blue", hjust = 0, size = 3) +
+  scale_x_continuous(
+    breaks = 1:6,
+    labels = c("1 = faible", "2", "3", "4", "5", "6 = forte")
+  ) +
   labs(
-    title = "Possibilité d'avoir des liens avec d'autres entreprises ?",
-    x = "",
-    y = "Nombre de réponses",
-    fill = "Note"
+    title = "Distribution de la volonté de lien avec d'autres entreprises",
+    x = "Note",
+    y = "Densité"
   ) +
   theme_minimal()
 
-# Version interactive
-p_possibilite_lien <- ggplotly(p, tooltip = "text") %>%
+# Graphique interactif
+ggplotly(p, tooltip = "text") %>%
   layout(
-    showlegend = TRUE,
-    legend = list(
-      orientation = "h",
-      x = 0.5,
-      xanchor = "center",
-      y = -0.35,
-      font = list(size = 12)
-    ),
     title = list(
-      text = "Possibilité d'avoir des liens avec d'autres entreprises ?",
+      text = "Distribution de la volonté de lien avec d'autres entreprises",
       x = 0.5,
       xanchor = "center",
-      yanchor = "top",
       font = list(color = "red", size = 16)
     ),
-    xaxis = list(
-      title = list(text = "", font = list(size = 14))
-    ),
-    yaxis = list(
-      title = list(text = "Nombre de réponses", font = list(size = 14))
-    ),
-    margin = list(t = 80, b = 120)
-  ) %>%
-  config(responsive = TRUE) %>%
-  onRender("
-    function(el, x) {
-      function resize() {
-        var w = el.offsetWidth;
-        var newSize = Math.max(10, Math.min(20, w/40));
-        Plotly.relayout(el, {'title.font.size': newSize});
-      }
-      window.addEventListener('resize', resize);
-      resize();
-    }
-  ")
+    xaxis = list(title = "Note"),
+    yaxis = list(title = "Densité"),
+    margin = list(t = 80, b = 80)
+  )
 
-p_possibilite_lien
+```
+
+Cependant quand on demande aux salariés s’ils souhaiteraient avoir des liens avec des salariés de d’autres entreprises, les avis sont mitigés. Le graphique (de 1 = faible à 6 = forte volonté), montre une distribution centrée autour des notes moyennes, avec une médiane située à 3, traduisant une volonté de lien plutôt modérée.
+On observe une légère concentration des réponses entre les notes 2, 3 et 4, tandis que les valeurs extrêmes (5 et 6) restent plus rares.  
+
+Cela suggère que, si certains salariés qualifient la ZAE peu conviviale, une majorité n’est pas enthousiaste à l’idée de créer de liens, ni fortement favorable ni totalement désintéressée.
+L’investissement relationnel semble donc faible à moyen, sans véritable dynamique collective spontanée. Ces résultats peuvent confirmer les constats précédents (C16–C17) d’un tissu professionnel peu interconnecté, marqué par une faible culture de coopération entre entreprises, un manque d’espaces physiques ou de temps dédiés aux échanges, et peut-être une représentation limitée de l’intérêt collectif dans la zone.
+
+
+### 4.3 Attachement au lieu de travail
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig.width: 3
+#| fig.height: 2
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Préparation des données
+possibilite_lien <- donnees %>%
+  select(Note = `C19 attaché lieu de travail`) %>%
+  filter(!is.na(Note)) %>%
+  mutate(Note = as.numeric(Note))
+
+# Calcul de la moyenne
+mediane_note <- median(possibilite_lien$Note)
+
+# Densité calculée manuellement
+densite <- density(possibilite_lien$Note, from = 1, to = 6)
+densite_df <- data.frame(
+  Note = densite$x,
+  Densite = densite$y
+) %>%
+  filter(Densite > 0.05) %>%
+  mutate(text = paste0("Note : ", round(Note, 2),
+                       "<br>Densité : ", round(Densite, 3)))
+
+# Graphique ggplot
+p <- ggplot(possibilite_lien, aes(x = Note)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1,
+                 fill = "#91cf60", color = "white", alpha = 0.7) +
+  geom_line(data = densite_df,
+            aes(x = Note, y = Densite, text = text, group = 1),
+            color = "#d73027", size = 1.2) +
+  geom_vline(aes(xintercept = mediane_note),
+             color = "blue", linetype = "dashed", size = 1) +
+  annotate("text", x = mediane_note + 0.1, y = max(densite_df$Densite),
+           label = paste0("Mediane : ", round(mediane_note, 2)),
+           color = "blue", hjust = 0, size = 3) +
+  scale_x_continuous(
+    breaks = 1:6,
+    labels = c("1 = faible", "2", "3", "4", "5", "6 = forte")
+  ) +
+  labs(
+    title = "Distribution de l’appréciation des salariés de l’attachement au lieu de travail",
+    x = "Note",
+    y = "Densité"
+  ) +
+  theme_minimal()
+
+# Graphique interactif
+ggplotly(p, tooltip = "text") %>%
+  layout(
+    title = list(
+      text = "Distribution de la volonté de lien avec d'autres entreprises",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 16)
+    ),
+    xaxis = list(title = "Note"),
+    yaxis = list(title = "Densité"),
+    margin = list(t = 80, b = 80)
+  )
+
+```
+
+En mesurant le degré d’attachement des salariés à leur lieu de travail, on constate une con-centration marquée des réponses entre 4 et 6, avec une médiane située autour de 5.
+Autrement dit, une majorité de répondants expriment un attachement relativement fort à leur lieu de travail. Les notes faibles (1 à 3) restent minoritaires, ce qui traduit un ancrage positif des salariés dans leur environnement professionnel quotidien. Si on fait le parallèle avec d’autres résultats, comme la question C18 sur la “volonté de lien”, plus centrée sur la relation entre salariés.
+On observe ici un attachement plus fort au lieu de travail qu’aux relations interpersonnelles, ce qui peut s’expliquer par une logique d’individualité des salariés ou un sentiment d’appartenance fort lié à l’entreprise mais non pas à la ZAE qui se traduirait par un senti-ment collectif ou communautaire.
+
+
+### 4.4 Horaires de travail et de temps de pause
+
+#### 4.4.1 Avez-vous des horaires fixes ou variables ?
+
+```{r}
+#| warning: false
+#| include: false
+
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+```
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
+
+# Préparation des données
+df_horaires <- donnees %>%
+  count(horaire = `C20 horaire`) %>%
+  mutate(
+    horaire = case_when(
+      is.na(horaire) | horaire == "N/A" ~ "Sans réponse",
+      TRUE ~ horaire
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    label = horaire
+  )
+
+# Graphique interactif en camembert
+plot_ly(
+  data = df_horaires,
+  labels = ~label,
+  values = ~n,
+  type = "pie",
+  textinfo = "label",
+  hovertemplate = paste(
+    "<b>%{label}</b><br>",
+    "Nombre de réponses = %{value}<br>",
+    "Pourcentage = %{percent}"
+  ),
+  hole = 0.4,
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "Répartition des horaires : fixes ou variables",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 16)
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE)
 
 ```
