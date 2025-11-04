@@ -20,8 +20,7 @@ donnees <- read_excel("data/Classeur1.xlsx")
   #drop_na(`Date de soumission`)
 ```
 
-## 4. PERCEPTION DE L'ENVIRONNEMENT ET DES CONDITIONS DE TRAVAIL 
-
+## 4. PERCEPTION DE L'ENVIRONNEMENT ET DES CONDITIONS DE TRAVAIL
 
 ```{=html}
 <div style="display: flex; align-items: flex-start; gap: 20px;">
@@ -37,34 +36,34 @@ Cette partie du questionnaire vise à comprendre la manière dont les salariés 
 <p>
 Plus précisément, cette section cherche à recueillir des informations sur plusieurs dimensions : <br><br>
 
-    <a style="display:block; margin-left:15px">1.	L’organisation et les espaces de travail<br>
+    <a style="display:block; margin-left:15px">1.   L’organisation et les espaces de travail<br>
         Les questions portent sur le type d’espace occupé (bureau individuel, open space, atelier, entrepôt, etc.) et sur l’évolution récente de ces espaces (partage, réduction, mutualisation). Cela permet d’appréhender les transformations structurelles du travail et d’identifier si la zone suit les tendances actuelles (flex office, mutualisation des lo-caux, optimisation des surfaces).</a> <br>
     <a style="display:block; margin-left:15px">
-    2.	Les relations interentreprises et le sentiment d’appartenance <br>
+    2.  Les relations interentreprises et le sentiment d’appartenance <br>
         Les items relatifs aux liens entre salariés de différentes entreprises visent à mesurer le niveau d’ouverture et de coopération au sein de la ZAE. Cette dimension est es-sentielle pour évaluer la dynamique collective du territoire économique, entre isole-ment professionnel et potentiel de réseau local (échanges informels, partenariats, événements communs).</a> <br>
     <a style="display:block; margin-left:15px">    
-    3.	L’attachement au lieu de travail et la perception subjective de l’environnement immédiat <br>
+    3.  L’attachement au lieu de travail et la perception subjective de l’environnement immédiat <br>
         En questionnant le degré d’attachement au lieu de travail, le questionnaire cherche à cerner le rapport affectif au cadre professionnel : fierté, bien-être, qualité perçue des espaces. Ces éléments permettent d’évaluer la valeur symbolique et sociale du travail dans la zone, au-delà de la seule dimension fonctionnelle. </a> <br>
     <a style="display:block; margin-left:15px">   
-    4.	Les pratiques de travail et les conditions quotidiennes<br>
+    4.  Les pratiques de travail et les conditions quotidiennes<br>
         Des questions complémentaires sur les horaires, le télétravail, les déplacements pro-fessionnels ou les habitudes autour du déjeuner visent à décrire les rythmes et modes de travail des salariés. Elles renseignent sur la souplesse organisationnelle des entreprises, la compatibilité entre vie professionnelle et personnelle, et la capacité du site à s’adapter aux nouvelles pratiques.</a><br><br>
         
 L’ensemble de ces items a pour finalité de dresser un portrait qualitatif du vécu salarié à Mar-ticot, en reliant la perception des conditions de travail à l’organisation spatiale et sociale de la zone.<br><br>
 
 Elle doit permettre de :
 <ul>
-    <li>	Identifier les atouts et fragilités du cadre de travail ;</li>
-    <li>	Comprendre comment les salariés s’approprient leur environnement professionnel ;</li>
-    <li>	Mesurer le potentiel d’évolution des espaces et des pratiques dans une perspective d’amélioration du bien-être au travail et de cohésion interentreprises.</li>
+    <li>    Identifier les atouts et fragilités du cadre de travail ;</li>
+    <li>    Comprendre comment les salariés s’approprient leur environnement professionnel ;</li>
+    <li>    Mesurer le potentiel d’évolution des espaces et des pratiques dans une perspective d’amélioration du bien-être au travail et de cohésion interentreprises.</li>
 </ul>
     
 En somme, cette partie du questionnaire constitue un levier d’analyse du climat de travail et de la qualité de vie professionnelle dans la ZAE. Elle éclaire les dynamiques humaines der-rière les structures économiques, et contribue à mieux cerner les enjeux d’aménagement, de coopération et d’attractivité du territoire.
 </p>
 ```
 
-### 4.1 Organisation et évolution des espaces de travail 
+### 4.1 Organisation et évolution des espaces de travail
 
-#### 4.1.1 Dans quel(s) types d’espace(s) travaillez-vous ? 
+#### 4.1.1 Dans quel(s) types d’espace(s) travaillez-vous ?
 
 ```{r}
 #| echo: false
@@ -151,17 +150,15 @@ p_espace
 
 ```
 
-L’analyse des types d’espaces de travail occupés par les salariés de la ZAE de Marticot met en évidence une nette dominance des espaces à vocation bureautique, en particulier les open spaces. Ceux-ci concentrent à eux seuls une large majorité des répondants, avec près de 180 salariés concernés. Ce constat confirme la forte représentation des emplois liés aux fonctions administratives, techniques ou de conception au sein des entreprises présentes dans la zone, notamment dans les grandes structures industrielles et technologiques comme Lectra ou Stryker.  
+L’analyse des types d’espaces de travail occupés par les salariés de la ZAE de Marticot met en évidence une nette dominance des espaces à vocation bureautique, en particulier les open spaces. Ceux-ci concentrent à eux seuls une large majorité des répondants, avec près de 180 salariés concernés. Ce constat confirme la forte représentation des emplois liés aux fonctions administratives, techniques ou de conception au sein des entreprises présentes dans la zone, notamment dans les grandes structures industrielles et technologiques comme Lectra ou Stryker.
 
-Les ateliers, qui relèvent d’activités plus manuelles, occupent une place secondaire mais néanmoins significative. Ils témoignent de la présence d’un tissu d’entreprises industrielles où la production et l’assemblage demeurent des composantes importantes de l’activité. En revanche, les entrepôts, pépinières d’entreprises ou garages sont très faiblement représen-tés, ce qui suggère une relative spécialisation des locaux à des usages de bureaux et de production plutôt qu’à la logistique ou à l’artisanat.  
+Les ateliers, qui relèvent d’activités plus manuelles, occupent une place secondaire mais néanmoins significative. Ils témoignent de la présence d’un tissu d’entreprises industrielles où la production et l’assemblage demeurent des composantes importantes de l’activité. En revanche, les entrepôts, pépinières d’entreprises ou garages sont très faiblement représentés, ce qui suggère une relative spécialisation des locaux à des usages de bureaux et de production plutôt qu’à la logistique ou à l’artisanat.
 
-On observe également une certaine diversification des espaces de travail dans le tertiaire : la part non négligeable de bureaux partagés traduit une tendance à la mutualisation des es-paces et à l’évolution vers des modes de travail plus collaboratifs, souvent liés à la présence d’activités d’ingénierie, de recherche ou de conception.  
+On observe également une certaine diversification des espaces de travail dans le tertiaire : la part non négligeable de bureaux partagés traduit une tendance à la mutualisation des espaces et à l’évolution vers des modes de travail plus collaboratifs, souvent liés à la présence d’activités d’ingénierie, de recherche ou de conception.
 
-Ainsi, la structure des espaces de travail reflète bien la spécificité de la ZAE de Marticot : un environnement où cohabitent des fonctions de bureau majoritaires et des activités de pro-duction manuelle complémentaires. Cette configuration illustre le profil d’une zone indus-trielle et technologique, davantage tournée vers la conception, la gestion et le suivi tech-nique que vers la production lourde, tout en conservant un ancrage manufacturier identi-fiable.
-
+Ainsi, la structure des espaces de travail reflète bien la spécificité de la ZAE de Marticot : un environnement où cohabitent des fonctions de bureau majoritaires et des activités de production manuelle complémentaires. Cette configuration illustre le profil d’une zone industrielle et technologique, davantage tournée vers la conception, la gestion et le suivi technique que vers la production lourde, tout en conservant un ancrage manufacturier identifiable.
 
 #### 4.1.2 Avez-vous constaté ces dernières années une évolution dans l’organisation des espaces de travail de votre entreprise ?
-
 
 ```{r}
 #| echo: false
@@ -244,15 +241,13 @@ p_espace <- ggplotly(p, tooltip = "text")%>%
 p_espace
 ```
 
-L’analyse des évolutions perçues dans les espaces de travail montre qu’une très large majo-rité des répondants déclarent ne pas avoir constaté de changement significatif dans l’aménagement ou l’organisation de leurs lieux de travail. Cette tendance traduit une relative permanence des modes d’occupation et peut s’expliquer par la nature des activités majoritai-rement industrielles et technologiques de la zone, où les espaces sont souvent conçus pour des usages spécifiques (bureaux techniques, ateliers, laboratoires, etc.) difficilement modi-fiables à court terme.  
+L’analyse des évolutions perçues dans les espaces de travail montre qu’une très large majorité des répondants déclarent ne pas avoir constaté de changement significatif dans l’aménagement ou l’organisation de leurs lieux de travail. Cette tendance traduit une relative permanence des modes d’occupation et peut s’expliquer par la nature des activités majoritairement industrielles et technologiques de la zone, où les espaces sont souvent conçus pour des usages spécifiques (bureaux techniques, ateliers, laboratoires, etc.) difficilement modifiables à court terme.
 
-Toutefois, une part non négligeable de salariés mentionne certaines évolutions récentes, notamment la mise en place d’espaces partagés et la réduction des surfaces de travail. Ces transformations, bien que minoritaires, traduisent une évolution des pratiques dans cer-taines entreprises, probablement liées à la recherche d’une meilleure optimisation foncière ou à l’adaptation aux nouvelles formes d’organisation du travail (télétravail, mutualisation des locaux). Elles concernent davantage les salariés des fonctions tertiaires et administra-tives que ceux exerçant des métiers manuels ou techniques. La  ZAE Marticot apparaît comme un espace professionnel relativement stable dans sa configuration spatiale, où les aménagements évoluent lentement. Cette stabilité peut être perçue positivement par les sa-lariés en termes de repères et de confort, mais elle témoigne également d’une faible dyna-mique de transformation des lieux de travail, limitant parfois l’adaptation aux nouvelles at-tentes en matière de convivialité, de flexibilité ou de bien-être au travail.
+Toutefois, une part non négligeable de salariés mentionne certaines évolutions récentes, notamment la mise en place d’espaces partagés et la réduction des surfaces de travail. Ces transformations, bien que minoritaires, traduisent une évolution des pratiques dans certaines entreprises, probablement liées à la recherche d’une meilleure optimisation foncière ou à l’adaptation aux nouvelles formes d’organisation du travail (télétravail, mutualisation des locaux). Elles concernent davantage les salariés des fonctions tertiaires et administratives que ceux exerçant des métiers manuels ou techniques. La ZAE Marticot apparaît comme un espace professionnel relativement stable dans sa configuration spatiale, où les aménagements évoluent lentement. Cette stabilité peut être perçue positivement par les salariés en termes de repères et de confort, mais elle témoigne également d’une faible dynamique de transformation des lieux de travail, limitant parfois l’adaptation aux nouvelles attentes en matière de convivialité, de flexibilité ou de bien-être au travail.
 
-
-### 4.2 liens et échanges entre salariés de la zone d’activité  
+### 4.2 liens et échanges entre salariés de la zone d’activité
 
 #### 4.2.1 Avez-vous des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité de Marticot ?
-
 
 ```{r}
 #| echo: false
@@ -326,7 +321,6 @@ p_lien_plotly
 ```
 
 #### 4.2.2 Si oui dans quel cadre ?
-
 
 ```{r}
 #| echo: false
@@ -413,9 +407,7 @@ Il nous a semblé pertinent dans la partie de la perception de l’environnement
 
 Cette répartition met en évidence une importante rupture entre les entreprises de la ZAE ce qui reflète la faible présence d’espaces mutualisés propice à ce que la convivialité et la rencontre se développe. Ce faussé est en partie créer par la présente de grandes entreprises qui ont leur propre emprise foncière et donc aucun lien avec d’autres entreprises. Cette frontière symbolique se matérialise notamment avec la présence de barrières, des entrées surveillées ou des clôtures qui délimitent. Cela pose des problématiques importantes notamment sur la gouvernance des ZAE. En effet les interactions sont essentielles pour développer des projets communs tel que de la mutualisation de services et faciliter les questions de gouvernance dans les ZAE. (CF fiche gouvernance)
 
-
 #### 4.2.3 Si non, souhaiteriez-vous avoir la possibilité d’avoir des liens ou des échanges avec d’autres salariés d’entreprises de la zone d’activité Marticot ?
-
 
 ```{r}
 #| echo: false
@@ -486,12 +478,9 @@ ggplotly(p, tooltip = "text") %>%
 
 ```
 
-Cependant quand on demande aux salariés s’ils souhaiteraient avoir des liens avec des salariés de d’autres entreprises, les avis sont mitigés. Le graphique (de 1 = faible à 6 = forte volonté), montre une distribution centrée autour des notes moyennes, avec une médiane située à 3, traduisant une volonté de lien plutôt modérée.
-On observe une légère concentration des réponses entre les notes 2, 3 et 4, tandis que les valeurs extrêmes (5 et 6) restent plus rares.  
+Cependant quand on demande aux salariés s’ils souhaiteraient avoir des liens avec des salariés de d’autres entreprises, les avis sont mitigés. Le graphique (de 1 = faible à 6 = forte volonté), montre une distribution centrée autour des notes moyennes, avec une médiane située à 3, traduisant une volonté de lien plutôt modérée. On observe une légère concentration des réponses entre les notes 2, 3 et 4, tandis que les valeurs extrêmes (5 et 6) restent plus rares.
 
-Cela suggère que, si certains salariés qualifient la ZAE peu conviviale, une majorité n’est pas enthousiaste à l’idée de créer de liens, ni fortement favorable ni totalement désintéressée.
-L’investissement relationnel semble donc faible à moyen, sans véritable dynamique collective spontanée. Ces résultats peuvent confirmer les constats précédents (C16–C17) d’un tissu professionnel peu interconnecté, marqué par une faible culture de coopération entre entreprises, un manque d’espaces physiques ou de temps dédiés aux échanges, et peut-être une représentation limitée de l’intérêt collectif dans la zone.
-
+Cela suggère que, si certains salariés qualifient la ZAE peu conviviale, une majorité n’est pas enthousiaste à l’idée de créer de liens, ni fortement favorable ni totalement désintéressée. L’investissement relationnel semble donc faible à moyen, sans véritable dynamique collective spontanée. Ces résultats peuvent confirmer les constats précédents (4.2.1–4.2.2) d’un tissu professionnel peu interconnecté, marqué par une faible culture de coopération entre entreprises, un manque d’espaces physiques ou de temps dédiés aux échanges, et peut-être une représentation limitée de l’intérêt collectif dans la zone.
 
 ### 4.3 Attachement au lieu de travail
 
@@ -564,10 +553,7 @@ ggplotly(p, tooltip = "text") %>%
 
 ```
 
-En mesurant le degré d’attachement des salariés à leur lieu de travail, on constate une con-centration marquée des réponses entre 4 et 6, avec une médiane située autour de 5.
-Autrement dit, une majorité de répondants expriment un attachement relativement fort à leur lieu de travail. Les notes faibles (1 à 3) restent minoritaires, ce qui traduit un ancrage positif des salariés dans leur environnement professionnel quotidien. Si on fait le parallèle avec d’autres résultats, comme la question C18 sur la “volonté de lien”, plus centrée sur la relation entre salariés.
-On observe ici un attachement plus fort au lieu de travail qu’aux relations interpersonnelles, ce qui peut s’expliquer par une logique d’individualité des salariés ou un sentiment d’appartenance fort lié à l’entreprise mais non pas à la ZAE qui se traduirait par un senti-ment collectif ou communautaire.
-
+En mesurant le degré d’attachement des salariés à leur lieu de travail, on constate une concentration marquée des réponses entre 4 et 6, avec une médiane située autour de 5. Autrement dit, une majorité de répondants expriment un attachement relativement fort à leur lieu de travail. Les notes faibles (1 à 3) restent minoritaires, ce qui traduit un ancrage positif des salariés dans leur environnement professionnel quotidien. Si on fait le parallèle avec d’autres résultats, comme la question 4.2.3 sur la “volonté de lien”, plus centrée sur la relation entre salariés. On observe ici un attachement plus fort au lieu de travail qu’aux relations interpersonnelles, ce qui peut s’expliquer par une logique d’individualité des salariés ou un sentiment d’appartenance fort lié à l’entreprise mais non pas à la ZAE qui se traduirait par un sentiment collectif ou communautaire.
 
 ### 4.4 Horaires de travail et de temps de pause
 
@@ -601,7 +587,7 @@ df_horaires <- donnees %>%
     ),
     Total = sum(n),
     Pourcent = round(100 * n / Total, 1),
-    label = horaire
+    label = paste0(horaire)
   )
 
 # Graphique interactif en camembert
@@ -614,7 +600,7 @@ plot_ly(
   hovertemplate = paste(
     "<b>%{label}</b><br>",
     "Nombre de réponses = %{value}<br>",
-    "Pourcentage = %{percent}"
+    "Pourcentage = %{percent}<extra></extra>"
   ),
   hole = 0.4,
   marker = list(line = list(color = "#FFFFFF", width = 1))
@@ -629,5 +615,254 @@ plot_ly(
     margin = list(t = 60, b = 60)
   ) %>%
   config(responsive = TRUE)
+
+
+```
+
+L’étude des rythmes quotidiens des salariés de la ZAE de Marticot met en évidence des schémas horaires d’activités de bureau, avec une forte concentration des arrivées et des départs sur des créneaux restreints.  
+
+Concernant les arrivées, la grande majorité des salariés rejoignent leur poste entre 8h et 10h, soit plus de 82 % des répondants. Le pic se situe entre 9h et 10h (43,2 %), suivi de la tranche 8h–9h (39 %). Les arrivées avant 7h ou après 10h restent marginales. Les départs suivent une dynamique similaire : près de 73 % des salariés quittent la zone entre 17h et 19h, avec un pic marqué entre 18h et 19h (44,3 %). Quelques départs plus précoces (entre 16h et 17h) sont observés, correspondant sans doute à des horaires aménagés ou à des temps partiels. Les départs tardifs (après 19h) restent rares.  
+
+Les horaires atypiques comme des arrivés dans l’après-midi et des départs tardifs restent marginales et peuvent être liées à des activités necessitant parfois des décalages comme la logistique ou les horaires dépendant des arrivages et départ des camions ou des métiers liées à la maintenance. C’est surtout la CSP ouvriers pouvant avoir ces horaires pénibles et décalés.  
+
+En parallèle, la répartition entre salariés en horaires fixes (38,3 %) et ceux en horaires variables (61,7 %) met en évidence une forte flexibilité temporelle au sein de la zone. Cette flexibilité pourrait être liée à la diversité des activités économiques représentées, mais aussi à des politiques internes d’aménagement du temps de travail, notamment pour éviter les embouteillages.  
+
+Ainsi, les salariés de Marticot présentent des rythmes de mobilité concentrés sur les heures de pointe, mais une part importante d’entre eux dispose d’une certaine marge de manœuvre dans leurs horaires. Cette configuration illustre un potentiel intéressant pour le développement de mobilités alternatives, comme le covoiturage ou le télétravail, afin d’atténuer la congestion routière observée aux entrées et sorties de la zone.
+
+#### 4.4.2 De quel temps disposez-vous le midi pour déjeuner ? 
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+df_dejeuner <- donnees %>%
+  mutate(
+    dejeuner_num = suppressWarnings(as.numeric(as.character(`C21 temps déjeuner`))))%>%
+  filter(!is.na(dejeuner_num)) %>%
+  mutate(
+    Tranche = case_when(
+      dejeuner_num < 30  ~ "moins de 30 min",
+      dejeuner_num >= 30 & dejeuner_num <= 59 ~ "30 à 59 min",
+      dejeuner_num >= 60 & dejeuner_num <= 89 ~ "60 à 89 min",
+      dejeuner_num >= 90  ~ "90 min et plus",
+      TRUE ~ "Autres"
+    )
+  ) %>%
+  count(Tranche) %>%
+    mutate(
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    text = paste0(Tranche, "<br>", Pourcent, "% (", n, " réponses)")
+  )
+
+# Couleurs personnalisées
+couleurs <- c("#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854")
+
+# Graphique interactif
+plot_ly(
+  data = df_dejeuner,
+  x = ~Tranche,
+  y = ~Pourcent,
+  type = "bar",
+  text = ~text,
+  hoverinfo = "text",
+  textposition = "none",
+  marker = list(color = couleurs),
+  showlegend = FALSE
+) %>%
+  layout(
+    title = list(
+      text = "Répartition des temps de déjeuner",
+      x = 0.5,
+      xanchor = "center",
+      font = list(size = 16, color = "red")
+    ),
+    xaxis = list(title = "Tranche horaire"),
+    yaxis = list(title = "Pourcentage"),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE)
+
+```
+
+
+Les résultats indiquent une forte proportion de salariés disposant d’un temps de déjeuner relativement long. En effet, plus de 70 % des répondants (38,8 % + 33,9 %) déclarent une pause supérieure à une heure, tandis qu’environ un quart (26,7 %) bénéficient d’un temps compris entre 30 et 59 minutes. Seule une minorité marginale (0,7 %) déjeune en moins de 30 minutes.  
+
+Ces chiffres traduisent une organisation du travail plutôt souple, laissant aux salariés un temps suffisant pour se restaurer, se détendre ou réaliser d’autres activités pendant la pause méridienne. Cette tendance peut être mise en parallèle avec la prévalence des horaires variables (61,7 %), observée précédemment, qui facilite probablement cette flexibilité dans les temps de pause.  
+
+Ces résultats laissent penser que le temps de déjeuner constitue une opportunité de développer des services de restauration, d’espaces conviviaux et d’équipements sportifs comme vu dans la question sur les services plaidoyés. (Cf A9).
+
+### 4.5 Le travail à l’extérieur de l’entreprise
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
+
+df_wexterieur <- donnees %>%
+  count(wexterieur = `C22 exercer extérieur`) %>%
+  mutate(
+    wexterieur = case_when(
+      is.na(wexterieur) | wexterieur == "N/A" ~ "Sans réponse",
+      TRUE ~ wexterieur
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    label = paste0(wexterieur)
+  )
+
+# Graphique interactif en camembert
+plot_ly(
+  data = df_wexterieur,
+  labels = ~label,
+  values = ~n,
+  type = "pie",
+  textinfo = "label",
+  hovertemplate = paste(
+    "<b>%{label}</b><br>",
+    "Nombre de réponses = %{value}<br>",
+    "Pourcentage = %{percent}<extra></extra>"
+  ),
+  hole = 0.4,
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "Pouvez-vous être amené à exercer votre activité <br> à l’extérieur de votre entreprise (réunion, chantier…) ?",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 13,
+      face = "bold")
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE)
+```
+
+Cette question nous permet d’en savoir plus sur la nature des activités des salariés dans leur temps de travail. 60,3% ne réalisent pas de replacements à l’extérieur de l’entreprise ce qui se traduit par des activités administratives, techniques ou productives. Cependant 1/3 sont concernés par des activités extérieurs ce qui peut expliquer ce faible sentiment d’appartenance à la zone d’activité. Certaines activités peuvent amener aux salariés d’être finalement peu présent dans l’entreprise et donc sur la ZA en général à cause de déplacements.
+
+### 4.6 Le télétravail
+
+#### 4.6.1 Avez la possibilité de télétravailler ?
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
+
+df_teletravail <- donnees %>%
+  count(teletravail = `C23 télétravail`) %>%
+  mutate(
+    teletravail = case_when(
+      is.na(teletravail) | teletravail == "N/A" ~ "Sans réponse",
+      TRUE ~ teletravail
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    label = paste0(teletravail)
+  )
+
+# Graphique interactif en camembert
+plot_ly(
+  data = df_teletravail,
+  labels = ~label,
+  values = ~n,
+  type = "pie",
+  textinfo = "label",
+  hovertemplate = paste(
+    "<b>%{label}</b><br>",
+    "Nombre de réponses = %{value}<br>",
+    "Pourcentage = %{percent}<extra></extra>"
+  ),
+  hole = 0.4,
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "Possibilité de télétravailler ?",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 13,
+      face = "bold")
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE)
+
+```
+
+#### 4.6.2 Si oui, combien de jours télétravaillez-vous par semaine en moyenne ? 
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
+
+df_jour_teletravail <- donnees %>%
+  mutate(
+    jour_teletravail_num = suppressWarnings(as.numeric(as.character(`C24 jour télétravail`)))
+  ) %>%
+  filter(!is.na(jour_teletravail_num)) %>%  # exclure les NA
+  count(jour_teletravail = jour_teletravail_num) %>%
+  mutate(
+    jour_teletravail = as.character(jour_teletravail),  # onversion en texte
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    label = paste0(jour_teletravail, " jour(s)")
+  )
+
+# Graphique interactif en camembert
+plot_ly(
+  data = df_jour_teletravail,
+  labels = ~label,
+  values = ~n,
+  type = "pie",
+  textinfo = "label",
+  hovertemplate = paste(
+    "<b>%{label}</b><br>",
+    "Nombre de réponses = %{value}<br>",
+    "Pourcentage = %{percent}<extra></extra>"
+  ),
+  hole = 0.4,
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "Nombre de jours télétravaillés par semaine en moyenne",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 13,
+      face = "bold")
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE)
+
+```
+
+Concernant le télétravail, la pratique est largement répandue avec 77% des salariés pouvant réaliser du télétravail et 1/3 ne pouvant pas. Cela traduit une majorité de salariés exerçant une activité bureaucratique et donc ne pas se rendre dans la ZA. Concernant le nombre de jour dont les salariés ont recours, on compte une médiane à 1,5 jours ce qui traduit une pratique partielle et flexible. En prenant en compte ceux qui n’utilisent pas le temps de télétravail (8,7%), une demi-journée (3%) et une journée (32,5%), 44,2% des salariés ont 1 jour ou moins de télétravail. Pour ceux ayant plus de 2 jours (17,7%), 2,5 jours (0,4%), 3jours et plus (3,2%) la part s’élève à 21,2%. Il y’a donc plus de personnes pratiquant du télétravail de manière partielle plutôt que de manière fréquente et importante. La présence sur site reste la norme mais la pratique est tout de même bien ancré dans les pratiques avec un usage régulier mais encore peu intensif. 
+
+
+### 4.7 Habitudes avant et après le travail 
+
+#### 4.7.1 Avant de venir au travail, avez-vous l’habitude de :
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
 
 ```
