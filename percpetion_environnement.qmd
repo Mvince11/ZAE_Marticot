@@ -856,13 +856,108 @@ Concernant le télétravail, la pratique est largement répandue avec 77% des sa
 
 ### 4.7 Habitudes avant et après le travail 
 
-#### 4.7.1 Avant de venir au travail, avez-vous l’habitude de :
+#### 4.7.1 Avant de venir au travail, avez-vous l’habitude de faire du sport ?
 
 ```{r}
 #| echo: false
 #| warning: false
 
+
+
 library(dplyr)
 library(plotly)
 
+
+df_travail_sport <- donnees %>%
+  count(travail_sport = `C25 1 avant travail sport`) %>%
+  filter(!is.na(travail_sport)) %>% 
+  mutate(
+    travail_sport = case_when(
+      is.na(travail_sport) | travail_sport == "N/A" ~ "Sans réponse",
+      TRUE ~ travail_sport
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    label = paste0(travail_sport)
+  )
+
+plot_ly(
+  data = df_travail_sport,
+  labels = ~label,
+  values = ~n,
+  type = "pie",
+  textinfo = "label",
+  hovertemplate = paste(
+    "<b>%{label}</b><br>",
+    "Nombre de réponses = %{value}<br>",
+    "Pourcentage = %{percent}<extra></extra>"
+  ),
+  hole = 0.4,
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "Pratique du sport avant le travail ?",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 13,
+      face = "bold")
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE)
 ```
+
+#### 4.7.2 Avant de venir au travail, avez-vous l’habitude d'amener vos enfants ?
+
+```{r}
+#| echo: false
+#| warning: false
+
+
+
+library(dplyr)
+library(plotly)
+
+
+df_travail_enfants <- donnees %>%
+  count(travail_enfants = `C25 2 avant travail récupérer enfants`) %>%
+  filter(!is.na(travail_enfants)) %>% 
+  mutate(
+    travail_enfants = case_when(
+      is.na(travail_enfants) | travail_enfants == "N/A" ~ "Sans réponse",
+      TRUE ~ travail_enfants
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    label = paste0(travail_enfants)
+  )
+
+plot_ly(
+  data = df_travail_enfants,
+  labels = ~label,
+  values = ~n,
+  type = "pie",
+  textinfo = "label",
+  hovertemplate = paste(
+    "<b>%{label}</b><br>",
+    "Nombre de réponses = %{value}<br>",
+    "Pourcentage = %{percent}<extra></extra>"
+  ),
+  hole = 0.4,
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "Amener les enfants avant le travail ?",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 13,
+      face = "bold")
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE)
+```
+
+#### 4.7.3 En repartant du travail, avez-vous l’habitude : 
