@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.38">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,18 +35,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b663525e4b92bb903b2199e2d401bf36.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b7e1f2767d6a33e309420a3313b95639.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-dashboard/quarto-dashboard.js"></script>
-<script src="site_libs/quarto-dashboard/stickythead.js"></script>
-<script src="site_libs/quarto-dashboard/datatables.min.js" kdttablesentinel="true"></script>
-<script src="site_libs/quarto-dashboard/pdfmake.min.js" kdttablesentinel="true"></script>
-<script src="site_libs/quarto-dashboard/vfs_fonts.js" kdttablesentinel="true"></script>
-<script src="site_libs/quarto-dashboard/web-components.js" type="module"></script>
-<script src="site_libs/quarto-dashboard/components.js"></script>
-<link href="site_libs/quarto-dashboard/datatables.min.css" rel="stylesheet" kdttablesentinel="true">
+<link href="site_libs/bootstrap/bootstrap-fc61046fd730ac123b60f5050bcc0ceb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -61,25 +53,53 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="site_libs/plotly-binding-4.11.0/plotly.js"></script>
+
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+
+<script src="site_libs/datatables-binding-0.33/datatables.js"></script>
+
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+
+<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
 </head>
 
-<body class="quarto-dashboard nav-fixed fullcontent">
-
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -90,8 +110,8 @@ ul.task-list li input[type="checkbox"] {
     <img src="./images/logos/Panorama2.png" alt="ZAE Marticot" class="navbar-logo">
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Recherche"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Basculer la navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -154,31 +174,96 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-<header id="quarto-dashboard-header">
-<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
-  <div class="navbar-container container-fluid">
-    <button class="navbar-toggler hidden" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>    
-
-
-</div></nav>
-</header></header>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-layout-custom page-navbar quarto-dashboard-content bslib-gap-spacing html-fill-container dashboard-scrolling">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenu</h2>
+   
+  <ul>
+  <li><a href="#modalités-de-transports" id="toc-modalités-de-transports" class="nav-link active" data-scroll-target="#modalités-de-transports">5. MODALITÉS DE TRANSPORTS</a>
+  <ul>
+  <li><a href="#modalités-de-transports-1" id="toc-modalités-de-transports-1" class="nav-link" data-scroll-target="#modalités-de-transports-1">5.1 Modalités de transports</a>
+  <ul class="collapse">
+  <li><a href="#en-général-quels-modes-de-transport-utilisez-vous-pour-venir-au-travail" id="toc-en-général-quels-modes-de-transport-utilisez-vous-pour-venir-au-travail" class="nav-link" data-scroll-target="#en-général-quels-modes-de-transport-utilisez-vous-pour-venir-au-travail">5.1.1 En général, quel(s) modes de transport utilisez-vous pour venir au travail ?</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<div class="bslib-grid-item html-fill-item bslib-grid" data-layout="flow" style="display: grid; grid-template-rows: ; grid-auto-columns: minmax(0, 1fr);">
 
 
-<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden">
 
+<section id="modalités-de-transports" class="level2">
+<h2 class="anchored" data-anchor-id="modalités-de-transports">5. MODALITÉS DE TRANSPORTS</h2>
+
+<div style="display: flex; align-items: flex-start; gap: 20px;">
+  <div style="flex: 1;">
+    <p style="text-align: justify;">
+Cette réflexion sur les activités liées aux trajets domicile-travail invite à aborder la question plus large des mobilités.
+Deux caractéristiques principales influencent ici les modes de déplacement.<br>
+
+D’une part, la localisation de la zone d’activités, relativement isolée et peu intégrée au tissu urbain, rend les questions de mobilité centrales dans le quotidien des salariés.
+D’autre part, sa configuration spatiale suit le modèle traditionnel des zones d’activités, largement pensées autour de la voiture : abondance de parkings, voiries larges, mais peu d’infrastructures adaptées aux piétons ou aux cyclistes.<br>
+    </p><p>
+  </p></div>
+    <div style="flex: 0 0 370px;">
+      <img src="images/arret_bus.png" style="width: 100%; border-radius: 6px;">
+    </div>
+</div>
+
+L’enjeu est donc d’améliorer l’accessibilité globale de la zone afin de favoriser des alternatives crédibles à la voiture individuelle et de réduire sa part modale dominante.
+Une meilleure prise en compte des mobilités actives et collectives apparaît indispensable pour renforcer la durabilité et l’attractivité du site.
+
+<section id="modalités-de-transports-1" class="level3">
+<h3 class="anchored" data-anchor-id="modalités-de-transports-1">5.1 Modalités de transports</h3>
+<section id="en-général-quels-modes-de-transport-utilisez-vous-pour-venir-au-travail" class="level4">
+<h4 class="anchored" data-anchor-id="en-général-quels-modes-de-transport-utilisez-vous-pour-venir-au-travail">5.1.1 En général, quel(s) modes de transport utilisez-vous pour venir au travail ?</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-f22f59e38bcf919181c7" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-f22f59e38bcf919181c7">{"x":{"visdat":{"73c75034978":["function () ","plotlyVisDat"]},"cur_data":"73c75034978","attrs":{"73c75034978":{"x":{},"y":{},"marker":{"color":["#1C1B47","#F54927","#78684E","#CC703B","#6747D1","#C4875E","#AF47D1"]},"hovertext":{},"hoverinfo":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":80,"l":60,"t":80,"r":10},"title":{"text":"<b>Répartition en pourcentage des différentes modalités de transports des salariés<\/b>","x":0.5,"font":{"color":"red","size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-30,"type":"category","categoryorder":"array","categoryarray":["2 roues motorisées","A pied","Bus","Covoiturage","Train","Vélo","Voiture"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Réponses en %"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"responsive":true},"data":[{"x":["2 roues motorisées","A pied","Bus","Covoiturage","Train","Voiture","Vélo"],"y":[5.2000000000000002,0.59999999999999998,2.5,8.3000000000000007,5.7999999999999998,84.900000000000006,23.100000000000001],"marker":{"color":["#1C1B47","#F54927","#78684E","#CC703B","#6747D1","#C4875E","#AF47D1"],"line":{"color":"rgba(31,119,180,1)"}},"hovertext":["Mode : 2 roues motorisées <br>Nombre : 17 <br>Pourcentage : 5.2 %","Mode : A pied <br>Nombre : 2 <br>Pourcentage : 0.6 %","Mode : Bus <br>Nombre : 8 <br>Pourcentage : 2.5 %","Mode : Covoiturage <br>Nombre : 27 <br>Pourcentage : 8.3 %","Mode : Train <br>Nombre : 19 <br>Pourcentage : 5.8 %","Mode : Voiture <br>Nombre : 276 <br>Pourcentage : 84.9 %","Mode : Vélo <br>Nombre : 75 <br>Pourcentage : 23.1 %"],"hoverinfo":["text","text","text","text","text","text","text"],"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<div style="margin-bottom:30px; margin-top:30px;">
+<div class="cell">
+<div class="cell-output-display">
+<style>
+      table.dataTable thead th {
+        background-color: #1C1B47; 
+        color: white; 
+        font-weight: bold;
+      }
+      table.dataTable tbody tr:nth-child(odd) {
+        background-color: #D15713;  /* ✅ lignes impaires */
+      }
+      table.dataTable tbody tr:nth-child(even) {
+        background-color: #EBAB8D;  /* ✅ lignes paires */
+      }
+    </style>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-b2686c5be8082f2ced03" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b2686c5be8082f2ced03">{"x":{"filter":"none","vertical":false,"caption":"<caption>Répartition des différentes modalités de transport<\/caption>","data":[["1","2","3","4","5","6","7"],["2 roues motorisées","A pied","Bus","Covoiturage","Train","Voiture","Vélo"],[17,2,8,27,19,276,75],[5.2,0.6,2.5,8.300000000000001,5.8,84.90000000000001,23.1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Mode de transport<\/th>\n      <th>Nombre de réponses<\/th>\n      <th>Pourcentage (%)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Service","targets":1},{"name":"N","targets":2},{"name":"pct","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<p>La voiture est le premier mode de transport des salariés avec 84,9%, pouvant s’additionner avec les deux roues motorisées (5,2%) grimpant à 90,1% le taux d’utilisation de véhicules motorisés. Si on fait le lien avec les communes d’origines des salariés (2.4 communes des salariés) il n’est pas étonnant au vu de l’air d’attractivité avec plus de 69 communes différentes.</p>
+<p>Ce qui est intéressant c’est d’analyser la part modale des salariés venant de Cestas même mais aussi des communes limitrophes.</p>
 
 
+</section>
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -222,12 +307,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copié");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Copié");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
@@ -269,7 +354,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/website\.quarto\.pub\/zae_marticot");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -630,14 +715,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 
-<script type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (_event) {
-  if (window.bslib.Card) {
-    window.bslib.Card.initializeAllCards();
-  }
-}); 
-</script>
-  
 
 
 

@@ -112,7 +112,7 @@ p <- ggplot(df_plot, aes(x = reorder(Service, N), y = N, fill = Service,
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    plot.title = element_text(color = "red", size = 8, face = "bold", hjust = 0.5),
     axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 9),
@@ -125,7 +125,7 @@ p_espace <- ggplotly(p, tooltip = "text")%>%
   layout(
     showlegend = FALSE,
     title = list(
-      text = "Espace de travail",
+      text = "<b>Espace de travail</b>",
       x = 0.5,
       xanchor = "center",
       yanchor = "top",
@@ -217,7 +217,7 @@ p_espace <- ggplotly(p, tooltip = "text")%>%
   layout(
     showlegend = FALSE,
     title = list(
-      text = "Evolution espace de travail",
+      text = "<b>Evolution espace de travail</b>",
       x = 0.5,
       xanchor = "center",
       yanchor = "top",
@@ -293,7 +293,7 @@ p_lien <- ggplot(liens_autres_entreprises, aes(
 p_lien_plotly <- ggplotly(p_lien, tooltip = "text") %>%
   layout(
     title = list(
-      text = "Lien avec autres entreprises",
+      text = "<b>Lien avec autres entreprises</b>",
       x = 0.5,
       xanchor = "center",
       yanchor = "top",
@@ -377,7 +377,7 @@ p_espace <- ggplotly(p, tooltip = "text")%>%
   layout(
     showlegend = FALSE,
     title = list(
-      text = "Dans quel cadre ?",
+      text = "<b>Dans quel cadre ?</b>",
       x = 0.5,
       xanchor = "center",
       yanchor = "top",
@@ -466,7 +466,7 @@ p <- ggplot(possibilite_lien, aes(x = Note)) +
 ggplotly(p, tooltip = "text") %>%
   layout(
     title = list(
-      text = "Distribution de la volonté de lien avec d'autres entreprises",
+      text = "<b>Distribution de la volonté de lien avec d'autres entreprises</b>",
       x = 0.5,
       xanchor = "center",
       font = list(color = "red", size = 16)
@@ -541,7 +541,7 @@ p <- ggplot(possibilite_lien, aes(x = Note)) +
 ggplotly(p, tooltip = "text") %>%
   layout(
     title = list(
-      text = "Distribution de la volonté de lien avec d'autres entreprises",
+      text = "<b>Distribution de la volonté de lien avec d'autres entreprises</b>",
       x = 0.5,
       xanchor = "center",
       font = list(color = "red", size = 16)
@@ -607,7 +607,7 @@ plot_ly(
 ) %>%
   layout(
     title = list(
-      text = "Répartition des horaires : fixes ou variables",
+      text = "<b>Répartition des horaires : fixes ou variables</b>",
       x = 0.5,
       xanchor = "center",
       font = list(color = "red", size = 16)
@@ -677,7 +677,7 @@ plot_ly(
 ) %>%
   layout(
     title = list(
-      text = "Répartition des temps de déjeuner",
+      text = "<b>Répartition des temps de déjeuner</b>",
       x = 0.5,
       xanchor = "center",
       font = list(size = 16, color = "red")
@@ -735,7 +735,7 @@ plot_ly(
 ) %>%
   layout(
     title = list(
-      text = "Pouvez-vous être amené à exercer votre activité <br> à l’extérieur de votre entreprise (réunion, chantier…) ?",
+      text = "<b>Pouvez-vous être amené à exercer votre activité <br> à l’extérieur de votre entreprise (réunion, chantier…) ?</b>",
       x = 0.5,
       xanchor = "center",
       font = list(color = "red", size = 13,
@@ -788,7 +788,7 @@ plot_ly(
 ) %>%
   layout(
     title = list(
-      text = "Possibilité de télétravailler ?",
+      text = "<b>Possibilité de télétravailler ?</b>",
       x = 0.5,
       xanchor = "center",
       font = list(color = "red", size = 13,
@@ -839,7 +839,7 @@ plot_ly(
 ) %>%
   layout(
     title = list(
-      text = "Nombre de jours télétravaillés par semaine en moyenne",
+      text = "<b>Nombre de jours télétravaillés par semaine en moyenne</b>",
       x = 0.5,
       xanchor = "center",
       font = list(color = "red", size = 13,
@@ -897,7 +897,7 @@ plot_ly(
 ) %>%
   layout(
     title = list(
-      text = "Pratique du sport avant le travail ?",
+      text = "<b>Pratique du sport avant le travail ?</b>",
       x = 0.5,
       xanchor = "center",
       font = list(color = "red", size = 13,
@@ -949,7 +949,7 @@ plot_ly(
 ) %>%
   layout(
     title = list(
-      text = "Amener les enfants avant le travail ?",
+      text = "<b>Amener les enfants avant le travail ?</b>",
       x = 0.5,
       xanchor = "center",
       font = list(color = "red", size = 13,
@@ -961,3 +961,66 @@ plot_ly(
 ```
 
 #### 4.7.3 En repartant du travail, avez-vous l’habitude : 
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
+library(tidyr)
+
+df_apres_travail <- donnees %>%
+  select(
+      "Faire des courses" = `C26 1 en repartant courses`,
+      "Un moment avec des collégues" = `C26 2 en repartant moment collègues`,
+      "Faire du sport" = `C26 3 en repartant sport`,
+      "Avoir un rendez-vous médical" = `C26 4 en repartant rdv médical`,
+      "Récupérer les enfants" = `C26 5 amener récup enfants`
+    ) %>%
+    pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+    filter(!is.na(Note))%>%   # supprimer les NA
+    group_by(Critere, Note) %>%
+    summarise(N = n(), .groups = "drop") %>%
+    group_by(Critere) %>%
+    mutate(
+    Total = sum(N),
+    Pourcent = round(100 * N / Total, 1)
+  )
+
+# S'assurer que Note est un facteur ordonné
+#df_plot$Note <- factor(df_plot$Note, levels = as.character(1:6))
+
+# Palette de couleurs similaire à RdYlGn
+couleurs <- c("#1C1B47","#F54927")
+
+plot_ly(
+  data = df_apres_travail,
+  x = ~Critere,
+  y = ~Pourcent,
+  color = ~Note,
+  colors = couleurs,
+  type = "bar",
+  hovertext = ~paste("Critère :", Critere, "<br>Réponse :", Note, "<br>Nombre :", N, "<br>Pourcentage :", Pourcent, "%"),
+  hoverinfo = "text"  # uniquement dans l'infobulle
+) %>%
+layout(
+  barmode = "stack",
+  title = list(
+    text = "<b>Habitudes en repartant du travail</b>",
+    x = 0.5,
+    font = list(color = "red", size = 14)
+  ),
+  xaxis = list(title = "", tickangle = -30),
+  yaxis = list(title = "Réponses en %"),
+  legend = list(title = list(text = "Réponses")),
+  margin = list(t = 80, b = 80)
+) %>%
+config(responsive = TRUE)
+```
+
+Pour mieux comprendre le rythme et les habitudes des salariés, nous avons voulu savoir qu’elles étaient les activités/ tâches qui sont réalisées avant et après leur journée sur le trajet domicile-travail et vis-versa.  
+Avant de venir au travail (C25) les pratiques restent relativement limités mais certaines sont indispensables pour les personnes comme amener les enfants à l’école, c’est le cas pour de 32,9% de salariés ou encore faire du sport avec tout de même 17,8%. 
+En repartant, les salariés ont également de multiples habitudes, une grande majorité réalise ses courses (65,2%), mais d’autres parts conséquentes se valent aussi. La pratique du sport est plus importante qu’avant le travail (39,1%), les rendez-vous médicaux de manière globale (35,7%), passer des moments avec les collèges (34,8%) ou encore chercher les enfants (31,1%). 
+Ces comportements traduisent une organisation quotidienne où les temps personnels et familiaux s’enchaînent directement à la journée de travail.
+Ils soulignent également l’importance des services de proximité dans le bon fonctionnement de la zone d’activités : infrastructures sportives, offre médicale ou encore supermarché apparaissent comme des équipements stratégiques susceptibles d’améliorer et de simplifier le quotidien des salariés (Cf A9 besoins en services).

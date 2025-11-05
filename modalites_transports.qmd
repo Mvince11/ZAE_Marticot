@@ -1,10 +1,137 @@
 ---
 title: ""
-format:
-  dashboard:
-    orientation: rows
-editor: visual
-expandable: true
-layout: "grid"
-scrolling: true
+lang: fr
+toc: true
+toc-depth: 4
 ---
+
+```{r}
+#| include: false
+
+library(readxl)
+
+donnees <- read_excel("data/Classeur1.xlsx")
+
+```
+
+## 5. MODALITÉS DE TRANSPORTS
+
+```{=html}
+
+<div style="display: flex; align-items: flex-start; gap: 20px;">
+  <div style="flex: 1;">
+    <p style="text-align: justify;">
+Cette réflexion sur les activités liées aux trajets domicile-travail invite à aborder la question plus large des mobilités.
+Deux caractéristiques principales influencent ici les modes de déplacement.<br>
+
+D’une part, la localisation de la zone d’activités, relativement isolée et peu intégrée au tissu urbain, rend les questions de mobilité centrales dans le quotidien des salariés.
+D’autre part, sa configuration spatiale suit le modèle traditionnel des zones d’activités, largement pensées autour de la voiture : abondance de parkings, voiries larges, mais peu d’infrastructures adaptées aux piétons ou aux cyclistes.<br>
+    <p>
+  </div>
+    <div style="flex: 0 0 370px;">
+      <img src="images/arret_bus.png" style="width: 100%; border-radius: 6px;">
+    </div>
+</div>
+
+L’enjeu est donc d’améliorer l’accessibilité globale de la zone afin de favoriser des alternatives crédibles à la voiture individuelle et de réduire sa part modale dominante.
+Une meilleure prise en compte des mobilités actives et collectives apparaît indispensable pour renforcer la durabilité et l’attractivité du site.
+
+```
+
+### 5.1 Modalités de transports
+
+#### 5.1.1 En général, quel(s) modes de transport utilisez-vous pour venir au travail ?
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
+library(tidyr)
+
+
+total_repondants <- nrow(donnees)
+
+transports_utilises <- donnees %>%
+  select("Bus" = `D27 A bus`,
+         "Train" = `D27 B train`,
+         "Voiture" = `D27 C voiture`,
+         "Vélo" = `D27 D vélo`,
+         "A pied" = `D27 E à pied`,
+         "Covoiturage" = `D27 F covoit`,
+         "2 roues motorisées" = `D27 G 2 roues motorisées`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse") %>%
+  filter(Reponse == "Oui") %>%
+  group_by(Service) %>%
+  summarise(N = n(), .groups = "drop") %>%
+  mutate(
+    pct = round(100 * N / total_repondants, 1)
+  )
+
+# Palette de couleurs
+couleurs <- c("#1C1B47","#F54927","#78684E","#CC703B","#6747D1","#C4875E","#AF47D1")
+
+# Graphique interactif
+plot_ly(
+  data = transports_utilises,
+  x = ~Service,
+  y = ~pct,
+  type = "bar",
+  marker = list(color = couleurs),
+  hovertext = ~paste("Mode :", Service,
+                     "<br>Nombre :", N,
+                     "<br>Pourcentage :", pct, "%"),
+  hoverinfo = "text"
+) %>%
+  layout(
+    title = list(
+      text = "<b>Répartition en pourcentage des différentes modalités de transports des salariés</b>",
+      x = 0.5,
+      font = list(color = "red", size = 14)
+    ),
+    xaxis = list(title = "", tickangle = -30),
+    yaxis = list(title = "Réponses en %"),
+    margin = list(t = 80, b = 80)
+  ) %>%
+  config(responsive = TRUE)
+
+```
+
+::: {style= "margin-bottom:30px; margin-top:30px;"}
+```{r}
+#| echo: false
+#| warning: false
+
+library(DT)
+library(htmltools)
+
+transports_utilises %>%
+  select(Service, N, pct) %>%
+  datatable(
+    colnames = c("Mode de transport", "Nombre de réponses", "Pourcentage (%)"),
+    options = list(dom="t"),
+    caption = "Répartition des différentes modalités de transport"
+  )%>%
+  htmlwidgets::prependContent(
+    tags$style(HTML("
+      table.dataTable thead th {
+        background-color: #1C1B47; 
+        color: white; 
+        font-weight: bold;
+      }
+      table.dataTable tbody tr:nth-child(odd) {
+        background-color: #D15713;  /* ✅ lignes impaires */
+      }
+      table.dataTable tbody tr:nth-child(even) {
+        background-color: #EBAB8D;  /* ✅ lignes paires */
+      }
+    "))
+  )
+```
+:::
+
+La voiture est le premier mode de transport des salariés avec 84,9%, pouvant s’additionner avec les deux roues motorisées (5,2%) grimpant à 90,1% le taux d’utilisation de véhicules motorisés. Si on fait le lien avec les communes d’origines des salariés (2.4 communes des salariés) il n’est pas étonnant au vu de l’air d’attractivité avec plus de 69 communes différentes. 
+
+Ce qui est intéressant c’est d’analyser la part modale des salariés venant de Cestas même mais aussi des communes limitrophes.
