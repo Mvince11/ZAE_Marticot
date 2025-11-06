@@ -348,6 +348,17 @@ img{
   cursor: context-menu !important;
 }
 
+.figure{
+  text-align: center;
+}
+
+nav#TOC ul li ul li ul li ul li { 
+  display: list-item; 
+}
+nav#TOC ul li ul li ul li ul li ul li { 
+  display: list-item; 
+}
+
 @media (max-width: 1268px){
   .quarto-dashboard #quarto-content.quarto-dashboard-content{
     padding-left: 5%;

@@ -2,7 +2,7 @@
 title: ""
 lang: fr
 toc: true
-toc-depth: 4
+toc-depth: 6
 ---
 
 ```{r}
@@ -135,3 +135,213 @@ transports_utilises %>%
 La voiture est le premier mode de transport des salariés avec 84,9%, pouvant s’additionner avec les deux roues motorisées (5,2%) grimpant à 90,1% le taux d’utilisation de véhicules motorisés. Si on fait le lien avec les communes d’origines des salariés (2.4 communes des salariés) il n’est pas étonnant au vu de l’air d’attractivité avec plus de 69 communes différentes. 
 
 Ce qui est intéressant c’est d’analyser la part modale des salariés venant de Cestas même mais aussi des communes limitrophes.
+
+![Cartographie des communes limitrophes de Cestas](images/communes_limitrophes_marticot.png){.lightbox fig-align="center" figcaption-align="center" width="80%"}
+
+::: {style="margin-top:30px;margin-bottom:30px;"}
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(DT)
+library(htmltools)
+
+table_commune_modes <- donnees %>%
+  filter(`X4 commune` %in% c("CESTAS 33610", "PESSAC 33600","MARCHEPRIME 33380",
+                             "LEOGNAN 33850","LE BARP 33114","ST JEAN D ILLAC 33127")) %>%
+  select(
+    ID,
+    Commune = `X4 commune`,
+    Voiture = `D27 C voiture`,
+    `2 roues motorisées` = `D27 G 2 roues motorisées`,
+    Vélo = `D27 D vélo`,
+    Bus = `D27 A bus`
+  ) %>%
+  mutate(across(c(Voiture, `2 roues motorisées`, Vélo, Bus),
+                ~replace_na(., "Non"))) %>%   # ✅ remplace NA par "Non"
+  group_by(Commune) %>%
+  summarise(
+    Nb_repondants = n_distinct(ID),
+    Voiture_2RM = sum((Voiture == "Oui" | `2 roues motorisées` == "Oui"), na.rm = TRUE),
+    Vélo = sum(Vélo == "Oui", na.rm = TRUE),
+    Bus = sum(Bus == "Oui", na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    `% Voiture + 2RM` = ifelse(Nb_repondants > 0,
+                               round(100 * Voiture_2RM / Nb_repondants, 1), 0),
+    `% Vélo` = ifelse(Nb_repondants > 0,
+                      round(100 * Vélo / Nb_repondants, 1), 0),
+    `% Bus` = ifelse(Nb_repondants > 0,
+                     round(100 * Bus / Nb_repondants, 1), 0)
+  ) %>%
+  select(Commune, Nb_repondants, `% Voiture + 2RM`, `% Vélo`, `% Bus`) %>%
+  arrange(desc(Nb_repondants))
+
+# Tableau interactif
+datatable(
+  table_commune_modes,
+  options = list(
+    pageLength = 20,
+    autoWidth = TRUE,
+    order = list(list(1, 'desc')),
+    dom = 't'
+  ),
+  rownames = FALSE
+) %>%
+  htmlwidgets::prependContent(
+    tags$style(HTML("
+      table.dataTable thead th {
+        background-color: #1C1B47; 
+        color: white; 
+        font-weight: bold;
+        text-align: center;
+      }
+      table.dataTable tbody tr:nth-child(odd) {
+        background-color: #D15713;
+        color: black;
+      }
+      table.dataTable tbody tr:nth-child(even) {
+        background-color: #EBAB8D;
+        color: black;
+      }
+      table.dataTable tbody td {
+        text-align: center;
+        font-weight: bold;
+      }
+    "))
+  )
+
+```
+:::
+
+L’analyse des modes de déplacement selon la commune de résidence met en évidence une dépendance quasi exclusive à la voiture individuelle, marquée également dans la commune même de Cestas mais aussi des communes périphériques. Dans les communes rurales ou faiblement desservies comme Le Barp, Saucats et Saint-Jean-d’Illac, l’usage de la voiture atteint 100 % des salariés. Ces territoires, éloignés des pôles urbains et mal connectés au réseau de transports collectifs, ne disposent d’aucune alternative crédible à l’automobile.  
+
+Les communes plus proches de la métropole bordelaise, telles que Cestas (82,5 %) et Pessac (82,4 %), présentent des taux légèrement inférieurs, mais la voiture demeure le mode de transport largement dominant. 
+Même dans Léognan (88,2 %), pourtant relativement bien située, l’usage de la voiture reste prépondérant, ce qui illustre la faible intermodalité et la difficulté d’accès à la zone d’activités autrement qu’en voiture. Les chiffres des bus (2,5% pour Cestas même, 2,9% pour Pessac) très bas reflètent des lacunes en terme de desserte en transports collectifs et la nécessité de développer des alternatives crédibles, qu’il s’agisse d’une meilleure offre de bus, de la création d’aires de covoiturage ou de la sécurisation des itinéraires cyclables reliant ces communes à la zone d’activités. Puisqu’il est important de souligner qu’un quart des salariés font usages du vélo, mais non pas de manière régulière, puisque les usagers continuent d’utiliser la voiture. 
+
+
+#### 5.1.2 Le bus
+
+![Carte mentale de l’offre de transports à Cestas et les connexions directes et indirectes avec Bordeaux métropole](images/reseaux_bus.png){.lightbox fig-align="center" figcaption-align="center" width="80%"}
+
+La zone d’activités du Marticot bénéficie d’une desserte en transports collectifs relativement limitée et peu structurée, reflet d’une implantation périphérique et d’une dépendance historique à la voiture individuelle. Trois réseaux assurent aujourd’hui un accès à la zone : le Prox’bus, les cars régionaux Nouvelle-Aquitaine, et, plus indirectement, le réseau TBM de Bordeaux Métropole.  
+
+Le Prox’bus et la ligne 413 des cars régionaux sont les 2 lignes ayant un arrêt direct dans la zone d’activité. Ils jouent un rôle essentiel pour les déplacements de proximité entre Cestas, Canéjan et Saint-Jean-d’Illac, mais les fréquences demeurent faibles et centrées sur les heures de pointe, ce qui limite leur praticité pour les salariés travaillant en horaires décalés.  
+
+Les autres lignes lignes 411 et 480 assurent des liaisons vers Bordeaux, Pessac ou Le Barp, mais leurs arrêts se situent principalement sur les axes structurants de Cestas ou Canéjan, nécessitant souvent une correspondance ou une marche pour rejoindre la zone. Quant au réseau TBM, il ne dessert pas directement le Marticot, bien qu’il constitue la principale porte d’entrée métropolitaine par le biais des arrêts et correspondances situés à Pessac ou Gradignan.  
+
+Cette configuration illustre une des difficultés dans l’offre de transports collectifs : chaque réseau opère dans une logique territoriale distincte, sans interconnexion fluide. Pour les salariés, cela se traduit par un accès complexe, peu avantageux face à la voiture. L’amélioration des liaisons intermodales (Prox’bus ↔ Cars ↔ TBM). Il est d’ailleurs difficile de consulter les différentes possibilités de crrespondance entre les différents opérateurs, sur le site TBM la ligne locale n’apparait pas, sur certaines applaications d’itiniériares les cars régionaux n’apparaissent pas ou proposent directement la voiture comme option principale.  
+
+La création d’arrêts mutualisés et le renforcement des fréquences apparaissent donc comme des leviers essentiels pour rendre la zone plus accessible et soutenir une mobilité plus durable.
+
+
+###### 5.1.2.1 Quel réseau de bus utilisez-vous ?
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
+
+
+df_choix_bus <- donnees %>%
+  select("Cars régionaux" = `D27 A 1 3 cars régionaux`,
+         "Ligne locale" = `D27 A 1 2 ligne locale`,
+         "Réseau TBM" = `D27 A 1 1 réseau bus tbm`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse") %>%
+  filter(Reponse == "Oui") %>%
+  group_by(Service) %>%
+  summarise(N = n(), .groups = "drop") %>%
+  mutate(
+    pct = round(100 * N / sum(N), 1)
+  )
+
+# Palette de couleurs
+couleurs <- c("#1C1B47","#F54927","#6747D1")
+
+# Graphique interactif
+plot_ly(
+  data = df_choix_bus,
+  x = ~Service,
+  y = ~pct,
+  type = "bar",
+  marker = list(color = couleurs),
+  hovertext = ~paste("Mode :", Service,
+                     "<br>Nombre :", N,
+                     "<br>Pourcentage :", pct, "%"),
+  hoverinfo = "text"
+) %>%
+  layout(
+    title = list(
+      text = "<b>Quel réseau de bus utilisez-vous ?</b>",
+      x = 0.5,
+      font = list(color = "red", size = 14)
+    ),
+    xaxis = list(title = "", tickangle = -30),
+    yaxis = list(title = "Réponses en %"),
+    margin = list(t = 80, b = 80)
+  ) %>%
+  config(responsive = TRUE)
+
+
+  
+```
+  
+
+##### 5.1.2.2 Dans quelle mesure les horaires de bus sont compatibles avec vos horaires de travail ?
+
+##### 5.1.2.3 Dans quelle mesure la fréquence des bus est-elle satisfaisante ?
+
+#### 5.1.3 Au cours de l’année changez-vous de mode de transports ?
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
+
+df_changements_transports <- donnees %>%
+  count(changements_transports = `D28 changement transport dans l'année`) %>%
+  mutate(
+    changements_transports = case_when(
+      is.na(changements_transports) | changements_transports == "N/A" ~ "Sans réponse",
+      TRUE ~ changements_transports
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    label = paste0(changements_transports)
+  )
+
+# Graphique interactif en camembert
+plot_ly(
+  data = df_changements_transports,
+  labels = ~label,
+  values = ~n,
+  type = "pie",
+  textinfo = "label",
+  hovertemplate = paste(
+    "<b>%{label}</b><br>",
+    "Nombre de réponses = %{value}<br>",
+    "Pourcentage = %{percent}<extra></extra>"
+  ),
+  hole = 0.4,
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "<b>Changement transports dans l'année</b>",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 14)
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE)
+```
+
+De plus sur les changements de transports au cours de l’année ou de la semaine, le taux est relativement bas (20,6%) contre 73,2% de salariés faisant le changement. Ces changements de transports signifient que les personnes font l’effort de faire l’intermodalité et d’utiliser des modes de déplacements doux (vélo par exemple ou des transports en communs. La cause N°1 des changements est la météo (15,1%) et des contraintes personnelles des individus (13,2%). Mais notre cas, les personnes sont contraintes à prendre leur voiture comme option n°1.
