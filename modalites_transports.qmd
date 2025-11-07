@@ -35,7 +35,6 @@ D’autre part, sa configuration spatiale suit le modèle traditionnel des zones
 
 L’enjeu est donc d’améliorer l’accessibilité globale de la zone afin de favoriser des alternatives crédibles à la voiture individuelle et de réduire sa part modale dominante.
 Une meilleure prise en compte des mobilités actives et collectives apparaît indispensable pour renforcer la durabilité et l’attractivité du site.
-
 ```
 
 ### 5.1 Modalités de transports
@@ -100,6 +99,7 @@ plot_ly(
 ```
 
 ::: {style= "margin-bottom:30px; margin-top:30px;"}
+
 ```{r}
 #| echo: false
 #| warning: false
@@ -130,9 +130,10 @@ transports_utilises %>%
     "))
   )
 ```
+
 :::
 
-La voiture est le premier mode de transport des salariés avec 84,9%, pouvant s’additionner avec les deux roues motorisées (5,2%) grimpant à 90,1% le taux d’utilisation de véhicules motorisés. Si on fait le lien avec les communes d’origines des salariés (2.4 communes des salariés) il n’est pas étonnant au vu de l’air d’attractivité avec plus de 69 communes différentes. 
+La voiture est le premier mode de transport des salariés avec 84,9%, pouvant s’additionner avec les deux roues motorisées (5,2%) grimpant à 90,1% le taux d’utilisation de véhicules motorisés. Si on fait le lien avec les communes d’origines des salariés (2.4 communes des salariés) il n’est pas étonnant au vu de l’air d’attractivité avec plus de 69 communes différentes.
 
 Ce qui est intéressant c’est d’analyser la part modale des salariés venant de Cestas même mais aussi des communes limitrophes.
 
@@ -216,26 +217,23 @@ datatable(
 ```
 :::
 
-L’analyse des modes de déplacement selon la commune de résidence met en évidence une dépendance quasi exclusive à la voiture individuelle, marquée également dans la commune même de Cestas mais aussi des communes périphériques. Dans les communes rurales ou faiblement desservies comme Le Barp, Saucats et Saint-Jean-d’Illac, l’usage de la voiture atteint 100 % des salariés. Ces territoires, éloignés des pôles urbains et mal connectés au réseau de transports collectifs, ne disposent d’aucune alternative crédible à l’automobile.  
+L’analyse des modes de déplacement selon la commune de résidence met en évidence une dépendance quasi exclusive à la voiture individuelle, marquée également dans la commune même de Cestas mais aussi des communes périphériques. Dans les communes rurales ou faiblement desservies comme Le Barp, Saucats et Saint-Jean-d’Illac, l’usage de la voiture atteint 100 % des salariés. Ces territoires, éloignés des pôles urbains et mal connectés au réseau de transports collectifs, ne disposent d’aucune alternative crédible à l’automobile.
 
-Les communes plus proches de la métropole bordelaise, telles que Cestas (82,5 %) et Pessac (82,4 %), présentent des taux légèrement inférieurs, mais la voiture demeure le mode de transport largement dominant. 
-Même dans Léognan (88,2 %), pourtant relativement bien située, l’usage de la voiture reste prépondérant, ce qui illustre la faible intermodalité et la difficulté d’accès à la zone d’activités autrement qu’en voiture. Les chiffres des bus (2,5% pour Cestas même, 2,9% pour Pessac) très bas reflètent des lacunes en terme de desserte en transports collectifs et la nécessité de développer des alternatives crédibles, qu’il s’agisse d’une meilleure offre de bus, de la création d’aires de covoiturage ou de la sécurisation des itinéraires cyclables reliant ces communes à la zone d’activités. Puisqu’il est important de souligner qu’un quart des salariés font usages du vélo, mais non pas de manière régulière, puisque les usagers continuent d’utiliser la voiture. 
-
+Les communes plus proches de la métropole bordelaise, telles que Cestas (82,5 %) et Pessac (82,4 %), présentent des taux légèrement inférieurs, mais la voiture demeure le mode de transport largement dominant. Même dans Léognan (88,2 %), pourtant relativement bien située, l’usage de la voiture reste prépondérant, ce qui illustre la faible intermodalité et la difficulté d’accès à la zone d’activités autrement qu’en voiture. Les chiffres des bus (2,5% pour Cestas même, 2,9% pour Pessac) très bas reflètent des lacunes en terme de desserte en transports collectifs et la nécessité de développer des alternatives crédibles, qu’il s’agisse d’une meilleure offre de bus, de la création d’aires de covoiturage ou de la sécurisation des itinéraires cyclables reliant ces communes à la zone d’activités. Puisqu’il est important de souligner qu’un quart des salariés font usages du vélo, mais non pas de manière régulière, puisque les usagers continuent d’utiliser la voiture.
 
 #### 5.1.2 Le bus
 
 ![Carte mentale de l’offre de transports à Cestas et les connexions directes et indirectes avec Bordeaux métropole](images/reseaux_bus.png){.lightbox fig-align="center" figcaption-align="center" width="80%"}
 
-La zone d’activités du Marticot bénéficie d’une desserte en transports collectifs relativement limitée et peu structurée, reflet d’une implantation périphérique et d’une dépendance historique à la voiture individuelle. Trois réseaux assurent aujourd’hui un accès à la zone : le Prox’bus, les cars régionaux Nouvelle-Aquitaine, et, plus indirectement, le réseau TBM de Bordeaux Métropole.  
+La zone d’activités du Marticot bénéficie d’une desserte en transports collectifs relativement limitée et peu structurée, reflet d’une implantation périphérique et d’une dépendance historique à la voiture individuelle. Trois réseaux assurent aujourd’hui un accès à la zone : le Prox’bus, les cars régionaux Nouvelle-Aquitaine, et, plus indirectement, le réseau TBM de Bordeaux Métropole.
 
-Le Prox’bus et la ligne 413 des cars régionaux sont les 2 lignes ayant un arrêt direct dans la zone d’activité. Ils jouent un rôle essentiel pour les déplacements de proximité entre Cestas, Canéjan et Saint-Jean-d’Illac, mais les fréquences demeurent faibles et centrées sur les heures de pointe, ce qui limite leur praticité pour les salariés travaillant en horaires décalés.  
+Le Prox’bus et la ligne 413 des cars régionaux sont les 2 lignes ayant un arrêt direct dans la zone d’activité. Ils jouent un rôle essentiel pour les déplacements de proximité entre Cestas, Canéjan et Saint-Jean-d’Illac, mais les fréquences demeurent faibles et centrées sur les heures de pointe, ce qui limite leur praticité pour les salariés travaillant en horaires décalés.
 
-Les autres lignes lignes 411 et 480 assurent des liaisons vers Bordeaux, Pessac ou Le Barp, mais leurs arrêts se situent principalement sur les axes structurants de Cestas ou Canéjan, nécessitant souvent une correspondance ou une marche pour rejoindre la zone. Quant au réseau TBM, il ne dessert pas directement le Marticot, bien qu’il constitue la principale porte d’entrée métropolitaine par le biais des arrêts et correspondances situés à Pessac ou Gradignan.  
+Les autres lignes lignes 411 et 480 assurent des liaisons vers Bordeaux, Pessac ou Le Barp, mais leurs arrêts se situent principalement sur les axes structurants de Cestas ou Canéjan, nécessitant souvent une correspondance ou une marche pour rejoindre la zone. Quant au réseau TBM, il ne dessert pas directement le Marticot, bien qu’il constitue la principale porte d’entrée métropolitaine par le biais des arrêts et correspondances situés à Pessac ou Gradignan.
 
-Cette configuration illustre une des difficultés dans l’offre de transports collectifs : chaque réseau opère dans une logique territoriale distincte, sans interconnexion fluide. Pour les salariés, cela se traduit par un accès complexe, peu avantageux face à la voiture. L’amélioration des liaisons intermodales (Prox’bus ↔ Cars ↔ TBM). Il est d’ailleurs difficile de consulter les différentes possibilités de crrespondance entre les différents opérateurs, sur le site TBM la ligne locale n’apparait pas, sur certaines applaications d’itiniériares les cars régionaux n’apparaissent pas ou proposent directement la voiture comme option principale.  
+Cette configuration illustre une des difficultés dans l’offre de transports collectifs : chaque réseau opère dans une logique territoriale distincte, sans interconnexion fluide. Pour les salariés, cela se traduit par un accès complexe, peu avantageux face à la voiture. L’amélioration des liaisons intermodales (Prox’bus ↔ Cars ↔ TBM). Il est d’ailleurs difficile de consulter les différentes possibilités de crrespondance entre les différents opérateurs, sur le site TBM la ligne locale n’apparait pas, sur certaines applaications d’itiniériares les cars régionaux n’apparaissent pas ou proposent directement la voiture comme option principale.
 
 La création d’arrêts mutualisés et le renforcement des fréquences apparaissent donc comme des leviers essentiels pour rendre la zone plus accessible et soutenir une mobilité plus durable.
-
 
 ###### 5.1.2.1 Quel réseau de bus utilisez-vous ?
 
@@ -290,13 +288,274 @@ plot_ly(
 
   
 ```
-  
 
 ##### 5.1.2.2 Dans quelle mesure les horaires de bus sont compatibles avec vos horaires de travail ?
 
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig.width: 3
+#| fig.height: 2
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Préparation des données
+horaires_compatibles <- donnees %>%
+  select(Note = `D27 A 2 horaires compatibles travail`) %>%
+  filter(!is.na(Note)) %>%
+  mutate(Note = as.numeric(Note))
+
+# Calcul de la moyenne
+mediane_note <- median(horaires_compatibles$Note)
+
+# Densité calculée manuellement
+densite <- density(horaires_compatibles$Note, from = 1, to = 6)
+densite_df <- data.frame(
+  Note = densite$x,
+  Densite = densite$y
+) %>%
+  filter(Densite > 0.05) %>%
+  mutate(text = paste0("Note : ", round(Note, 2),
+                       "<br>Densité : ", round(Densite, 3)))
+
+# Graphique ggplot
+p <- ggplot(horaires_compatibles, aes(x = Note)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1,
+                 fill = "#91cf60", color = "white", alpha = 0.7) +
+  geom_line(data = densite_df,
+            aes(x = Note, y = Densite, text = text, group = 1),
+            color = "#d73027", size = 1.2) +
+  geom_vline(aes(xintercept = mediane_note),
+             color = "blue", linetype = "dashed", size = 1) +
+  annotate("text", x = mediane_note + 0.1, y = max(densite_df$Densite),
+           label = paste0("Mediane : ", round(mediane_note, 2)),
+           color = "blue", hjust = 0, size = 3) +
+  scale_x_continuous(
+    breaks = 1:6,
+    labels = c("1 = faible", "2", "3", "4", "5", "6 = forte")
+  ) +
+  labs(
+    title = "Densité sur l’appréciation de la compatibilité des horaires de travail avec les horaires de bus",
+    x = "Note",
+    y = "Densité"
+  ) +
+  theme_minimal()
+
+# Graphique interactif
+ggplotly(p, tooltip = "text") %>%
+  layout(
+    title = list(
+      text = "<b>Densité sur l’appréciation de la compatibilité des horaires de travail avec les horaires de bus </b>",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 14)
+    ),
+    xaxis = list(title = "Note"),
+    yaxis = list(title = "Densité"),
+    margin = list(t = 80, b = 80)
+  )
+  
+```
+
 ##### 5.1.2.3 Dans quelle mesure la fréquence des bus est-elle satisfaisante ?
 
-#### 5.1.3 Au cours de l’année changez-vous de mode de transports ?
+```{r}
+#| echo: false
+#| warning: false
+#| fig.width: 3
+#| fig.height: 2
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Préparation des données
+frequence_satisfaisante <- donnees %>%
+  select(Note = `D27 A 3 fréquence satisfaisante`) %>%
+  filter(!is.na(Note)) %>%
+  mutate(Note = as.numeric(Note))
+
+# Calcul de la moyenne
+mediane_note <- median(frequence_satisfaisante$Note)
+
+# Densité calculée manuellement
+densite <- density(frequence_satisfaisante$Note, from = 1, to = 6)
+densite_df <- data.frame(
+  Note = densite$x,
+  Densite = densite$y
+) %>%
+  filter(Densite > 0.05) %>%
+  mutate(text = paste0("Note : ", round(Note, 2),
+                       "<br>Densité : ", round(Densite, 3)))
+
+# Graphique ggplot
+p <- ggplot(frequence_satisfaisante, aes(x = Note)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1,
+                 fill = "#91cf60", color = "white", alpha = 0.7) +
+  geom_line(data = densite_df,
+            aes(x = Note, y = Densite, text = text, group = 1),
+            color = "#d73027", size = 1.2) +
+  geom_vline(aes(xintercept = mediane_note),
+             color = "blue", linetype = "dashed", size = 1) +
+  annotate("text", x = mediane_note + 0.1, y = max(densite_df$Densite),
+           label = paste0("Mediane : ", round(mediane_note, 2)),
+           color = "blue", hjust = 0, size = 3) +
+  scale_x_continuous(
+    breaks = 1:6,
+    labels = c("1 = faible", "2", "3", "4", "5", "6 = forte")
+  ) +
+  labs(
+    title = "Densité de satisfaction des usagers de la fréquence des bus/cars",
+    x = "Note",
+    y = "Densité"
+  ) +
+  theme_minimal()
+
+# Graphique interactif
+ggplotly(p, tooltip = "text") %>%
+  layout(
+    title = list(
+      text = "<b>Densité de satisfaction des usagers de la fréquence des bus/cars</b>",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 14)
+    ),
+    xaxis = list(title = "Note"),
+    yaxis = list(title = "Densité"),
+    margin = list(t = 80, b = 80)
+  )
+  
+```
+
+Sur les usagers, qui, on le rappelle représentent 2,5% du total des modalités de transports. 
+Les cars régionaux et les lignes locales sont utilisés par la moitié des répondants (50 %), tandis que le réseau TBM, pourtant structurant à l’échelle métropolitaine, n’est cité que par 37,5 % des usagers. Ce constat s’explique principalement par la localisation périphérique de la ZAE du Marticot, à la limite du périmètre métropolitain, et par la faible interconnexion entre les réseaux. La compatibilité des horaires entre le bus et le travail reste mitigé sans réelles tendances avec une moyenne de 3,13. Enfin sur la question de la satisfaction de la fréquence, la médiane est de 1,5 sur une graduation de 1 à 6. Cette insatisfaction est sans doute l’un des facteurs de cette dépréciation des transports en communs face à la voiture en plus d’un tissage intermodale complexe. 
+
+#### 5.1.3 Le train
+
+Même si l’usage du train reste très limité quant à la totalité des salariés, il reste plus utilisé que le bus et cela s’explique par un point d’intérêt non négligeable. Puisque la ZAE se situe à 3km d’une gare intercités SCNF. Une ligne TER relie Bordeaux-Arcachon avec comme arrêts Talence Pessac Cestas Marcheprime, Le Teich, Biganos. De Bordeaux, le trajet est très rapide, on compte environ 15min depuis la gare de Bordeaux Saint-Jean (sans les retards bien sûr…) avec une fréquence de 30min pour chaque train dans une amplitude de 6h00 à 9h00 et de 16h à 19h00 pour les horaires de pointes.
+
+![Cartographie de la ligne Ter Bordeaux-Arcachon à proximité de la zone d’activité](images/train_bx_arcachon.png){.lightbox fig-align="center" width="60%"}
+
+##### 5.1.3.1 Les horaires de trains sont-ils compatibles avec les horaires de travail ?
+
+:::{style = "margin-top:30px; margin-bottom: 30px;"}
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(DT)
+
+# Exemple : summary sur une variable numérique
+horaires_compatibles <- donnees %>%
+  select(Note = `D27 B 1 horaire train compatible horaire travail`) %>%
+  summarise(
+    `Nombre de réponses` = sum(!is.na(Note)),
+    `Absence de réponses` = sum(is.na(Note)),
+    Moyenne = round(mean(Note, na.rm = TRUE), 2),
+    Médiane = median(Note, na.rm = TRUE),
+    `Écart-type` = round(sd(Note, na.rm = TRUE), 2),
+    Minimum = min(Note, na.rm = TRUE),
+    Maximum = max(Note, na.rm = TRUE)
+  )
+
+# Tableau interactif
+datatable(
+  horaires_compatibles,
+  options = list(dom = "t"),
+  rownames = FALSE
+)
+
+```
+:::
+
+  
+##### 5.1.3.2 Satisfaction de la fréquence des trains
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig.width: 3
+#| fig.height: 2
+
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(htmlwidgets)
+
+# Préparation des données
+frequence_satisfaisante <- donnees %>%
+  select(Note = `D27 B 2 fréquence satisfaisante`) %>%
+  filter(!is.na(Note)) %>%
+  mutate(Note = as.numeric(Note))
+
+# Calcul de la moyenne
+mediane_note <- median(frequence_satisfaisante$Note)
+
+# Densité calculée manuellement
+densite <- density(frequence_satisfaisante$Note, from = 1, to = 6)
+densite_df <- data.frame(
+  Note = densite$x,
+  Densite = densite$y
+) %>%
+  filter(Densite > 0.05) %>%
+  mutate(text = paste0("Note : ", round(Note, 2),
+                       "<br>Densité : ", round(Densite, 3)))
+
+# Graphique ggplot
+p <- ggplot(frequence_satisfaisante, aes(x = Note)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1,
+                 fill = "#91cf60", color = "white", alpha = 0.7) +
+  geom_line(data = densite_df,
+            aes(x = Note, y = Densite, text = text, group = 1),
+            color = "#d73027", size = 1.2) +
+  geom_vline(aes(xintercept = mediane_note),
+             color = "blue", linetype = "dashed", size = 1) +
+  annotate("text", x = mediane_note + 0.1, y = max(densite_df$Densite),
+           label = paste0("Mediane : ", round(mediane_note, 2)),
+           color = "blue", hjust = 0, size = 3) +
+  scale_x_continuous(
+    breaks = 1:6,
+    labels = c("1 = faible", "2", "3", "4", "5", "6 = forte")
+  ) +
+  labs(
+    title = "Densité de la satisfaction de la fréquence des trains",
+    x = "Note",
+    y = "Densité"
+  ) +
+  theme_minimal()
+
+# Graphique interactif
+ggplotly(p, tooltip = "text") %>%
+  layout(
+    title = list(
+      text = "<b>Densité de la satisfaction de la fréquence des trains</b>",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 14)
+    ),
+    xaxis = list(title = "Note"),
+    yaxis = list(title = "Densité"),
+    margin = list(t = 80, b = 80)
+  )
+  
+```
+
+Les salariés utilisant le train évaluent globalement de manière positive la compatibilité des horaires de train avec leurs horaires de travail, avec une moyenne de 4,47/6. Cela montre que ce moyen de transport constitue une alternative crédible à la voiture pour une partie des actifs de la zone d’activité.
+En revanche, la satisfaction concernant la fréquence des trains apparaît plus nuancée, avec une moyenne de 3,26/6, traduisant un service jugé parfois insuffisant ou irrégulier pour un usage quotidien.  
+
+Les principaux usagers résident dans des communes situées le long de la ligne TER Bordeaux–Arcachon (Arcachon, Le Teich, Marcheprime, Biganos, La Teste-de-Buch). Ces loca-lisations bénéficient d’un accès direct et pratique à la gare de Cestas-Gazinet ou aux arrêts intermédiaires, ce qui renforce le potentiel de développement de cette mobilité.
+Pourtant, la comparaison avec les salariés de ces mêmes communes utilisant encore majoritairement la voiture montre que le potentiel de report modal vers le train reste important.  
+
+Enfin, les salariés bordelais apparaissent également comme un public stratégique : confrontés à une forte congestion routière, ils pourraient trouver dans le train une solution de déplacement plus fiable et plus rapide pour accéder à la zone d’activité, 39,1% utilise le train comme moyen de mobilité.
+
+
+#### 5.1.4 Au cours de l’année changez-vous de mode de transports ?
 
 ```{r}
 #| echo: false

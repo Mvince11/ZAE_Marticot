@@ -5,6 +5,7 @@ website:
   #title: "CAPB_web"
   back-to-top-navigation: true
   navbar:
+    collapse-below: xxl
     logo: "images/logos/Panorama2.png"
     logo-alt: "ZAE Marticot"
     left:
