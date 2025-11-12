@@ -439,7 +439,7 @@ Les cars régionaux et les lignes locales sont utilisés par la moitié des rép
 
 Même si l’usage du train reste très limité quant à la totalité des salariés, il reste plus utilisé que le bus et cela s’explique par un point d’intérêt non négligeable. Puisque la ZAE se situe à 3km d’une gare intercités SCNF. Une ligne TER relie Bordeaux-Arcachon avec comme arrêts Talence Pessac Cestas Marcheprime, Le Teich, Biganos. De Bordeaux, le trajet est très rapide, on compte environ 15min depuis la gare de Bordeaux Saint-Jean (sans les retards bien sûr…) avec une fréquence de 30min pour chaque train dans une amplitude de 6h00 à 9h00 et de 16h à 19h00 pour les horaires de pointes.
 
-![Cartographie de la ligne Ter Bordeaux-Arcachon à proximité de la zone d’activité](images/train_bx_arcachon.png){.lightbox fig-align="center" width="60%"}
+![Cartographie de la ligne Ter Bordeaux-Arcachon à proximité de la zone d’activité](images/ter_arcachon.jpg){.lightbox fig-align="center" width="60%"}
 
 ##### 5.1.3.1 Les horaires de trains sont-ils compatibles avec les horaires de travail ?
 
@@ -555,7 +555,175 @@ Pourtant, la comparaison avec les salariés de ces mêmes communes utilisant enc
 Enfin, les salariés bordelais apparaissent également comme un public stratégique : confrontés à une forte congestion routière, ils pourraient trouver dans le train une solution de déplacement plus fiable et plus rapide pour accéder à la zone d’activité, 39,1% utilise le train comme moyen de mobilité.
 
 
-#### 5.1.4 Au cours de l’année changez-vous de mode de transports ?
+#### 5.1.4 La voiture
+
+
+```{r}
+#| echo: false
+
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+
+# Données croisées : adaptation × horaire
+df_croise <- donnees %>%
+  select(Note = `D27 C 1 adapter embouteillage`,
+         Horaire = `C20 horaire`) %>%
+  filter(!is.na(Note)) %>%
+  mutate(
+    Horaire = case_when(
+      is.na(Horaire) | Horaire == "N/A" ~ "Sans réponse",
+      TRUE ~ Horaire
+    ),
+    Horaire = trimws(Horaire),          # ✅ supprime espaces
+    Horaire = stringr::str_to_title(Horaire), # ✅ met en majuscule initiale
+    Note = factor(Note, levels = c("1","2","3","4","5","6"),
+                  labels = c("1 = Jamais","2","3","4","5","6 = Toujours"))
+  ) %>%
+  group_by(Horaire, Note) %>%
+  summarise(N = n(), .groups = "drop")%>%
+  mutate(
+    Total = sum(N),                          
+    Pourcent = round(100 * N / Total, 1)     
+  )
+
+
+
+couleurs_horaires <- c(
+  "Fixes" = "#1f77b4",      
+  "Variables" = "#ff7f0e",  
+  "Sans réponse" = "green"
+)
+
+# Graphique en barres groupées
+plot_ly(
+  data = df_croise,
+  x = ~Note,
+  y = ~N,
+  color = ~Horaire,
+  colors = couleurs_horaires, 
+  type = "bar",
+  text = ~paste("Horaire :", Horaire, 
+                "<br>Note :", Note, 
+                "<br>Réponses :", N,
+                "<br>Pourcentage :", Pourcent, "%"),
+  hoverinfo = "text", 
+  textposition = "none" 
+) %>%
+  layout(
+    barmode = "group",
+    title = list(
+      text = "<b>Adaptation aux embouteillages selon type d’horaire</b>",
+      x = 0.5,
+      xanchor = "center",
+      font = list(size = 14, color = "red")
+    ),
+    xaxis = list(title = "Note d’adaptation"),
+    yaxis = list(title = "Nombre de réponses"),
+    legend = list(orientation = "h", x = 0.5, xanchor = "center", y = -0.2)
+  )
+
+```
+
+Pour les automobilistes, nous avons cherché à savoir l’impact du trafic sur les horaires de travail en heures d’arrivés et de départ des salariés. La majorité (42,5%) attribuent une note faible de 1 sur une graduation jusqu’à 6. Ce qui peut signifier que les salariés n’ont pas besoins d’adapter ou qu’ils n’ont pas la possibilité et doivent subir la congestion routière lors de leur trajet. Cette faible flexibilité peut signifier qu’ils n’ont pas la possibilité d’avoir des horaires moins exposés aux embouteillages et doivent donc adapter leur heure de départ et ne pas partir quand ils veulent. Les contraintes personnelles peuvent également impacter cette tendance, en effet les personnes devant amener leurs enfants à l’école n’ont pas plus de marche de manœuvre pour éviter cette pénibilité. 
+
+Quand on compare entre les personnes ayant des horaires fixes et variables la tendance est relativement identique. Le test du khi² d’indépendance (χ²(5, N=275) = 7,95 ; p = 0,159) ne met pas en évidence de lien significatif entre le type d’horaires (fixes ou variables) et l’adaptation des horaires en fonction des embouteillages.
+
+Bien que les salariés disposant d’horaires variables semblent légèrement plus nombreux à adapter leurs déplacements, cette différence n’est pas statistiquement significative.
+Ces résultats suggèrent que la flexibilité horaire ne constitue pas, à elle seule, un facteur déterminant dans l’adaptation aux embouteillages. 
+
+Les personnes ayant des horaires variables estiment également en majorité ne pas du tout adapter leurs horaires de travail en fonction des embouteillages (24,4%). Cela peut signifier qu’ils estiment ne pas avoir besoin d’adapter grâce à leurs horaires variables. Ils sont également beaucoup plus nombreux à déclarer s’adapter davantage aux conditions de circulation, avec une distribution plus équilibrée sur les notes moyennes et élevées. Cela traduit une plus grande flexibilité dans l’organisation du travail, leur permettant d’éviter les heures de pointe ou de décaler leurs trajets.
+
+
+
+#### 5.1.5 Vélo/trottinette
+
+::: {style="margin-top:30px; margin-bottom:30px;"}
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 3
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+
+# Préparation des données
+frequence_semaine <- donnees %>%
+  select(
+    "D27 D 1 fréquence semaine"
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))
+
+# Comptage des réponses par critère/note
+df_plot <- frequence_semaine %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")%>%
+  group_by(Critere) %>%
+  mutate(
+    Total = sum(N),
+    Pourcent = round(100 * N / Total, 1)  # % arrondi à 1 décimale
+  )
+
+plot_ly(
+  data = df_plot,
+  x = ~Note,          # ✅ les modalités sur l’axe X
+  y = ~N,      # ✅ pourcentage ou N sur l’axe Y
+  color = ~Note,
+  colors = "RdYlGn",
+  type = "bar",
+  text = ~paste(
+    "Note :", Note,
+    "<br>Réponses :", N,
+    "<br>Pourcentage :", Pourcent, "%"
+  ),
+  hoverinfo = "text"
+) %>%
+  layout(
+    barmode = "stack",   # empilé si plusieurs critères
+    title = list(
+      text = "<b>Fréquence hebdomadaire d’utilisation du vélo par les usagers</b>",
+      x = 0.5,
+      font = list(color = "red", size = 14)
+    ),
+    xaxis = list(title = "Fréquence par semaine"),
+    yaxis = list(title = "Nombre de réponses"),
+    autosize = TRUE,
+    showlegend = FALSE
+  ) %>%
+  config(responsive = TRUE)
+
+
+```
+:::
+
+L’utilisation du vélo par les salariés de la zone apparaît relativement homogène, bien que majoritairement occasionnelle. Une part importante des cyclistes déclare utiliser ce mode de transport moins d’une fois par semaine (29,3%), ou entre une et deux fois par semaine (27%). Environ un quart (21%) des répondants l’utilisent trois à quatre fois par semaine, tan-dis que 22% déclarent se déplacer quotidiennement à vélo. Cette répartition traduit une pra-tique encore partielle, souvent conditionnée par la météo, la distance domicile-travail ou en-core le télétravail, qui limite la fréquence des trajets vers la zone.  
+
+Concernant les infrastructures, la majorité des entreprises de la ZAE semblent avoir investi dans des équipements favorables à la pratique cyclable : 92% des usagers indiquent béné-ficier d’un stationnement pour vélo, 78,7% disposent d’un vestiaire, et 80% ont la possibilité de se doucher sur leur lieu de travail.
+
+Ces chiffres témoignent d’un engagement concret des entreprises en faveur de la mobilité douce, facilitant les conditions d’accès pour les salariés souhaitant adopter le vélo comme mode de déplacement régulier.
+
+#### 5.1.6 Les Piétons
+
+Sur l’ensemble de l’échantillon, seulement deux personnes déclarent venir à pied sur la zone d’activités. Ce chiffre extrêmement faible confirme l’isolement de la zone, éloignée des zones d’habitation et difficilement accessible autrement qu’en véhicule motorisée ou en vé-lo. Pourtant, à environ 500 mètres, on retrouve des lotissements résidentiels qui pourraient potentiellement générer des déplacements piétons.  
+
+Cependant, les conditions de cheminement ne sont pas favorables : la route départementale ne comporte ni trottoirs ni espaces sécurisés pour les piétons. Si une piste cyclable longe une partie de la voie principale jusqu’à la zone d’activités, celle-ci ne compense pas l’absence d’aménagements piétons adaptés.
+
+![Vue satellite du site de Marticot avec une zone pavillonaire en proximité ; image de gauche : Côté droit de la route de Fourc, D214 ; image 2 : passage piéton route de Fourc, D214 ; Google Street View, Septembre 2025](images/passage_pietons.png){.lightbox fig-align="center" figcaption-align="center" width="80%"}
+
+
+À l’intérieur même de la zone, les problématiques de cheminement persistent. Certaines voi-ries ne disposent pas de trottoirs, rendant la marche inconfortable voire dangereuse. La par-tie sud est particulièrement concernée, avec l’absence totale de trottoirs et la présence fré-quente de véhicules stationnés sur la chaussée. Les quelques salariés se déplaçant à pied ont évalué la sécurité de leur trajet à 2 sur 6, ce qui témoigne d’un sentiment d’insécurité réel.
+
+Même si le nombre de marcheurs est très faible, cette situation doit être prise en compte : elle illustre le manque d’infrastructures favorables à la marche et le potentiel inexploité des dé-placements de proximité. Des salariés résidant à proximité immédiate pourraient envisager la marche si les conditions de sécurité et de confort étaient améliorées.
+
+![Chemin de Marticot, entrée de l’entreprise Lectra ; Google Street View, Septembre 2025](images/chemin_marticot.png){.lightbox fig-align="center" figcaption-align="center" width="80%"}
+
+#### 5.1.7 Covoiturage
+
+#### 5.1.8 Au cours de l’année changez-vous de mode de transports ?
 
 ```{r}
 #| echo: false
