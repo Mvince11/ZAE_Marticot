@@ -1,0 +1,15 @@
+---
+title: "Conclusion"
+#subtitle: "Cas d'étude de la zone d'activité de Marticot (33)"
+image: "images/logos/logo_cerema_br.jpg"
+lang: fr
+about:
+  template: trestles
+  image: "images/logos/logo_cerema.PNG"
+toc: true
+---
+
+- Etude exploratrice qui permet d’ouvrir le champs d’analyses qualitatifs des ZAE en mettant au centre l’individu.
+- Méthodologie applicable à toutes les ZAE mais réflexion poussée sur les caractéristiques 
+- Échantillon conséquent mais reste limité, à interpréter avec recul 
+- Demande beaucoup de temps et de réflexion dans l’élaboration

@@ -35,6 +35,8 @@ website:
             href: modalites_transports.qmd
           - text: Volet Pause déjeuner
             href: pause_dejeuner.qmd
+          - text: Conclusion
+            href: conclusion.qmd
       - href: ref_biblio.qmd
         text: Références biliographiques
         icon: book

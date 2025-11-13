@@ -2,7 +2,7 @@
 title: ""
 lang: fr
 toc: true
-toc-depth: 6
+toc-depth: 4
 ---
 
 ```{r}
@@ -37,9 +37,8 @@ L’enjeu est donc d’améliorer l’accessibilité globale de la zone afin de 
 Une meilleure prise en compte des mobilités actives et collectives apparaît indispensable pour renforcer la durabilité et l’attractivité du site.
 ```
 
-### 5.1 Modalités de transports
 
-#### 5.1.1 En général, quel(s) modes de transport utilisez-vous pour venir au travail ?
+### 5.1 En général, quel(s) modes de transport utilisez-vous pour venir au travail ?
 
 ```{r}
 #| echo: false
@@ -221,7 +220,58 @@ L’analyse des modes de déplacement selon la commune de résidence met en évi
 
 Les communes plus proches de la métropole bordelaise, telles que Cestas (82,5 %) et Pessac (82,4 %), présentent des taux légèrement inférieurs, mais la voiture demeure le mode de transport largement dominant. Même dans Léognan (88,2 %), pourtant relativement bien située, l’usage de la voiture reste prépondérant, ce qui illustre la faible intermodalité et la difficulté d’accès à la zone d’activités autrement qu’en voiture. Les chiffres des bus (2,5% pour Cestas même, 2,9% pour Pessac) très bas reflètent des lacunes en terme de desserte en transports collectifs et la nécessité de développer des alternatives crédibles, qu’il s’agisse d’une meilleure offre de bus, de la création d’aires de covoiturage ou de la sécurisation des itinéraires cyclables reliant ces communes à la zone d’activités. Puisqu’il est important de souligner qu’un quart des salariés font usages du vélo, mais non pas de manière régulière, puisque les usagers continuent d’utiliser la voiture.
 
-#### 5.1.2 Le bus
+### 5.2 Au cours de l’année changez-vous de mode de transports ?
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(plotly)
+
+df_changements_transports <- donnees %>%
+  count(changements_transports = `D28 changement transport dans l'année`) %>%
+  mutate(
+    changements_transports = case_when(
+      is.na(changements_transports) | changements_transports == "N/A" ~ "Sans réponse",
+      TRUE ~ changements_transports
+    ),
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    label = paste0(changements_transports)
+  )
+
+# Graphique interactif en camembert
+plot_ly(
+  data = df_changements_transports,
+  labels = ~label,
+  values = ~n,
+  type = "pie",
+  textinfo = "label",
+  hovertemplate = paste(
+    "<b>%{label}</b><br>",
+    "Nombre de réponses = %{value}<br>",
+    "Pourcentage = %{percent}<extra></extra>"
+  ),
+  hole = 0.4,
+  marker = list(line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "<b>Changement transports dans l'année</b>",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 14)
+    ),
+    margin = list(t = 60, b = 60)
+  ) %>%
+  config(responsive = TRUE)
+```
+
+De plus sur les changements de transports au cours de l’année ou de la semaine, le taux est relativement bas (20,6%) contre 73,2% de salariés faisant le changement. Ces changements de transports signifient que les personnes font l’effort de faire l’intermodalité et d’utiliser des modes de déplacements doux (vélo par exemple ou des transports en communs. La cause N°1 des changements est la météo (15,1%) et des contraintes personnelles des individus (13,2%). Mais notre cas, les personnes sont contraintes à prendre leur voiture comme option n°1.
+
+
+### 5.3 Le bus
 
 ![Carte mentale de l’offre de transports à Cestas et les connexions directes et indirectes avec Bordeaux métropole](images/reseaux_bus.png){.lightbox fig-align="center" figcaption-align="center" width="80%"}
 
@@ -235,7 +285,7 @@ Cette configuration illustre une des difficultés dans l’offre de transports c
 
 La création d’arrêts mutualisés et le renforcement des fréquences apparaissent donc comme des leviers essentiels pour rendre la zone plus accessible et soutenir une mobilité plus durable.
 
-###### 5.1.2.1 Quel réseau de bus utilisez-vous ?
+#### 5.3.1 Quel réseau de bus utilisez-vous ?
 
 ```{r}
 #| echo: false
@@ -289,7 +339,7 @@ plot_ly(
   
 ```
 
-##### 5.1.2.2 Dans quelle mesure les horaires de bus sont compatibles avec vos horaires de travail ?
+#### 5.3.2 Dans quelle mesure les horaires de bus sont compatibles avec vos horaires de travail ?
 
 
 ```{r}
@@ -361,7 +411,7 @@ ggplotly(p, tooltip = "text") %>%
   
 ```
 
-##### 5.1.2.3 Dans quelle mesure la fréquence des bus est-elle satisfaisante ?
+#### 5.3.3 Dans quelle mesure la fréquence des bus est-elle satisfaisante ?
 
 ```{r}
 #| echo: false
@@ -435,13 +485,13 @@ ggplotly(p, tooltip = "text") %>%
 Sur les usagers, qui, on le rappelle représentent 2,5% du total des modalités de transports. 
 Les cars régionaux et les lignes locales sont utilisés par la moitié des répondants (50 %), tandis que le réseau TBM, pourtant structurant à l’échelle métropolitaine, n’est cité que par 37,5 % des usagers. Ce constat s’explique principalement par la localisation périphérique de la ZAE du Marticot, à la limite du périmètre métropolitain, et par la faible interconnexion entre les réseaux. La compatibilité des horaires entre le bus et le travail reste mitigé sans réelles tendances avec une moyenne de 3,13. Enfin sur la question de la satisfaction de la fréquence, la médiane est de 1,5 sur une graduation de 1 à 6. Cette insatisfaction est sans doute l’un des facteurs de cette dépréciation des transports en communs face à la voiture en plus d’un tissage intermodale complexe. 
 
-#### 5.1.3 Le train
+### 5.4 Le train
 
 Même si l’usage du train reste très limité quant à la totalité des salariés, il reste plus utilisé que le bus et cela s’explique par un point d’intérêt non négligeable. Puisque la ZAE se situe à 3km d’une gare intercités SCNF. Une ligne TER relie Bordeaux-Arcachon avec comme arrêts Talence Pessac Cestas Marcheprime, Le Teich, Biganos. De Bordeaux, le trajet est très rapide, on compte environ 15min depuis la gare de Bordeaux Saint-Jean (sans les retards bien sûr…) avec une fréquence de 30min pour chaque train dans une amplitude de 6h00 à 9h00 et de 16h à 19h00 pour les horaires de pointes.
 
 ![Cartographie de la ligne Ter Bordeaux-Arcachon à proximité de la zone d’activité](images/ter_arcachon.jpg){.lightbox fig-align="center" width="60%"}
 
-##### 5.1.3.1 Les horaires de trains sont-ils compatibles avec les horaires de travail ?
+#### 5.4.1 Les horaires de trains sont-ils compatibles avec les horaires de travail ?
 
 :::{style = "margin-top:30px; margin-bottom: 30px;"}
 ```{r}
@@ -475,7 +525,7 @@ datatable(
 :::
 
   
-##### 5.1.3.2 Satisfaction de la fréquence des trains
+#### 5.4.2 Satisfaction de la fréquence des trains
 
 ```{r}
 #| echo: false
@@ -555,7 +605,7 @@ Pourtant, la comparaison avec les salariés de ces mêmes communes utilisant enc
 Enfin, les salariés bordelais apparaissent également comme un public stratégique : confrontés à une forte congestion routière, ils pourraient trouver dans le train une solution de déplacement plus fiable et plus rapide pour accéder à la zone d’activité, 39,1% utilise le train comme moyen de mobilité.
 
 
-#### 5.1.4 La voiture
+### 5.5 La voiture
 
 
 ```{r}
@@ -637,7 +687,7 @@ Les personnes ayant des horaires variables estiment également en majorité ne p
 
 
 
-#### 5.1.5 Vélo/trottinette
+### 5.6 Vélo/trottinette
 
 ::: {style="margin-top:30px; margin-bottom:30px;"}
 ```{r}
@@ -685,7 +735,7 @@ plot_ly(
   layout(
     barmode = "stack",   # empilé si plusieurs critères
     title = list(
-      text = "<b>Fréquence hebdomadaire d’utilisation du vélo par les usagers</b>",
+      text = "<b>Fréquence hebdomadaire d’utilisation du vélo par les salariés</b>",
       x = 0.5,
       font = list(color = "red", size = 14)
     ),
@@ -706,7 +756,7 @@ Concernant les infrastructures, la majorité des entreprises de la ZAE semblent 
 
 Ces chiffres témoignent d’un engagement concret des entreprises en faveur de la mobilité douce, facilitant les conditions d’accès pour les salariés souhaitant adopter le vélo comme mode de déplacement régulier.
 
-#### 5.1.6 Les Piétons
+### 5.7 Les Piétons
 
 Sur l’ensemble de l’échantillon, seulement deux personnes déclarent venir à pied sur la zone d’activités. Ce chiffre extrêmement faible confirme l’isolement de la zone, éloignée des zones d’habitation et difficilement accessible autrement qu’en véhicule motorisée ou en vé-lo. Pourtant, à environ 500 mètres, on retrouve des lotissements résidentiels qui pourraient potentiellement générer des déplacements piétons.  
 
@@ -721,9 +771,147 @@ Même si le nombre de marcheurs est très faible, cette situation doit être pri
 
 ![Chemin de Marticot, entrée de l’entreprise Lectra ; Google Street View, Septembre 2025](images/chemin_marticot.png){.lightbox fig-align="center" figcaption-align="center" width="80%"}
 
-#### 5.1.7 Covoiturage
+### 5.8 Covoiturage
 
-#### 5.1.8 Au cours de l’année changez-vous de mode de transports ?
+::: {style="margin-top:30px; margin-bottom:30px;"}
+```{r}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 3
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+
+# Préparation des données
+frequence_covoit_semaine <- donnees %>%
+  select(
+    "D27 F 1 fréquence covoit"
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Critere", values_to = "Note") %>%
+  filter(!is.na(Note))
+
+# Comptage des réponses par critère/note
+df_plot <- frequence_covoit_semaine %>%
+  group_by(Critere, Note) %>%
+  summarise(N = n(), .groups = "drop")%>%
+  group_by(Critere) %>%
+  mutate(
+    Total = sum(N),
+    Pourcent = round(100 * N / Total, 1)  # % arrondi à 1 décimale
+  )
+
+plot_ly(
+  data = df_plot,
+  x = ~Note,          # ✅ les modalités sur l’axe X
+  y = ~N,      # ✅ pourcentage ou N sur l’axe Y
+  color = ~Note,
+  colors = "RdYlGn",
+  type = "bar",
+  text = ~paste(
+    "Note :", Note,
+    "<br>Réponses :", N,
+    "<br>Pourcentage :", Pourcent, "%"
+  ),
+  hoverinfo = "text",
+  textposition = "none"
+) %>%
+  layout(
+    barmode = "stack",   # empilé si plusieurs critères
+    title = list(
+      text = "<b>Fréquence hebdomadaire de la pratique du covoiturage par les salariés</b>",
+      x = 0.5,
+      font = list(color = "red", size = 14)
+    ),
+    xaxis = list(title = "Fréquence par semaine"),
+    yaxis = list(title = "Nombre de réponses"),
+    autosize = TRUE,
+    showlegend = FALSE
+  ) %>%
+  config(responsive = TRUE)
+
+
+```
+:::
+
+La pratique du covoiturage au sein des salariés reste modérée et principalement occasionnelle.
+Les résultats montrent que près d’un tiers (34,6%) des répondants ont recours à ce mode de déplacement quelques fois par mois, tandis qu’un quart environ (26,9%) l’utilisent entre deux et quatre fois par semaine.
+Seuls 23,1% déclarent covoiturer tous les jours ouvrés, traduisant une utilisation régulière mais minoritaire. À l’inverse, le covoiturage ponctuel demeure significatif : 11,5% le pratiquent quelques fois par an, et 3,8% seulement une fois par semaine.
+Ces données témoignent d’une pratique encore limitée et irrégulière, souvent dépendante des opportunités de trajet partagé (compatibilité des horaires, collègues proches géographiquement, disponibilité des plateformes, etc.).  
+
+Ainsi, bien que la pratique du covoiturage soit présente sur la zone d’activité, elle ne constitue pas encore une alternative solide à la voiture individuelle.
+Cependant, certains résultats révèlent un potentiel de développement significatif : près de 70 % des salariés pratiquant le covoiturage le font avec leurs collègues, soulignant que cette modalité repose avant tout sur les liens professionnels existants.
+Ce constat suggère qu’un dispositif de mise en relation interentreprises pourrait renforcer et pérenniser la pratique, en facilitant l’organisation des trajets communs au-delà des frontières de chaque structure.  
+
+Seulement 0.9% des personnes utilisent une aire de coivturage et 0,6% passent par une application de covoiturage. 
+Le covoiturage représente ainsi un levier concret pour réduire la part modale de la voiture individuelle, à condition d’être mieux coordonné à l’échelle de la zone, avec un service mutualisé pour mettre en relation les salariés d’une même entreprise mais aussi de d’autres.
+
+:::{style="margin-top:30px;"}
+```{r}
+#| echo: false
+
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+library(RColorBrewer)
+
+# Étape 1 : transformation des données
+covoit <- donnees %>%
+  select(
+    "Avec des collégues" = `D27 F 2 1 collegue`,
+    "Avec de la famille" = `D27 F 2 2 famille`,
+    "Avec une personne de la ZAE" = `D27 F 2 3 personne ZAE`,
+    "Avec une personne hors ZAE" = `D27 F 2 4 personne hors ZAE`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse") %>%
+  filter(Reponse %in% c("Oui", "Non"))
+
+# Étape 2 : calcul du % de Oui par service
+df_plot <- covoit %>%
+  group_by(Service) %>%
+  summarise(
+    total = n(),
+    nb_oui = sum(Reponse == "Oui"),
+    pct = round(100 * nb_oui / total, 1),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    hover = paste0("Service : ", Service,
+                   "<br>Réponses Oui : ", nb_oui,
+                   "<br>Total réponses : ", total,
+                   "<br>Pourcentage : ", pct, "%")
+  )
+
+# Palette de couleurs par service (6 couleurs)
+couleurs <- RColorBrewer::brewer.pal(n = 6, name = "Set2")
+
+# Graphique Plotly : barres colorées par service
+plot_ly(
+  data = df_plot,
+  x = ~reorder(Service, nb_oui),
+  y = ~nb_oui,
+  type = "bar",
+  marker = list(color = couleurs),
+  text = ~hover,
+  textposition = "none",
+  hoverinfo = "text"
+) %>%
+  layout(
+    title = list(text = "<b>Nature du covoiturage des salariés</b>", x = 0.5, font = list(size = 14, color = "red")),
+    xaxis = list(title = "", tickangle = 25, tickfont = list(size = 10)),
+    yaxis = list(title = "Nombre de réponses", titlefont = list(size = 12)),
+    showlegend = FALSE
+  )
+```
+:::
+
+
+### 5.9 Si pas d'utilisation de transports en commun   
+
+
+#### 5.9.1 Existe-t-il un transport en commun pour votre trajet ? 
 
 ```{r}
 #| echo: false
@@ -732,21 +920,19 @@ Même si le nombre de marcheurs est très faible, cette situation doit être pri
 library(dplyr)
 library(plotly)
 
-df_changements_transports <- donnees %>%
-  count(changements_transports = `D28 changement transport dans l'année`) %>%
+df_transports <- donnees %>%
+  count(transports_commun = `D28 transports en communs`) %>%
+  filter(transports_commun %in% c("Oui", "Non")) %>%  
   mutate(
-    changements_transports = case_when(
-      is.na(changements_transports) | changements_transports == "N/A" ~ "Sans réponse",
-      TRUE ~ changements_transports
-    ),
     Total = sum(n),
     Pourcent = round(100 * n / Total, 1),
-    label = paste0(changements_transports)
+    label = paste0(transports_commun)
   )
+
 
 # Graphique interactif en camembert
 plot_ly(
-  data = df_changements_transports,
+  data = df_transports,
   labels = ~label,
   values = ~n,
   type = "pie",
@@ -761,7 +947,7 @@ plot_ly(
 ) %>%
   layout(
     title = list(
-      text = "<b>Changement transports dans l'année</b>",
+      text = "<b>Existe-t-il un transport en commun pour votre trajet ?</b>",
       x = 0.5,
       xanchor = "center",
       font = list(color = "red", size = 14)
@@ -771,4 +957,159 @@ plot_ly(
   config(responsive = TRUE)
 ```
 
-De plus sur les changements de transports au cours de l’année ou de la semaine, le taux est relativement bas (20,6%) contre 73,2% de salariés faisant le changement. Ces changements de transports signifient que les personnes font l’effort de faire l’intermodalité et d’utiliser des modes de déplacements doux (vélo par exemple ou des transports en communs. La cause N°1 des changements est la météo (15,1%) et des contraintes personnelles des individus (13,2%). Mais notre cas, les personnes sont contraintes à prendre leur voiture comme option n°1.
+#### 5.9.2 Si oui, pourquoi ne l’utilisez-vous pas ? 
+
+:::{style="margin-top:30px;"}
+```{r}
+#| echo: false
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+library(RColorBrewer)
+
+# Étape 1 : mise en forme des données
+pas_bus <- donnees %>%
+  select(
+    "Horaires" = `D28 1 1 horaires`,
+    "Durée trop importante" = `D28 1 2 durée trop importante`,
+    "Coût élevé" = `D28 1 3 coût élevé`,
+    "Contraintes perso" = `D28 1 4 contraintes perso`,
+    "Trop de bus" = `D28 1 5 trop de bus`,
+    "Trop de transports différents" = `D28 1 6 trop de transports différents`,
+    "Dernier arrêt loin" = `D28 1 7 dernier arrêt loin`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse") %>%
+  mutate(Reponse = ifelse(is.na(Reponse), "Sans réponse", Reponse))
+  #filter(Reponse %in% c("Oui", "Non"))
+
+# Étape 2 : calcul du % de Oui par rapport au total global
+df_plot <- pas_bus %>%
+  group_by(Service) %>%
+  summarise(
+    nb_oui = sum(Reponse == "Oui", na.rm = TRUE),   # ✅ nombre de Oui
+    total = n(),                                    # ✅ total = Oui + Non + NA
+    pct = round(100 * nb_oui / total, 1),           # ✅ % de Oui avec NA au dénominateur
+    .groups = "drop"
+  ) %>%
+  mutate(
+    hover = paste0("Service : ", Service,
+                   "<br>Réponses Oui : ", nb_oui,
+                   "<br>Total réponses : ", total,
+                   "<br>Pourcentage global : ", pct, "%")
+  )
+
+# Palette de couleurs par service
+couleurs <- RColorBrewer::brewer.pal(n = length(unique(df_plot$Service)), name = "Set2")
+
+# Graphique Plotly
+plot_ly(
+  data = df_plot,
+  x = ~reorder(Service, nb_oui),
+  y = ~pct,
+  type = "bar",
+  marker = list(color = couleurs),
+  text = ~hover,
+  hoverinfo = "text",
+  textposition="none"
+) %>%
+  layout(
+    title = list(
+      text = "<b>Raisons de la non utilisation des transports en commun des salariés</b>",
+      x = 0.5,
+      font = list(size = 14, color = "red")
+    ),
+    xaxis = list(title = "", tickangle = 25, tickfont = list(size = 10)),
+    yaxis = list(title = "% de Oui sur le total global", titlefont = list(size = 12)),
+    showlegend = FALSE
+  )
+
+```
+:::
+
+L’analyse de la question D28 montre que seulement 22,1 % des salariés déclarent utiliser les transports en commun pour se rendre sur la zone d’activité, contre près de 78 % qui ne les utilisent pas. Cette faible part illustre les limites d’accessibilité de la ZAE de Marticot par les transports collectifs, en cohérence avec les constats précédents sur la dépendance à la voiture individuelle.  
+
+Parmi les raisons invoquées par les non-usagers, les contraintes d’horaires (10,2 %) et la durée trop importante du trajet (9,5 %) apparaissent comme les principaux freins. Ces éléments traduisent une inadéquation entre les horaires de travail et ceux des réseaux de transport (TBM, cars régionaux, Prox’bus), ainsi qu’un temps de parcours jugé trop long par rapport à la voiture.
+D’autres motifs, tels que l’éloignement du dernier arrêt (6,2 %) ou la multiplication des correspondances (5,5 %), renforcent l’idée d’un réseau pas assez adéquat à la localisation périphérique de la zone et à la diversité des communes de résidence des salariés.
+
+Les contraintes personnelles ou professionnelles (environ 2 à 3 %) sont quant à elles plus marginales mais rappellent que la flexibilité des déplacements (horaires variables, obligations familiales, etc.) reste un facteur clé dans le choix du mode de transport. En somme, ces résultats montrent que l’usage des transports collectifs reste limité non par un manque d’offre totale, mais plutôt par un déficit d’adéquation entre l’offre existante et les besoins réels des salariés en termes d’horaires, de fréquence et de proximité des arrêts. Cela plaide pour une réflexion sur une meilleure connexion entre la ZAE de Marticot et les réseaux structurants, ainsi que sur des solutions de rabattement ou de mobilité partagée (navettes, covoiturage organisé).
+
+### 5.10 Si pas d’utilisation de covoiturage
+
+:::{style="margin-top:30px;"}
+```{r}
+#| echo: false
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+library(RColorBrewer)
+
+# Étape 1 : mise en forme des données
+incitation_covoit <- donnees %>%
+  select(
+    "Avantage financier" = `D29 1 1 avantage financier`,
+    "Covoitureur compatible" = `D29 1 2 covoitureur`,
+    "Service covoiturage entreprise/ZA" = `D29 1 3 service covoit`,
+    "Horaires compatibles" = `D29 1 4 horaires compatibles`,
+    "Système d'assurance retour" = `D29 1 5 système retour d'assurance`,
+    "Aucun de ces incitatifs" = `D29 1 6 aucun`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse") %>%
+  mutate(Reponse = ifelse(is.na(Reponse), "Sans réponse", Reponse))
+  #filter(Reponse %in% c("Oui", "Non"))
+
+# Étape 2 : calcul du % de Oui par rapport au total global
+df_plot <- incitation_covoit %>%
+  group_by(Service) %>%
+  summarise(
+    nb_oui = sum(Reponse == "Oui", na.rm = TRUE),   # ✅ nombre de Oui
+    total = n(),                                    # ✅ total = Oui + Non + NA
+    pct = round(100 * nb_oui / total, 1),           # ✅ % de Oui avec NA au dénominateur
+    .groups = "drop"
+  ) %>%
+  mutate(
+    hover = paste0("Service : ", Service,
+                   "<br>Réponses Oui : ", nb_oui,
+                   "<br>Total réponses : ", total,
+                   "<br>Pourcentage global : ", pct, "%")
+  )
+
+# Palette de couleurs par service
+couleurs <- RColorBrewer::brewer.pal(n = length(unique(df_plot$Service)), name = "Set2")
+
+# Graphique Plotly
+plot_ly(
+  data = df_plot,
+  x = ~reorder(Service, nb_oui),
+  y = ~pct,
+  type = "bar",
+  marker = list(color = couleurs),
+  text = ~hover,
+  hoverinfo = "text",
+  textposition="none"
+) %>%
+  layout(
+    title = list(
+      text = "<b>Incitation à covoiturer ?</b>",
+      x = 0.5,
+      font = list(size = 14, color = "red")
+    ),
+    xaxis = list(title = "", tickangle = 25, tickfont = list(size = 10)),
+    yaxis = list(title = "% de Oui sur le total global", titlefont = list(size = 12)),
+    showlegend = FALSE
+  )
+
+```
+
+Nous nous ommes également intéresser sur les les leviers potentiels d’incitation au covoiturage pour les salariés de la zone d’activité.
+Les résultats montrent que les facteurs organisationnels sont les plus déterminants :  
+
+ - 45,5 % des répondants estiment que des horaires compatibles avec d’autres salariés constitueraient un incitatif majeur,  
+ - tandis que 39,1 % soulignent l’importance de trouver un covoitureur compatible (trajet, horaires, affinités, etc.).    
+
+Ces réponses traduisent une forte sensibilité à la flexibilité temporelle, principale contrainte à la mise en place du covoiturage, surtout dans une zone où les rythmes de travail peuvent varier d’une entreprise à l’autre. (horaires fixes, variables peuvent dépendrent en fonction des entreprises)  
+
+Les incitations structurelles ou matérielles sont perçues comme secondaires : environ 23 % des répondants seraient motivés par la mise en place d’un service de covoiturage dédié à la ZAE ou porté par les entreprises, et 22,8 % par un avantage financier (ex. indemnités, participation, primes). Enfin, près d’un salarié sur cinq (20,9 %) déclare qu’aucun de ces dispositifs ne l’inciterait à covoiturer, traduisant un certain attachement à l’autonomie de la voiture individuelle. Le système d’assurance retour (4,3 %) reste marginal, suggérant que la principale attente ne porte pas sur la sécurité du dispositif mais bien sur la compatibilité pratique et organisationnelle.  
+
+Ces résultats confirment qu’un covoiturage efficace sur la ZAE passerait avant tout par une coordination interentreprises des horaires, la mise en relation entre salariés proches géographiquement, et éventuellement un accompagnement institutionnel ou financier.

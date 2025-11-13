@@ -1,10 +1,340 @@
 ---
 title: ""
-format:
-  dashboard:
-    orientation: rows
-editor: visual
-expandable: true
-layout: "grid"
-scrolling: true
+lang: fr
+toc: true
+toc-depth: 4
 ---
+
+```{r}
+#| include: false
+
+library(readxl)
+
+donnees <- read_excel("data/Classeur1.xlsx")
+
+```
+
+## 6. PAUSE DÉJEUNER
+
+Cette sous partie a pour objectif de comprendre la pause déjeuner des salariés en ciblant leurs habitudes. Elle est essentielle dans le quotidien d’un salarié et contribue au bien-être personnel et à son intégration dans son environnement professionnel. 
+
+### 6.1 En général le midi, vous déjeuner :
+
+::: {style="margin-top:30px; margin-bottom:30px;"}
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(tidyr)
+library(DT)
+library(htmltools)
+
+# Données préparées (exclusion des sans réponses)
+df_base <- donnees %>%
+  select(
+    Sur_place = `E30 1 déjeuner sur place`,
+    Exterieur = `E30 2 déjeuner extérieur`
+  ) %>%
+  filter(Sur_place %in% c("Oui","Non"),
+         Exterieur %in% c("Oui","Non"))
+
+# Tableau croisé (comptage)
+df_croise <- df_base %>%
+  count(Sur_place, Exterieur) %>%
+  mutate(Total_global = sum(n)) %>%
+  mutate(Affichage = paste0(n, " (", round(100 * n / Total_global, 1), "%)"))
+
+# Mise en forme en large (2x2)
+df_wide <- df_croise %>%
+  select(Sur_place, Exterieur, Affichage) %>%
+  pivot_wider(
+    names_from = Exterieur,
+    values_from = Affichage,
+    values_fill = "0 (0%)"
+  ) %>%
+  rename(`Déjeuner sur place` = Sur_place,
+         `Oui extérieur` = Oui,
+         `Non extérieur` = Non)   # ✅ renommage clair
+
+# Ajout de colonne Total (somme des deux colonnes Oui/Non en nombre)
+df_counts_wide <- df_croise %>%
+  select(Sur_place, Exterieur, n) %>%
+  pivot_wider(names_from = Exterieur, values_from = n, values_fill = 0) %>%
+  mutate(Total = Oui + Non) %>%
+  rename(`Déjeuner sur place` = Sur_place,
+         `Oui extérieur` = Oui,
+         `Non extérieur` = Non)
+
+# Fusion des affichages et des totaux
+df_final <- df_wide %>%
+  left_join(df_counts_wide %>% 
+              select(`Déjeuner sur place`, Total),
+            by = "Déjeuner sur place") %>%
+  mutate(
+    Total = paste0(Total, " (", round(100 * as.numeric(Total) / sum(df_counts_wide$Total), 1), "%)")
+  )
+
+# Ajout de la ligne Total
+total_row <- df_counts_wide %>%
+  summarise(
+    `Déjeuner sur place` = "Total",
+    `Oui extérieur` = sum(`Oui extérieur`, na.rm = TRUE),
+    `Non extérieur` = sum(`Non extérieur`, na.rm = TRUE),
+    Total = sum(Total, na.rm = TRUE)
+  ) %>%
+  mutate(
+    `Oui extérieur` = paste0(`Oui extérieur`, " (", round(100 * `Oui extérieur` / sum(df_counts_wide$Total), 1), "%)"),
+    `Non extérieur` = paste0(`Non extérieur`, " (", round(100 * `Non extérieur` / sum(df_counts_wide$Total), 1), "%)"),
+    Total = paste0(Total, " (100%)")
+  )
+
+df_final <- bind_rows(df_final, total_row)
+
+# Tableau interactif DT
+datatable(
+  df_final,
+  rownames = FALSE,
+  options = list(
+    dom = "t",
+    pageLength = 10,
+    columnDefs = list(list(className = "dt-center", targets = 1:3))
+  )
+) %>%
+  formatStyle("Oui extérieur", backgroundColor = "#d9f0a3") %>%
+  formatStyle("Non extérieur", backgroundColor = "#fdae61") %>%
+  formatStyle("Total", backgroundColor = "#cfe0f5")
+
+
+```
+:::
+
+
+Ce tableau de contingence nous permet de savoir le nombre d’individus déjeunant sur place et à l’extérieur, mais aussi ceux qui mixe ces deux pratiques. 
+
+ La grande majorité des salariés (86,3 %) qui déjeunent sur place ne vont pas à l’extérieur pour le repas.  
+ 
+→ Cela confirme que la plupart des salariés disposent d’un espace de restauration interne (cantine, salle dédiée, etc.) et y mangent régulièrement.
+13,7 % des salariés qui déjeunent sur place vont parfois aussi à l’extérieur, ce qui traduit une variabilité dans les pratiques, en  alternant repas internes et externes selon les jours ou les contraintes. À l’inverse, presque tous ceux qui ne déjeunent pas sur place (96,8 %) vont déjeuner à l’extérieur.  
+
+→ Cela montre que le déjeuner à l’extérieur est une nécessité plutôt qu’un choix pour ceux qui n’ont pas de solution sur site.Globalement, 77,9 % des salariés déjeunent principalement sur place, contre 22,1 % à l’extérieur. Cela illustre une forte centralité de la restauration interne dans les pratiques quotidiennes.
+
+
+### 6.2 Déjeuner sur place et à l’extérieur
+
+#### 6.2.1 Si vous déjeunez sur place
+
+:::{style="margin-top:30px;"}
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+library(RColorBrewer)
+
+# Étape 1 : mise en forme des données
+dejeuner_place <- donnees %>%
+  select(
+    "A la cantine" = `E30 1 1 cantine`,
+    "Une salle dédiée" = `E30 1 2 salle dédiée`,
+    "Au bureau" = `E30 1 3 bureau`,
+    "Extérieur dans l'entreprise" = `E30 1 4 extérieur dans entreprise`,
+    "Dans la voiture" = `E30 1 5 voiture`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse") %>%
+  mutate(Reponse = ifelse(is.na(Reponse), "Sans réponse", Reponse))
+  #filter(Reponse %in% c("Oui", "Non"))
+
+# Étape 2 : calcul du % de Oui par rapport au total global
+df_plot <- dejeuner_place %>%
+  group_by(Service) %>%
+  summarise(
+    nb_oui = sum(Reponse == "Oui", na.rm = TRUE),   # ✅ nombre de Oui
+    total = n(),                                    # ✅ total = Oui + Non + NA
+    pct = round(100 * nb_oui / total, 1),           # ✅ % de Oui avec NA au dénominateur
+    .groups = "drop"
+  ) %>%
+  mutate(
+    hover = paste0("Service : ", Service,
+                   "<br>Réponses Oui : ", nb_oui,
+                   "<br>Total réponses : ", total,
+                   "<br>Pourcentage global : ", pct, "%")
+  )
+
+# Palette de couleurs par service
+couleurs <- RColorBrewer::brewer.pal(n = length(unique(df_plot$Service)), name = "Set2")
+
+# Graphique Plotly
+plot_ly(
+  data = df_plot,
+  x = ~reorder(Service, nb_oui),
+  y = ~pct,
+  type = "bar",
+  marker = list(color = couleurs),
+  text = ~hover,
+  hoverinfo = "text",
+  textposition="none"
+) %>%
+  layout(
+    title = list(
+      text = "<b>Lieux de restaurations des salariés mangeants sur place </b>",
+      x = 0.5,
+      font = list(size = 14, color = "red")
+    ),
+    xaxis = list(title = "", tickangle = 25, tickfont = list(size = 10)),
+    yaxis = list(title = "% de Oui sur le total global", titlefont = list(size = 12)),
+    showlegend = FALSE
+  )
+
+```
+:::
+
+#### 6.2.2 Si vous déjeunez à l’extérieur 
+
+
+:::{style="margin-top:30px;"}
+```{r}
+#| echo: false
+
+library(dplyr)
+library(tidyr)
+library(plotly)
+library(RColorBrewer)
+
+# Étape 1 : mise en forme des données
+dejeuner_exterieur <- donnees %>%
+  select(
+    "A la maison" = `E30 2 1 maison`,
+    "Food truck" = `E30 2 2 food truck`,
+    "Au restaurant" = `E30 2 3 restaurant`,
+    "Espace vert" = `E30 2 4 espace vert`,
+    "Autre" = `E30 2 5 autre`
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Reponse") %>%
+  mutate(Reponse = ifelse(is.na(Reponse), "Sans réponse", Reponse))
+  #filter(Reponse %in% c("Oui", "Non"))
+
+# Étape 2 : calcul du % de Oui par rapport au total global
+df_plot <- dejeuner_exterieur %>%
+  group_by(Service) %>%
+  summarise(
+    nb_oui = sum(Reponse == "Oui", na.rm = TRUE),   # ✅ nombre de Oui
+    total = n(),                                    # ✅ total = Oui + Non + NA
+    pct = round(100 * nb_oui / total, 1),           # ✅ % de Oui avec NA au dénominateur
+    .groups = "drop"
+  ) %>%
+  mutate(
+    hover = paste0("Service : ", Service,
+                   "<br>Réponses Oui : ", nb_oui,
+                   "<br>Total réponses : ", total,
+                   "<br>Pourcentage global : ", pct, "%")
+  )
+
+# Palette de couleurs par service
+couleurs <- RColorBrewer::brewer.pal(n = length(unique(df_plot$Service)), name = "Set2")
+
+# Graphique Plotly
+plot_ly(
+  data = df_plot,
+  x = ~reorder(Service, nb_oui),
+  y = ~pct,
+  type = "bar",
+  marker = list(color = couleurs),
+  text = ~hover,
+  hoverinfo = "text",
+  textposition="none"
+) %>%
+  layout(
+    title = list(
+      text = "<b>Lieux de restaurations des salariés mangeants en extérieur </b>",
+      x = 0.5,
+      font = list(size = 14, color = "red")
+    ),
+    xaxis = list(title = "", tickangle = 25, tickfont = list(size = 10)),
+    yaxis = list(title = "% de Oui sur le total global", titlefont = list(size = 12)),
+    showlegend = FALSE
+  )
+
+```
+:::
+
+Dans l’ensemble, la pause-déjeuner s’effectue majoritairement sur place, avec plus de la moitié des répondants (56,6 %) qui déjeunent à la cantine. Cela montre que les entreprises de la zone disposent de structures collectives adaptées ou que les salariés ont accès à une offre mutualisée efficace. Près d’un quart (24,3 %) déjeunent dans une salle dédiée, traduisant la présence d’espaces aménagés en interne, tandis que 10,5 % mangent à l’extérieur mais à proximité de l’entreprise, sans quitter le site. Les repas pris au bureau (8 %) ou dans la voiture (4,6 %) restent marginaux mais témoignent d’un besoin d’intimité ou d’un manque d’espaces conviviaux pour certains salariés.  
+
+En revanche, lorsque les salariés déjeunent à l’extérieur, les pratiques deviennent plus diffuses. Le restaurant (11,4 %) et le retour au domicile (9,9 %) sont les options les plus courantes, tandis que les espaces verts (7,4 %) et les food trucks (2,8 %) sont nettement moins fréquentés. Ces faibles taux traduisent à la fois une offre de restauration extérieure limitée autour de la zone et une accessibilité restreinte pour s’y rendre sur le temps de midi.  
+
+En conclusion, ces résultats soulignent une forte dépendance à la restauration sur site. Ils mettent également en évidence un potentiel d’amélioration des offres extérieures, notamment par le développement de solutions mobiles (food trucks), d’espaces verts aménagés et de liens piétons plus sûrs et agréables vers les commerces et restaurants environnants. Cela permettrait de diversifier les pratiques de pause-déjeuner et d’améliorer la qualité de vie au travail sur la ZAE.
+
+### 6.3 En général, le midi, vous mangez quoi ?
+
+```{r}
+#| echo: false
+
+
+library(dplyr)
+library(plotly)
+library(RColorBrewer)
+
+# Préparation des données
+manger_quoi <- donnees %>%
+  count(manger = `E31 mangez quoi`) %>%
+  mutate(
+    manger = case_when(
+      is.na(manger) | manger == "N/A" ~ "Sans réponse",
+      TRUE ~ manger
+    )
+  )%>%
+  filter(manger != "Sans réponse") %>%
+  mutate(
+    Total = sum(n),
+    Pourcent = round(100 * n / Total, 1),
+    label = paste0(manger, " (", Pourcent, "%)")
+  )
+
+# Palette de couleurs
+couleurs <- brewer.pal(n = max(3, length(unique(manger_quoi$manger))), name = "Set2")
+
+# Graphique interactif en camembert
+plot_ly(
+  data = manger_quoi,
+  labels = ~manger,
+  values = ~n,
+  type = "pie",
+  hole= 0.5,
+  textinfo = "label+percent",   # ✅ affiche libellé + %
+  textposition = "none",
+  hovertemplate = paste(
+    "<b>%{label}</b><br>",
+    "Nombre de réponses = %{value}<br>",
+    "Pourcentage = %{percent}<extra></extra>"
+  ),
+  marker = list(colors = couleurs,
+                line = list(color = "#FFFFFF", width = 1))
+) %>%
+  layout(
+    title = list(
+      text = "<b>En général, le midi, vous mangez quoi ?</b>",
+      x = 0.5,
+      xanchor = "center",
+      font = list(color = "red", size = 14)
+    ),
+    margin = list(t = 60, b = 60),
+    legend = list(orientation = "h",   # ✅ légende horizontale
+                  x = 0.5,             # centrée
+                  y = -0.2,            # en dessous du graphique
+                  xanchor = "center")
+  ) %>%
+  config(responsive = TRUE)
+
+
+
+```
+
+
+Les pratiques alimentaires des salariés révèlent une majorité des repas pris au sein de la structure de travail. En effet, 53,6 % des répondants déclarent manger ce qu’on leur propose (repas de cantine ou self), confirmant l’importance des infrastructures internes dans l’organisation du repas de midi. Il est important de rappeler ques des grandes entreprises comme Lectra ou Striker ont une surreprésentation sur notre échantillon au vu du nombre impportant de salariés. Il est donc normal que des grandes entreprises de cette taille possèdent un service interne de restauration.  
+
+A contrario, près de 37,3 % des salariés apportent leur propre repas (gamelle, sandwich, etc.), cela peut refléter un choix économique mais surtout une habitude liée à l’absence de restauration collective pour certaines entreprises.  Enfin, 9,2 % des répondants déclarent acheter leur repas à l’extérieur (boulangerie, restaurant, supermarché). Cette part relativement faible s’explique sans doute par la localisation périphérique de la zone d’activité, où l’offre de restauration est limitée.  
+
+Globalement, ces résultats mettent en évidence que les salariés disposent majoritairement d’une solution de restauration sur site ou auto-organisée, mais que l’offre extérieure reste marginale, ce qui peut être un frein à la diversification des pratiques alimentaires.
