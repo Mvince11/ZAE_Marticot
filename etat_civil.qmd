@@ -1,12 +1,5 @@
 ---
 title: ""
-# format:
-#   dashboard:
-#     orientation: rows
-# editor: visual
-# expandable: true
-# layout: "grid"
-# scrolling: true
 lang: fr
 toc: true
 toc-depth: 4
@@ -158,7 +151,7 @@ p_age_plotly <- ggplotly(p_age, tooltip = "text") %>%
       x = 0.5,
       xanchor = "center",
       yanchor = "top",
-      font = list(color = "red")
+      font = list(color = "red", size =14)
     ),
     margin = list(t = 60, b = 60)
   ) %>%
@@ -322,7 +315,7 @@ question_commune <- st_read("data/question_commune.geojson")
 Les répondants résident majoritairement dans des communes proches : Cestas (12 %), Pessac (10,5 %), Léognan (5,2 %), Villeneuve-d’Ornon (5,9 %), Mérignac (4,6 %), Bègles (4,3 %) et Talence (4,9 %). Bordeaux intra-muros regroupe environ 6 % des salariés (tous quartiers confondus). L’aire de résidence est donc assez étendue, couvrant aussi bien la métropole bordelaise que des communes périphériques plus éloignées.\
 La zone de Marticot attire des salariés de proximité mais aussi d’un bassin d’emploi plus large, à l’échelle de l’agglomération bordelaise et au-delà. Cette dispersion géographique explique l’importance accordée aux enjeux de mobilité et d’accessibilité. Le fait que plus d’un salarié sur dix habite Cestas traduit aussi une dimension locale forte, où la zone d’activité joue un rôle structurant pour l’emploi de la commune.
 
-###### **carte des Flux Domicile/travail**
+###### **carte interactive des Flux Domicile/travail**
 
 ```{r}
 #| include: false

@@ -5,7 +5,7 @@ website:
   #title: "CAPB_web"
   back-to-top-navigation: true
   navbar:
-    collapse-below: xxl
+    collapse-below: xl
     logo: "images/logos/Panorama2.png"
     logo-alt: "ZAE Marticot"
     left:
@@ -26,7 +26,7 @@ website:
           - href: etat_civil.qmd
             text: Volet Etat civil
           - text: Volet Perception générale
-            href: perception_general.qmd
+            href: perception_generale.qmd
           - text: Volet vie professionnelle
             href: vie_professionnelle.qmd
           - text: Volet Perception de l'environnement et des conditions de travail
@@ -37,9 +37,9 @@ website:
             href: pause_dejeuner.qmd
           - text: Conclusion
             href: conclusion.qmd
-      - href: ref_biblio.qmd
-        text: Références biliographiques
-        icon: book
+      #- href: ref_biblio.qmd
+        #text: Références biliographiques
+        #icon: book
   page-footer:
     left: "Site créé avec [Quarto](https://quarto.org/)"
     center: "©CEREMA"

@@ -16,7 +16,7 @@ donnees <- read_excel("data/Classeur1.xlsx")
 
 ## 6. PAUSE DÉJEUNER
 
-Cette sous partie a pour objectif de comprendre la pause déjeuner des salariés en ciblant leurs habitudes. Elle est essentielle dans le quotidien d’un salarié et contribue au bien-être personnel et à son intégration dans son environnement professionnel. 
+Cette sous partie a pour objectif de comprendre la pause déjeuner des salariés en ciblant leurs habitudes. Elle est essentielle dans le quotidien d’un salarié et contribue au bien-être personnel et à son intégration dans son environnement professionnel.
 
 ### 6.1 En général le midi, vous déjeuner :
 
@@ -109,22 +109,19 @@ datatable(
 ```
 :::
 
+Ce tableau de contingence nous permet de savoir le nombre d’individus déjeunant sur place et à l’extérieur, mais aussi ceux qui mixe ces deux pratiques.
 
-Ce tableau de contingence nous permet de savoir le nombre d’individus déjeunant sur place et à l’extérieur, mais aussi ceux qui mixe ces deux pratiques. 
+La grande majorité des salariés (86,3 %) qui déjeunent sur place ne vont pas à l’extérieur pour le repas.
 
- La grande majorité des salariés (86,3 %) qui déjeunent sur place ne vont pas à l’extérieur pour le repas.  
- 
-→ Cela confirme que la plupart des salariés disposent d’un espace de restauration interne (cantine, salle dédiée, etc.) et y mangent régulièrement.
-13,7 % des salariés qui déjeunent sur place vont parfois aussi à l’extérieur, ce qui traduit une variabilité dans les pratiques, en  alternant repas internes et externes selon les jours ou les contraintes. À l’inverse, presque tous ceux qui ne déjeunent pas sur place (96,8 %) vont déjeuner à l’extérieur.  
+→ Cela confirme que la plupart des salariés disposent d’un espace de restauration interne (cantine, salle dédiée, etc.) et y mangent régulièrement. 13,7 % des salariés qui déjeunent sur place vont parfois aussi à l’extérieur, ce qui traduit une variabilité dans les pratiques, en alternant repas internes et externes selon les jours ou les contraintes. À l’inverse, presque tous ceux qui ne déjeunent pas sur place (96,8 %) vont déjeuner à l’extérieur.
 
 → Cela montre que le déjeuner à l’extérieur est une nécessité plutôt qu’un choix pour ceux qui n’ont pas de solution sur site.Globalement, 77,9 % des salariés déjeunent principalement sur place, contre 22,1 % à l’extérieur. Cela illustre une forte centralité de la restauration interne dans les pratiques quotidiennes.
-
 
 ### 6.2 Déjeuner sur place et à l’extérieur
 
 #### 6.2.1 Si vous déjeunez sur place
 
-:::{style="margin-top:30px;"}
+::: {style="margin-top:30px;"}
 ```{r}
 #| echo: false
 #| message: false
@@ -192,10 +189,9 @@ plot_ly(
 ```
 :::
 
-#### 6.2.2 Si vous déjeunez à l’extérieur 
+#### 6.2.2 Si vous déjeunez à l’extérieur
 
-
-:::{style="margin-top:30px;"}
+::: {style="margin-top:30px;"}
 ```{r}
 #| echo: false
 
@@ -261,9 +257,9 @@ plot_ly(
 ```
 :::
 
-Dans l’ensemble, la pause-déjeuner s’effectue majoritairement sur place, avec plus de la moitié des répondants (56,6 %) qui déjeunent à la cantine. Cela montre que les entreprises de la zone disposent de structures collectives adaptées ou que les salariés ont accès à une offre mutualisée efficace. Près d’un quart (24,3 %) déjeunent dans une salle dédiée, traduisant la présence d’espaces aménagés en interne, tandis que 10,5 % mangent à l’extérieur mais à proximité de l’entreprise, sans quitter le site. Les repas pris au bureau (8 %) ou dans la voiture (4,6 %) restent marginaux mais témoignent d’un besoin d’intimité ou d’un manque d’espaces conviviaux pour certains salariés.  
+Dans l’ensemble, la pause-déjeuner s’effectue majoritairement sur place, avec plus de la moitié des répondants (56,6 %) qui déjeunent à la cantine. Cela montre que les entreprises de la zone disposent de structures collectives adaptées ou que les salariés ont accès à une offre mutualisée efficace. Près d’un quart (24,3 %) déjeunent dans une salle dédiée, traduisant la présence d’espaces aménagés en interne, tandis que 10,5 % mangent à l’extérieur mais à proximité de l’entreprise, sans quitter le site. Les repas pris au bureau (8 %) ou dans la voiture (4,6 %) restent marginaux mais témoignent d’un besoin d’intimité ou d’un manque d’espaces conviviaux pour certains salariés.
 
-En revanche, lorsque les salariés déjeunent à l’extérieur, les pratiques deviennent plus diffuses. Le restaurant (11,4 %) et le retour au domicile (9,9 %) sont les options les plus courantes, tandis que les espaces verts (7,4 %) et les food trucks (2,8 %) sont nettement moins fréquentés. Ces faibles taux traduisent à la fois une offre de restauration extérieure limitée autour de la zone et une accessibilité restreinte pour s’y rendre sur le temps de midi.  
+En revanche, lorsque les salariés déjeunent à l’extérieur, les pratiques deviennent plus diffuses. Le restaurant (11,4 %) et le retour au domicile (9,9 %) sont les options les plus courantes, tandis que les espaces verts (7,4 %) et les food trucks (2,8 %) sont nettement moins fréquentés. Ces faibles taux traduisent à la fois une offre de restauration extérieure limitée autour de la zone et une accessibilité restreinte pour s’y rendre sur le temps de midi.
 
 En conclusion, ces résultats soulignent une forte dépendance à la restauration sur site. Ils mettent également en évidence un potentiel d’amélioration des offres extérieures, notamment par le développement de solutions mobiles (food trucks), d’espaces verts aménagés et de liens piétons plus sûrs et agréables vers les commerces et restaurants environnants. Cela permettrait de diversifier les pratiques de pause-déjeuner et d’améliorer la qualité de vie au travail sur la ZAE.
 
@@ -332,9 +328,8 @@ plot_ly(
 
 ```
 
+Les pratiques alimentaires des salariés révèlent une majorité des repas pris au sein de la structure de travail. En effet, 53,6 % des répondants déclarent manger ce qu’on leur propose (repas de cantine ou self), confirmant l’importance des infrastructures internes dans l’organisation du repas de midi. Il est important de rappeler ques des grandes entreprises comme Lectra ou Striker ont une surreprésentation sur notre échantillon au vu du nombre impportant de salariés. Il est donc normal que des grandes entreprises de cette taille possèdent un service interne de restauration.
 
-Les pratiques alimentaires des salariés révèlent une majorité des repas pris au sein de la structure de travail. En effet, 53,6 % des répondants déclarent manger ce qu’on leur propose (repas de cantine ou self), confirmant l’importance des infrastructures internes dans l’organisation du repas de midi. Il est important de rappeler ques des grandes entreprises comme Lectra ou Striker ont une surreprésentation sur notre échantillon au vu du nombre impportant de salariés. Il est donc normal que des grandes entreprises de cette taille possèdent un service interne de restauration.  
-
-A contrario, près de 37,3 % des salariés apportent leur propre repas (gamelle, sandwich, etc.), cela peut refléter un choix économique mais surtout une habitude liée à l’absence de restauration collective pour certaines entreprises.  Enfin, 9,2 % des répondants déclarent acheter leur repas à l’extérieur (boulangerie, restaurant, supermarché). Cette part relativement faible s’explique sans doute par la localisation périphérique de la zone d’activité, où l’offre de restauration est limitée.  
+A contrario, près de 37,3 % des salariés apportent leur propre repas (gamelle, sandwich, etc.), cela peut refléter un choix économique mais surtout une habitude liée à l’absence de restauration collective pour certaines entreprises. Enfin, 9,2 % des répondants déclarent acheter leur repas à l’extérieur (boulangerie, restaurant, supermarché). Cette part relativement faible s’explique sans doute par la localisation périphérique de la zone d’activité, où l’offre de restauration est limitée.
 
 Globalement, ces résultats mettent en évidence que les salariés disposent majoritairement d’une solution de restauration sur site ou auto-organisée, mais que l’offre extérieure reste marginale, ce qui peut être un frein à la diversification des pratiques alimentaires.

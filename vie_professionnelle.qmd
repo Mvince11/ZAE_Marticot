@@ -12,7 +12,6 @@ toc: true
 toc-depth: 4
 ---
 
-
 ```{r setup, include=FALSE}
 #| include: FALSE
 # Chargement des packages
@@ -28,7 +27,7 @@ donnees <- read_excel("data/Classeur1.xlsx")
 ## 4. VIE PROFESSIONNELLE
 
 ```{=html}
-<div style="display: flex; align-items: flex-start; gap: 20px;">
+<div style="display: flex; align-items: flex-start; gap: 20px;" class="photo_container">
   <div style="flex: 1;">
     <p style="text-align: justify;">
 Cette partie du questionnaire vise à mieux comprendre le profil professionnel des salariés de la ZAE de Marticot et leur parcours au sein de la zone. Elle cherche à identifier dans quels secteurs ils travaillent, la taille des entreprises, et depuis combien de temps ils occupent leur poste ou travaillent dans la zone.  
@@ -39,12 +38,14 @@ Les questions sur l’ancienneté permettent d’évaluer la stabilité des empl
 </p>
   </div>
     <div style="flex: 0 0 370px;">
-      <img src="images/vie_professionnelle.jpg" alt="Vue de la zone" style="width: 100%; border-radius: 6px;">
+      <img src="images/vie_professionnelle.jpg" alt="Vue de la zone" style="width: 100%; border-radius: 6px;" class="photo">
     </div>
 </div>
 ```
 
-### 4.1 Dans quel secteur travaillez-vous ?
+### 4.1 Secteur d’activité des salariés de la zone d’activité
+
+#### 4.1.1 Dans quel secteur travaillez-vous ?
 
 ```{r}
 #| echo: false
@@ -99,7 +100,7 @@ ggplotly(p, tooltip = "text") %>%
       x = 0.5,             # centré horizontalement
       xanchor = "center",
       yanchor = "top",
-      font = list(size = 12, color = "red",  # adaptatif et lisible
+      font = list(size = 14, color = "red",  # adaptatif et lisible
       face = "bold")
     ),
     margin = list(t = 60, b = 110),  # marge haut/bas pour laisser la place au titre/légende
@@ -109,8 +110,7 @@ ggplotly(p, tooltip = "text") %>%
 
 ```
 
-
-::: {.callout-tip collapse="true" icon="false"}
+:::: {.callout-tip collapse="true" icon="false"}
 #### Localisation des entreprises par zone
 
 ::: {style="margin-top: 10px;"}
@@ -127,25 +127,23 @@ ggplotly(p, tooltip = "text") %>%
 ##### Zone Sud
 
 ![](images/zae_marticot_entreprise_3.png){.lightbox}
-:::
+::::
 
+La ZAE affiche une identité très marquée par la domination du secteur industriel. En croisant la carte des entreprises implantées et le graphique sur la répartition des salariés par secteur, on saisit mieux les logiques d’occupation de l’espace et les dynamiques économiques qui structurent cette zone.
 
-La ZAE affiche une identité très marquée par la domination du secteur industriel. En croisant la carte des entreprises implantées et le graphique sur la répartition des salariés par secteur, on saisit mieux les logiques d’occupation de l’espace et les dynamiques économiques qui structurent cette zone.  
+Sur le plan sectoriel, la ZAE Marticot concentre des entreprises à fort profil industriel et technologique. On y trouve Lectra, une entreprise leader dans la conception de machines de découpe et de logiciels destinés aux industries textile et automobile. À ses côtés, Stryker, entreprise américaine, fabrique des dispositifs médicaux et des implants rachidiens ou encore ELSIL electronics fabriquant de composants électroniques industriels. À côté de ces grandes structures, un grand nombre de PME opèrent dans la fabrication, la maintenance et le montage de structures métalliques — à l’image d’Accès Innovations Services (AIS) ou de l’Entreprise de Montage de Produits Industriels (EMPI). Ces entreprises, plus modestes en taille mais très spécialisées, participent activement au dynamisme industriel de la zone.
 
-Sur le plan sectoriel, la ZAE Marticot concentre des entreprises à fort profil industriel et technologique. On y trouve Lectra, une entreprise leader dans la conception de machines de découpe et de logiciels destinés aux industries textile et automobile. À ses côtés, Stryker, entreprise américaine, fabrique des dispositifs médicaux et des implants rachidiens ou encore ELSIL electronics fabriquant de composants électroniques industriels. À côté de ces grandes structures, un grand nombre de PME opèrent dans la fabrication, la maintenance et le montage de structures métalliques — à l’image d’Accès Innovations Services (AIS) ou de l’Entreprise de Montage de Produits Industriels (EMPI). Ces entreprises, plus modestes en taille mais très spécialisées, participent activement au dynamisme industriel de la zone.  
+Un élément clé de cette vitalité économique réside dans la présence d’une pépinière d’entreprises, véritable levier de développement local. Cet espace favorise l’émergence de jeunes sociétés innovantes, leur offrant un accompagnement, des locaux adaptés et un environnement propice à la collaboration. La pépinière participe à la diversification du tissu productif et la présence de PME, artisans ou encore auto-entrepreneurs.
 
-Un élément clé de cette vitalité économique réside dans la présence d’une pépinière d’entreprises, véritable levier de développement local. Cet espace favorise l’émergence de jeunes sociétés innovantes, leur offrant un accompagnement, des locaux adaptés et un environnement propice à la collaboration. La pépinière participe à la diversification du tissu productif et la présence de PME, artisans ou encore auto-entrepreneurs.  
-
-En complément, des structures comme SGS France, experte en contrôle, inspection et certification, ou encore divers bureaux d’ingénierie et de logistique, assurent des fonctions de soutien indispensables : maintenance, contrôle qualité, gestion des flux, services techniques. Bien qu’appartenant au secteur tertiaire, ces acteurs restent étroitement liés à la chaîne industrielle et participent au bon fonctionnement de l’écosystème global. Le graphique de répartition des salariés confirme la nette domination du secteur industriel, très largement majoritaire face au tertiaire ou à la logistique. Cette concentration s’explique autant par la présence d’unités de production importantes que par le réseau de PME techniques et artisanales qui gravitent autour des grandes entreprises, renforçant la cohérence industrielle du site.  
+En complément, des structures comme SGS France, experte en contrôle, inspection et certification, ou encore divers bureaux d’ingénierie et de logistique, assurent des fonctions de soutien indispensables : maintenance, contrôle qualité, gestion des flux, services techniques. Bien qu’appartenant au secteur tertiaire, ces acteurs restent étroitement liés à la chaîne industrielle et participent au bon fonctionnement de l’écosystème global. Le graphique de répartition des salariés confirme la nette domination du secteur industriel, très largement majoritaire face au tertiaire ou à la logistique. Cette concentration s’explique autant par la présence d’unités de production importantes que par le réseau de PME techniques et artisanales qui gravitent autour des grandes entreprises, renforçant la cohérence industrielle du site.
 
 Ainsi, la ZAE Marticot se distingue par un modèle économique équilibré : d’un côté, des entreprises industrielles de haute technicité assurent la stabilité et la visibilité du site ; de l’autre, une multitude de PME et la pépinière d’entreprises insufflent flexibilité, innovation et capacité d’adaptation. Ce maillage dense contribue à faire de Marticot un pôle industriel et technologique attractif du sud-ouest bordelais, symbole d’une économie locale à la fois productive, collaborative et résolument tournée vers l’avenir.
 
-
-
 ### 4.2 Nombre de salariés
 
-::: {style="margin-top:30px;"}
+#### 4.2.1 Combien y-a-t-il de salariés dans votre entreprise ?
 
+::: {style="margin-top:30px;"}
 ```{r}
 #| echo: false
 
@@ -206,7 +204,7 @@ ggplotly(p, tooltip = "text")%>%
       x = 0.5,             # centré horizontalement
       xanchor = "center",
       yanchor = "top",
-      font = list(size = 12, color = "red",
+      font = list(size = 14, color = "red",
       face= "bold")
     ),
     margin = list(b = 110),     # espace en bas pour la légende
@@ -216,13 +214,15 @@ ggplotly(p, tooltip = "text")%>%
 ```
 :::
 
-La répartition du nombre de salariés montre que la ZAE de Marticot est largement dominée par des entreprises de taille moyenne à grande, employant entre 250 et 5000 salariés (83,2 % du total). Ces structures, souvent industrielles, forment le cœur économique de la zone. . Cela s’explique par la présence de plusieurs entreprises industrielles majeures, comme Lectra ou Stryker Spine, qui concentrent une grande partie de l’emploi local et donc de notr échantillon de réponses.  
+La répartition du nombre de salariés montre que la ZAE de Marticot est largement dominée par des entreprises de taille moyenne à grande, employant entre 250 et 5000 salariés (83,2 % du total). Ces structures, souvent industrielles, forment le cœur économique de la zone. . Cela s’explique par la présence de plusieurs entreprises industrielles majeures, comme Lectra ou Stryker Spine, qui concentrent une grande partie de l’emploi local et donc de notr échantillon de réponses.
 
-Les PME (10 à 250 salariés) représentent environ 7 % des effectifs, jouant un rôle de soutien technique ou logistique auprès des grands groupes. Les très petites entreprises (moins de 10 salariés) comptent pour 7,6 %, souvent issues de la pépinière d’entreprises. Enfin, les très grands employeurs (+5000 salariés) restent rares (2,2 %).  
+Les PME (10 à 250 salariés) représentent environ **7 %** des effectifs, jouant un rôle de soutien technique ou logistique auprès des grands groupes. Les très petites entreprises (moins de 10 salariés) comptent pour 7,6 %, souvent issues de la pépinière d’entreprises. Enfin, les très grands employeurs (+5000 salariés) restent rares (2,2 %).
 
 La ZAE est d’une certaine déséquilibré puisque les entreprises de grandes tailles sont majoritairement représentés ce qui peut induire des surreprésentations dans les réponses en raison de la sous représentation des PME.
 
-### 4.3 Depuis combien de temps travaillez-vous dans la zone d’activité ?
+### 4.3 Ancienneté des salariés dans la zone d’activité et l’entreprise
+
+#### 4.3.1 Depuis combien de temps travaillez-vous dans la zone d’activité ?
 
 ::: {style="margin-top:30px;"}
 ```{r}
@@ -274,7 +274,7 @@ ggplotly(p, tooltip = "text") %>%
     ),
      title = list(
       text = "<b>Ancienneté professionnelle dans la zone d’activité de Marticot</b>",
-      font = list(size = 12),
+      font = list(size = 14),
       face = "bold",
       x = 0.5,  # centré
       xanchor = "center"
@@ -287,7 +287,7 @@ ggplotly(p, tooltip = "text") %>%
 ```
 :::
 
-### 4.4 Depuis combien de temps travaillez-vous dans l’entreprise ? 
+#### 4.3.2 Depuis combien de temps travaillez-vous dans l’entreprise ?
 
 ::: {style="margin-top:30px;"}
 ```{r}
@@ -352,12 +352,12 @@ ggplotly(p, tooltip = "text")%>%
 ```
 :::
 
-Ces deux graphiques permettent de comparer l’ancienneté des salariés dans la ZAE de Marticot (à gauche) et dans leur entreprise actuelle (à droite). Globalement, les deux distributions présentent des profils proches, mais certaines nuances apportent des éléments intéressants sur la stabilité de l’emploi et la mobilité interne au sein de la zone.  
+Ces deux graphiques permettent de comparer l’ancienneté des salariés dans la ZAE de Marticot (en 4.3.1) et dans leur entreprise actuelle (en 4.3.2). Globalement, les deux distributions présentent des profils proches, mais certaines nuances apportent des éléments intéressants sur la stabilité de l’emploi et la mobilité interne au sein de la zone.
 
-On observe d’abord que la majorité des salariés travaillent depuis plus de 10 ans, que ce soit dans la ZAE ou dans leur entreprise. Cette forte proportion témoigne d’un ancrage durable des travailleurs dans le tissu industriel local, caractéristique des entreprises stables et bien implantées. Cela confirme la stabilité économique de la zone, marquée par des structures solides et peu sujettes au turn-over ou à des cas de dépôt de bilan/ changementqs d’entreprises.  
+On observe d’abord que la majorité des salariés travaillent depuis plus de 10 ans, que ce soit dans la ZAE ou dans leur entreprise. Cette forte proportion témoigne d’un ancrage durable des travailleurs dans le tissu industriel local, caractéristique des entreprises stables et bien implantées. Cela confirme la stabilité économique de la zone, marquée par des structures solides et peu sujettes au turn-over ou à des cas de dépôt de bilan/changements d’entreprises.
 
-Les classes intermédiaires, notamment celles entre 1 et 10 ans d’ancienneté, affichent également des effectifs conséquents. Cela traduit un renouvellement progressif des équipes, souvent lié à des embauches régulières pour accompagner la croissance ou le remplacement de départs à la retraite. On perçoit ainsi une certaine dynamique de recrutement, sans rupture générationnelle nette.  
+Les classes intermédiaires, notamment celles entre 1 et 10 ans d’ancienneté, affichent également des effectifs conséquents. Cela traduit un renouvellement progressif des équipes, souvent lié à des embauches régulières pour accompagner la croissance ou le remplacement de départs à la retraite. On perçoit ainsi une certaine dynamique de recrutement, sans rupture générationnelle nette.
 
-En revanche, les effectifs ayant moins d’un an d’ancienneté restent minoritaires. Ce faible taux de nouvelles arrivées montre que les entreprises de la zone privilégient la stabilité et la fidélisation du personnel plutôt qu’une forte rotation. A noter que au vu du profil des âges de la ZAE (cf 2.2),  
+En revanche, les effectifs ayant moins d’un an d’ancienneté restent minoritaires. Ce faible taux de nouvelles arrivées montre que les entreprises de la zone privilégient la stabilité et la fidélisation du personnel plutôt qu’une forte rotation. A noter que au vu du profil des âges de la ZAE (cf 2.2),
 
 Enfin, la similitude entre les deux graphiques suggère que peu de salariés changent d’entreprise à l’intérieur même de la ZAE : ceux qui y travaillent depuis longtemps y restent souvent dans la même structure, confirmant la faible mobilité intra-zone.

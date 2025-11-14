@@ -359,27 +359,61 @@ nav#TOC ul li ul li ul li ul li ul li {
   display: list-item; 
 }
 
+
 @media (max-width: 1268px){
   .quarto-dashboard #quarto-content.quarto-dashboard-content{
     padding-left: 5%;
     padding-right: 5%;
   }
   
-  .navbar-logo {
+  /*.navbar-logo {
   max-height: 70px;
+}*/
+}
+
+@media (max-width: 1199px){
+  .navbar .navbar-collapse {
+  margin-left: 0;
+  
 }
 }
 
+@media (max-width: 1305px){
+  .photo_container {
+  display: block !important;
+  
+}
+  .photo {
+    width:80% !important;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
 
-@media (min-width: 768px) and (max-width: 1268px){
+@media (min-width: 536px) and (max-width: 600px){
+  .navbar-logo {
+  max-height: 80px;
+  
+}
+}
+
+@media (min-width: 447px) and (max-width: 535px){
+  .navbar-logo {
+  max-height: 60px;
+  
+}
+}
+
+@media (max-width: 446px){
   .navbar-logo {
   max-height: 50px;
   
 }
 }
 
-@media (max-width: 568px){
-  #quarto-search {
+@media (max-width: 600px){
+  .navbar #quarto-search {
     display: none;
   }
 }

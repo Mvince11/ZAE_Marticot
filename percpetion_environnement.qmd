@@ -1,12 +1,5 @@
 ---
 title: ""
-# format:
-#   dashboard:
-#     orientation: rows
-# editor: visual
-# expandable: true
-# layout: "grid"
-# scrolling: true
 lang: fr
 toc: true
 toc-depth: 4
@@ -23,14 +16,14 @@ donnees <- read_excel("data/Classeur1.xlsx")
 ## 4. PERCEPTION DE L'ENVIRONNEMENT ET DES CONDITIONS DE TRAVAIL
 
 ```{=html}
-<div style="display: flex; align-items: flex-start; gap: 20px;">
+<div style="display: flex; align-items: flex-start; gap: 20px;" class="photo_container">
   <div style="flex: 1;">
     <p style="text-align: justify;">
 Cette partie du questionnaire vise à comprendre la manière dont les salariés perçoivent leur environnement professionnel au sein de la zone d’activités économiques (ZAE) de Marticot. Au-delà des données objectives sur les secteurs d’activité ou les effectifs, l’objectif est ici d’explorer le ressenti des travailleurs et les modalités concrètes de leurs conditions de travail, afin de comprendre dans quel cadre professionnel ils évoluent et les interactions sociales qui peut y avoir.
     </p>
   </div>
     <div style="flex: 0 0 370px;">
-      <img src="images/environnement.jpg" style="width: 100%; border-radius: 6px;">
+      <img src="images/environnement.jpg" style="width: 100%; border-radius: 6px;" class="photo">
     </div>
 </div>
 <p>
@@ -103,7 +96,7 @@ df_plot <- espace_travail %>%
 
 # Graphique ggplot
 p <- ggplot(df_plot, aes(x = reorder(Service, N), y = N, fill = Service,
-                         text = paste("Espace de travail:", Service, "<br>Réponses:", N, "<br>% des répondants: ", pct, "%"))) +
+                         text = paste("Espace de travail:", Service, "<br>Réponses:", N, "<br>Pourcentage des répondants: ", pct, "%"))) +
   geom_col(show.legend = FALSE) +   # enlève la légende
   labs(
     #title = "Quels services vous seraient utiles",
@@ -112,7 +105,7 @@ p <- ggplot(df_plot, aes(x = reorder(Service, N), y = N, fill = Service,
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 8, face = "bold", hjust = 0.5),
+    #plot.title = element_text(color = "red", size = 8, face = "bold", hjust = 0.5),
     axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 9),
@@ -129,7 +122,7 @@ p_espace <- ggplotly(p, tooltip = "text")%>%
       x = 0.5,
       xanchor = "center",
       yanchor = "top",
-      font = list(color = "red")
+      font = list(color = "red", size=8)
     ),
     margin = list(t = 60, b = 60)
   ) %>%
@@ -204,7 +197,7 @@ p <- ggplot(df_plot, aes(x = reorder(Service, N), y = N, fill = Service,
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
+    #plot.title = element_text(color = "red", size = 10, face = "bold", hjust = 0.5),
     axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
     axis.title.x = element_blank(),
     axis.title.y = element_text(size = 9),
@@ -221,7 +214,7 @@ p_espace <- ggplotly(p, tooltip = "text")%>%
       x = 0.5,
       xanchor = "center",
       yanchor = "top",
-      font = list(color = "red")
+      font = list(color = "red", size=8)
     ),
     margin = list(t = 60, b = 60)
   ) %>%
@@ -559,16 +552,6 @@ En mesurant le degré d’attachement des salariés à leur lieu de travail, on 
 
 #### 4.4.1 Avez-vous des horaires fixes ou variables ?
 
-```{r}
-#| warning: false
-#| include: false
-
-
-library(dplyr)
-library(ggplot2)
-library(plotly)
-library(htmlwidgets)
-```
 
 ```{r}
 #| echo: false
@@ -618,6 +601,121 @@ plot_ly(
 
 
 ```
+
+::: {style="margin-bottom:30px;"}
+**Tableau des plages horaires des heures fixes d'arrivée**
+```{r}
+#| echo: false
+#| warning: false
+
+
+library(dplyr)
+library(lubridate)
+library(DT)
+
+# Préparation des données
+arrivees <- donnees %>%
+  select(heure_arrivee = `C20 1 fixe arrivé`) %>%
+  filter(!is.na(heure_arrivee)) %>%
+  mutate(
+    # Nettoyage : remplacer "h" par ":" si besoin
+    heure_arrivee = gsub("h", ":", heure_arrivee),
+    # Conversion en heure (si format HH:MM)
+    heure_arrivee = hm(heure_arrivee),
+    heure = hour(heure_arrivee)
+  )
+
+# Création des tranches horaires de 1h
+arrivees <- arrivees %>%
+  mutate(`Tranche horaire` = cut(
+    heure,
+    breaks = seq(0, 24, by = 1),
+    labels = paste0(seq(0, 23, by = 1), "h - ", seq(1, 24, by = 1), "h"),
+    include.lowest = TRUE,
+    right = FALSE
+  ))
+
+# Comptage par tranche
+table_arrivees <- arrivees %>%
+  count(`Tranche horaire`, name = "Effectif") %>%
+  mutate(
+    Pourcentage = paste0(round(100 * Effectif / sum(Effectif), 1), " %")  # ✅ ajout du signe %
+  )
+
+# Tableau interactif plus joli
+datatable(
+  table_arrivees,
+  rownames = FALSE,
+  options = list(
+    dom = "t",
+    pageLength = 10,
+    columnDefs = list(list(className = "dt-center", targets = 0:2))
+  )
+) %>%
+  formatStyle("Effectif", backgroundColor = "#d9f0a3") %>%
+  formatStyle("Pourcentage", backgroundColor = "#cfe0f5")
+
+
+```
+:::
+
+::: {style="margin-bottom:30px;"}
+**Tableau des plages horaires des heures fixes de départ**
+```{r}
+#| echo: false
+#| warning: false
+
+
+library(dplyr)
+library(lubridate)
+library(DT)
+
+# Préparation des données
+depart <- donnees %>%
+  select(heure_depart = `C20 1 fixe départ`) %>%
+  filter(!is.na(heure_depart)) %>%
+  mutate(
+    # Nettoyage : remplacer "h" par ":" si besoin
+    heure_depart = gsub("h", ":", heure_depart),
+    # Conversion en heure (si format HH:MM)
+    heure_depart = hm(heure_depart),
+    heure = hour(heure_depart)
+  )
+
+# Création des tranches horaires de 1h
+depart <- depart %>%
+  mutate(`Tranche horaire` = cut(
+    heure,
+    breaks = seq(0, 24, by = 1),
+    labels = paste0(seq(0, 23, by = 1), "h - ", seq(1, 24, by = 1), "h"),
+    include.lowest = TRUE,
+    right = FALSE
+  ))
+
+# Comptage par tranche
+table_depart <- depart %>%
+  count(`Tranche horaire`, name = "Effectif") %>%
+  mutate(
+    Pourcentage = paste0(round(100 * Effectif / sum(Effectif), 1), " %")  # ✅ ajout du signe %
+  )
+
+# Tableau interactif plus joli
+datatable(
+  table_depart,
+  rownames = FALSE,
+  options = list(
+    dom = "t",
+    pageLength = 10,
+    columnDefs = list(list(className = "dt-center", targets = 0:2))
+  )
+) %>%
+  formatStyle("Effectif", backgroundColor = "#d9f0a3") %>%
+  formatStyle("Pourcentage", backgroundColor = "#cfe0f5")
+
+
+```
+:::
+
 
 L’étude des rythmes quotidiens des salariés de la ZAE de Marticot met en évidence des schémas horaires d’activités de bureau, avec une forte concentration des arrivées et des départs sur des créneaux restreints.  
 
