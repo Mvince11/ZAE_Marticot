@@ -18,7 +18,7 @@ donnees <- read_excel("data/Classeur1.xlsx")
 
 Cette sous partie a pour objectif de comprendre la pause déjeuner des salariés en ciblant leurs habitudes. Elle est essentielle dans le quotidien d’un salarié et contribue au bien-être personnel et à son intégration dans son environnement professionnel.
 
-### 6.1 En général le midi, vous déjeuner :
+### 6.1 En général le midi, vous déjeunez :
 
 ::: {style="margin-top:30px; margin-bottom:30px;"}
 ```{r}
