@@ -129,15 +129,15 @@ ggplotly(p, tooltip = "text") %>%
 ![](images/zae_marticot_entreprise_3.png){.lightbox}
 ::::
 
-La ZAE affiche une identité très marquée par la domination du secteur industriel. En croisant la carte des entreprises implantées et le graphique sur la répartition des salariés par secteur, on saisit mieux les logiques d’occupation de l’espace et les dynamiques économiques qui structurent cette zone.
+La ZAE est très marquée par le secteur industriel. En croisant la carte des entreprises implantées et le graphique sur la répartition des salariés par secteur, on saisit mieux les logiques d’occupation de l’espace et les dynamiques économiques qui structurent cette zone.
 
 Sur le plan sectoriel, la ZAE Marticot concentre des entreprises à fort profil industriel et technologique. On y trouve Lectra, une entreprise leader dans la conception de machines de découpe et de logiciels destinés aux industries textile et automobile. À ses côtés, Stryker, entreprise américaine, fabrique des dispositifs médicaux et des implants rachidiens ou encore ELSIL electronics fabriquant de composants électroniques industriels. À côté de ces grandes structures, un grand nombre de PME opèrent dans la fabrication, la maintenance et le montage de structures métalliques — à l’image d’Accès Innovations Services (AIS) ou de l’Entreprise de Montage de Produits Industriels (EMPI). Ces entreprises, plus modestes en taille mais très spécialisées, participent activement au dynamisme industriel de la zone.
 
-Un élément clé de cette vitalité économique réside dans la présence d’une pépinière d’entreprises, véritable levier de développement local. Cet espace favorise l’émergence de jeunes sociétés innovantes, leur offrant un accompagnement, des locaux adaptés et un environnement propice à la collaboration. La pépinière participe à la diversification du tissu productif et la présence de PME, artisans ou encore auto-entrepreneurs.
+Un élément clé de cette vitalité économique réside dans la présence d’une pépinière d’entreprises, véritable levier de développement local. Cet espace favorise l’émergence de jeunes sociétés innovantes, leur offrant un accompagnement, des locaux adaptés et un environnement propice à la collaboration. La pépinière participe à la diversification du tissu productif et à la présence de PME, artisans ou encore auto-entrepreneurs.
 
 En complément, des structures comme SGS France, experte en contrôle, inspection et certification, ou encore divers bureaux d’ingénierie et de logistique, assurent des fonctions de soutien indispensables : maintenance, contrôle qualité, gestion des flux, services techniques. Bien qu’appartenant au secteur tertiaire, ces acteurs restent étroitement liés à la chaîne industrielle et participent au bon fonctionnement de l’écosystème global. Le graphique de répartition des salariés confirme la nette domination du secteur industriel, très largement majoritaire face au tertiaire ou à la logistique. Cette concentration s’explique autant par la présence d’unités de production importantes que par le réseau de PME techniques et artisanales qui gravitent autour des grandes entreprises, renforçant la cohérence industrielle du site.
 
-Ainsi, la ZAE Marticot se distingue par un modèle économique équilibré : d’un côté, des entreprises industrielles de haute technicité assurent la stabilité et la visibilité du site ; de l’autre, une multitude de PME et la pépinière d’entreprises insufflent flexibilité, innovation et capacité d’adaptation. Ce maillage dense contribue à faire de Marticot un pôle industriel et technologique attractif du sud-ouest bordelais, symbole d’une économie locale à la fois productive, collaborative et résolument tournée vers l’avenir.
+Ainsi, la ZAE Marticot se distingue par un modèle économique équilibré : d’un côté, des entreprises industrielles de haute technicité assurent la stabilité et la visibilité du site ; de l’autre, une multitude de PME et la pépinière d’entreprises insufflent flexibilité, innovation et capacité d’adaptation. Ce maillage dense contribue à faire de Marticot un pôle industriel et technologique attractif du sud-ouest bordelais.
 
 ### 4.2 Nombre de salariés
 
@@ -214,13 +214,13 @@ ggplotly(p, tooltip = "text")%>%
 ```
 :::
 
-La répartition du nombre de salariés montre que la ZAE de Marticot est largement dominée par des entreprises de taille moyenne à grande, employant entre 250 et 5000 salariés (83,2 % du total). Ces structures, souvent industrielles, forment le cœur économique de la zone. . Cela s’explique par la présence de plusieurs entreprises industrielles majeures, comme Lectra ou Stryker Spine, qui concentrent une grande partie de l’emploi local et donc de notr échantillon de réponses.
+La répartition du nombre de salariés montre que la ZAE de Marticot est largement dominée par des entreprises de taille moyenne à grande, employant entre 250 et 5000 salariés (83,2 % du total). Ces structures, souvent industrielles, forment le cœur économique de la zone.
+Comme on l'a vu, cela s’explique par la présence de plusieurs entreprises industrielles majeures, comme Lectra ou Stryker Spine, qui concentrent une grande partie de l’emploi local et donc de notre échantillon de réponses.
 
-Les PME (10 à 250 salariés) représentent environ **7 %** des effectifs, jouant un rôle de soutien technique ou logistique auprès des grands groupes. Les très petites entreprises (moins de 10 salariés) comptent pour 7,6 %, souvent issues de la pépinière d’entreprises. Enfin, les très grands employeurs (+5000 salariés) restent rares (2,2 %).
+Les PME (10 à 250 salariés) représentent environ **7 %** des effectifs, jouant un rôle de soutien technique ou logistique auprès des grands groupes. Les très petites entreprises (moins de 10 salariés) comptent pour 7,6 % des réponses au questionnaire, souvent issues de la pépinière d’entreprises. Enfin, les très grands employeurs (+5000 salariés) restent rares (2,2 %).
 
-La ZAE est d’une certaine déséquilibré puisque les entreprises de grandes tailles sont majoritairement représentés ce qui peut induire des surreprésentations dans les réponses en raison de la sous représentation des PME.
 
-### 4.3 Ancienneté des salariés dans la zone d’activité et l’entreprise
+### 4.3 Ancienneté des salariés dans la zone d’activité et dans l’entreprise
 
 #### 4.3.1 Depuis combien de temps travaillez-vous dans la zone d’activité ?
 
@@ -358,6 +358,6 @@ On observe d’abord que la majorité des salariés travaillent depuis plus de 1
 
 Les classes intermédiaires, notamment celles entre 1 et 10 ans d’ancienneté, affichent également des effectifs conséquents. Cela traduit un renouvellement progressif des équipes, souvent lié à des embauches régulières pour accompagner la croissance ou le remplacement de départs à la retraite. On perçoit ainsi une certaine dynamique de recrutement, sans rupture générationnelle nette.
 
-En revanche, les effectifs ayant moins d’un an d’ancienneté restent minoritaires. Ce faible taux de nouvelles arrivées montre que les entreprises de la zone privilégient la stabilité et la fidélisation du personnel plutôt qu’une forte rotation. A noter que au vu du profil des âges de la ZAE (cf 2.2),
+En revanche, les effectifs ayant moins d’un an d’ancienneté restent minoritaires. Ce faible taux de nouvelles arrivées montre que les entreprises de la zone privilégient la stabilité et la fidélisation du personnel plutôt qu’une forte rotation, et le recrutement d'une main d'oeuvre qualifiée et l'attachement à l'entreprise. 
 
-Enfin, la similitude entre les deux graphiques suggère que peu de salariés changent d’entreprise à l’intérieur même de la ZAE : ceux qui y travaillent depuis longtemps y restent souvent dans la même structure, confirmant la faible mobilité intra-zone.
+Enfin, la similitude entre les deux graphiques suggère que peu de salariés changent d’entreprise à l’intérieur même de la ZAE : ceux qui y travaillent depuis longtemps restent souvent dans la même structure, confirmant la faible mobilité intra-zone.

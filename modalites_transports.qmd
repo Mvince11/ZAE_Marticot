@@ -33,7 +33,7 @@ D’autre part, sa configuration spatiale suit le modèle traditionnel des zones
     </div>
 </div>
 
-L’enjeu est donc d’améliorer l’accessibilité globale de la zone afin de favoriser des alternatives crédibles à la voiture individuelle et de réduire sa part modale dominante.
+L’enjeu consiste donc à améliorer l’accessibilité globale de la zone afin de favoriser des alternatives crédibles à la voiture individuelle et de réduire sa part modale dominante.
 Une meilleure prise en compte des mobilités actives et collectives apparaît indispensable pour renforcer la durabilité et l’attractivité du site.
 ```
 
@@ -131,9 +131,9 @@ transports_utilises %>%
 
 :::
 
-La voiture est le premier mode de transport des salariés avec 84,9%, pouvant s’additionner avec les deux roues motorisées (5,2%) grimpant à 90,1% le taux d’utilisation de véhicules motorisés. Si on fait le lien avec les communes d’origines des salariés (2.4 communes des salariés) il n’est pas étonnant au vu de l’air d’attractivité avec plus de 69 communes différentes.
+La voiture est le premier mode de transport des salariés avec 84,9%, pouvant s’additionner avec les deux roues motorisées (5,2%).
 
-Ce qui est intéressant c’est d’analyser la part modale des salariés venant de Cestas même mais aussi des communes limitrophes.
+L'analyse de  la part modale des salariés venant de Cestas même mais aussi des communes limitrophes est à ce titre intéressante.
 
 ![Cartographie des communes limitrophes de Cestas](images/communes_limitrophes_marticot.png){.lightbox fig-align="center" figcaption-align="center" width="80%"}
 
@@ -215,9 +215,9 @@ datatable(
 ```
 :::
 
-L’analyse des modes de déplacement selon la commune de résidence met en évidence une dépendance quasi exclusive à la voiture individuelle, marquée également dans la commune même de Cestas mais aussi des communes périphériques. Dans les communes rurales ou faiblement desservies comme Le Barp, Saucats et Saint-Jean-d’Illac, l’usage de la voiture atteint 100 % des salariés. Ces territoires, éloignés des pôles urbains et mal connectés au réseau de transports collectifs, ne disposent d’aucune alternative crédible à l’automobile.
+L’analyse des modes de déplacement selon la commune de résidence met en évidence une dépendance quasi exclusive à la voiture individuelle, marquée également pour les salariés de la commune même de Cestas mais aussi des communes périphériques. Dans les communes rurales ou faiblement desservies comme Le Barp, Saucats et Saint-Jean-d’Illac, l’usage de la voiture atteint 100 % des salariés. Ces territoires, éloignés des pôles urbains et mal connectés au réseau de transports collectifs, ne disposent d’aucune alternative crédible à l’automobile.
 
-Les communes plus proches de la métropole bordelaise, telles que Cestas (82,5 %) et Pessac (82,4 %), présentent des taux légèrement inférieurs, mais la voiture demeure le mode de transport largement dominant. Même dans Léognan (88,2 %), pourtant relativement bien située, l’usage de la voiture reste prépondérant, ce qui illustre la faible intermodalité et la difficulté d’accès à la zone d’activités autrement qu’en voiture. Les chiffres des bus (2,5% pour Cestas même, 2,9% pour Pessac) très bas reflètent des lacunes en terme de desserte en transports collectifs et la nécessité de développer des alternatives crédibles, qu’il s’agisse d’une meilleure offre de bus, de la création d’aires de covoiturage ou de la sécurisation des itinéraires cyclables reliant ces communes à la zone d’activités. Puisqu’il est important de souligner qu’un quart des salariés font usages du vélo, mais non pas de manière régulière, puisque les usagers continuent d’utiliser la voiture.
+Les communes plus proches, telles que Cestas (82,5 %) et Pessac (82,4 %), présentent des taux légèrement inférieurs, mais la voiture demeure le mode de transport largement dominant. Même dans Léognan (88,2 %), pourtant relativement bien située, l’usage de la voiture reste prépondérant, ce qui illustre la faible intermodalité et la difficulté d’accès à la zone d’activités autrement qu’en voiture. Le recours au bus (2,5% pour les salariés de Cestas même, 2,9% pour ceux de Pessac) est très faible et reflète des lacunes en terme de desserte en transports collectifs et la nécessité de développer des alternatives crédibles, qu’il s’agisse d’une meilleure offre de bus, de la création d’aires de covoiturage ou de la sécurisation des itinéraires cyclables reliant ces communes à la zone d’activités. Il est en effet important de souligner qu’un quart des salariés utilisent le vélo, mais pas de manière régulière, puisque les usagers continuent d’utiliser la voiture.
 
 ### 5.2 Au cours de l’année changez-vous de mode de transports ?
 
@@ -267,7 +267,7 @@ plot_ly(
   config(responsive = TRUE)
 ```
 
-De plus sur les changements de transports au cours de l’année ou de la semaine, le taux est relativement bas (20,6%) contre 73,2% de salariés faisant le changement. Ces changements de transports signifient que les personnes font l’effort de faire l’intermodalité et d’utiliser des modes de déplacements doux (vélo par exemple ou des transports en communs. La cause N°1 des changements est la météo (15,1%) et des contraintes personnelles des individus (13,2%). Mais notre cas, les personnes sont contraintes à prendre leur voiture comme option n°1.
+De plus, concernant les changements de transports au cours de l’année ou de la semaine, le taux est relativement bas (20,6%) contre 73,2% de salariés faisant le changement. Ces changements de transports signifient que les personnes font l’effort de faire l’intermodalité et d’utiliser des modes de déplacements doux (vélo par exemple ou des transports en communs. La cause N°1 des changements est la météo (15,1%) et des contraintes personnelles des individus (13,2%). Mais notre cas, les personnes sont contraintes à prendre leur voiture comme option n°1.
 
 ### 5.3 Le bus
 

@@ -19,12 +19,12 @@ donnees <- read_excel("data/Classeur1.xlsx")
 
 ## 2. PROFIL DE l’ÉCHANTILLON
 
-Comme évoqué notre échantillon finale de notre questionnaire est de 325 réponses, représentant environ \[20%\] de l’ensemble des salariés de la zone (estimée entre 1000 et 1500 salariés).
+Comme évoqué, l'échantillon finale correspond à 325 réponses, représentant environ 20% de l’ensemble des salariés de la zone (estimée entre 1000 et 1500 salariés).
 
 ### 2.1 Le genre
 
-La population salariée de la zone de Marticot apparaît majoritairement masculine, ce qui reflète probablement la nature des activités implantées (industrie, logistique, artisanat) traditionnellement plus masculinisées. Cette part supérieur est aussi importante à corréler avec la forte présence de CSP de cadres et professions intellectuelles supérieures qui représentent 66% environ des répondant au questionnaire. D’après les chiffres CSP en emploi de l’INSEE en 2024, 25,4% sont des hommes et 20,4% sont des femmes. Les hommes sont proportionnellement plus nombreux parmi les cadres et les ouvriers qualifiés (INSEE, 2024).\
-Le profil de la zone de Marticot, caractérisé par une forte proportion de cadres et une majorité d’hommes, traduit donc une composition socioprofessionnelle spécifique à cette ZAE, qui ne reflète pas la structure nationale mais plutôt les caractéristiques économiques locales (présence d’ETI, activités industrielles, logistiques et de services spécialisés).Ce déséquilibre peut influencer les perceptions entre genre mais aussi en CSP au vu de ces 2 surreprésentations dans l’échantillon. Celui-ci reste représentatif de la réalité puisqu’il s’agit d’une réalité factuelle de la zone mais il ne pas négliger les sous représentations. Notamment en terme de CSP.
+La population salariée de la zone de Marticot apparaît majoritairement masculine, ce qui reflète probablement la nature des activités implantées (industrie, logistique, artisanat) traditionnellement plus masculinisées. Cette part supérieure est aussi importante à corréler avec la forte présence de CSP de cadres et professions intellectuelles supérieures qui représentent 66% environ des répondant au questionnaire. D’après les chiffres CSP en emploi de l’INSEE en 2024, 25,4% sont des hommes et 20,4% sont des femmes. Les hommes sont proportionnellement plus nombreux parmi les cadres et les ouvriers qualifiés (INSEE, 2024).\
+Le profil de la zone de Marticot, caractérisée par une forte proportion de cadres et une majorité d’hommes, traduit donc une composition socioprofessionnelle spécifique à cette ZAE, qui ne reflète pas la structure nationale mais plutôt les caractéristiques économiques locales (présence d’ETI, activités industrielles, logistiques et de services spécialisés).Ce déséquilibre peut influencer les perceptions entre genres mais aussi en CSP au vu de ces deux surreprésentations dans l’échantillon. Celui-ci reste représentatif de la réalité puisqu’il s’agit d’une réalité factuelle de la zone mais il ne faut pas négliger les sous représentations, notamment en terme de CSP.
 
 ```{r}
 #| include: FALSE
@@ -78,18 +78,44 @@ plot_ly(
 
 ### 2.2 L’âge
 
-Dans notre échantillon de 325 répondants, L’âge moyen s’établit à 43,3 ans, tandis que la médiane, très proche (44 ans), confirme une distribution centrée autour de la quarantaine. L’écart-type de 11 ans indique toutefois une certaine diversité d’âges, avec des salariés allant de 21 à 63 ans. Le mode (valeur la plus fréquente) se situe à 53 ans, ce qui suggère la présence notable de salariés plus âgés, souvent expérimentés. Le graphique confirme visuellement cette tendance :
-
-La tranche des 40-49 ans concentre le plus grand nombre d’effectifs, ce qui en fait le cœur de la population active de la ZAE. Cette surreprésentation traduit une main-d’œuvre en pleine maturité professionnelle, occupant souvent des postes qualifiés ou de responsabilité.
-
-Les 30-39 ans et 50-59 ans forment des groupes secondaires importants, témoignant d’une bonne continuité générationnelle et d’un renouvellement progressif.
-
-À l’inverse, les moins de 30 ans et les plus de 60 ans sont minoritaires, traduisant une faible proportion de jeunes entrants et de salariés proches de la retraite encore en activité.
+Dans notre échantillon de 325 répondants, l’âge moyen s’établit à 43,3 ans, tandis que la médiane, très proche (44 ans), confirme une distribution centrée autour de la quarantaine. L’écart-type de 11 ans indique toutefois une certaine diversité d’âges, avec des salariés allant de 21 à 63 ans. Le mode (valeur la plus fréquente) se situe à 53 ans, ce qui suggère la présence notable de salariés plus âgés, souvent expérimentés. 
 
 La ZAE de Marticot présente une structure d’âge équilibrée mais vieillissante, dominée par les salariés de 40 à 50 ans, avec une représentation limitée des jeunes actifs. Cette configuration reflète le profil typique d’une zone industrielle établie, où la stabilité des emplois et la technicité des postes favorisent la fidélisation et la longévité professionnelle.
 
 ```{r}
 #| echo: false
+#| warning: false
+library(dplyr)
+
+# Conversion en numérique
+df_age <- donnees %>%
+  mutate(Age_num = suppressWarnings(as.numeric(as.character(`X2 age...3`))))
+
+# Fonction pour calculer le mode
+mode_val <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+# Calcul des statistiques
+stats_age <- df_age %>%
+  summarise(
+    N = sum(!is.na(Age_num)),
+    Moyenne = mean(Age_num, na.rm = TRUE),
+    Médiane = median(Age_num, na.rm = TRUE),
+    Mode = mode_val(Age_num),
+    `Écart-type` = sd(Age_num, na.rm = TRUE),
+    Minimum = min(Age_num, na.rm = TRUE),
+    Maximum = max(Age_num, na.rm = TRUE)
+  )
+
+# Affichage du tableau
+knitr::kable(stats_age, caption = "Résumé statistique des âges")
+```
+
+```{r}
+#| eval: false
+#| include: false
 
 library(dplyr)
 library(ggplot2)
@@ -254,7 +280,7 @@ p_csp_plotly
 
 ```
 
-Les cadres et professions intellectuelles supérieures représentent 66 % des répondants, suivis par les employés (24 %) et les ouvriers (6 %). Les professions intermédiaires sont très minoritaires (2 %). Quelques cas isolés apparaissent (artisans, CEO, agents d’exploitation, surveillants de travaux) La forte présence de cadres témoigne de l’importance d’entreprises de taille intermédiaire (ETI) et de secteurs à forte valeur ajoutée (comme Lectra). Cela traduit un profil socio-économique élevé, susceptible de générer des attentes fortes en matière de services, de mobilité et de qualité de vie au travail. La présence non négligeable d’employés et d’ouvriers rappelle toutefois que les besoins sont variés et qu’une politique de requalification devra concilier des profils sociaux différents. De plus, il faut prendre en compte le fait que de part notre méthodologie, nous avons diffuser le questionnaire de manière numérique (par mail, QR code). Les salariés ayant le plus de chance d’avoir un accès bureautique sont les cadres et les employés puisqu’il s’agit de leur matériel de travail. Les ouvriers, artisans et certaines professions intermédiaires sont donc moins susceptibles d’avoir eu accès au questionnaire. C’est pour cela que nous avons réalisé un travail de terrain pour permettre une « démocratisation » de l’accès au questionnaire, en sensibilisant toutes les CSP présentent sur site.
+Les cadres et professions intellectuelles supérieures représentent 66 % des répondants, suivis par les employés (24 %) et les ouvriers (6 %). Les professions intermédiaires sont très minoritaires (2 %). Quelques cas isolés apparaissent (artisans, CEO, agents d’exploitation, surveillants de travaux) La forte présence de cadres témoigne de l’importance d’entreprises de taille intermédiaire (ETI) et de secteurs à forte valeur ajoutée (comme Lectra). Cela traduit un profil socio-économique élevé, susceptible de générer des attentes fortes en matière de services, de mobilité et de qualité de vie au travail. La présence non négligeable d’employés et d’ouvriers rappelle toutefois que les besoins sont variés et qu’une politique de requalification devra concilier des profils sociaux différents. De plus, il faut prendre en compte le fait que de par notre méthodologie, nous avons diffusé le questionnaire de manière numérique (par mail, QR code). Les salariés ayant le plus de chance d’avoir un accès bureautique sont les cadres et les employés puisqu’il s’agit de leur matériel de travail. Les ouvriers, artisans et certaines professions intermédiaires sont donc moins susceptibles d’avoir eu accès au questionnaire, malgré les diffusions à la sortie des entreprises. 
 
 ### 2.4 la commune de résidence des salariés
 

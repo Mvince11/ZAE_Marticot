@@ -23,7 +23,7 @@ donnees <- read_excel("data/Classeur1.xlsx")
 <div style="display: flex; align-items: flex-start; gap: 20px;" class="photo_container">
   <div style="flex: 1;">
     <p style="text-align: justify;">
-La perception qu’ont les salariés de cette zone d’activité offre un éclairage essentiel sur son fonctionnement quotidien, sa qualité d’aménagement et son attractivité en tant que lieu de travail. Au-delà des données économiques, il s’agit ici de comprendre comment la zone est vécue par ceux qui la pratiquent chaque jour : comment ils perçoivent ses qualités, ses manques, et les conditions qu’elle offre en matière de confort, d’accessibilité, de services ou d’ambiance. Notre objectif est de dresser un portrait sur les qualités de la zone mais aussi sur ces points faibles afin de cibler des axes d’améliorations mais surtout de comprendre la perception globale des salariés.
+La perception qu’ont les salariés de cette zone d’activité offre un éclairage essentiel sur son fonctionnement quotidien, sa qualité d’aménagement et son attractivité en tant que lieu de travail. Au-delà des données économiques, il s’agit ici de comprendre comment la zone est vécue par ceux qui la pratiquent chaque jour : comment ils perçoivent ses qualités, ses manques, et les conditions qu’elle offre en matière de confort, d’accessibilité, de services ou d’ambiance. Notre objectif est de dresser un portrait sur les qualités de la zone mais aussi sur ces points faibles afin de cibler des axes d’amélioration mais surtout de comprendre la perception globale des salariés.
     </p>
   </div>
     <div style="flex: 0 0 370px;">
@@ -105,15 +105,17 @@ config(responsive = TRUE)
 ```
 :::
 
-Sous forme de tableau, les répondants devaient donner une note d’appréciation de 1 à 6 sur différent adjectif qualificatif de la zone. L’objectif est de faire ressortir les caractéristiques globales pour mieux identifier les points faibles.
+Sous forme de tableau, les répondants devaient donner une note d’appréciation de 1 (pas du tout) à 6 (tout à fait) sur différents adjectifs qualificatifs de la zone (attractive, conviviale, accessible, isolée, obsolète). L’objectif est de faire ressortir les caractéristiques globales pour mieux identifier les points faibles.
 
-Les résultats montrent que la zone est perçue de manière nuancée. Elle est jugée moyennement attractive (moyenne 3,15/6) avec un écart-type de 1,24, ce qui traduit une dispersion modérée des réponses. Pour la convivialité on retrouve une moyenne plus basse de (2,92/6) avec 69,4% des répondants ayant donné une note entre 1 et 3. L’accessibilité est la modalité la moins bien évaluée avec une tendance négative (2,37/6) en moyenne, confirmant un ressenti de difficulté d’accès. À l’inverse, l’isolement est plutôt marqué (3,61/6), ce qui traduit une impression de coupure vis-à-vis de son environnement urbain. Cependant l’écart type de 1,64 (le plus élévé des 5) indique tout de même une importante dispersion. Avec 20,9% pour une note de 3 et 21,8% pour une note de 5. Cela peut traduire un isolement à relativiser. Enfin, la zone n’est pas jugée particulièrement obsolète (2,93/6), avec 71,9% des répondants ayant donné une note entre 1 et 3. Ces résultats traduisent une image mitigée de la zone de Marticot : si elle conserve une certaine attractivité économique, son manque de convivialité et surtout ses problèmes d’accessibilité apparaissent comme des points faibles majeurs. Le ressenti d’isolement dispersé renforce l’idée d’une zone fonctionnelle mais avec peut-être des problématiques d’intégration à son territoire.
+Les résultats montrent que la zone est perçue de manière nuancée. Elle est jugée moyennement attractive (moyenne 3,15/6) avec un écart-type de 1,24, ce qui traduit une dispersion modérée des réponses. Pour la convivialité on retrouve une moyenne plus basse de 2,92/6 avec 69,4% des répondants ayant donné une note entre 1 et 3. L’accessibilité est la modalité la moins bien évaluée avec une tendance négative 2,37/6 en moyenne, confirmant un ressenti dans la difficulté d’accès. À l’inverse, l’isolement est plutôt marqué 3,61/6, ce qui traduit une impression de coupure vis-à-vis de son environnement urbain. Cependant l’écart type de 1,64 (le plus élévé des 5) indique tout de même une importante dispersion. Avec 20,9% pour une note de 3 et 21,8% pour une note de 5. Cela peut traduire un isolement à relativiser. Enfin, la zone n’est pas jugée particulièrement obsolète 2,93/6, avec 71,9% des répondants ayant donné une note entre 1 et 3. Ces résultats traduisent une image mitigée de la zone de Marticot : si elle conserve une certaine attractivité économique, son manque de convivialité et surtout ses problèmes d’accessibilité apparaissent comme des points faibles majeurs. Le ressenti d’isolement dispersé renforce l’idée d’une zone fonctionnelle mais avec peut-être des problématiques d’intégration dans son territoire.
+Cela reflète également la disparité de l'intégration des entreprises dans la ville et la cdc. Les salariés de Lectra sont mieux intégrés (accès aux équipements sportifs de Cestas) que d'autres.
+
 
 ### 3.2 Les nuissances
 
 #### 3.2.1 Ressentez-vous des nuisances dans la ZAE de Marticot ?
 
-Sur la question des nuisances, nous avons voulus savoir quels pourrez être les éléments pouvant rendre l’expérience négative dans le zone, ainsi impacter le quotidien des salariés. Sur l’ensemble des répondants, on retrouve une majorité de personnes ne trouvant pas que la zone d’activité de Marticot soit associés à une quelconque nuisance (71,4%). Cependant 27,7% soit presque 1/3 estiment ressentir des nuisances.
+Sur la question des nuisances, nous avons voulu savoir quels pourraient être les éléments pouvant rendre l’expérience négative dans le zone, et ainsi impacter le quotidien des salariés. Sur l’ensemble des répondants, on retrouve une majorité de personnes ne trouvant pas que la zone d’activité de Marticot soit associée à une quelconque nuisance (71,4%). Cependant 27,7% soit presque 1/3 estiment ressentir des nuisances.
 
 ```{r}
 #| echo: false
@@ -157,16 +159,16 @@ plot_ly(
   config(responsive = TRUE)
 ```
 
-Dans l’élaboration de notre questionnaire, nous avons prédéfinis des catégories qui nous semblaient pertinentes et englobantes ; Les nuisances liées :
+Dans l’élaboration de notre questionnaire, nous avons prédéfini des catégories qui nous semblaient pertinentes et englobantes, les nuisances proposées étaient liées au regard des entretiens menés préalablement à nos visites sur site :
 
 -   À l’environnement bruyant
 -   À la circulation de poids lourd
 -   Au trafic routier et à la sécurité
 -   Aux odeurs
 -   À l’accessibilité
--   Les nuisances
+-   Pollution
 
-A savoir que les 3 dernières catégories ont étés rajoutés après avoir analyser les réponses libres des personnes ayant choisis de préciser dans « autre ».
+A savoir que les trois dernières catégories ont été ajoutées après avoir analysé les réponses libres des personnes ayant choisis de préciser dans « autre ».
 
 ```{r}
 #| echo: false
@@ -241,7 +243,9 @@ Les résultats mettent en évidence une perception différenciée des nuisances 
 -   le bruit, mentionné par 60,0 % ;
 -   et la circulation des poids lourds, évoquée par 53,3 %.
 
-Ces résultats traduisent une sensibilité forte des usagers à la circulation routière et à ses conséquences directes, qu’il s’agisse du bruit, du trafic dense ou des poids lourds. À l’inverse, l’odeur, l’accessibilité et la pollution apparaissent comme beaucoup plus marginales comme nuisances. Mais celles-ci ont étés rajoutés à partir de la case autre qui permettaient de préciser d’autres nuisances non cités. Ainsi, les nuisances perçues dans la zone d’activité sont avant tout liées aux conditions de circulation et de sécurité, tandis que les nuisances environnementales plus classiques (pollution de l’air, odeurs) sont relativement peu mentionnées.
+Ces résultats traduisent une sensibilité forte des usagers à la circulation routière et à ses conséquences directes, qu’il s’agisse du bruit, du trafic dense ou de la présence des poids lourds.  
+
+À l’inverse, l’odeur, l’accessibilité et la pollution apparaissent comme beaucoup plus marginales. Mais celles-ci ont été rajoutées à partir de la case "autre" qui permettait de préciser d’autres nuisances non citées. Ainsi, les nuisances perçues dans la zone d’activité sont avant tout liées aux conditions de circulation et de sécurité, tandis que les nuisances environnementales plus classiques (pollution de l’air, odeurs) sont relativement peu mentionnées.
 
 ### 3.3 Appréciation des caractéristiques de la zone d’activité
 
@@ -464,6 +468,7 @@ ggplotly(p, tooltip = "text") %>%
 :::
 
 La qualité esthétique de la zone est jugée de manière mitigée par les salariés. La moyenne s’établit à 3,26/6, avec une médiane de 3, ce qui traduit une appréciation plutôt moyenne. La majorité des répondants se situe dans les notes intermédiaires (3 ou 4), tandis qu’environ un quart exprime une perception négative (notes 1 ou 2). À l’inverse, seuls 14 % évaluent positivement l’esthétisme (notes 5 ou 6). Ces résultats soulignent que l’environnement bâti de la ZAE n’est pas perçu comme un atout particulier et qu’il suscite au mieux une neutralité, au pire une certaine réserve.
+Il faut souligner que lors du questionnaire diffusé en direct, la plupart des réactions des répondants montraient un désintérêt pour la question : "C'est un lieu de travail, peu importe que ce soit beau !".
 
 ### 3.5 Attachement aux espaces verts de la zone d’activité
 
@@ -656,7 +661,7 @@ ggplotly(p, tooltip = "text") %>%
 
 ### 3.7 Présence de friches ou locaux vacants
 
-#### 3.7.1 Avez-vous remarqué la présence de friches (terrain ou local abandonnées de longue date) ou de locaux vacants sur la zone d’activité ?
+#### 3.7.1 Avez-vous remarqué la présence de friches (terrain ou local abandonnés de longue date) ou de locaux vacants sur la zone d’activité ?
 
 Une majorité de salariés **(66,2 %)** déclarent ne pas avoir remarqué de friches ou de locaux vacants sur la zone. Toutefois, près d’un tiers **(30,3 %)** indiquent en avoir observé “quelques-uns”, et **3,5 %** mentionnent même “plusieurs” friches. Ces perceptions contrastées traduisent une situation intermédiaire : la présence de bâtiments inoccupés est visible mais reste limitée, suggérant une vigilance nécessaire pour éviter que ces espaces ne deviennent des points de fragilité ou n’altèrent l’image générale de la zone.
 
@@ -709,7 +714,7 @@ margin = list(t = 60, b = 60))%>%
 
 ### 3.8 Évolution de la zone d’activité
 
-#### 3.8.1 Si la zone d’activité de Marticot devait évoluer; pour vous elle devrait être :
+#### 3.8.1 Si la zone d’activité de Marticot devait évoluer, pour vous elle devrait être :
 
 ::: {style= "margin-top:30px;"}
 
@@ -779,7 +784,7 @@ plot_ly(
 Les résultats de la question A8 mettent clairement en évidence que les attentes prioritaires des salariés concernent avant tout la **mobilité et l’accessibilité**. Avec une moyenne de 4,95 sur 6 et un écart-type limité (1,15), cet item recueille un consensus très fort : plus de 70 % des répondants lui attribuent une note de 5 ou 6. Cette concentration des réponses illustre la centralité de la question des déplacements dans le quotidien des usagers de la zone.
 
 Viennent ensuite les services disponibles, qui apparaissent eux aussi comme un enjeu majeur d’évolution. La moyenne atteint 4,85, avec une médiane de 5 et un écart-type faible (1,14), traduisant une convergence d’opinions. Une large majorité de salariés exprime le besoin de voir se développer l’offre de restauration, de commerces et de services de proximité, confirmant l’importance de ce levier dans l’amélioration de la qualité de vie au travail. La signalétique arrive en troisième position avec une moyenne de 4,40. Bien que moins prioritaire que la mobilité ou les services, elle est tout de même jugée nécessaire par une majorité de répondants. L’écart-type légèrement plus élevé (1,31) témoigne cependant d’une certaine dispersion : certains salariés considèrent la signalétique comme un point faible de la zone, tandis que d’autres ne l’identifient pas comme un enjeu majeur. La qualité architecturale est également évoquée, avec une moyenne de 4,07 et une médiane de 4. L’écart-type de 1,27 suggère une diversité de perceptions : une partie des salariés souhaite une amélioration du bâti et de l’image architecturale, tandis qu’une autre estime que ce n’est pas une priorité. Enfin, les espaces verts arrivent en dernière position, avec une moyenne de 3,77. Cet item, qui avait pourtant suscité un fort attachement en A5, apparaît ici comme moins urgent dans les évolutions attendues. L’écart-type de 1,33 traduit des avis assez hétérogènes : certains salariés semblent satisfaits de l’existant, tandis que d’autres souhaitent davantage de valorisation paysagère.\
-Dans l’ensemble, ces résultats traduisent une hiérarchisation nette des attentes : l’amélioration des conditions de déplacement et de l’offre de services constitue la priorité des salariés, suivie par des besoins intermédiaires en matière de signalétique et d’architecture, tandis que la dimension paysagère, bien qu’appréciée, est reléguée au second plan dans les demandes de transformation.
+Dans l’ensemble, ces résultats traduisent une hiérarchisation nette des attentes : l’amélioration des conditions de déplacement et de l’offre de services constitue la priorité des salariés, suivie par des besoins intermédiaires en matière de signalétique et d’architecture, tandis que la dimension paysagère, bien qu’appréciée, est reléguée au second plan dans les demandes de transformation, sans doute parce qu'elle est jugée globalement satisfaisante dans l'existant.
 
 ### 3.9 Les services utiles pour la zone d’activité
 
@@ -847,9 +852,9 @@ plot_ly(
 ```
 :::
 
-La question en 3.8 visait à identifier les services jugés utiles par les salariés de la zone d’activité de Marticot. La difficulté était de cibler des axes de services sans pour autant demander explicitement les besoins. Cette approche peut-être biaiser puisque les personnes peuvent en effet vouloir des équipements dont ils ne se serviront pas forcément ou jugeant que c’est nécessaire pour la qualité de vie dans la ZAE mais sans que ce le soit necessairement. C’est pour cela que nous avons cibler des services « utiles » afin cadrer les attentes et avoir des réponses crédibles. Les résultats montrent des attentes différenciées selon les types de services proposés.
+La question en 3.8 visait à identifier les services jugés utiles par les salariés de la zone d’activité de Marticot. La difficulté était de cibler des axes de services sans pour autant demander explicitement les besoins. Cette approche peut-être biaisée puisque les personnes peuvent en effet vouloir des équipements dont ils ne se serviront pas forcément ou jugeant que c’est nécessaire pour la qualité de vie dans la ZAE mais sans que ce le soit necessairement. C’est pour cela que nous avons ciblé des services « utiles » afin de cadrer les attentes et avoir des réponses crédibles. Les résultats montrent des attentes différenciées selon les types de services proposés.
 
-Tout d’abord, le service le plus plébiscité est la restauration : 72,3 % des répondants déclarent qu’un restaurant ou une offre alimentaire leur serait utile. Cette forte demande traduit un besoin central de lieux de convivialité et de solutions pratiques pour la pause déjeuner, dans une zone où l’offre semble insuffisante au regard du nombre de salariés. Cela rejoint également les résultats de la partie E du questionnaire sur la pause déjeuner, où beaucoup de salariés expriment des contraintes liées au temps et à l’accessibilité de la restauration.
+Tout d’abord, le service le plus plébiscité est la restauration : 72,3 % des répondants déclarent qu’un restaurant ou une offre alimentaire leur serait utile. Cette forte demande traduit un besoin central de lieux de convivialité et de solutions pratiques pour la pause déjeuner, dans une zone où l’offre semble insuffisante au regard du nombre de salariés. Cela rejoint également les résultats de la partie 6 du questionnaire sur la pause déjeuner, où beaucoup de salariés expriment des contraintes liées au temps et à l’accessibilité de la restauration.
 
 Ensuite, près de la moitié des répondants (44 %) estiment qu’une offre sportive serait un service utile. Cette donnée témoigne d’une attente significative en matière de qualité de vie au travail et de possibilités de pratiquer une activité physique à proximité immédiate du lieu d’emploi, ce qui rejoint les tendances actuelles d’entreprises cherchant à promouvoir la santé et le bien-être des salariés.
 
