@@ -84,7 +84,7 @@ plot_ly(
 ) %>%
   layout(
     title = list(
-      text = "<b>Répartition en pourcentage des différentes modalités de transports des salariés</b>",
+      text = "<b>Répartition en pourcentage des différentes modalités <br> de transports des salariés</b>",
       x = 0.5,
       font = list(color = "red", size = 14)
     ),
@@ -267,7 +267,7 @@ plot_ly(
   config(responsive = TRUE)
 ```
 
-De plus, concernant les changements de transports au cours de l’année ou de la semaine, le taux est relativement bas (20,6%) contre 73,2% de salariés faisant le changement. Ces changements de transports signifient que les personnes font l’effort de faire l’intermodalité et d’utiliser des modes de déplacements doux (vélo par exemple ou des transports en communs. La cause N°1 des changements est la météo (15,1%) et des contraintes personnelles des individus (13,2%). Mais notre cas, les personnes sont contraintes à prendre leur voiture comme option n°1.
+De plus, concernant les changements de transports au cours de l’année ou de la semaine, le taux est relativement bas (20,6%) contre 73,2% de salariés faisant le changement. Ces changements de transports signifient que les personnes font l’effort de faire prendre plusieurs modes de transports et d’utiliser des modes de déplacements doux (vélo par exemple ou des transports en communs). La première cause de ces changements est la météo (15,1%) et les contraintes personnelles des individus (13,2%). A chaque fois, les salariés ont recours à la voiture.
 
 ### 5.3 Le bus
 
@@ -275,11 +275,11 @@ De plus, concernant les changements de transports au cours de l’année ou de l
 
 La zone d’activités du Marticot bénéficie d’une desserte en transports collectifs relativement limitée et peu structurée, reflet d’une implantation périphérique et d’une dépendance historique à la voiture individuelle. Trois réseaux assurent aujourd’hui un accès à la zone : le Prox’bus, les cars régionaux Nouvelle-Aquitaine, et, plus indirectement, le réseau TBM de Bordeaux Métropole.
 
-Le Prox’bus et la ligne 413 des cars régionaux sont les 2 lignes ayant un arrêt direct dans la zone d’activité. Ils jouent un rôle essentiel pour les déplacements de proximité entre Cestas, Canéjan et Saint-Jean-d’Illac, mais les fréquences demeurent faibles et centrées sur les heures de pointe, ce qui limite leur praticité pour les salariés travaillant en horaires décalés.
+Le Prox’bus et la ligne 413 des cars régionaux sont les 2 lignes ayant un arrêt direct dans la zone d’activité. Ils jouent un rôle essentiel pour les déplacements de proximité entre Cestas, Canéjan et Saint-Jean-d’Illac, mais les fréquences demeurent faibles et centrées sur les heures de pointe, ce qui limite leur praticité pour les salariés travaillant en horaires décalés, ou ayant des contraintes avant ou après le travail.
 
-Les autres lignes lignes 411 et 480 assurent des liaisons vers Bordeaux, Pessac ou Le Barp, mais leurs arrêts se situent principalement sur les axes structurants de Cestas ou Canéjan, nécessitant souvent une correspondance ou une marche pour rejoindre la zone. Quant au réseau TBM, il ne dessert pas directement le Marticot, bien qu’il constitue la principale porte d’entrée métropolitaine par le biais des arrêts et correspondances situés à Pessac ou Gradignan.
+Les autres lignes lignes 411 et 480 assurent des liaisons vers Bordeaux, Pessac ou Le Barp, mais leurs arrêts se situent principalement sur les axes structurants de Cestas ou Canéjan, nécessitant souvent une correspondance ou une marche pour rejoindre la zone. Quant au réseau TBM, il ne dessert pas directement Marticot, bien qu’il constitue la principale porte d’entrée métropolitaine par le biais des arrêts et correspondances situés à Pessac ou Gradignan.
 
-Cette configuration illustre une des difficultés dans l’offre de transports collectifs : chaque réseau opère dans une logique territoriale distincte, sans interconnexion fluide. Pour les salariés, cela se traduit par un accès complexe, peu avantageux face à la voiture. L’amélioration des liaisons intermodales (Prox’bus ↔ Cars ↔ TBM). Il est d’ailleurs difficile de consulter les différentes possibilités de crrespondance entre les différents opérateurs, sur le site TBM la ligne locale n’apparait pas, sur certaines applaications d’itiniériares les cars régionaux n’apparaissent pas ou proposent directement la voiture comme option principale.
+Cette configuration illustre une des difficultés dans l’offre de transports collectifs : chaque réseau opère une logique territoriale distincte, sans interconnexion fluide. Pour les salariés, cela se traduit par un accès complexe, peu avantageux face à la voiture. L’amélioration des liaisons intermodales (Prox’bus ↔ Cars ↔ TBM). Il est d’ailleurs difficile de consulter les différentes possibilités de correspondance entre les différents opérateurs: sur le site TBM la ligne locale n’apparait pas, sur certaines applaications d’itinéraires les cars régionaux n’apparaissent pas ou proposent directement la voiture comme option principale.
 
 La création d’arrêts mutualisés et le renforcement des fréquences apparaissent donc comme des leviers essentiels pour rendre la zone plus accessible et soutenir une mobilité plus durable.
 
@@ -396,10 +396,10 @@ p <- ggplot(horaires_compatibles, aes(x = Note)) +
 ggplotly(p, tooltip = "text") %>%
   layout(
     title = list(
-      text = "<b>Densité sur l’appréciation de la compatibilité des horaires de travail avec les horaires de bus </b>",
+      text = "<b>Densité sur l’appréciation de la compatibilité des horaires <br> de travail avec les horaires de bus </b>",
       x = 0.5,
       xanchor = "center",
-      font = list(color = "red", size = 14)
+      font = list(color = "red", size = 13)
     ),
     xaxis = list(title = "Note"),
     yaxis = list(title = "Densité"),
@@ -479,11 +479,11 @@ ggplotly(p, tooltip = "text") %>%
   
 ```
 
-Sur les usagers, qui, on le rappelle représentent 2,5% du total des modalités de transports. Les cars régionaux et les lignes locales sont utilisés par la moitié des répondants (50 %), tandis que le réseau TBM, pourtant structurant à l’échelle métropolitaine, n’est cité que par 37,5 % des usagers. Ce constat s’explique principalement par la localisation périphérique de la ZAE du Marticot, à la limite du périmètre métropolitain, et par la faible interconnexion entre les réseaux. La compatibilité des horaires entre le bus et le travail reste mitigé sans réelles tendances avec une moyenne de 3,13. Enfin sur la question de la satisfaction de la fréquence, la médiane est de 1,5 sur une graduation de 1 à 6. Cette insatisfaction est sans doute l’un des facteurs de cette dépréciation des transports en communs face à la voiture en plus d’un tissage intermodale complexe.
+Les cars régionaux et les lignes locales sont utilisés par la moitié des répondants (50 %) des 2,5% d'usagers de transports en commun, tandis que le réseau TBM, pourtant structurant à l’échelle métropolitaine, n’est cité que par 37,5 % des usagers. Ce constat s’explique principalement par la localisation périphérique de la ZAE du Marticot, à la limite du périmètre métropolitain, et par la faible interconnexion entre les réseaux. La compatibilité des horaires entre le bus et le travail reste mitigé sans réelles tendances avec une moyenne de 3,13. Enfin sur la question de la satisfaction de la fréquence, la médiane est de 1,5 sur une graduation de 1 à 6. Cette insatisfaction est sans doute l’un des facteurs de cette dépréciation des transports en communs face à la voiture en plus d’un tissage intermodale complexe.
 
 ### 5.4 Le train
 
-Même si l’usage du train reste très limité quant à la totalité des salariés, il reste plus utilisé que le bus et cela s’explique par un point d’intérêt non négligeable. Puisque la ZAE se situe à 3km d’une gare intercités SCNF. Une ligne TER relie Bordeaux-Arcachon avec comme arrêts Talence Pessac Cestas Marcheprime, Le Teich, Biganos. De Bordeaux, le trajet est très rapide, on compte environ 15min depuis la gare de Bordeaux Saint-Jean (sans les retards bien sûr…) avec une fréquence de 30min pour chaque train dans une amplitude de 6h00 à 9h00 et de 16h à 19h00 pour les horaires de pointes.
+Même si l’usage du train reste très limité quant à la totalité des salariés (5,8%), il reste plus utilisé que le bus et cela s’explique par un point d’intérêt non négligeable: la ZAE se situe à 3 km d’une gare intercités SCNF. Une ligne TER relie Bordeaux-Arcachon avec comme arrêts Talence, Pessac, Cestas, Marcheprime, Le Teich, Biganos. De Bordeaux, le trajet est très rapide, on compte environ 15 min depuis la gare de Bordeaux Saint-Jean avec une fréquence de 30 min entre chaque train de 6h00 à 9h00 et de 16h à 19h00.
 
 ![Cartographie de la ligne Ter Bordeaux-Arcachon à proximité de la zone d’activité](images/ter_arcachon.jpg){.lightbox fig-align="center" width="60%"}
 
@@ -595,9 +595,9 @@ ggplotly(p, tooltip = "text") %>%
 
 Les salariés utilisant le train évaluent globalement de manière positive la compatibilité des horaires de train avec leurs horaires de travail, avec une moyenne de 4,47/6. Cela montre que ce moyen de transport constitue une alternative crédible à la voiture pour une partie des actifs de la zone d’activité. En revanche, la satisfaction concernant la fréquence des trains apparaît plus nuancée, avec une moyenne de 3,26/6, traduisant un service jugé parfois insuffisant ou irrégulier pour un usage quotidien.
 
-Les principaux usagers résident dans des communes situées le long de la ligne TER Bordeaux–Arcachon (Arcachon, Le Teich, Marcheprime, Biganos, La Teste-de-Buch). Ces loca-lisations bénéficient d’un accès direct et pratique à la gare de Cestas-Gazinet ou aux arrêts intermédiaires, ce qui renforce le potentiel de développement de cette mobilité. Pourtant, la comparaison avec les salariés de ces mêmes communes utilisant encore majoritairement la voiture montre que le potentiel de report modal vers le train reste important.
+Les principaux usagers résident sans surprise dans des communes situées le long de la ligne TER Bordeaux–Arcachon (Arcachon, Le Teich, Marcheprime, Biganos, La Teste-de-Buch). Ces loca-lisations bénéficient d’un accès direct et pratique à la gare de Cestas-Gazinet ou aux arrêts intermédiaires, ce qui renforce le potentiel de développement de cette mobilité. Pourtant, la comparaison avec les salariés de ces mêmes communes utilisant encore majoritairement la voiture montre que le potentiel de report modal vers le train reste important.
 
-Enfin, les salariés bordelais apparaissent également comme un public stratégique : confrontés à une forte congestion routière, ils pourraient trouver dans le train une solution de déplacement plus fiable et plus rapide pour accéder à la zone d’activité, 39,1% utilise le train comme moyen de mobilité.
+Enfin, les salariés bordelais apparaissent également comme un public stratégique : confrontés à une forte congestion routière, ils pourraient trouver dans le train une solution de déplacement plus fiable et plus rapide pour accéder à la zone d’activité (39,1% utilisent le train).
 
 ### 5.5 La voiture
 
@@ -669,13 +669,13 @@ plot_ly(
 
 ```
 
-Pour les automobilistes, nous avons cherché à savoir l’impact du trafic sur les horaires de travail en heures d’arrivés et de départ des salariés. La majorité (42,5%) attribuent une note faible de 1 sur une graduation jusqu’à 6. Ce qui peut signifier que les salariés n’ont pas besoins d’adapter ou qu’ils n’ont pas la possibilité et doivent subir la congestion routière lors de leur trajet. Cette faible flexibilité peut signifier qu’ils n’ont pas la possibilité d’avoir des horaires moins exposés aux embouteillages et doivent donc adapter leur heure de départ et ne pas partir quand ils veulent. Les contraintes personnelles peuvent également impacter cette tendance, en effet les personnes devant amener leurs enfants à l’école n’ont pas plus de marche de manœuvre pour éviter cette pénibilité.
+Pour les automobilistes, nous avons cherché à savoir l’impact du trafic sur les horaires de travail en heures d’arrivée et de départ des salariés. La majorité (42,5%) attribuent une note faible de 1 sur une graduation jusqu’à 6. Ce qui peut signifier que les salariés n’ont pas besoins d’adapter ou qu’ils n’ont pas la possibilité et doivent subir la congestion routière lors de leur trajet. Cette faible flexibilité peut signifier qu’ils n’ en ont pas la possibilité d’avoir des horaires moins exposés aux embouteillages et doivent donc adapter leur heure de départ et ne pas partir quand ils veulent. Les contraintes personnelles peuvent également impacter cette tendance, en effet les personnes devant amener leurs enfants à l’école n’ont pas plus de marche de manœuvre pour éviter cette pénibilité.
 
-Quand on compare entre les personnes ayant des horaires fixes et variables la tendance est relativement identique. Le test du khi² d’indépendance (χ²(5, N=275) = 7,95 ; p = 0,159) ne met pas en évidence de lien significatif entre le type d’horaires (fixes ou variables) et l’adaptation des horaires en fonction des embouteillages.
+Quand on compare les personnes ayant des horaires fixes et celles ayant des horaires variables la tendance est relativement similaire. Le test du khi² d’indépendance (χ²(5, N=275) = 7,95 ; p = 0,159) ne met pas en évidence de lien significatif entre le type d’horaires (fixes ou variables) et l’adaptation des horaires en fonction des embouteillages.
 
 Bien que les salariés disposant d’horaires variables semblent légèrement plus nombreux à adapter leurs déplacements, cette différence n’est pas statistiquement significative. Ces résultats suggèrent que la flexibilité horaire ne constitue pas, à elle seule, un facteur déterminant dans l’adaptation aux embouteillages.
 
-Les personnes ayant des horaires variables estiment également en majorité ne pas du tout adapter leurs horaires de travail en fonction des embouteillages (24,4%). Cela peut signifier qu’ils estiment ne pas avoir besoin d’adapter grâce à leurs horaires variables. Ils sont également beaucoup plus nombreux à déclarer s’adapter davantage aux conditions de circulation, avec une distribution plus équilibrée sur les notes moyennes et élevées. Cela traduit une plus grande flexibilité dans l’organisation du travail, leur permettant d’éviter les heures de pointe ou de décaler leurs trajets.
+Les personnes ayant des horaires variables estiment également en majorité ne pas du tout adapter leurs horaires de travail en fonction des embouteillages (24,4%). Elles sont également beaucoup plus nombreuses à déclarer s’adapter davantage aux conditions de circulation, avec une distribution plus équilibrée sur les notes moyennes et élevées. Cela traduit une plus grande flexibilité dans l’organisation du travail, leur permettant d’éviter les heures de pointe ou de décaler leurs trajets.
 
 ### 5.6 Vélo/trottinette
 
@@ -748,7 +748,7 @@ Ces chiffres témoignent d’un engagement concret des entreprises en faveur de 
 
 ### 5.7 Les Piétons
 
-Sur l’ensemble de l’échantillon, seulement deux personnes déclarent venir à pied sur la zone d’activités. Ce chiffre extrêmement faible confirme l’isolement de la zone, éloignée des zones d’habitation et difficilement accessible autrement qu’en véhicule motorisée ou en vé-lo. Pourtant, à environ 500 mètres, on retrouve des lotissements résidentiels qui pourraient potentiellement générer des déplacements piétons.
+Sur l’ensemble de l’échantillon, seulement deux personnes déclarent venir à pied sur la zone d’activités. Ce chiffre extrêmement faible confirme l’isolement de la zone, éloignée des zones d’habitation et difficilement accessible autrement qu’en véhicule motorisé ou en vélo. Pourtant, à environ 500 mètres, on retrouve des lotissements résidentiels qui pourraient potentiellement générer des déplacements piétons.
 
 Cependant, les conditions de cheminement ne sont pas favorables : la route départementale ne comporte ni trottoirs ni espaces sécurisés pour les piétons. Si une piste cyclable longe une partie de la voie principale jusqu’à la zone d’activités, celle-ci ne compense pas l’absence d’aménagements piétons adaptés.
 
@@ -824,11 +824,11 @@ plot_ly(
 ```
 :::
 
-La pratique du covoiturage au sein des salariés reste modérée et principalement occasionnelle. Les résultats montrent que près d’un tiers (34,6%) des répondants ont recours à ce mode de déplacement quelques fois par mois, tandis qu’un quart environ (26,9%) l’utilisent entre deux et quatre fois par semaine. Seuls 23,1% déclarent covoiturer tous les jours ouvrés, traduisant une utilisation régulière mais minoritaire. À l’inverse, le covoiturage ponctuel demeure significatif : 11,5% le pratiquent quelques fois par an, et 3,8% seulement une fois par semaine. Ces données témoignent d’une pratique encore limitée et irrégulière, souvent dépendante des opportunités de trajet partagé (compatibilité des horaires, collègues proches géographiquement, disponibilité des plateformes, etc.).
+La pratique du covoiturage reste modérée et principalement occasionnelle. Les résultats montrent que près d’un tiers (34,6%) des répondants ont recours à ce mode de déplacement quelques fois par mois, tandis qu’un quart environ (26,9%) l’utilisent entre deux et quatre fois par semaine. Seuls 23,1% déclarent covoiturer tous les jours ouvrés, traduisant une utilisation régulière mais minoritaire. À l’inverse, le covoiturage ponctuel demeure significatif : 11,5% le pratiquent quelques fois par an, et 3,8% seulement une fois par semaine. Ces données témoignent d’une pratique encore limitée et irrégulière, souvent dépendante des opportunités de trajet partagé (compatibilité des horaires, collègues proches géographiquement, disponibilité des plateformes, etc.).
 
 Ainsi, bien que la pratique du covoiturage soit présente sur la zone d’activité, elle ne constitue pas encore une alternative solide à la voiture individuelle. Cependant, certains résultats révèlent un potentiel de développement significatif : près de 70 % des salariés pratiquant le covoiturage le font avec leurs collègues, soulignant que cette modalité repose avant tout sur les liens professionnels existants. Ce constat suggère qu’un dispositif de mise en relation interentreprises pourrait renforcer et pérenniser la pratique, en facilitant l’organisation des trajets communs au-delà des frontières de chaque structure.
 
-Seulement 0.9% des personnes utilisent une aire de coivturage et 0,6% passent par une application de covoiturage. Le covoiturage représente ainsi un levier concret pour réduire la part modale de la voiture individuelle, à condition d’être mieux coordonné à l’échelle de la zone, avec un service mutualisé pour mettre en relation les salariés d’une même entreprise mais aussi de d’autres.
+Seulement 0.9% des personnes utilisent une aire de covoiturage et 0,6% passent par une application de covoiturage. Le covoiturage représente ainsi un levier concret pour réduire la part modale de la voiture individuelle, à condition d’être mieux coordonné à l’échelle de la zone, avec un service mutualisé pour mettre en relation les salariés d’une même entreprise mais aussi des autres.
 
 ::: {style="margin-top:30px;"}
 ```{r}
@@ -1008,9 +1008,9 @@ plot_ly(
 ```
 :::
 
-L’analyse de la question D28 montre que seulement 22,1 % des salariés déclarent utiliser les transports en commun pour se rendre sur la zone d’activité, contre près de 78 % qui ne les utilisent pas. Cette faible part illustre les limites d’accessibilité de la ZAE de Marticot par les transports collectifs, en cohérence avec les constats précédents sur la dépendance à la voiture individuelle.
+L’analyse de cette question montre que seulement 22,1 % des salariés déclarent utiliser les transports en commun pour se rendre sur la zone d’activité, contre près de 78 % qui ne les utilisent pas. Cette faible part illustre les limites d’accessibilité de la ZAE de Marticot par les transports collectifs, en cohérence avec les constats précédents sur la dépendance à la voiture individuelle.
 
-Parmi les raisons invoquées par les non-usagers, les contraintes d’horaires (10,2 %) et la durée trop importante du trajet (9,5 %) apparaissent comme les principaux freins. Ces éléments traduisent une inadéquation entre les horaires de travail et ceux des réseaux de transport (TBM, cars régionaux, Prox’bus), ainsi qu’un temps de parcours jugé trop long par rapport à la voiture. D’autres motifs, tels que l’éloignement du dernier arrêt (6,2 %) ou la multiplication des correspondances (5,5 %), renforcent l’idée d’un réseau pas assez adéquat à la localisation périphérique de la zone et à la diversité des communes de résidence des salariés.
+Parmi les raisons invoquées par les non-usagers, les contraintes horaires (10,2 %) et la durée trop importante du trajet (9,5 %) apparaissent comme les principaux freins. Ces éléments traduisent une inadéquation entre les horaires de travail et ceux des réseaux de transport (TBM, cars régionaux, Prox’bus), ainsi qu’un temps de parcours jugé trop long par rapport à la voiture. D’autres motifs, tels que l’éloignement du dernier arrêt (6,2 %) ou la multiplication des correspondances (5,5 %), renforcent l’idée d’un réseau pas adéquat à la localisation périphérique de la zone et à la diversité des communes de résidence des salariés.
 
 Les contraintes personnelles ou professionnelles (environ 2 à 3 %) sont quant à elles plus marginales mais rappellent que la flexibilité des déplacements (horaires variables, obligations familiales, etc.) reste un facteur clé dans le choix du mode de transport. En somme, ces résultats montrent que l’usage des transports collectifs reste limité non par un manque d’offre totale, mais plutôt par un déficit d’adéquation entre l’offre existante et les besoins réels des salariés en termes d’horaires, de fréquence et de proximité des arrêts. Cela plaide pour une réflexion sur une meilleure connexion entre la ZAE de Marticot et les réseaux structurants, ainsi que sur des solutions de rabattement ou de mobilité partagée (navettes, covoiturage organisé).
 
@@ -1082,7 +1082,7 @@ plot_ly(
 
 ```
 
-Nous nous ommes également intéresser sur les les leviers potentiels d’incitation au covoiturage pour les salariés de la zone d’activité. Les résultats montrent que les facteurs organisationnels sont les plus déterminants :
+Nous nous sommes également intéressés aux leviers potentiels d’incitation au covoiturage pour les salariés de la zone d’activité. Les résultats montrent que les facteurs organisationnels sont les plus déterminants :
 
 -   45,5 % des répondants estiment que des horaires compatibles avec d’autres salariés constitueraient un incitatif majeur,\
 -   tandis que 39,1 % soulignent l’importance de trouver un covoitureur compatible (trajet, horaires, affinités, etc.).
