@@ -9,7 +9,15 @@ about:
 toc: true
 ---
 
-- Etude exploratrice qui permet d’ouvrir le champs d’analyses qualitatifs des ZAE en mettant au centre l’individu.
-- Méthodologie applicable à toutes les ZAE mais réflexion poussée sur les caractéristiques 
-- Échantillon conséquent mais reste limité, à interpréter avec recul 
-- Demande beaucoup de temps et de réflexion dans l’élaboration
+Cette étude exploratoire a permis à la fois de dresser un profil-type des salariés interrogés sur cette ZAE et de la ZAE en elle-même, et d'en tirer quelques conclusions quant à son éventuel aménagement. Les salariés de la ZAE de Marticot sont plutôt des cadres, hommes de 43 ans en moyenne, travaillant dans l'industrie et dont les lieux de résidence sont variés. Le télétravail y est répandu mais modéré (1.5 jours en médian par semaine).
+La ZAE présente un certains nombre d'atouts : les bâtiments sont dans un état correct, elle dispose d'espaces verts et l'ancrage professionnel y est fort.  
+Des faiblesses sont toutefois observées : la convivialité - qu'il s'agisse des espaces de convivialité ou des échanges entre salariés - y est relativement faible et on note un certain manque de services de proximité (notament la restauration).  
+Enfin, l'accessibilié de cette zone constitue un point d'achoppement important, le recours à la voiture individuelle étant très largement sollicité (les transports en commun et la marche sont marginalisés, le covoiturage peu structuré).
+De ce travail exploratoire, on peut tirer quelques pistes, qui sont autant de priorité d'intervention dans la perspective d'une requalification de cette ZAE : 
+
+- l'amélioration de la desserte de la zone   
+- la diversification des mobilités (la structuration du covoiturage à l'échelle de la ZAE semble une piste intéressante, tout comme la multiplication et la sécurisation des accès piétonniers)  
+- le développement des services de proximité, notament ceux liés à la restauration et aux équipements partagés pour renforcer la convivialité et l'attractivité.  
+
+En matière de densification, en dépit des grandes emprises foncières des entreprises qui restent observables, des efforts ont semble-t'il été faits, au regard des aménagements des espaces de travail déjà réalisés.
+La méthodolgie appliquée ici a l'aventage d'être réplicable à toute ZAE, mais elle ne saurait exclure des entretiens passés avec les chefs d'entreprises et les propriétaires fonciers pour envisager la requalification de la zone. Ces deux approches sont parfaitement complémentaires.
